@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mega Goal 2 — Term 2 Mock Exams</title>
+<!-- v1: secondary stage, all units mixed in every exam -->
+<style>
+:root{
+  --green:#0e6b48; --green-dark:#0a4f35; --green-light:#e6f4ee;
+  --gold:#c9a227; --ink:#1f2937; --muted:#6b7280; --bg:#f3f6f4;
+  --ok:#15803d; --ok-bg:#dcfce7; --bad:#b91c1c; --bad-bg:#fee2e2;
+  --card:#ffffff; --radius:14px;
+}
+*{box-sizing:border-box; margin:0; padding:0;}
+body{font-family:"Segoe UI",Tahoma,Arial,sans-serif; background:var(--bg); color:var(--ink); line-height:1.55;}
+.wrap{max-width:880px; margin:0 auto; padding:18px 14px 80px;}
+.moe{background:linear-gradient(135deg,var(--green-dark),var(--green)); color:#fff; border-radius:var(--radius); padding:22px 24px; box-shadow:0 8px 24px rgba(14,107,72,.25); position:relative; overflow:hidden;}
+.moe::after{content:""; position:absolute; right:-40px; top:-40px; width:200px; height:200px; border-radius:50%; background:rgba(255,255,255,.06);}
+.moe-row{display:flex; justify-content:space-between; gap:10px; flex-wrap:wrap; font-size:.85rem; opacity:.95;}
+.moe-row div{line-height:1.7;}
+.moe h1{text-align:center; font-size:1.35rem; margin:14px 0 4px; letter-spacing:.3px;}
+.moe .sub{text-align:center; font-size:.9rem; opacity:.9;}
+.moe .badge{display:inline-block; background:var(--gold); color:#3a2e05; font-weight:700; border-radius:999px; padding:2px 14px; font-size:.8rem; margin-top:10px;}
+.student{display:flex; gap:10px; flex-wrap:wrap; margin-top:16px;}
+.student input{flex:1; min-width:160px; border:none; border-radius:8px; padding:9px 12px; font-size:.9rem;}
+.tabs{display:flex; gap:8px; margin:18px 0 6px; flex-wrap:wrap;}
+.tab{flex:1; min-width:120px; background:var(--card); border:2px solid transparent; border-radius:12px; padding:10px 8px; text-align:center; cursor:pointer; box-shadow:0 2px 8px rgba(0,0,0,.06); transition:.15s;}
+.tab:hover{transform:translateY(-2px);}
+.tab.active{border-color:var(--green); background:var(--green-light);}
+.tab b{display:block; color:var(--green-dark); font-size:.95rem;}
+.tab span{font-size:.72rem; color:var(--muted);}
+.tab .done{display:inline-block; margin-top:3px; font-size:.72rem; font-weight:700; color:var(--ok);}
+.section{background:var(--card); border-radius:var(--radius); box-shadow:0 2px 10px rgba(0,0,0,.05); margin-top:16px; overflow:hidden;}
+.sec-head{display:flex; justify-content:space-between; align-items:center; padding:12px 18px; background:var(--green-light); border-bottom:1px solid #d4e9df;}
+.sec-head h2{font-size:1rem; color:var(--green-dark);}
+.sec-head h2 small{display:block; font-size:.74rem; color:var(--muted); font-weight:400;}
+.marks{background:var(--green); color:#fff; border-radius:999px; padding:3px 12px; font-size:.78rem; font-weight:700; white-space:nowrap;}
+.sec-body{padding:16px 18px;}
+.instr{font-size:.85rem; color:var(--muted); font-style:italic; margin-bottom:12px;}
+.q{margin-bottom:14px; padding:12px 14px; border:1px solid #e5e7eb; border-radius:10px; transition:.2s;}
+.q .qt{font-weight:600; margin-bottom:8px; font-size:.94rem;}
+.q .qt .num{color:var(--green); margin-right:6px;}
+.opts{display:flex; flex-wrap:wrap; gap:8px;}
+.opt{position:relative;}
+.opt input{position:absolute; opacity:0; pointer-events:none;}
+.opt label{display:inline-block; border:1.5px solid #d1d5db; border-radius:999px; padding:6px 16px; cursor:pointer; font-size:.88rem; background:#fff; transition:.12s; user-select:none;}
+.opt label:hover{border-color:var(--green);}
+.opt input:checked + label{background:var(--green); color:#fff; border-color:var(--green);}
+.q.correct{border-color:var(--ok); background:var(--ok-bg);}
+.q.wrong{border-color:var(--bad); background:var(--bad-bg);}
+.q .fb{display:none; margin-top:8px; font-size:.84rem; font-weight:600; border-radius:8px; padding:7px 12px;}
+.q.correct .fb{display:block; color:var(--ok); background:#fff;}
+.q.wrong .fb{display:block; color:var(--bad); background:#fff;}
+.q.unanswered{border-color:var(--gold);}
+.q.unanswered .fb{display:block; color:#92600a; background:#fff8e1;}
+.passage{background:#fbfdf9; border:1px solid #dcebe2; border-left:5px solid var(--green); border-radius:10px; padding:16px 18px; margin-bottom:16px; font-size:.93rem;}
+.passage h3{color:var(--green-dark); margin-bottom:8px; font-size:1.05rem;}
+.passage p{margin-bottom:8px; text-align:justify;}
+.comp-helpers{display:flex; flex-wrap:wrap; gap:6px; margin:10px 0 12px;}
+.comp-helpers span{background:var(--green-light); color:var(--green-dark); border:1px dashed var(--green); border-radius:999px; padding:3px 12px; font-size:.8rem;}
+textarea{width:100%; min-height:160px; border:1.5px solid #d1d5db; border-radius:10px; padding:12px; font-size:.95rem; font-family:inherit; resize:vertical;}
+textarea:focus{outline:none; border-color:var(--green);}
+.wordcount{font-size:.78rem; color:var(--muted); text-align:right; margin-top:4px;}
+.model{display:none; margin-top:12px; background:#fffbea; border:1px solid #f0dc9a; border-radius:10px; padding:14px;}
+.model h4{color:#8a6d0b; font-size:.9rem; margin-bottom:6px;}
+.model p{font-size:.9rem;}
+.rubric{display:none; margin-top:10px; font-size:.84rem;}
+.rubric table{width:100%; border-collapse:collapse;}
+.rubric td,.rubric th{border:1px solid #e5e7eb; padding:6px 10px; text-align:left;}
+.rubric th{background:var(--green-light); color:var(--green-dark);}
+.actions{display:flex; gap:10px; margin-top:18px; flex-wrap:wrap;}
+.btn{border:none; border-radius:10px; padding:12px 22px; font-size:.95rem; font-weight:700; cursor:pointer; transition:.15s;}
+.btn:hover{transform:translateY(-1px);}
+.btn-check{background:var(--green); color:#fff; flex:1; min-width:180px; box-shadow:0 4px 12px rgba(14,107,72,.3);}
+.btn-reset{background:#fff; color:var(--muted); border:1.5px solid #d1d5db;}
+.btn-print{background:#fff; color:var(--green-dark); border:1.5px solid var(--green);}
+.score{display:none; margin-top:16px; background:var(--card); border-radius:var(--radius); box-shadow:0 2px 10px rgba(0,0,0,.05); padding:18px;}
+.score h3{color:var(--green-dark); margin-bottom:10px;}
+.score-total{font-size:1.5rem; font-weight:800; color:var(--green);}
+.bar{height:12px; background:#e5e7eb; border-radius:999px; overflow:hidden; margin:10px 0 14px;}
+.bar i{display:block; height:100%; background:linear-gradient(90deg,var(--green),var(--gold)); border-radius:999px; transition:width .6s;}
+.score-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(140px,1fr)); gap:8px;}
+.score-grid div{background:var(--green-light); border-radius:10px; padding:8px 12px; font-size:.85rem;}
+.score-grid b{display:block; color:var(--green-dark); font-size:1.05rem;}
+.score .msg{margin-top:12px; font-size:.92rem; font-weight:600;}
+.note-comp{font-size:.8rem; color:var(--muted); margin-top:8px;}
+.fs-btn{position:fixed; top:14px; right:14px; z-index:99; background:var(--green-dark); color:#fff; border:none; border-radius:999px; padding:10px 18px; font-size:.85rem; font-weight:700; cursor:pointer; box-shadow:0 4px 14px rgba(0,0,0,.3); display:flex; align-items:center; gap:6px;}
+.fs-btn:hover{background:var(--green);}
+@media print{
+  body{background:#fff;}
+  .tabs,.actions,.moe .badge,.student,.fs-btn{display:none!important;}
+  .section{box-shadow:none; border:1px solid #ccc; break-inside:avoid;}
+  .q{break-inside:avoid;}
+}
+</style>
+</head>
+<body>
+<button class="fs-btn" id="fsBtn" onclick="toggleFS()" title="Full screen (F11)">⛶ <span>Full Screen</span></button>
+<div class="wrap">
+  <div class="moe">
+    <div class="moe-row">
+      <div>Kingdom of Saudi Arabia<br>Ministry of Education<br>Secondary Stage</div>
+      <div style="text-align:right">المملكة العربية السعودية<br>وزارة التعليم<br>المرحلة الثانوية</div>
+    </div>
+    <h1>English Language — End of Term 2 Mock Exams</h1>
+    <div class="sub">Mega Goal 2 &nbsp;•&nbsp; Units 7 – 12 &nbsp;•&nbsp; 1447 H</div>
+    <div style="text-align:center"><span class="badge">Total: 40 Marks</span></div>
+    <div class="student">
+      <input placeholder="Student Name / اسم الطالب" id="stName">
+      <input placeholder="Class / الصف" id="stClass">
+    </div>
+  </div>
+  <div class="tabs" id="tabs"></div>
+  <div id="examArea"></div>
+</div>
+<script>
+const T="True", F="False";
+const EXAMS=[
+/* ============ EXAM 1 ============ */
+{
+ name:"Mock Exam 1", focus:"Units 7–12",
+ reading:{
+  title:"A Country Born on Skis",
+  text:"<p>Norway, a small country of 5.5 million inhabitants, has won more Winter Games medals than any other nation. It became the first country to win 100 Olympic gold medals. Norwegians go cross-country skiing, ski-jumping, or downhill skiing on weekends, on holidays, and after work. 2,500 lit tracks all over the country make it possible for people to ski in winter, although it gets dark early.</p><p>Norwegians have enjoyed skiing for thousands of years. A rock carving in Nordland County provides evidence that the use of skis dates back to the Stone Age. Skiing did not become a mass sport until the mid-1880s, when the first competitions were arranged. Sondre Norheim, who is considered the father of modern skiing, was the originator of the Telemark skis. Polar explorers made skis known internationally: Roald Amundsen was the first man to reach the South Pole in 1911, on skis. Annual cross-country events are organized throughout Norway. Such events are not restricted to athletes, but include “keep fit” categories that allow more people to participate. Biathlon, a cross-country skiing race interspersed with shooting contests, was first included in the Winter Olympic program in 1960.</p>"
+ },
+ rq:[
+  {q:"Which country has won more Winter Games medals than any other nation?",o:["Norway","Sweden","Greenland","Japan"]},
+  {q:"Who is considered the father of modern skiing?",o:["Sondre Norheim","Roald Amundsen","Fridtjof Nansen","Madan Kataria"]},
+  {q:"Who was the first man to reach the South Pole in 1911?",o:["Roald Amundsen","Sondre Norheim","George Crum","Frank Epperson"]},
+  {q:"What makes it possible for Norwegians to ski although it gets dark early?",o:["2,500 lit tracks","Indoor stadiums","Special night skis","Snow machines"]},
+  {q:"Biathlon is a cross-country skiing race combined with ________.",o:["shooting contests","ice hockey","figure skating","jumping contests"]},
+  {q:"A rock carving shows that the use of skis dates back to the Stone Age.",o:[T,F],tf:1},
+  {q:"Skiing became a mass sport in the Stone Age.",o:[F,T],tf:1},
+  {q:"Annual cross-country events in Norway are only for professional athletes.",o:[F,T],tf:1}
+ ],
+ gr:[
+  {q:"I bought a ________ table for the kitchen. (Unit 7)",o:["beautiful, round, wooden","wooden, beautiful, round","round, wooden, beautiful","wooden, round, beautiful"]},
+  {q:"She can't reach the shelf. She's ________ short. (Unit 7)",o:["too","enough","much","very much"]},
+  {q:"________ in shape takes time and effort. (Unit 8)",o:["Getting","Get","To getting","Got"]},
+  {q:"This is the most exciting match I ________. (Unit 8)",o:["have ever seen","ever see","am ever seeing","was ever seen"]},
+  {q:"The news was ________. Jack felt very disappointed. (Unit 9)",o:["disappointing","disappointed","disappoint","disappointedly"]},
+  {q:"How ________ sugar do you take in your tea? (Unit 10)",o:["much","many","few","a few"]},
+  {q:"Pets ________ well by their owners. (Unit 11)",o:["should be treated","should treat","should treating","should be treat"]},
+  {q:"If I had tutored him, he ________ the test. (Unit 12)",o:["might have passed","might pass","passed","will pass"]}
+ ],
+ vo:[
+  {q:"An ________ designs buildings and houses.",o:["architect","exterminator","arborist","spectator"]},
+  {q:"We live in the ________, outside the center of the city.",o:["suburbs","canyon","cliff","hub"]},
+  {q:"A ________ is a person who watches a game or an event.",o:["spectator","goaltender","vendor","contestant"]},
+  {q:"A ________ person can speak two languages.",o:["bilingual","hearty","genuine","pampered"]},
+  {q:"The ________ of fresh bread filled the kitchen.",o:["aroma","toxin","debt","quandary"]},
+  {q:"I skipped breakfast and lunch, so now I'm absolutely ________.",o:["famished","appetizing","exorbitant","licensed"]},
+  {q:"A whale is a large sea ________.",o:["mammal","reptile","insect","bird"]},
+  {q:"The doctors faced a difficult moral ________.",o:["dilemma","diagnosis","disorder","downside"]}
+ ],
+ guided:{
+  prompt:"Guided: Write a paragraph of at least six sentences describing your dream house.",
+  helpers:["two floors","garden","large windows","comfortable","suburbs","view","modern"],
+  model:"My dream house is a large, modern, two-story villa in the suburbs of Riyadh. It has a beautiful green garden with numerous palm trees. The living room has enormous windows with a wonderful view of the city. There are five comfortable bedrooms and a large kitchen. My favorite room is the library, which is full of interesting books. The house is quiet enough to study and relax in. I hope my dream will come true one day."
+ },
+ free:{
+  prompt:"Free: Write a composition of at least eight sentences on ONE of these topics: (1) My favorite sport. (2) A funny situation that happened to me.",
+  model:"My favorite sport is football. I have been playing it since I was seven years old. Playing football keeps me fit and healthy because it is the cardiovascular equivalent of running for a long time. I practice with my school team twice a week, and we play a match every Friday. The most exciting match I have ever played was the final of the school championship last year. We won the cup, and our coach said he was proud of us. Watching football is fun, but playing it is much better. In the future, I hope to play for a famous club and win many medals."
+ }
+},
+/* ============ EXAM 2 ============ */
+{
+ name:"Mock Exam 2", focus:"Units 7–12",
+ reading:{
+  title:"Laughter Really Is the Best Medicine",
+  text:"<p>Are you feeling run-down? Stressed? The solution to your problems may be surprisingly simple: try laughing. Countless research studies have shown the amazing number of ways that laughter positively impacts both our mind and body. Research has found that laughter offers some of the same benefits as exercise. When you laugh, that laughter stretches, tones, and strengthens muscles in your face and body. According to Dr. William F. Fry of Stanford University, “Laughing 100–200 times per day is the cardiovascular equivalent of rowing for 10 minutes.”</p><p>One study even found that laughing out loud for 10–15 minutes a day can burn up to 50 calories. People who laugh often tend to have lower blood pressure and lower stress levels. They get sick less often because laughter increases infection-fighting antibodies. Laughter has also been found to help people recover from illness. This has led many hospitals to create programs designed to make patients laugh, such as “humor carts” loaded with cartoons, DVDs, and funny props. In the mid-1990s, a doctor from India, Madan Kataria, gathered a group of people in a local park to practice laughing as part of a “laughter club.”</p>"
+ },
+ rq:[
+  {q:"According to Dr. Fry, laughing 100–200 times per day equals 10 minutes of ________.",o:["rowing","running","skiing","swimming"]},
+  {q:"Laughing out loud for 10–15 minutes a day can burn up to ________.",o:["50 calories","200 calories","450 calories","10 calories"]},
+  {q:"People who laugh often tend to have ________.",o:["lower blood pressure","higher stress levels","more illnesses","fewer friends"]},
+  {q:"Who started the first “laughter club”?",o:["Madan Kataria","William F. Fry","Charles Menches","Kalervo Oberg"]},
+  {q:"Hospitals provide “humor carts” in order to ________.",o:["make patients laugh","sell funny products","train doctors","entertain visitors only"]},
+  {q:"Laughter offers some of the same benefits as exercise.",o:[T,F],tf:1},
+  {q:"Laughter makes people sleep badly.",o:[F,T],tf:1},
+  {q:"Laughter has been found to help people recover from illness.",o:[T,F],tf:1}
+ ],
+ gr:[
+  {q:"She can reach the shelf easily. She's tall ________. (Unit 7)",o:["enough","too","so","much"]},
+  {q:"They ________ for three hours, and they're still playing now. (Unit 8)",o:["have been playing","played","play","had played"]},
+  {q:"________ have you been studying English? (Unit 8)",o:["How long","How often","How much","How many"]},
+  {q:"Put on sunscreen, or you'll get ________. (Unit 9)",o:["sunburned","sunburning","to sunburn","sunburns"]},
+  {q:"We've ________ milk. Can you buy some on your way home? (Unit 10)",o:["run out of","run into","looked into","come across"]},
+  {q:"I can't solve this problem. Help me figure ________. (Unit 10)",o:["it out","out it","it on","out"]},
+  {q:"________ Ali nor Omar plays tennis. (Unit 11)",o:["Neither","Both","Either","None"]},
+  {q:"If you asked me my opinion, I ________ you the truth. (Unit 12)",o:["would tell","will tell","told","tell"]}
+ ],
+ vo:[
+  {q:"We can't buy this house. The price is far over our ________.",o:["budget","comfort","loyalty","asset"]},
+  {q:"The winner of the race received a gold ________.",o:["medal","penalty","puck","hurdle"]},
+  {q:"A ________ is a long race of about 42 kilometers.",o:["marathon","biathlon","procession","milestone"]},
+  {q:"Her smile was ________, not fake.",o:["genuine","irritated","puzzled","cardiovascular"]},
+  {q:"A street ________ sells food in the market.",o:["vendor","staple","delicacy","feast"]},
+  {q:"Dogs are ________ animals; they have lived with people for ages.",o:["domesticated","marine","aggressive","abstract"]},
+  {q:"He was ________ to accept the job offer; he couldn't decide.",o:["reluctant","tempted","treatable","preventative"]},
+  {q:"She will ________ an operation on her knee next week.",o:["undergo","inherit","vanish","dread"]}
+ ],
+ guided:{
+  prompt:"Guided: Write a paragraph of at least six sentences about your favorite sport or athlete.",
+  helpers:["have been playing","since","keeps me fit","team","medal","champion","thrilling"],
+  model:"My favorite athlete is a Saudi football player who plays for our national team. He has been playing professionally since he was eighteen years old. Watching him play is really thrilling because he runs faster than any other player on the field. He has won many medals and trophies in his career. He trains hard every day, and he never gives up. I admire him because he is humble and generous off the field as well. He has taught me that the harder you work, the better you become."
+ },
+ free:{
+  prompt:"Free: Write a composition of at least eight sentences on ONE of these topics: (1) Healthy eating habits. (2) An animal that amazed me.",
+  model:"Eating healthy food is one of the most important habits in our lives. First of all, we should eat plenty of fruits and vegetables every day because they are full of vitamins. We should also cut down on fast food, which contains too much fat and salt. Drinking enough water is necessary to keep our bodies working well. In addition, it is a good idea to eat breakfast every morning to get energy for the day. We shouldn't skip meals, and we shouldn't gobble down our food quickly. If we follow these habits, we will feel healthier and more active. Remember: you are what you eat!"
+ }
+},
+/* ============ EXAM 3 ============ */
+{
+ name:"Mock Exam 3", focus:"Units 7–12",
+ reading:{
+  title:"Accidental Food Discoveries",
+  text:"<p>Can you imagine a world without ice-cream cones or potato chips? All these treats are fairly recent inventions that may never have come into existence if it weren't for lucky accidents. One winter day in 1905, an 11-year-old boy named Frank Epperson was making soda pop by mixing powdered soda and water. He accidentally left the mixing bucket outside overnight, and the fruit-flavored liquid froze to the mixing stick. His invention later became known as the popsicle.</p><p>At the 1904 St. Louis World's Fair, an ice-cream vendor named Charles Menches ran out of bowls. The vendor next to him, a young Syrian immigrant named Ernest Hamwi, was selling zalabia, a crisp, wafer-like pastry. Hamwi rolled some of his warm pastry into a cone so that Menches could put ice cream inside — and the ice-cream cone was born. In 1930, Ruth Wakefield was making chocolate cookies when she ran out of baker's chocolate. She substituted broken-up pieces of a chocolate bar, expecting them to melt. They didn't — and the chocolate chip cookie was a great success. Wakefield sold the recipe to Nestlé in exchange for a lifetime supply of chocolate chips. And in 1853, chef George Crum invented potato chips when a customer kept complaining that his French fries were too thick and soggy. Crum sliced the potatoes as thinly as possible — and to his astonishment, the customer thought they were delectable.</p>"
+ },
+ rq:[
+  {q:"Who invented the popsicle?",o:["Frank Epperson","George Crum","Ernest Hamwi","Charles Menches"]},
+  {q:"What was Ernest Hamwi selling at the World's Fair?",o:["zalabia, a crisp pastry","ice cream","potato chips","chocolate cookies"]},
+  {q:"Why did Ruth Wakefield use pieces of a chocolate bar?",o:["She ran out of baker's chocolate","She wanted to invent a new cookie","Chocolate bars were cheaper","Her guests asked for them"]},
+  {q:"What did Wakefield receive from Nestlé for her recipe?",o:["A lifetime supply of chocolate chips","A million dollars","A new bakery","A gold medal"]},
+  {q:"The customer complained that George Crum's French fries were ________.",o:["too thick and soggy","too thin and crispy","too salty","too cold"]},
+  {q:"Frank Epperson was an 11-year-old boy when he made his discovery.",o:[T,F],tf:1},
+  {q:"The ice-cream cone was invented at the 1904 St. Louis World's Fair.",o:[T,F],tf:1},
+  {q:"The chocolate pieces melted and mixed into Wakefield's cookie batter.",o:[F,T],tf:1}
+ ],
+ gr:[
+  {q:"She bought two ________ sofas for the living room. (Unit 7)",o:["large, brown","brown, large","largely brown","large and the brown"]},
+  {q:"You're ________ sick to go to school today. Stay in bed. (Unit 7)",o:["too","enough","very much","so much"]},
+  {q:"________ before you exercise can lead to injuries. (Unit 8)",o:["Not warming up","Don't warm up","No warming up","Not warm up"]},
+  {q:"The funnier the joke, ________ the audience laughs. (Unit 9)",o:["the harder","harder","the hardest","hard"]},
+  {q:"I'm really looking ________ the school trip next week. (Unit 10)",o:["forward to","forward at","up to","out for"]},
+  {q:"There are only a ________ eggs left in the fridge. (Unit 10)",o:["few","little","much","slice of"]},
+  {q:"Dolphins ________ to be among the most intelligent animals. (Unit 11)",o:["are said","say","are saying","said"]},
+  {q:"He talks ________ he were an expert in the field. (Unit 12)",o:["as if","even","so that","unless"]}
+ ],
+ vo:[
+  {q:"The cave gave the climbers ________ from the storm.",o:["shelter","mortar","sorrow","furniture"]},
+  {q:"Ice skating takes place on a ________.",o:["rink","terrain","rooftop","track"]},
+  {q:"His jokes always put me in a good ________.",o:["mood","prop","script","antibody"]},
+  {q:"The actors spent the morning practicing the ________.",o:["script","sitcom","equivalent","footage"]},
+  {q:"Dates are a ________ food in Saudi Arabia.",o:["staple","soggy","picky","booming"]},
+  {q:"My little brother is a ________ eater; he refuses most foods.",o:["picky","succulent","famished","phenomenal"]},
+  {q:"The horses began to ________ very fast across the field.",o:["gallop","whistle","speculate","adapt"]},
+  {q:"If you ________ a disease, you get it through your parents' genes.",o:["inherit","undergo","disapprove","motivate"]}
+ ],
+ guided:{
+  prompt:"Guided: Write a paragraph of at least six sentences explaining why laughter is good for you.",
+  helpers:["mood","stress","exercise","muscles","blood pressure","recover","benefits"],
+  model:"Laughter is one of the best medicines for the mind and the body. First, laughing improves your mood and lowers your stress levels. It also offers some of the same benefits as exercise because it strengthens the muscles in your face and body. People who laugh often tend to have lower blood pressure. Moreover, laughter helps patients recover from illness more quickly. The harder you laugh, the better you feel. So try to laugh every day — it is free, easy, and very healthy!"
+ },
+ free:{
+  prompt:"Free: Write a composition of at least eight sentences on ONE of these topics: (1) If I had a million riyals... (2) My dream house.",
+  model:"If I had a million riyals, my life would change in many ways. First of all, I would give some of the money to charity to help poor families. If I helped others, I would feel really happy and satisfied. Then I would buy a beautiful, large, modern house for my family in the suburbs. I would also pay for my parents to go on Hajj, because that has always been their dream. After that, I would invest part of the money in a small business. If the business succeeded, I would create jobs for young people in my city. I might also travel and see the world. Money cannot buy happiness, but if we used it wisely, we could do a lot of good."
+ }
+},
+/* ============ EXAM 4 ============ */
+{
+ name:"Mock Exam 4", focus:"Units 7–12",
+ reading:{
+  title:"Animal Heroes",
+  text:"<p>One night, Pilar was in a deep sleep when she was woken by her cat Inti. Inti was meowing wildly outside Pilar's bedroom and throwing himself against the closed door. When Pilar opened her eyes, she saw that her bedroom was filling with smoke. As she escaped her house with Inti in her arms, she saw that a fire was blazing in her kitchen. Even though Inti could have escaped through a cat door, he wouldn't leave Pilar. A fireman at the scene said, “Without question, that cat is responsible for saving his owner's life. He should be honored as a hero.”</p><p>There are countless stories of animals coming to the aid of humans. Animals are said to have a sixth sense for danger. Take the example of Charlotte Lee and her horse, Thunder. One summer night, there was a loud crashing noise from the stable, and then Thunder stood outside Charlotte's window, neighing and stomping on the wooden porch. She knew Thunder was disturbed for a reason, and she quickly got everyone out of the house before the earthquake hit. Part of the roof caved in and crashed into her room. Yet it is not only domesticated animals who have acted heroically. One wild animal known to be a friend and protector of humans is the dolphin, considered to be among the most intelligent of animals.</p>"
+ },
+ rq:[
+  {q:"How did Inti the cat save Pilar?",o:["He woke her when the house was filling with smoke","He put out the fire","He called the neighbors","He opened the kitchen door"]},
+  {q:"What danger did Thunder the horse warn his owners about?",o:["An earthquake","A fire","A flood","A thief"]},
+  {q:"Animals are said to have a ________ for danger.",o:["sixth sense","strong fear","special school","secret language"]},
+  {q:"Which wild animal is known as a friend and protector of humans?",o:["The dolphin","The lion","The eagle","The wolf"]},
+  {q:"What did the fireman say about Inti?",o:["He should be honored as a hero","He should be given a medal of gold","He was too frightened to help","He escaped through the cat door"]},
+  {q:"Inti escaped the house alone through the cat door.",o:[F,T],tf:1},
+  {q:"Part of the roof crashed into Charlotte's room.",o:[T,F],tf:1},
+  {q:"Only domesticated animals have acted heroically.",o:[F,T],tf:1}
+ ],
+ gr:[
+  {q:"They live in a ________ house near the canyon. (Unit 7)",o:["lovely, old, stone","stone, old, lovely","old, lovely, stone","stone, lovely, old"]},
+  {q:"I ________ my homework. Now I can watch TV. (Unit 8)",o:["have finished","have been finishing","am finishing","finish"]},
+  {q:"I was terribly ________ when I called my friend by the wrong name. (Unit 9)",o:["embarrassed","embarrassing","embarrass","embarrassment"]},
+  {q:"The lights are off. They ________ be at home. (Unit 9)",o:["can't","must","should","would"]},
+  {q:"I don't have ________ money with me today. (Unit 10)",o:["much","many","a few","few"]},
+  {q:"She came ________ an old photo while she was cleaning her room. (Unit 10)",o:["across","out of","down with","up to"]},
+  {q:"________ my brother and I love football. (Unit 11)",o:["Both","Neither","Either","None"]},
+  {q:"By the year 2035, scientists ________ a cure for many diseases. (Unit 12)",o:["will have found","will find have","have found will","found"]}
+ ],
+ vo:[
+  {q:"The hotel has a friendly, family ________.",o:["atmosphere","mortar","adobe","plot"]},
+  {q:"The referee gave the other team a ________.",o:["penalty","medal","merit","spectator"]},
+  {q:"The final match was really ________; we enjoyed every minute.",o:["thrilling","stiff","defensive","worn"]},
+  {q:"The magician's trick was ________; nobody could explain it.",o:["remarkable","tasteful","pediatric","fake"]},
+  {q:"The chips were thick and ________, so the customer sent them back.",o:["soggy","crispy","delectable","appetizing"]},
+  {q:"A guard dog must stay ________ at all times.",o:["alert","pampered","abstract","disturbed"]},
+  {q:"________ animals like sharks and dolphins live in the sea.",o:["Marine","Domesticated","Aggressive","Deliberate"]},
+  {q:"Genetic testing is a highly ________ topic; people strongly disagree about it.",o:["controversial","preventative","treatable","tempted"]}
+ ],
+ guided:{
+  prompt:"Guided: Write a paragraph of at least six sentences about your eating habits and your favorite food.",
+  helpers:["meals","breakfast","favorite dish","healthy","cut down on","delicious","vegetables"],
+  model:"I always try to follow healthy eating habits. I never skip breakfast because it gives me energy for the whole day. My favorite dish is kabsa, which my mother cooks every Friday. The aroma of the spices fills the whole house, and the rice is always succulent and delicious. I eat plenty of fruits and vegetables, and I have cut down on fast food and soft drinks. I also drink a lot of water every day. Eating well keeps me fit, healthy, and ready to study."
+ },
+ free:{
+  prompt:"Free: Write a composition of at least eight sentences on ONE of these topics: (1) The Olympic Games. (2) A difficult decision I had to make.",
+  model:"The Olympic Games are the greatest sporting event in the world. They are held every four years, and athletes from all over the globe take part in them. There are summer games and winter games, with sports such as athletics, swimming, football, and skiing. Winning an Olympic medal is the highest honor any athlete can dream of. Athletes train for years, and the harder they train, the better their chances become. The Olympics also teach important values such as respect, friendship, and fair play. Watching the opening ceremony is thrilling because each country marches behind its flag. I hope that one day Saudi Arabia will host the Olympic Games and that our athletes will win many gold medals."
+ }
+},
+/* ============ EXAM 5 ============ */
+{
+ name:"Mock Exam 5", focus:"Units 7–12",
+ reading:{
+  title:"Peeking into Our Medical Future",
+  text:"<p>Did you know that a drop of your blood can predict diseases you may develop in the future? This is possible through genetic testing — testing that analyzes the genetic information found in the cells of your body. Each cell contains a sample of DNA. The information in DNA can help determine a person's risk of developing certain diseases years from now.</p><p>The most common type of genetic testing is called “newborn screening.” Its goal is to identify treatable genetic disorders in newborn babies. Although it is rare to find that a baby has a genetic disorder, those that do can start receiving treatment right away. Another type is “predictive gene testing,” which is used to predict an adult's risk of developing certain diseases later in life, like certain cancers or Alzheimer's disease. There are many benefits to this kind of testing. A negative test can bring a tremendous sense of relief. Jen Thomson, who underwent predictive testing, explains: “When the test came back negative, I felt as if someone had lifted an enormous weight off my shoulders.” A positive test has benefits as well: it warns of the need for preventative care, like frequent checkups, dietary changes, or medicines. However, there are also some controversial downsides to genetic testing.</p>"
+ },
+ rq:[
+  {q:"What does genetic testing analyze?",o:["The genetic information in the cells of your body","The food you eat","Your daily exercise","Your blood pressure only"]},
+  {q:"What is the goal of newborn screening?",o:["To identify treatable genetic disorders in babies","To choose a baby's name","To measure a baby's weight","To test a baby's hearing"]},
+  {q:"Predictive gene testing is used to predict ________.",o:["an adult's risk of developing certain diseases","tomorrow's weather","a person's future job","a baby's eye color"]},
+  {q:"How did Jen Thomson feel when her test came back negative?",o:["As if an enormous weight had been lifted off her shoulders","Very worried about her family","Angry at the doctors","Disappointed with the result"]},
+  {q:"A positive test warns of the need for ________.",o:["preventative care","a new job","more genetic tests for the family","less sleep"]},
+  {q:"Each cell of the body contains a sample of DNA.",o:[T,F],tf:1},
+  {q:"It is very common to find that a baby has a genetic disorder.",o:[F,T],tf:1},
+  {q:"Genetic testing has some controversial downsides.",o:[T,F],tf:1}
+ ],
+ gr:[
+  {q:"They can buy their own home. They have ________ money. (Unit 7)",o:["enough","too","few","much too"]},
+  {q:"________ a marathon gives a runner a sense of satisfaction. (Unit 8)",o:["Completing","Complete","Completed","To completing"]},
+  {q:"It's almost time for my presentation. I'm getting ________. (Unit 9)",o:["nervous","nervously","nerve","nervousness"]},
+  {q:"The joke was ________ funny that everyone in the room laughed. (Unit 9)",o:["so","such","too","enough"]},
+  {q:"These old magazines are useless. Throw ________. (Unit 10)",o:["them away","away them","it aways","away their"]},
+  {q:"Wild animals ________ in small cages. (Unit 11)",o:["shouldn't be kept","shouldn't keep","aren't keep","shouldn't kept"]},
+  {q:"I ________ getting up early now. I do it every day without any problem. (Unit 12)",o:["am used to","used to","use to","was used to"]},
+  {q:"If Audra had been honest, she ________ into trouble. (Unit 12)",o:["would not have gotten","will not get","did not get","would not get"]}
+ ],
+ vo:[
+  {q:"They built the lodge at the edge of a high ________.",o:["cliff","suburb","budget","shelter"]},
+  {q:"The skiers raced across the rough, snowy ________.",o:["terrain","rink","penalty","procession"]},
+  {q:"We were ________ when we heard the astonishing news.",o:["astonished","fascinated by it all","pediatric","bilingual"]},
+  {q:"Laughter can ________ the brain and enhance learning.",o:["stimulate","gratify","vanish","dread"]},
+  {q:"The wedding ________ included more than twenty different dishes.",o:["feast","vendor","taste bud","wrapper"]},
+  {q:"She ran out of baker's chocolate, so she used a chocolate bar as a ________.",o:["substitute","delicacy","staple","toxin"]},
+  {q:"There is a strong ________ between people and their pets.",o:["bond","intake","duration","residence"]},
+  {q:"The doctor explained the ________ to the patient before starting treatment.",o:["diagnosis","ethics","downside","peek"]}
+ ],
+ guided:{
+  prompt:"Guided: Write a paragraph of at least six sentences about an animal that helped or amazed people.",
+  helpers:["sixth sense","danger","saved","alert","intelligent","hero","loyal"],
+  model:"Animals can be real heroes, and my neighbor's dog Rex is a perfect example. One night, Rex started barking wildly and would not stop. My neighbor woke up and discovered that smoke was filling the house. Thanks to Rex, the whole family escaped before the fire spread. Animals are said to have a sixth sense for danger, and Rex proved it that night. He stayed alert and refused to leave the house until everyone was safe. The family says Rex should be honored as a hero, and I completely agree. Such loyal and intelligent animals deserve our love and care."
+ },
+ free:{
+  prompt:"Free: Write a composition of at least eight sentences on ONE of these topics: (1) What would you do if you found a lost wallet full of money? (2) Laughter is the best medicine.",
+  model:"If I found a lost wallet full of money, I would do the right thing without hesitation. First, I would look inside the wallet for an ID card or a phone number. If I found the owner's name, I would try to contact him directly. If I couldn't find any information, I would take the wallet to the nearest police station. I would never keep the money, because it simply isn't mine. If I kept it, I would feel guilty every time I thought about it. Honesty is a value that my parents taught me since I was a child. Besides, if I lost my own wallet, I would hope that an honest person would return it to me. Doing the right thing always brings peace of mind."
+ }
+}
+];
+
+function shuffled(arr, seed){
+  const a=arr.slice();
+  let s=seed;
+  for(let i=a.length-1;i>0;i--){
+    s=(s*9301+49297)%233280;
+    const j=Math.floor((s/233280)*(i+1));
+    [a[i],a[j]]=[a[j],a[i]];
+  }
+  return a;
+}
+
+let current=0;
+const answers=EXAMS.map(()=>({}));
+const checked=EXAMS.map(()=>false);
+const scores=EXAMS.map(()=>null);
+
+function renderTabs(){
+  const t=document.getElementById('tabs');
+  t.innerHTML=EXAMS.map((e,i)=>`
+    <div class="tab ${i===current?'active':''}" onclick="switchExam(${i})">
+      <b>${e.name}</b><span>${e.focus}</span>
+      ${scores[i]!==null?`<span class="done">✓ ${scores[i]} / 24</span>`:''}
+    </div>`).join('');
+}
+
+function escapeAttr(s){return String(s).replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;');}
+
+function qHTML(item, group, idx, seed){
+  const opts = item.tf ? ["True","False"] : shuffled(item.o, seed+idx*7+3);
+  const correct=item.o[0];
+  const name=`${group}_${idx}`;
+  const saved=answers[current][name];
+  return `<div class="q" id="q_${name}" data-correct="${escapeAttr(correct)}">
+    <div class="qt"><span class="num">${idx+1}.</span>${item.q}</div>
+    <div class="opts">${opts.map((o,k)=>`
+      <span class="opt">
+        <input type="radio" id="${name}_${k}" name="${name}" value="${escapeAttr(o)}" ${saved===o?'checked':''} onchange="answers[${current}]['${name}']=this.value">
+        <label for="${name}_${k}">${o}</label>
+      </span>`).join('')}
+    </div>
+    <div class="fb"></div>
+  </div>`;
+}
+
+function writingHTML(w, key, title){
+  return `<div class="section">
+    <div class="sec-head"><h2>${title}</h2><span class="marks">8 Marks</span></div>
+    <div class="sec-body">
+      <p style="font-weight:600">${w.prompt}</p>
+      ${w.helpers?`<div class="comp-helpers">${w.helpers.map(h=>`<span>${h}</span>`).join('')}</div>`:''}
+      <textarea id="${key}Text" placeholder="Write here..." oninput="updateWC('${key}')">${answers[current][key]||''}</textarea>
+      <div class="wordcount" id="${key}wc"></div>
+      <div class="model" id="${key}Model">
+        <h4>📝 Model Answer (compare with your writing)</h4>
+        <p>${w.model}</p>
+      </div>
+      <p class="note-comp">✦ Marked by your teacher (8 marks). The model answer appears after you check your answers.</p>
+    </div>
+  </div>`;
+}
+
+function renderExam(){
+  const e=EXAMS[current];
+  const seed=(current+1)*131;
+  const area=document.getElementById('examArea');
+  area.innerHTML=`
+  ${writingHTML(e.guided,'guided','I. Guided Composition <small>التعبير الموجه</small>')}
+  ${writingHTML(e.free,'free','II. Free Composition <small>التعبير الحر</small>')}
+
+  <div class="section">
+    <div class="sec-head"><h2>III. Reading Comprehension <small>فهم المقروء</small></h2><span class="marks">8 Marks</span></div>
+    <div class="sec-body">
+      <div class="passage"><h3>${e.reading.title}</h3>${e.reading.text}</div>
+      <p class="instr">Read the passage, then answer the questions. (1 mark each)</p>
+      ${e.rq.map((it,i)=>qHTML(it,'rq',i,seed)).join('')}
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="sec-head"><h2>IV. Grammar <small>القواعد</small></h2><span class="marks">8 Marks</span></div>
+    <div class="sec-body">
+      <p class="instr">Choose the correct answer. (1 mark each)</p>
+      ${e.gr.map((it,i)=>qHTML(it,'gr',i,seed+50)).join('')}
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="sec-head"><h2>V. Vocabulary <small>المفردات</small></h2><span class="marks">8 Marks</span></div>
+    <div class="sec-body">
+      <p class="instr">Choose the correct word. (1 mark each)</p>
+      ${e.vo.map((it,i)=>qHTML(it,'vo',i,seed+100)).join('')}
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="sec-head"><h2>Writing Marking Criteria <small>للمعلم</small></h2><span class="marks">2 × 8 Marks</span></div>
+    <div class="sec-body">
+      <div class="rubric" id="rubricBox" style="display:block">
+        <table>
+          <tr><th>Criteria for each composition (teacher)</th><th>Marks</th></tr>
+          <tr><td>Content and ideas</td><td>2</td></tr>
+          <tr><td>Vocabulary and language accuracy</td><td>2</td></tr>
+          <tr><td>Punctuation and spelling</td><td>2</td></tr>
+          <tr><td>Organization, linking of ideas, and relevance to the topic</td><td>2</td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="actions">
+    <button class="btn btn-check" onclick="checkExam()">✔ Check My Answers</button>
+    <button class="btn btn-reset" onclick="resetExam()">↺ Try Again</button>
+    <button class="btn btn-print" onclick="window.print()">🖨 Print</button>
+  </div>
+  <div class="score" id="scoreBox"></div>`;
+  updateWC('guided'); updateWC('free');
+  if(checked[current]) checkExam(true);
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function updateWC(key){
+  const ta=document.getElementById(key+'Text');
+  if(!ta) return;
+  answers[current][key]=ta.value;
+  const n=ta.value.trim()? ta.value.trim().split(/\s+/).length : 0;
+  document.getElementById(key+'wc').textContent=n+" words";
+}
+
+function gradeGroup(prefix,count,per){
+  let pts=0;
+  for(let i=0;i<count;i++){
+    const name=`${prefix}_${i}`;
+    const div=document.getElementById('q_'+name);
+    const correct=div.dataset.correct;
+    const sel=document.querySelector(`input[name="${name}"]:checked`);
+    div.classList.remove('correct','wrong','unanswered');
+    const fb=div.querySelector('.fb');
+    if(!sel){
+      div.classList.add('unanswered');
+      fb.textContent='⚠ Not answered. Correct answer: '+correct;
+    }else if(sel.value===correct){
+      div.classList.add('correct'); fb.textContent='✓ Correct!';
+      pts+=per;
+    }else{
+      div.classList.add('wrong');
+      fb.textContent='✗ Incorrect. Correct answer: '+correct;
+    }
+  }
+  return pts;
+}
+
+function checkExam(silent){
+  const r=gradeGroup('rq',8,1);
+  const g=gradeGroup('gr',8,1);
+  const v=gradeGroup('vo',8,1);
+  const total=r+g+v;
+  checked[current]=true; scores[current]=total;
+  document.getElementById('guidedModel').style.display='block';
+  document.getElementById('freeModel').style.display='block';
+  const pct=Math.round(total/24*100);
+  let msg, color;
+  if(pct>=90){msg="🌟 Excellent! Outstanding work — you are ready for the final exam!"; color="var(--ok)";}
+  else if(pct>=75){msg="👍 Very good! Review the questions marked in red and try again."; color="var(--ok)";}
+  else if(pct>=50){msg="📖 Good effort. Go back to the units in your book and review the red questions."; color="#92600a";}
+  else{msg="💪 Don't give up! Review Units 7–12 carefully, then try this exam again."; color="var(--bad)";}
+  const box=document.getElementById('scoreBox');
+  box.style.display='block';
+  box.innerHTML=`
+    <h3>Your Result — ${EXAMS[current].name}</h3>
+    <div class="score-total">${total} / 24 <span style="font-size:.9rem;color:var(--muted);font-weight:400">(+ 16 marks for the two compositions, marked by teacher = /40)</span></div>
+    <div class="bar"><i style="width:${pct}%"></i></div>
+    <div class="score-grid">
+      <div>Reading<b>${r} / 8</b></div>
+      <div>Grammar<b>${g} / 8</b></div>
+      <div>Vocabulary<b>${v} / 8</b></div>
+    </div>
+    <div class="msg" style="color:${color}">${msg}</div>`;
+  renderTabs();
+  if(!silent) box.scrollIntoView({behavior:'smooth'});
+}
+
+function resetExam(){
+  answers[current]={guided:answers[current].guided||'',free:answers[current].free||''};
+  checked[current]=false; scores[current]=null;
+  renderTabs(); renderExam();
+}
+
+function switchExam(i){ current=i; renderTabs(); renderExam(); }
+
+function toggleFS(){
+  if(!document.fullscreenElement){
+    document.documentElement.requestFullscreen().catch(()=>{});
+  }else{
+    document.exitFullscreen();
+  }
+}
+document.addEventListener('fullscreenchange',()=>{
+  const b=document.getElementById('fsBtn');
+  b.querySelector('span').textContent=document.fullscreenElement?'Exit Full Screen':'Full Screen';
+});
+
+renderTabs(); renderExam();
+</script>
+</body>
+</html>
