@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>اختبار STEP — النموذج الأول — مستر محمود أبوهند</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap');
+  * { margin:0; padding:0; box-sizing:border-box; font-family:'Cairo','Segoe UI',Tahoma,sans-serif; }
+  :root {
+    --primary:#0f4c5c; --primary2:#1b6f85; --accent:#e9b949; --accent2:#f6d877;
+    --ok:#1e9e6a; --okbg:#e6f7f0; --bad:#d64550; --badbg:#fdecee;
+    --ink:#1c2b33; --muted:#5e7480; --card:#ffffff; --bg:#f2f6f8;
+  }
+  body { background:var(--bg); color:var(--ink); min-height:100vh; }
+  .header {
+    background:linear-gradient(135deg, #0a3a47 0%, var(--primary) 45%, var(--primary2) 100%);
+    color:#fff; padding:28px 20px 80px; text-align:center; position:relative; overflow:hidden;
+  }
+  .header::after{content:'';position:absolute;inset:0;background:radial-gradient(circle at 80% 10%, rgba(233,185,73,.18), transparent 45%),radial-gradient(circle at 15% 90%, rgba(233,185,73,.12), transparent 40%);}
+  .header > * { position:relative; z-index:1; }
+  .badge { display:inline-block; background:var(--accent); color:#0a3a47; font-weight:900; padding:4px 18px; border-radius:30px; font-size:14px; letter-spacing:.5px; margin-bottom:10px;}
+  .header h1 { font-size:30px; font-weight:900; margin-bottom:4px; }
+  .header h2 { font-size:17px; font-weight:600; color:var(--accent2); margin-bottom:14px;}
+  .teacher {
+    display:inline-flex; flex-wrap:wrap; justify-content:center; gap:10px 22px; align-items:center;
+    background:rgba(255,255,255,.10); border:1px solid rgba(255,255,255,.25);
+    border-radius:16px; padding:10px 26px; font-size:15.5px; backdrop-filter:blur(4px);
+  }
+  .teacher b { color:var(--accent2); font-weight:900; font-size:17px;}
+  .teacher a { color:#fff; text-decoration:none; font-weight:700;}
+  .teacher .dot{opacity:.5}
+  .wrap { max-width:880px; margin:-52px auto 40px; padding:0 16px; }
+  .panel { background:var(--card); border-radius:18px; box-shadow:0 6px 30px rgba(15,76,92,.12); padding:26px; margin-bottom:20px; }
+
+  /* status bar */
+  .statusbar { display:flex; gap:12px; align-items:center; justify-content:space-between; flex-wrap:wrap; }
+  .pill { background:var(--bg); border-radius:12px; padding:8px 16px; font-weight:700; font-size:14px; color:var(--primary); }
+  .pill span{color:var(--ink)}
+  #timer.warn { background:var(--badbg); color:var(--bad); }
+  .progress-outer { flex:1 1 180px; background:var(--bg); height:12px; border-radius:8px; overflow:hidden; min-width:140px;}
+  .progress-inner { height:100%; width:0%; background:linear-gradient(90deg,var(--primary2),var(--accent)); transition:width .4s; }
+
+  /* sections nav */
+  .secnav { display:flex; gap:8px; flex-wrap:wrap; margin-top:14px; }
+  .secnav button {
+    border:2px solid var(--primary2); background:#fff; color:var(--primary);
+    border-radius:30px; padding:6px 16px; font-weight:700; font-size:13.5px; cursor:pointer; transition:.2s;
+  }
+  .secnav button.active { background:var(--primary); color:#fff; }
+  .secnav button .cnt{font-size:11px; opacity:.75}
+
+  .sec-title { display:flex; align-items:center; gap:12px; margin-bottom:6px;}
+  .sec-title .num { background:var(--accent); color:#0a3a47; font-weight:900; width:42px; height:42px; border-radius:12px; display:flex; align-items:center; justify-content:center; font-size:19px;}
+  .sec-title h3 { font-size:21px; color:var(--primary); font-weight:900;}
+  .sec-desc { color:var(--muted); font-size:14px; margin-bottom:18px; line-height:1.7;}
+
+  .passage {
+    background:#f7fafc; border:1px solid #dde8ee; border-right:5px solid var(--accent);
+    border-radius:12px; padding:18px 20px; margin:18px 0 14px; direction:ltr; text-align:left;
+    font-size:15.5px; line-height:1.85; color:#243640; white-space:pre-wrap;
+  }
+  .passage .ptitle { font-weight:900; color:var(--primary); display:block; margin-bottom:6px; font-size:16.5px;}
+  .listen-tag { display:inline-block; background:var(--primary2); color:#fff; border-radius:8px; font-size:12px; padding:2px 10px; margin-bottom:8px; font-weight:700;}
+
+  .q { margin:20px 0 26px; }
+  .q .qtext { font-weight:700; font-size:16.5px; margin-bottom:12px; direction:ltr; text-align:left; line-height:1.7;}
+  .q .qtext .qnum { background:var(--primary); color:#fff; border-radius:8px; padding:2px 10px; font-size:13.5px; margin-right:8px; display:inline-block;}
+  .opts { display:grid; gap:9px; direction:ltr; }
+  .opt {
+    text-align:left; border:2px solid #dbe6ec; background:#fff; border-radius:12px;
+    padding:11px 16px; font-size:15px; cursor:pointer; transition:.15s; line-height:1.6; color:var(--ink);
+  }
+  .opt:hover:not(:disabled) { border-color:var(--primary2); background:#f4fafc; }
+  .opt:disabled { cursor:default; }
+  .opt .L { font-weight:900; color:var(--primary2); margin-right:9px;}
+  .opt.correct { border-color:var(--ok); background:var(--okbg); }
+  .opt.wrong { border-color:var(--bad); background:var(--badbg); }
+  .fb { display:none; margin-top:11px; border-radius:12px; padding:13px 16px; font-size:14.5px; line-height:1.9; }
+  .fb.show { display:block; animation:pop .25s; }
+  .fb.good { background:var(--okbg); border:1px solid #bfe8d6; color:#11543a; }
+  .fb.badf { background:var(--badbg); border:1px solid #f3c2c7; color:#7c2730; }
+  .fb b.tag{display:inline-block; margin-left:6px;}
+  @keyframes pop { from{transform:scale(.97); opacity:0} to{transform:scale(1); opacity:1} }
+
+  .navbtns { display:flex; justify-content:space-between; gap:12px; margin-top:8px;}
+  .btn {
+    border:none; border-radius:14px; padding:13px 34px; font-size:16px; font-weight:900; cursor:pointer; transition:.2s;
+  }
+  .btn-main { background:linear-gradient(135deg,var(--primary),var(--primary2)); color:#fff; }
+  .btn-main:hover { transform:translateY(-2px); box-shadow:0 8px 18px rgba(15,76,92,.3);}
+  .btn-ghost { background:#fff; color:var(--primary); border:2px solid var(--primary2);}
+  .btn:disabled{opacity:.45; cursor:not-allowed; transform:none; box-shadow:none;}
+
+  /* start & result screens */
+  .center { text-align:center; padding:30px 10px; }
+  .center h3{font-size:24px; color:var(--primary); font-weight:900; margin-bottom:10px;}
+  .center p{color:var(--muted); line-height:2; font-size:15.5px; max-width:640px; margin:0 auto 18px;}
+  .bigscore { font-size:64px; font-weight:900; color:var(--primary); line-height:1.1;}
+  .scoreword { font-size:20px; font-weight:900; margin:6px 0 22px;}
+  .breakdown { display:grid; grid-template-columns:repeat(auto-fit,minmax(170px,1fr)); gap:12px; margin:20px 0;}
+  .bd { background:var(--bg); border-radius:14px; padding:14px;}
+  .bd .nm{font-size:13px; color:var(--muted); font-weight:700;}
+  .bd .vl{font-size:22px; font-weight:900; color:var(--primary);}
+  .bd .bar{height:8px; background:#dde8ee; border-radius:6px; margin-top:8px; overflow:hidden;}
+  .bd .bar i{display:block; height:100%; background:linear-gradient(90deg,var(--primary2),var(--accent));}
+
+  .footer { background:#0a3a47; color:#cfe3ea; text-align:center; padding:22px 16px; font-size:14.5px; line-height:2;}
+  .footer b{color:var(--accent2); font-size:16px;}
+  .footer a{color:#fff; font-weight:700; text-decoration:none;}
+  .wa { display:inline-block; background:#25D366; color:#fff!important; border-radius:30px; padding:4px 18px; font-weight:900; margin-right:8px;}
+  @media (max-width:600px){ .header h1{font-size:23px} .bigscore{font-size:48px} .panel{padding:18px} }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="badge">STEP · اختبار كفايات اللغة الإنجليزية</div>
+  <h1>اختبار STEP — النموذج الأول</h1>
+  <h2>نموذج تدريبي شامل (100 سؤال) مبني على الأسئلة الأكثر تكرارا</h2>
+  <div class="teacher">
+    <span>إعداد: <b>مستر محمود أبوهند</b></span>
+    <span class="dot">•</span>
+    <span>جوال / واتساب: <a href="https://wa.me/966542260935" target="_blank">0542260935</a></span>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <div class="panel" id="startPanel">
+    <div class="center">
+      <h3>أهلا بك في اختبار STEP — النموذج الأول 👋</h3>
+      <p>
+        هذا النموذج مبني على <b>الأسئلة والموضوعات الأكثر تكرارا</b> في اختبارات STEP الفعلية حسب تجارب الطلاب الحديثة.<br>
+        الاختبار <b>100 سؤال</b> موزعة مثل الاختبار الرسمي: استيعاب المقروء (40) – التراكيب النحوية (30) – الاستيعاب السماعي (20) – التحليل الكتابي (10).<br>
+        بعد اختيارك لأي إجابة ستظهر لك <b>تغذية راجعة فورية بالعربي</b> تشرح لك الإجابة الصحيحة.
+      </p>
+      <button class="btn btn-main" onclick="startExam()">🚀 ابدأ الاختبار</button>
+    </div>
+  </div>
+
+  <div class="panel" id="quizPanel" style="display:none">
+    <div class="statusbar">
+      <div class="pill">⏱️ الوقت: <span id="timer">02:30:00</span></div>
+      <div class="progress-outer"><div class="progress-inner" id="prog"></div></div>
+      <div class="pill">✅ <span id="answeredCnt">0</span> / <span id="totalCnt">100</span></div>
+    </div>
+    <div class="secnav" id="secnav"></div>
+    <div id="secArea"></div>
+    <div class="navbtns">
+      <button class="btn btn-ghost" id="prevBtn" onclick="gotoSec(curSec-1)">→ القسم السابق</button>
+      <button class="btn btn-main" id="nextBtn" onclick="gotoSec(curSec+1)">القسم التالي ←</button>
+    </div>
+  </div>
+
+  <div class="panel" id="resultPanel" style="display:none">
+    <div class="center">
+      <h3>🎉 انتهى الاختبار!</h3>
+      <div class="bigscore" id="finalScore">0%</div>
+      <div class="scoreword" id="scoreWord"></div>
+      <div class="breakdown" id="breakdown"></div>
+      <p id="advice"></p>
+      <button class="btn btn-main" onclick="location.reload()">🔄 إعادة الاختبار</button>
+    </div>
+  </div>
+
+</div>
+
+<div class="footer">
+  للتدريب على اختبار STEP وتحقيق أعلى الدرجات تواصل مع <b>مستر محمود أبوهند</b><br>
+  <a class="wa" href="https://wa.me/966542260935" target="_blank">واتساب: 0542260935</a>
+  <a href="tel:0542260935">📞 0542260935</a>
+</div>
+
+<script>
+const EXAM = {"title": "نموذج 1 — الموضوعات الأكثر تكرارا", "sections": [{"name": "استيعاب المقروء", "desc": "اقرأ كل قطعة ثم أجب عن الأسئلة التي تليها. 40 سؤالا.", "blocks": [{"title": "Controlling Inflation", "passage": "Inflation means a general rise in the prices of goods and services over time. When inflation is high, the money people earn buys fewer things, so their standard of living falls. Governments and central banks try to control inflation in several ways. The most common tool is raising interest rates, which makes borrowing money more expensive. As a result, people and companies spend less, and prices stop rising so quickly. Another method is to reduce government spending. Some countries also introduce economic reform programs to make their markets work better. However, controlling inflation is not easy: if a central bank raises interest rates too much, businesses may stop growing and workers may lose their jobs. For this reason, economists say that fighting inflation always requires a careful balance.", "qs": [{"q": "What is the main idea of the passage?", "o": ["The history of money", "How inflation can be controlled and its difficulties", "Why workers lose their jobs", "How banks make profits"], "a": 1, "fb": "الفكرة الرئيسية هي طرق السيطرة على التضخم وصعوباتها. القطعة كلها تدور حول أدوات التحكم في التضخم (رفع الفائدة، تقليل الإنفاق) والتحديات. تذكر: سؤال Main Idea إجابته تغطي القطعة كلها وليس تفصيلة واحدة."}, {"q": "According to the passage, what is the most common tool to control inflation?", "o": ["Printing more money", "Reducing taxes", "Raising interest rates", "Increasing salaries"], "a": 2, "fb": "ورد نصا: \"The most common tool is raising interest rates\" أي رفع أسعار الفائدة. في أسئلة التفاصيل ابحث عن الكلمة المفتاحية (most common tool) داخل النص."}, {"q": "The word \"reform\" in the passage is closest in meaning to:", "o": ["change", "punishment", "payment", "question"], "a": 0, "fb": "reform = إصلاح/تغيير، وأقرب معنى لها change. هذه مفردة متكررة جدا في الاختبار الفعلي — احفظها!"}, {"q": "What may happen if interest rates are raised too much?", "o": ["Prices rise faster", "People buy more goods", "Businesses may stop growing", "Inflation increases"], "a": 2, "fb": "النص يقول: \"if a central bank raises interest rates too much, businesses may stop growing and workers may lose their jobs\" — رفع الفائدة المبالغ فيه يوقف نمو الشركات."}, {"q": "Why does fighting inflation require a careful balance?", "o": ["Because banks refuse to help", "Because strong action can harm jobs and growth", "Because people like high prices", "Because governments have no tools"], "a": 1, "fb": "الاستنتاج: التوازن مطلوب لأن العلاج القوي (رفع الفائدة كثيرا) له آثار جانبية على الوظائف والنمو، كما ذكرت نهاية القطعة."}]}, {"title": "Stress and Our Emotions", "passage": "Stress is the body's natural reaction to pressure or danger. When we feel stressed, our hearts beat faster and our muscles become tense. A small amount of stress can actually be useful because it helps us stay alert and finish important tasks. However, when stress continues for a long time, it can harm both the body and the mind. People under constant stress often sleep badly, feel angry quickly, and find it hard to concentrate. Doctors say that strong emotions during stress can make people behave in irrational ways and make poor decisions. To manage stress, experts recommend regular exercise, talking to friends, and taking short breaks during work. Learning to control our emotions does not mean hiding them; it means understanding why we feel them and responding calmly.", "qs": [{"q": "What is the main purpose of the passage?", "o": ["To explain what stress is and how to manage it", "To prove that stress is always harmful", "To describe hospital treatments", "To compare stress in men and women"], "a": 0, "fb": "الهدف الرئيسي: تعريف التوتر وكيفية التعامل معه. لاحظ أن القطعة ذكرت أن التوتر القليل مفيد، فخيار \"دائما ضار\" خاطئ."}, {"q": "According to the passage, a small amount of stress can:", "o": ["damage the heart", "help us stay alert", "cause bad sleep", "stop concentration"], "a": 1, "fb": "ورد نصا: \"A small amount of stress can actually be useful because it helps us stay alert\" — التوتر البسيط يساعدنا على التركيز واليقظة."}, {"q": "The word \"irrational\" is closest in meaning to:", "o": ["unreasonable", "organized", "healthy", "slow"], "a": 0, "fb": "irrational = غير عقلاني، وأقرب معنى unreasonable. هذه من المفردات اللي تكررت حرفيا في الاختبار — ثبّتها كويس!"}, {"q": "Which of the following is NOT mentioned as a way to manage stress?", "o": ["Regular exercise", "Talking to friends", "Taking medicine", "Taking short breaks"], "a": 2, "fb": "الطرق المذكورة: الرياضة، التحدث مع الأصدقاء، فترات الراحة القصيرة. الدواء لم يُذكر. في أسئلة NOT ارجع للنص واستبعد المذكور."}, {"q": "What does controlling our emotions mean, according to the passage?", "o": ["Hiding our feelings completely", "Never feeling angry", "Understanding our feelings and responding calmly", "Avoiding other people"], "a": 2, "fb": "آخر جملة: السيطرة على المشاعر لا تعني إخفاءها بل فهم أسبابها والرد بهدوء."}]}, {"title": "Aggressive Behavior in Children", "passage": "Many parents worry when their young children hit, push, or shout at others. Child specialists explain that some aggressive behavior is a normal part of growing up, especially between the ages of two and four, when children cannot yet express their feelings in words. However, doctors warn that parents should not respond to misbehavior with hitting or shouting, because children learn by copying adults. Instead, parents should stay calm, explain why the behavior is wrong, and praise the child when he or she behaves well. If aggressive behavior continues after the age of six, or if the child hurts others seriously, families are advised to visit a child psychologist who can discover the hidden reasons behind the anger.", "qs": [{"q": "What is the main idea of the passage?", "o": ["All aggressive children need doctors", "How parents should deal with children's aggressive behavior", "Children should never be punished", "Why children hate school"], "a": 1, "fb": "الفكرة الرئيسية: كيف يتعامل الآباء مع السلوك العدواني عند الأطفال. قطعة \"عدوانية الأطفال\" من أكثر القطع تكرارا في الاختبار."}, {"q": "At what age is some aggression considered normal?", "o": ["Between two and four", "After six", "At ten", "Only at one year"], "a": 0, "fb": "ورد نصا: \"especially between the ages of two and four\" لأن الطفل لا يستطيع التعبير بالكلام في هذه المرحلة."}, {"q": "Why shouldn't parents hit children as a punishment?", "o": ["Because it is expensive", "Because children learn by copying adults", "Because doctors will be angry", "Because children will forget it"], "a": 1, "fb": "السبب المذكور: \"children learn by copying adults\" — الطفل يقلد الكبار، فالضرب يعلّمه العنف."}, {"q": "The word \"misbehavior\" is closest in meaning to:", "o": ["good manners", "bad conduct", "quick learning", "loud noise"], "a": 1, "fb": "misbehavior = سوء سلوك/تصرف خاطئ = bad conduct. البادئة mis تعني الخطأ، مثل misunderstand (يسيء الفهم)."}, {"q": "When should a family visit a child psychologist?", "o": ["When the child is two years old", "When aggression continues after age six", "Every month", "When the child cries"], "a": 1, "fb": "النص: \"If aggressive behavior continues after the age of six... families are advised to visit a child psychologist\"."}]}, {"title": "Tourism in Jamaica", "passage": "Jamaica is an island country in the Caribbean Sea, famous for its beautiful beaches, green mountains, and warm weather all year. Tourism is one of the most important parts of the Jamaican economy. Every year, millions of visitors arrive by air and by cruise ship to enjoy swimming, diving, and the island's famous music. Tourism provides jobs for thousands of Jamaicans in hotels, restaurants, and transport. However, the industry also brings problems. Large hotels use huge amounts of water and electricity, and some beaches have become crowded and polluted. The government is now encouraging \"eco-tourism\" — a kind of tourism that protects nature and supports local villages instead of harming them.", "qs": [{"q": "What is the passage mainly about?", "o": ["The history of Jamaican music", "The importance and problems of tourism in Jamaica", "How to book a hotel in Jamaica", "Caribbean weather patterns"], "a": 1, "fb": "القطعة تتحدث عن أهمية السياحة لاقتصاد جامايكا ومشاكلها ثم الحل (السياحة البيئية). قطعة \"السياحة في جامايكا\" متكررة جدا بالاختبار."}, {"q": "How do most tourists arrive in Jamaica?", "o": ["By train and car", "By air and cruise ship", "On foot", "By bus only"], "a": 1, "fb": "ورد نصا: \"millions of visitors arrive by air and by cruise ship\" — بالطيران والسفن السياحية."}, {"q": "Which problem of tourism is mentioned in the passage?", "o": ["High airline prices", "Cold weather", "Crowded and polluted beaches", "Lack of music"], "a": 2, "fb": "المشاكل المذكورة: استهلاك ضخم للماء والكهرباء وشواطئ مزدحمة وملوثة."}, {"q": "What is \"eco-tourism\" according to the passage?", "o": ["Tourism that protects nature and supports local villages", "Tourism for rich people only", "Tourism inside big cities", "Tourism without hotels"], "a": 0, "fb": "التعريف جاء بعد الشرطة مباشرة: سياحة تحمي الطبيعة وتدعم القرى المحلية. لما تشوف تعريفا بعد شرطة (—) فهو غالبا إجابة سؤال!"}, {"q": "It can be inferred that the Jamaican government:", "o": ["wants to stop all tourism", "cares about protecting the environment", "plans to close hotels", "dislikes cruise ships"], "a": 1, "fb": "استنتاج: تشجيع الحكومة للسياحة البيئية يدل على اهتمامها بحماية البيئة، وليس إيقاف السياحة."}]}, {"title": "Software Piracy", "passage": "Software piracy means copying or using computer programs without permission from the company that owns them. Although obtaining a pirated program may seem like an easy way to save money, it causes serious harm. Software companies lose billions of dollars every year, which means they have less money to develop new products and must reduce the number of workers. Pirated software is also dangerous for users themselves: it often contains viruses, it cannot be updated, and it receives no technical support. Many countries now have strict laws against piracy, and companies use special codes and online activation to protect their products. Experts believe that the best long-term solution is education — teaching people that software, like any other product, is the result of someone's hard work.", "qs": [{"q": "What is the main idea of the passage?", "o": ["How to download programs quickly", "The harms of software piracy and ways to fight it", "The history of computers", "How to become a programmer"], "a": 1, "fb": "الفكرة الرئيسية: أضرار قرصنة البرامج وطرق مكافحتها. قطعة \"السوفت وير\" من المتكررات الثابتة في الاختبار."}, {"q": "The word \"obtaining\" is closest in meaning to:", "o": ["selling", "getting", "losing", "breaking"], "a": 1, "fb": "obtaining = الحصول على = getting. مفردة تكررت في الاختبارات الفعلية كما ذكر الطلاب."}, {"q": "According to the passage, pirated software:", "o": ["is always safe", "receives free support", "often contains viruses", "is updated daily"], "a": 2, "fb": "ورد نصا: \"it often contains viruses, it cannot be updated, and it receives no technical support\"."}, {"q": "What happens to software companies because of piracy?", "o": ["They earn more money", "They lose billions of dollars", "They make better products", "They hire more workers"], "a": 1, "fb": "النص: الشركات تخسر مليارات الدولارات سنويا مما يقلل التطوير والوظائف."}, {"q": "What do experts consider the best long-term solution?", "o": ["More expensive software", "Stronger computers", "Education", "Faster internet"], "a": 2, "fb": "آخر جملة: \"the best long-term solution is education\" — التوعية والتعليم. الإجابة غالبا في آخر القطعة لأسئلة الحلول."}]}, {"title": "The Tiger", "passage": "The tiger is the largest member of the cat family and one of the strongest hunters on land. An adult male tiger can weigh more than 250 kilograms. Unlike lions, which live and hunt in groups, tigers prefer to live alone. A tiger usually hunts at night, moving silently through the forest before attacking quickly. Tigers prefer to eat large animals such as deer and wild pigs, and a hungry tiger can eat up to 30 kilograms of meat in one night. Although people often ask whether a tiger is stronger than a lion, scientists say the two animals rarely meet in the wild because they live in different regions. Today, tigers are in danger: hunting and the loss of forests have left fewer than 4,000 tigers in the wild.", "qs": [{"q": "What does a tiger prefer to eat?", "o": ["Grass and fruit", "Large animals such as deer and wild pigs", "Fish only", "Insects"], "a": 1, "fb": "ورد نصا: \"Tigers prefer to eat large animals such as deer and wild pigs\". هذا حرفيا السؤال اللي ذكره الطلاب عن قطعة التايقر!"}, {"q": "How do tigers differ from lions?", "o": ["Tigers live alone while lions live in groups", "Tigers are smaller", "Tigers eat plants", "Tigers cannot hunt"], "a": 0, "fb": "النص: الأسود تعيش وتصطاد في جماعات، أما النمور فتفضل العيش منفردة."}, {"q": "Why do tigers and lions rarely fight in the wild?", "o": ["They are friends", "They live in different regions", "Lions are afraid", "Tigers sleep all day"], "a": 1, "fb": "النص يجيب على السؤال الشهير \"هل النمر أقوى من الأسد؟\": نادرا ما يلتقيان لأنهما يعيشان في مناطق مختلفة."}, {"q": "When does a tiger usually hunt?", "o": ["At night", "In the morning", "At noon", "In winter only"], "a": 0, "fb": "ورد نصا: \"A tiger usually hunts at night\" — يصطاد ليلا ويتحرك بصمت."}, {"q": "Why are tigers in danger today?", "o": ["Because of diseases", "Because of hunting and loss of forests", "Because lions attack them", "Because they eat too much"], "a": 1, "fb": "السبب المذكور: الصيد الجائر وفقدان الغابات، وبقي أقل من 4000 نمر في البرية."}]}, {"title": "Graph: Fast Food Restaurants in Saudi Arabia (2015–2023)", "passage": "The chart below shows the number of branches of two fast food chains in Saudi Arabia.\n\nYear        | McDonald's | KFC\n2015        | 120        | 150\n2017        | 150        | 180\n2019        | 185        | 210\n2021        | 220        | 230\n2023        | 270        | 250\n\nThe table shows that both restaurant chains grew steadily between 2015 and 2023. KFC had more branches than McDonald's in every year except 2023, when McDonald's opened many new branches and took the lead for the first time.", "qs": [{"q": "In which year did McDonald's have more branches than KFC for the first time?", "o": ["2015", "2019", "2021", "2023"], "a": 3, "fb": "من الجدول: في 2023 وصل ماكدونالدز إلى 270 فرعا مقابل 250 لكنتاكي — أول مرة يتقدم فيها. أسئلة الرسم البياني عن ماك وكنتاكي تكررت في الاختبار."}, {"q": "How many KFC branches were there in 2019?", "o": ["180", "210", "230", "250"], "a": 1, "fb": "اقرأ من صف 2019 تحت عمود KFC: العدد 210. تأكد دائما أنك تقرأ من الصف والعمود الصحيحين."}, {"q": "What was the increase in McDonald's branches between 2015 and 2023?", "o": ["100", "120", "150", "270"], "a": 2, "fb": "الحساب: 270 − 120 = 150 فرعا. أسئلة \"الزيادة\" = القيمة الأخيرة ناقص الأولى."}, {"q": "Which statement is TRUE according to the table?", "o": ["KFC branches decreased every year", "Both chains grew between 2015 and 2023", "McDonald's was always ahead of KFC", "KFC had 300 branches in 2023"], "a": 1, "fb": "الصحيح: كلا السلسلتين نمتا باستمرار من 2015 إلى 2023. باقي الخيارات تخالف الجدول."}, {"q": "In 2021, the difference between the two chains was:", "o": ["10 branches", "30 branches", "50 branches", "70 branches"], "a": 0, "fb": "الحساب: 230 − 220 = 10 فروع فقط في 2021."}]}, {"title": "Graph: Renewable Freshwater Resources", "passage": "The chart below shows renewable internal freshwater resources (billion cubic meters) in four countries in selected years.\n\nCountry  | 1967 | 1997 | 2011\nMorocco  | 32   | 29   | 26\nSyria    | 9    | 7    | 5\nEgypt    | 2.5  | 2.0  | 1.8\nAlgeria  | 12   | 11   | 10\n\nThe data shows that freshwater levels were highest in all four countries in 1967 and have fallen steadily since then, mainly because of population growth and climate change.", "qs": [{"q": "In which year was the freshwater level the highest in Morocco?", "o": ["1967", "1997", "2011", "2020"], "a": 0, "fb": "من الجدول: المغرب 32 مليار م³ في 1967 وهي الأعلى. هذا السؤال ورد حرفيا في تجارب الطلاب (الإجابة 1967)!"}, {"q": "How much did freshwater resources decrease in Syria between 1967 and 2011?", "o": ["About 2 billion cubic meters", "About 4 billion cubic meters", "About 9 billion cubic meters", "About 12 billion cubic meters"], "a": 1, "fb": "الحساب: 9 − 5 = 4 مليار م³ تقريبا. سؤال \"كم انخفضت المياه في سوريا\" ذكره الطلاب أيضا."}, {"q": "Which country had the lowest freshwater resources in all years?", "o": ["Morocco", "Syria", "Egypt", "Algeria"], "a": 2, "fb": "مصر هي الأقل في كل الأعوام (2.5 ثم 2.0 ثم 1.8). قارن الأرقام عموديا بسرعة."}, {"q": "According to the passage, why have freshwater levels fallen?", "o": ["Because of population growth and climate change", "Because of new dams", "Because of tourism", "Because of farming only"], "a": 0, "fb": "السبب المذكور نصا: النمو السكاني والتغير المناخي."}, {"q": "What general trend does the chart show?", "o": ["Freshwater is increasing everywhere", "Freshwater has fallen steadily in all four countries", "Only Morocco lost water", "Water levels never change"], "a": 1, "fb": "الاتجاه العام (trend): انخفاض مستمر في الدول الأربع منذ 1967. أسئلة الـtrend تسأل عن الصورة الكلية وليس رقما واحدا."}]}]}, {"name": "التراكيب النحوية", "desc": "اختر الإجابة الصحيحة لكل سؤال. 30 سؤالا — ركزنا على القواعد الأكثر تكرارا: if، الأزمنة، when/while، تصحيح الأخطاء، الترتيب، Capitalization.", "blocks": [{"qs": [{"q": "If I ______ enough money, I will buy a new car.", "o": ["have", "had", "will have", "having"], "a": 0, "fb": "قاعدة if الأولى (First Conditional): If + مضارع بسيط ، will + مصدر. \"If I have... I will buy\". قاعدة if هي الأكثر تكرارا في الاختبار — احفظ الأنواع الثلاثة!"}, {"q": "If she studied harder, she ______ the exam.", "o": ["will pass", "would pass", "passes", "passed"], "a": 1, "fb": "قاعدة if الثانية (Second Conditional): If + ماضي بسيط ، would + مصدر. تستخدم للمواقف الخيالية أو غير المحتملة."}, {"q": "If they had left early, they ______ the train.", "o": ["would catch", "will catch", "would have caught", "catch"], "a": 2, "fb": "قاعدة if الثالثة (Third Conditional): If + had + V3 ، would have + V3. تستخدم للندم على شيء في الماضي لم يحدث."}, {"q": "______ I was walking home, I saw an old friend.", "o": ["While", "If", "Until", "Unless"], "a": 0, "fb": "While + فعل مستمر (was walking) للتعبير عن حدثين متزامنين. while/when من القواعد المتكررة جدا حسب تجارب الطلاب."}, {"q": "When the phone rang, she ______ dinner.", "o": ["cooks", "was cooking", "is cooking", "has cooked"], "a": 1, "fb": "حدث طويل (الطبخ) قطعه حدث قصير (رنين الهاتف): الطويل ماضي مستمر was cooking والقصير ماضي بسيط rang."}, {"q": "She ______ in Riyadh since 2018.", "o": ["lives", "is living", "has lived", "lived"], "a": 2, "fb": "since + نقطة زمنية = مضارع تام has lived. كلمات since/for/just/already دلالات المضارع التام."}, {"q": "They ______ the project two days ago.", "o": ["finish", "have finished", "finished", "are finishing"], "a": 2, "fb": "ago = ماضي بسيط دائما. لا تستخدم المضارع التام مع زمن محدد في الماضي."}, {"q": "Listen! The children ______ in the garden.", "o": ["play", "are playing", "played", "plays"], "a": 1, "fb": "Listen!/Look!/Now دلالات المضارع المستمر: are playing — حدث يقع الآن لحظة الكلام."}, {"q": "Water ______ at 100 degrees Celsius.", "o": ["boil", "boils", "is boiling", "boiled"], "a": 1, "fb": "الحقائق العلمية = مضارع بسيط، والفاعل مفرد (water) فيأخذ الفعل s: boils."}, {"q": "By the time we arrived, the lecture ______.", "o": ["started", "has started", "had started", "starts"], "a": 2, "fb": "حدثان في الماضي: الأسبق يأخذ الماضي التام had started. \"By the time\" دلالة شهيرة على الماضي التام."}, {"q": "You ______ wear a seatbelt while driving. It's the law.", "o": ["might", "must", "could", "would"], "a": 1, "fb": "must = إلزام وضرورة (قانون). تذكر ملاحظة الطلاب: must يأتي بعدها مصدر بدون to — \"must go\" وليس \"must to go\"."}, {"q": "He ______ speak three languages when he was ten.", "o": ["can", "could", "must", "should"], "a": 1, "fb": "could = استطاعة في الماضي (when he was ten). can للمضارع."}, {"q": "______ you like some tea?", "o": ["Would", "Must", "Should", "Will"], "a": 0, "fb": "العرض المهذب: Would you like...? من أسئلة modals المتكررة (would/might/should)."}, {"q": "The man ______ car was stolen called the police.", "o": ["who", "whose", "whom", "which"], "a": 1, "fb": "whose للملكية (سيارته). who للفاعل العاقل، whom للمفعول العاقل، which لغير العاقل."}, {"q": "She is the teacher ______ helped me improve my English.", "o": ["whom", "which", "who", "whose"], "a": 2, "fb": "who تحل محل الفاعل العاقل (هي التي ساعدتني). ذكر الطلاب تكرار أسئلة who/whom."}, {"q": "There isn't ______ milk in the fridge.", "o": ["many", "much", "a few", "some"], "a": 1, "fb": "much مع غير المعدود (milk) في النفي والسؤال. many للمعدود. قاعدة much/many/few من المتكررات."}, {"q": "______ students passed the difficult test — only three out of forty.", "o": ["Few", "A lot of", "Much", "Many of"], "a": 0, "fb": "Few = قليل جدا (معنى سلبي) مع المعدود. ثلاثة من أربعين عدد قليل جدا."}, {"q": "I don't like coffee, and my brother doesn't like it ______.", "o": ["too", "neither", "either", "also"], "a": 2, "fb": "في النفي نستخدم either في آخر الجملة. neither تأتي في بداية الرد: \"Neither do I\". تكررت كثيرا حسب الطلاب."}, {"q": "______ of the two answers is correct — they are both wrong.", "o": ["Either", "Neither", "Both", "All"], "a": 1, "fb": "Neither = ولا واحد من الاثنين (نفي). الجملة تقول إن الإجابتين خاطئتان."}, {"q": "My keys ______ been missing since yesterday.", "o": ["has", "have", "was", "is"], "a": 1, "fb": "keys جمع فتأخذ have been. انتبه لتطابق الفاعل والفعل — أسئلة has been/have been متكررة."}, {"q": "Choose the sentence with correct capitalization:", "o": ["my friend ahmed lives in jeddah.", "My friend Ahmed lives in Jeddah.", "My Friend ahmed Lives in jeddah.", "my Friend Ahmed lives In Jeddah."], "a": 1, "fb": "الحروف الكبيرة: بداية الجملة (My) + أسماء الأشخاص (Ahmed) + أسماء المدن (Jeddah). سؤال Capitalization يأتي في كل اختبار تقريبا!"}, {"q": "Choose the sentence with correct capitalization:", "o": ["We visited london in january.", "we visited London in January.", "We visited London in January.", "We Visited London In January."], "a": 2, "fb": "تُكبَّر: بداية الجملة + المدن (London) + الشهور (January). لا تُكبَّر بقية الكلمات العادية."}, {"q": "Choose the correct order: (1) to the library (2) Sara (3) every morning (4) walks", "o": ["2-4-1-3", "4-2-1-3", "2-1-4-3", "3-2-4-1"], "a": 0, "fb": "الترتيب: فاعل + فعل + مكان + زمان = Sara walks to the library every morning. قاعدة الترتيب: SVO ثم المكان قبل الزمان."}, {"q": "Choose the correct order: (1) bought (2) a new phone (3) my father (4) last week", "o": ["3-1-2-4", "1-3-2-4", "3-2-1-4", "2-3-1-4"], "a": 0, "fb": "My father bought a new phone last week. فاعل (my father) + فعل ماضي (bought) + مفعول (a new phone) + زمان (last week)."}, {"q": "Find the mistake: \"She have been working here for five years.\"", "o": ["She", "have", "working", "for"], "a": 1, "fb": "الخطأ في have: الفاعل مفرد (She) فالصحيح has been working. أسئلة \"اختر الكلمة الخطأ\" تكررت كثيرا في الاختبارات الأخيرة."}, {"q": "Find the mistake: \"He must to finish his homework before dinner.\"", "o": ["must", "to", "finish", "before"], "a": 1, "fb": "الخطأ: to. بعد must يأتي المصدر مباشرة بدون to: \"must finish\". هذه الملاحظة ذكرها الطلاب حرفيا: \"must go وركزوا ما يصلح بعدها to\"."}, {"q": "Find the mistake: \"They was watching TV while the kids were sleeping.\"", "o": ["was", "watching", "while", "were"], "a": 0, "fb": "They جمع فالصحيح were watching وليس was. طابق الفاعل مع الفعل دائما."}, {"q": "Find the mistake: \"I have visited Paris last summer.\"", "o": ["have", "visited", "Paris", "summer"], "a": 0, "fb": "مع زمن محدد في الماضي (last summer) نستخدم الماضي البسيط: \"I visited Paris last summer\" — احذف have."}, {"q": "The letter ______ by the manager yesterday.", "o": ["wrote", "was written", "is written", "has written"], "a": 1, "fb": "مبني للمجهول في الماضي: was/were + V3. الرسالة \"كُتبت\" بواسطة المدير: was written."}, {"q": "Choose the correct punctuation: \"______\"", "o": ["Where are you going.", "Where are you going?", "Where are you going,", "Where, are you going"], "a": 1, "fb": "السؤال ينتهي بعلامة استفهام (?). أسئلة علامات الترقيم ذكرها الطلاب (3 أسئلة تقريبا في الاختبار)."}]}]}, {"name": "الاستيعاب السماعي", "desc": "في الاختبار الحقيقي ستسمع هذه النصوص صوتيا. هنا اقرأ النص (أو اطلب من معلمك قراءته عليك بصوت مسموع) ثم أجب. أغلب الأسئلة عن الفكرة الرئيسية (Main Idea). 20 سؤالا.", "blocks": [{"listen": true, "title": "Conversation 1: The Telescope", "passage": "Professor: Today I want to talk about one of the most important inventions in astronomy — the telescope. The first telescopes were made in the Netherlands in 1608, but it was the Italian scientist Galileo who improved the design and used it to study the sky. With his telescope, Galileo discovered the moons of Jupiter and saw the mountains on our Moon. Modern telescopes are much more powerful. Some, like the space telescopes, orbit the Earth and send us amazing pictures of stars that are millions of light years away.", "qs": [{"q": "What is the talk mainly about?", "o": ["The life of Galileo", "The telescope and its development", "The moons of Jupiter", "Space travel"], "a": 1, "fb": "الفكرة الرئيسية: التلسكوب وتطوره عبر التاريخ. نص \"التلسكوب\" من أكثر نصوص الاستماع تكرارا في الاختبار!"}, {"q": "Where were the first telescopes made?", "o": ["Italy", "The Netherlands", "England", "Egypt"], "a": 1, "fb": "ورد نصا: \"The first telescopes were made in the Netherlands in 1608\". جاليليو طوّره لكنه لم يخترعه."}, {"q": "What did Galileo discover with his telescope?", "o": ["The moons of Jupiter", "New planets outside our galaxy", "The sun's temperature", "Black holes"], "a": 0, "fb": "اكتشف جاليليو أقمار المشتري ورأى جبال القمر."}, {"q": "What is special about space telescopes?", "o": ["They are cheap", "They orbit the Earth", "They are very small", "They were made by Galileo"], "a": 1, "fb": "التلسكوبات الفضائية تدور حول الأرض وترسل صورا لنجوم تبعد ملايين السنين الضوئية."}]}, {"listen": true, "title": "Conversation 2: A Trip to Brazil", "passage": "Man: Have you ever been to Brazil?\nWoman: Yes! I went there two years ago. It's the largest country in South America, you know.\nMan: What did you like most?\nWoman: The Amazon rainforest was incredible — it produces about twenty percent of the world's oxygen. But honestly, the people were the best part. Brazilians are very friendly.\nMan: Did you visit the famous beaches?\nWoman: Of course! Rio de Janeiro has some of the most beautiful beaches in the world. I also watched a football match there — football is like a national religion in Brazil!", "qs": [{"q": "What are the speakers mainly talking about?", "o": ["The woman's trip to Brazil", "Football rules", "The man's holiday plans", "Learning Portuguese"], "a": 0, "fb": "المحادثة كلها عن رحلة المرأة إلى البرازيل. نص \"البرازيل\" تكرر في تجارب طلاب كثيرين."}, {"q": "What does the Amazon rainforest produce?", "o": ["About 20% of the world's oxygen", "Most of the world's coffee", "Half of the world's water", "All of Brazil's food"], "a": 0, "fb": "ورد نصا: تنتج غابات الأمازون حوالي 20% من أكسجين العالم."}, {"q": "What did the woman like most about Brazil?", "o": ["The beaches", "The people", "The food", "The hotels"], "a": 1, "fb": "قالت: \"the people were the best part\" — الناس الودودون كانوا أفضل شيء. انتبه: الشواطئ أعجبتها لكن الناس \"الأفضل\"."}, {"q": "What does the woman say about football in Brazil?", "o": ["It is boring", "It is like a national religion", "It is only for children", "It is new there"], "a": 1, "fb": "قالت: \"football is like a national religion in Brazil\" — تشبيه يدل على أهميته الكبيرة عندهم."}]}, {"listen": true, "title": "Conversation 3: Planning a Trip", "passage": "Wife: Ahmed, I've been thinking. We both need a break. Why don't we travel somewhere next month?\nHusband: That's a great idea. Where would you like to go?\nWife: I was thinking about Turkey. The flights are not expensive, and my sister went last year — she loved it.\nHusband: Turkey sounds good, but what about the hotel costs?\nWife: I checked online. If we book early, we can get a four-star hotel at half price.\nHusband: Perfect. Let's book the tickets this weekend before the prices go up.", "qs": [{"q": "What is the main topic of the conversation?", "o": ["A couple planning a trip", "Buying a new house", "A sister's wedding", "Hotel jobs"], "a": 0, "fb": "الفكرة الرئيسية: زوجان يخططان لرحلة. نص \"الرجل وزوجته اللي يبون يسافرون\" ذكره الطلاب كثيرا في الاستماع!"}, {"q": "Where does the wife suggest going?", "o": ["Egypt", "Turkey", "Malaysia", "France"], "a": 1, "fb": "اقترحت الزوجة تركيا لأن الطيران غير مكلف وأختها زارتها وأحبتها."}, {"q": "How can they get a four-star hotel at half price?", "o": ["By booking early", "By traveling alone", "By asking her sister", "By going in winter"], "a": 0, "fb": "قالت: \"If we book early, we can get a four-star hotel at half price\" — الحجز المبكر."}, {"q": "When will they book the tickets?", "o": ["Next month", "This weekend", "Tomorrow morning", "Next year"], "a": 1, "fb": "قال الزوج: \"Let's book the tickets this weekend before the prices go up\"."}]}, {"listen": true, "title": "Announcement: The Final Exam", "passage": "Professor: Before you leave, I have an important announcement about your final exam. The exam will be held next Wednesday at nine o'clock in the main hall. It will cover units six to eight only — units one to five will NOT be included. The exam will have fifty multiple-choice questions, and you will have two hours to finish. Please bring your university ID card and arrive at least fifteen minutes early. If you have any questions, my office hours are on Monday from ten to twelve.", "qs": [{"q": "What is the announcement mainly about?", "o": ["A new course", "Details of the final exam", "A university trip", "Office cleaning"], "a": 1, "fb": "إعلان عن تفاصيل الاختبار النهائي. نص \"الدكتور يحدد موعد الاختبار يوم الأربعاء والوحدات 6-8\" ورد حرفيا في تجارب الطلاب!"}, {"q": "When will the exam be held?", "o": ["Next Monday at ten", "Next Wednesday at nine", "Next Friday at nine", "Today at twelve"], "a": 1, "fb": "ورد نصا: \"next Wednesday at nine o'clock\" — الأربعاء القادم الساعة التاسعة."}, {"q": "Which units will the exam cover?", "o": ["Units one to five", "Units six to eight", "All units", "Units two to four"], "a": 1, "fb": "الاختبار يغطي الوحدات 6 إلى 8 فقط، والوحدات 1-5 غير داخلة. هذه التفصيلة ذكرها الطلاب بالنص!"}, {"q": "What should students bring to the exam?", "o": ["A laptop", "Their university ID card", "A dictionary", "Their textbooks"], "a": 1, "fb": "المطلوب: بطاقة الجامعة (university ID card) والحضور قبل الموعد بربع ساعة."}]}, {"listen": true, "title": "Interview: Learning English", "passage": "Interviewer: Today we're talking with Ayed, a Saudi engineer who speaks excellent English. Ayed, how did you learn the language?\nAyed: Thank you. Well, I started seriously at university. The most important thing for me was daily practice. I watched English movies with subtitles, then without them. I also changed my phone language to English.\nInterviewer: Did you take any courses?\nAyed: Just one course at the beginning. But honestly, speaking with native speakers online helped me more than any course. My advice is simple: don't be afraid of making mistakes. Every mistake teaches you something new.", "qs": [{"q": "What is the interview mainly about?", "o": ["How Ayed learned English", "Engineering jobs in Saudi Arabia", "The best universities", "Phone applications"], "a": 0, "fb": "المقابلة عن تجربة عايد في تعلم الإنجليزية. نص \"عايد اللي يتكلم عن تعلم اللغة\" من المتكررات الشهيرة في الاستماع!"}, {"q": "What was the most important thing for Ayed?", "o": ["Expensive courses", "Daily practice", "Living abroad", "Reading novels"], "a": 1, "fb": "قال: \"The most important thing for me was daily practice\" — الممارسة اليومية."}, {"q": "What helped Ayed more than any course?", "o": ["Watching TV", "Speaking with native speakers online", "His university teachers", "Grammar books"], "a": 1, "fb": "قال إن التحدث مع الناطقين الأصليين أونلاين أفاده أكثر من أي دورة."}, {"q": "What is Ayed's advice?", "o": ["Take many courses", "Don't be afraid of making mistakes", "Study grammar only", "Move to another country"], "a": 1, "fb": "نصيحته: لا تخف من الأخطاء، فكل خطأ يعلمك شيئا جديدا."}]}]}, {"name": "التحليل الكتابي", "desc": "اختر الجملة الصحيحة أو الأفضل صياغة. هذا القسم يقيس قدرتك على تمييز الكتابة الصحيحة. 10 أسئلة.", "blocks": [{"qs": [{"q": "Choose the best sentence:", "o": ["Riyadh is the capital of Saudi Arabia, it is a big city.", "Riyadh, the capital of Saudi Arabia, is a big city.", "Riyadh the capital, of Saudi Arabia is a big city.", "Riyadh is capital the of Saudi Arabia big city."], "a": 1, "fb": "الجملة B تستخدم البدل (apposition) بين فاصلتين بشكل صحيح. الجملة A فيها خطأ comma splice (ربط جملتين بفاصلة فقط)."}, {"q": "Which sentence is correct?", "o": ["Because it was raining, we stayed home.", "Because it was raining. We stayed home.", "We stayed home because was raining.", "Because raining, we stayed at the home."], "a": 0, "fb": "الجملة A تربط السبب بالنتيجة بشكل صحيح. لا تفصل جملة Because عن جوابها بنقطة (خيار B = fragment)."}, {"q": "Combine the two sentences: \"The boy is my brother. He won the prize.\"", "o": ["The boy who won the prize is my brother.", "The boy is my brother who the prize.", "The boy won is my brother the prize.", "The boy whose won the prize is my brother."], "a": 0, "fb": "نستخدم who للعاقل الفاعل: \"الولد الذي فاز بالجائزة هو أخي\". whose للملكية فلا تصح هنا."}, {"q": "Choose the best sentence:", "o": ["Although he was tired, but he finished his work.", "Although he was tired, he finished his work.", "Although he was tired so he finished his work.", "He was tired although he finished but his work."], "a": 1, "fb": "قاعدة مهمة: لا تجمع بين Although و but في نفس الجملة — واحدة فقط تكفي."}, {"q": "Which sentence expresses the idea most clearly?", "o": ["Eating breakfast every day good for health is.", "Eating breakfast every day is good for your health.", "Every day is breakfast eating good for health.", "Good for your health eating is every day breakfast."], "a": 1, "fb": "الترتيب الصحيح: الفاعل (Eating breakfast every day) + فعل (is) + خبر (good for your health)."}, {"q": "Choose the correct sentence:", "o": ["She enjoys to read books in her free time.", "She enjoys reading books in her free time.", "She enjoys read books in her free time.", "She enjoy reading books in her free time."], "a": 1, "fb": "بعد enjoy يأتي الفعل بصيغة V-ing دائما: enjoys reading. أفعال مثل enjoy, finish, avoid, mind + V-ing."}, {"q": "Which sentence is punctuated correctly?", "o": ["I bought apples, oranges, and bananas.", "I bought apples oranges and bananas,", "I bought, apples, oranges and, bananas.", "I bought apples; oranges; and bananas,"], "a": 0, "fb": "عند سرد ثلاثة عناصر أو أكثر: فاصلة بين كل عنصر و and قبل الأخير."}, {"q": "Choose the best topic sentence for a paragraph about the benefits of exercise:", "o": ["Exercise has many important benefits for the body and mind.", "I went to the gym yesterday.", "Some people do not like sports.", "Football is played by two teams."], "a": 0, "fb": "جملة الموضوع (Topic Sentence) تلخص فكرة الفقرة كاملة. الخيارات الأخرى تفاصيل جزئية لا تصلح افتتاحية لفقرة عن فوائد الرياضة."}, {"q": "Which sentence uses the passive voice correctly?", "o": ["The homework was completed by all the students.", "The homework completed by all the students.", "The homework was complete by all the students did.", "All the students was completed the homework."], "a": 0, "fb": "المبني للمجهول الصحيح: was/were + V3 (completed) + by + الفاعل."}, {"q": "Choose the sentence with NO errors:", "o": ["He don't like coffee in the morning.", "He doesn't likes coffee in the morning.", "He doesn't like coffee in the morning.", "He not like coffee in the morning."], "a": 2, "fb": "النفي مع He: doesn't + الفعل في المصدر (like بدون s). الخطأ الشائع: تكرار الـs بعد doesn't."}]}]}]};
+
+let curSec = 0, answered = 0, correct = 0, total = 0;
+let secStats = [];
+let timeLeft = 150 * 60;
+let timerInt = null;
+
+EXAM.sections.forEach(s => {
+  let n = 0;
+  s.blocks.forEach(b => n += b.qs.length);
+  secStats.push({name:s.name, total:n, correct:0, answered:0});
+  total += n;
+});
+
+function startExam(){
+  document.getElementById('startPanel').style.display='none';
+  document.getElementById('quizPanel').style.display='block';
+  document.getElementById('totalCnt').textContent = total;
+  buildNav(); renderSec(0);
+  timerInt = setInterval(tick, 1000);
+}
+function tick(){
+  timeLeft--;
+  const t = document.getElementById('timer');
+  const h = String(Math.floor(timeLeft/3600)).padStart(2,'0');
+  const m = String(Math.floor((timeLeft%3600)/60)).padStart(2,'0');
+  const s = String(timeLeft%60).padStart(2,'0');
+  t.textContent = `${h}:${m}:${s}`;
+  if (timeLeft <= 600) t.classList.add('warn');
+  if (timeLeft <= 0){ clearInterval(timerInt); finish(); }
+}
+function buildNav(){
+  const nav = document.getElementById('secnav');
+  nav.innerHTML = '';
+  EXAM.sections.forEach((s,i)=>{
+    const b = document.createElement('button');
+    b.id = 'navb'+i;
+    b.innerHTML = `${s.name} <span class="cnt">(${secStats[i].total})</span>`;
+    b.onclick = ()=>gotoSec(i);
+    nav.appendChild(b);
+  });
+}
+let qCounter = 0;
+function renderSec(i){
+  curSec = i; qCounterBase(i);
+  document.querySelectorAll('.secnav button').forEach((b,j)=>b.classList.toggle('active', j===i));
+  const s = EXAM.sections[i];
+  let html = `<div class="sec-title"><div class="num">${i+1}</div><h3>${s.name}</h3></div><div class="sec-desc">${s.desc}</div>`;
+  let qn = qStart[i];
+  s.blocks.forEach((blk, bi)=>{
+    if (blk.passage){
+      html += `<div class="passage">${blk.listen?'<span class="listen-tag">🎧 نص الاستماع — اقرأه كأنك تستمع إليه (أو يقرؤه عليك المعلم)</span><br>':''}${blk.title?`<span class="ptitle">${blk.title}</span>`:''}${blk.passage}</div>`;
+    }
+    blk.qs.forEach((q, qi)=>{
+      qn++;
+      const qid = `q_${i}_${bi}_${qi}`;
+      html += `<div class="q" id="${qid}">
+        <div class="qtext"><span class="qnum">${qn}</span> ${q.q}</div>
+        <div class="opts">` +
+        q.o.map((opt,oi)=>`<button class="opt" onclick="answer('${qid}',${i},${oi},${q.a})"><span class="L">${'ABCD'[oi]}.</span>${opt}</button>`).join('') +
+        `</div><div class="fb" id="${qid}_fb"></div></div>`;
+      q._id = qid;
+    });
+  });
+  document.getElementById('secArea').innerHTML = html;
+  document.getElementById('prevBtn').disabled = (i===0);
+  document.getElementById('nextBtn').textContent = (i===EXAM.sections.length-1) ? '🏁 إنهاء الاختبار' : 'القسم التالي ←';
+  restoreSec(i);
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+let qStart = [];
+function qCounterBase(){
+  qStart = []; let acc = 0;
+  EXAM.sections.forEach(s=>{ qStart.push(acc); s.blocks.forEach(b=>acc+=b.qs.length); });
+}
+const saved = {};
+function answer(qid, secIdx, chosen, correctIdx){
+  if (saved[qid] !== undefined) return;
+  saved[qid] = chosen;
+  const q = findQ(qid);
+  markQuestion(qid, q, chosen, correctIdx, true);
+  answered++; secStats[secIdx].answered++;
+  if (chosen === correctIdx){ correct++; secStats[secIdx].correct++; }
+  document.getElementById('answeredCnt').textContent = answered;
+  document.getElementById('prog').style.width = (answered/total*100)+'%';
+}
+function findQ(qid){
+  const [_, si, bi, qi] = qid.split('_').map(Number);
+  return EXAM.sections[si].blocks[bi].qs[qi];
+}
+function markQuestion(qid, q, chosen, correctIdx, animate){
+  const el = document.getElementById(qid);
+  if (!el) return;
+  const opts = el.querySelectorAll('.opt');
+  opts.forEach((o,oi)=>{
+    o.disabled = true;
+    if (oi === correctIdx) o.classList.add('correct');
+    else if (oi === chosen) o.classList.add('wrong');
+  });
+  const fb = document.getElementById(qid+'_fb');
+  const good = chosen === correctIdx;
+  fb.className = 'fb show ' + (good?'good':'badf');
+  fb.innerHTML = (good ? '<b class="tag">✅ إجابة صحيحة!</b>' : `<b class="tag">❌ إجابة خاطئة — الصحيح: ${'ABCD'[correctIdx]}</b>`) + '<br>' + q.fb;
+}
+function restoreSec(si){
+  const s = EXAM.sections[si];
+  s.blocks.forEach((blk,bi)=>{
+    blk.qs.forEach((q,qi)=>{
+      const qid = `q_${si}_${bi}_${qi}`;
+      if (saved[qid] !== undefined) markQuestion(qid, q, saved[qid], q.a, false);
+    });
+  });
+}
+function gotoSec(i){
+  if (i >= EXAM.sections.length){ finish(); return; }
+  if (i < 0) return;
+  renderSec(i);
+}
+function finish(){
+  clearInterval(timerInt);
+  document.getElementById('quizPanel').style.display='none';
+  document.getElementById('resultPanel').style.display='block';
+  const pct = Math.round(correct/total*100);
+  document.getElementById('finalScore').textContent = pct + '%';
+  const sw = document.getElementById('scoreWord');
+  let word, advice;
+  if (pct >= 85){ word='🏆 ممتاز — مستوى متقدم!'; advice='ما شاء الله! أنت جاهز للاختبار. راجع أخطاءك البسيطة وثبّت ثقتك بنفسك يوم الاختبار.'; }
+  else if (pct >= 70){ word='⭐ جيد جدا — قريب من التميز'; advice='مستواك قوي. ركّز على الأقسام الأضعف في الجدول وتدرب على إدارة الوقت.'; }
+  else if (pct >= 50){ word='👍 جيد — تحتاج مزيدا من التدريب'; advice='أساسك كويس لكن يحتاج تثبيت. راجع التغذية الراجعة لكل سؤال غلطت فيه وأعد النموذج بعد يومين.'; }
+  else { word='💪 تحتاج تأسيسا أقوى'; advice='لا تقلق! ابدأ بالقواعد الأساسية (الأزمنة وقاعدة if) ثم تدرّب على قطع القراءة القصيرة، وتواصل مع مستر محمود لخطة مذاكرة مكثفة.'; }
+  sw.textContent = word;
+  sw.style.color = pct>=70 ? 'var(--ok)' : (pct>=50 ? '#b07d10' : 'var(--bad)');
+  document.getElementById('advice').textContent = advice;
+  const bd = document.getElementById('breakdown');
+  bd.innerHTML = secStats.map(s=>{
+    const p = s.total? Math.round(s.correct/s.total*100):0;
+    return `<div class="bd"><div class="nm">${s.name}</div><div class="vl">${s.correct}/${s.total}</div><div class="bar"><i style="width:${p}%"></i></div></div>`;
+  }).join('');
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+</script>
+</body>
+</html>
