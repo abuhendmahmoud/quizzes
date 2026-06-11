@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>دليل مذاكرة STEP الشامل — مستر محمود أبوهند</title>
+<style>@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap');
+* { margin:0; padding:0; box-sizing:border-box; font-family:'Cairo','Segoe UI',Tahoma,sans-serif; }
+:root { --primary:#0f4c5c; --primary2:#1b6f85; --accent:#e9b949; --accent2:#f6d877; --ok:#1e9e6a; --okbg:#e6f7f0; --bad:#d64550; --badbg:#fdecee; --ink:#1c2b33; --muted:#5e7480; --bg:#f2f6f8; }
+body { background:var(--bg); color:var(--ink); }
+.header { background:linear-gradient(135deg,#0a3a47 0%,var(--primary) 45%,var(--primary2) 100%); color:#fff; padding:26px 18px 64px; text-align:center; position:relative; overflow:hidden;}
+.header::after{content:'';position:absolute;inset:0;background:radial-gradient(circle at 80% 10%, rgba(233,185,73,.18), transparent 45%),radial-gradient(circle at 15% 90%, rgba(233,185,73,.12), transparent 40%);}
+.header > * { position:relative; z-index:1; }
+.badge { display:inline-block; background:var(--accent); color:#0a3a47; font-weight:900; padding:4px 18px; border-radius:30px; font-size:13.5px; margin-bottom:10px;}
+.header h1 { font-size:27px; font-weight:900; margin-bottom:4px;}
+.header h2 { font-size:15.5px; font-weight:600; color:var(--accent2); margin-bottom:13px;}
+.teacher { display:inline-flex; flex-wrap:wrap; justify-content:center; gap:8px 20px; background:rgba(255,255,255,.10); border:1px solid rgba(255,255,255,.25); border-radius:14px; padding:8px 22px; font-size:14.5px;}
+.teacher b{color:var(--accent2); font-weight:900;}
+.teacher a{color:#fff; text-decoration:none; font-weight:700;}
+.wrap { max-width:880px; margin:-40px auto 40px; padding:0 16px;}
+.toc { background:#fff; border-radius:16px; box-shadow:0 6px 26px rgba(15,76,92,.12); padding:18px 22px; margin-bottom:18px;}
+.toc h3{color:var(--primary); font-size:16px; margin-bottom:8px;}
+.toc a{display:inline-block; background:var(--bg); color:var(--primary); font-weight:700; font-size:13px; border-radius:20px; padding:4px 14px; margin:3px 2px; text-decoration:none; border:1px solid #dbe6ec;}
+.toc a:hover{background:var(--primary); color:#fff;}
+.card { background:#fff; border-radius:16px; box-shadow:0 5px 22px rgba(15,76,92,.10); margin-bottom:18px; overflow:hidden;}
+.card-h { display:flex; align-items:center; gap:12px; padding:16px 20px; cursor:pointer; user-select:none;}
+.card-h .num{background:var(--accent); color:#0a3a47; min-width:38px; height:38px; border-radius:11px; display:flex; align-items:center; justify-content:center; font-weight:900; font-size:17px;}
+.card-h h3{font-size:18.5px; color:var(--primary); font-weight:900; flex:1;}
+.card-h .arrow{transition:.25s; color:var(--muted); font-size:18px;}
+.card.open .card-h .arrow{transform:rotate(180deg);}
+.card-b { display:none; padding:0 20px 20px; line-height:2; font-size:15.5px;}
+.card.open .card-b{display:block; animation:fade .3s;}
+@keyframes fade{from{opacity:0; transform:translateY(-4px)} to{opacity:1; transform:none}}
+.rule { background:#f0f7fa; border-right:5px solid var(--primary2); border-radius:10px; padding:12px 16px; margin:12px 0; font-weight:700;}
+.rule .en{direction:ltr; display:block; text-align:left; font-size:15px; color:var(--primary); background:#fff; border-radius:8px; padding:6px 12px; margin-top:6px; font-weight:900;}
+.ex { direction:ltr; text-align:left; background:#f7fafc; border:1px solid #dde8ee; border-radius:10px; padding:10px 14px; margin:8px 0; font-size:15px;}
+.ex b{color:var(--ok);}
+.ex .tr{direction:rtl; text-align:right; display:block; color:var(--muted); font-size:13.5px;}
+.trap { background:var(--badbg); border:1px solid #f3c2c7; border-radius:10px; padding:11px 15px; margin:12px 0; font-size:14.5px;}
+.trap b{color:var(--bad);}
+.tip { background:var(--okbg); border:1px solid #bfe8d6; border-radius:10px; padding:11px 15px; margin:12px 0; font-size:14.5px;}
+.tip b{color:#11543a;}
+.star { background:#fdf6e3; border:1px solid #f0e0b0; border-radius:10px; padding:11px 15px; margin:12px 0; font-size:14.5px;}
+.star b{color:#9a7b1a;}
+table.t { width:100%; border-collapse:collapse; margin:10px 0; font-size:14.5px;}
+table.t th{background:var(--primary); color:#fff; padding:8px 10px; font-size:13.5px;}
+table.t td{border:1px solid #dde8ee; padding:7px 10px; text-align:center;}
+table.t tr:nth-child(even) td{background:#f7fafc;}
+.try { border:2px dashed var(--primary2); border-radius:12px; padding:13px 16px; margin:14px 0;}
+.try .q{font-weight:700; direction:ltr; text-align:left; margin-bottom:8px;}
+.try button{border:none; background:var(--primary); color:#fff; border-radius:9px; padding:6px 18px; font-weight:700; cursor:pointer; font-family:inherit; font-size:13.5px;}
+.try .ans{display:none; margin-top:9px; background:var(--okbg); border-radius:9px; padding:9px 13px; font-size:14px;}
+.try .ans.show{display:block; animation:fade .3s;}
+.footer { background:#0a3a47; color:#cfe3ea; text-align:center; padding:20px 16px; font-size:14px; line-height:2;}
+.footer b{color:var(--accent2); font-size:15.5px;}
+.footer a{color:#fff; font-weight:700; text-decoration:none;}
+.wa { display:inline-block; background:#25D366; color:#fff!important; border-radius:30px; padding:3px 16px; font-weight:900; margin-right:8px;}
+.openall{border:none; background:var(--accent); color:#0a3a47; font-weight:900; border-radius:10px; padding:7px 18px; cursor:pointer; font-family:inherit; margin-bottom:14px; font-size:14px;}
+@media(max-width:600px){.header h1{font-size:21px}}
+
+.unitnav { display:flex; gap:8px; flex-wrap:wrap; justify-content:center; margin:-10px 0 18px; position:relative; z-index:2;}
+.unitnav button { border:2px solid var(--primary2); background:#fff; color:var(--primary); border-radius:30px; padding:9px 22px; font-weight:900; font-size:15px; cursor:pointer; font-family:inherit; transition:.2s; box-shadow:0 3px 10px rgba(15,76,92,.12);}
+.unitnav button.active { background:var(--primary); color:#fff; }
+.unit { display:none; }
+.unit.active { display:block; animation:fade .3s; }
+.unit-head { background:#fff; border-radius:16px; box-shadow:0 6px 26px rgba(15,76,92,.12); padding:16px 22px; margin-bottom:16px; border-right:6px solid var(--accent);}
+.unit-head h2 { color:var(--primary); font-size:21px; font-weight:900;}
+.unit-head p { color:var(--muted); font-size:14px; line-height:1.9;}
+</style>
+</head>
+<body>
+<div class="header">
+  <div class="badge">STEP · دليل المذاكرة الشامل</div>
+  <h1>دليل مذاكرة اختبار STEP</h1>
+  <h2>كل اللي تحتاجه قبل الاختبار: القواعد والقطع والنصوص والمفردات الأكثر تكرارا — ذاكر منه ثم اختبر نفسك بالنماذج الثلاثة</h2>
+  <div class="teacher"><span>إعداد: <b>مستر محمود أبوهند</b></span><span>•</span><span>جوال / واتساب: <a href="https://wa.me/966542260935" target="_blank">0542260935</a></span></div>
+</div>
+<div class="wrap">
+  <div class="unitnav"><button id="ub_g" onclick="showUnit('g')">القرامر</button><button id="ub_r" onclick="showUnit('r')">الريدنق</button><button id="ub_l" onclick="showUnit('l')">الليسنق</button><button id="ub_w" onclick="showUnit('w')">التحليل الكتابي</button></div>
+  <div class="unit" id="unit_g">
+<div class="unit-head"><h2>📘 التراكيب النحوية — 30% من الاختبار</h2><p>القواعد الأكثر تكرارا في اختبار STEP: قاعدة if، الأزمنة، when/while، الأفعال الناقصة، ضمائر الوصل، الكميات، الحروف الكبيرة، تحديد الخطأ، المبني للمجهول والترقيم.</p></div>
+<div class="toc"><h3>📑 محتويات القسم</h3><a href="#g_c1">قاعدة الشرط if — أهم قاعدة في الاختبار ⭐</a><a href="#g_c2">when و while والروابط الزمنية</a><a href="#g_c3">الأزمنة الأساسية — جدول الكلمات الدالة</a><a href="#g_c4">الأفعال الناقصة Modals — وفخ "to" الشهير</a><a href="#g_c5">ضمائر الوصل who / whom / whose / which</a><a href="#g_c6">الكمّيات: much / many / few / little / neither / both</a><a href="#g_c7">Capitalization — سؤال ثابت في كل اختبار</a><a href="#g_c8">ترتيب الجمل + تحديد الخطأ — أسئلة المهارة</a><a href="#g_c9">المبني للمجهول Passive Voice</a><a href="#g_c10">علامات الترقيم + المقارنة — أسئلة سريعة الحسم</a></div>
+<button class="openall" onclick="openAll('g')">📖 فتح كل الدروس</button>
+<div class="card open" id="g_c1">
+<div class="card-h" onclick="tg(this)"><div class="num">1</div><h3>قاعدة الشرط if — أهم قاعدة في الاختبار ⭐</h3><span class="arrow">▼</span></div>
+<div class="card-b">
+<p>أسئلة if تأتي في <b>كل اختبار STEP تقريبا</b> — وهي الأكثر تكرارا بفارق كبير حسب تجارب المختبرين. السر كله في حفظ "التركيبة": شوف زمن النصف المعطى في الجملة، تعرف منه زمن الفراغ.</p>
+<table class="t">
+<tr><th>النوع</th><th>التركيبة</th><th>الاستخدام</th></tr>
+<tr><td>Zero</td><td style="direction:ltr">If + present , present</td><td>حقائق علمية: If you heat ice, it <b>melts</b></td></tr>
+<tr><td>First</td><td style="direction:ltr">If + present , will + مصدر</td><td>مستقبل محتمل: If it rains, we <b>will cancel</b></td></tr>
+<tr><td>Second</td><td style="direction:ltr">If + past , would + مصدر</td><td>خيالي الآن: If I <b>were</b> you, I would apologize</td></tr>
+<tr><td>Third</td><td style="direction:ltr">If + had + V3 , would have + V3</td><td>ندم على الماضي: If they had left early, they <b>would have caught</b> the train</td></tr>
+</table>
+<div class="trap"><b>⚠️ فخ الاختبار:</b> الاختبار غالبا يعطيك نصف الجملة ويطلب النصف الثاني. لو شفت <b>would have</b> فالشرط لازم <b>had + V3</b>، ولو شفت <b>will</b> فالشرط مضارع بسيط. وانتبه: مع النصيحة الخيالية نقول <b>If I were you</b> (وليس was).</div>
+<div class="try"><div class="q">If she ______ harder, she would pass the exam. (study)</div><button onclick="rv(this)">أظهر الإجابة</button><div class="ans">✅ <b>studied</b> — النتيجة فيها would + مصدر، فهذا شرط ثان والفراغ ماضي بسيط.</div></div>
+</div></div>
+
+<div class="card" id="g_c2">
+<div class="card-h" onclick="tg(this)"><div class="num">2</div><h3>when و while والروابط الزمنية</h3><span class="arrow">▼</span></div>
+<div class="card-b">
+<div class="rule">القاعدة الذهبية: <b>while + الحدث الطويل المستمر</b> (was/were + V-ing)، و<b>when + الحدث القصير المفاجئ</b> (ماضي بسيط).<span class="en">While I was walking home, I saw an old friend. / When the phone rang, she was cooking.</span></div>
+<p>طريقة سهلة: تخيل "فيلم وصورة" — while مع الفيلم الشغال (المشي، الطبخ، المذاكرة)، وwhen مع الصورة اللحظية (رن الهاتف، انقطعت الكهرباء، رأيت صديقي).</p>
+<div class="trap"><b>⚠️ فخ الاختبار:</b> الجملتان قد تنعكسان! <b>When the lights went out, she was reading</b> صحيحة أيضا. لا تحفظ مكان الكلمة في الجملة، احفظ نوع الحدث بعدها: مستمر = while، قصير = when.</div>
+<div class="try"><div class="q">______ they were playing football, it started to rain.</div><button onclick="rv(this)">أظهر الإجابة</button><div class="ans">✅ <b>While</b> — بعدها حدث مستمر (were playing).</div></div>
+</div></div>
+
+<div class="card" id="g_c3">
+<div class="card-h" onclick="tg(this)"><div class="num">3</div><h3>الأزمنة الأساسية — جدول الكلمات الدالة</h3><span class="arrow">▼</span></div>
+<div class="card-b">
+<p>أهم نصيحة: <b>لا تترجم الجملة، دوّر على الكلمة الدالة (keyword)</b> — هي اللي تحدد الزمن في 90% من أسئلة الاختبار.</p>
+<table class="t">
+<tr><th>الزمن</th><th>الكلمات الدالة</th><th>التركيبة</th><th>مثال</th></tr>
+<tr><td>مضارع بسيط</td><td>always, usually, every day + الحقائق</td><td style="direction:ltr">V1 (+s للمفرد)</td><td style="direction:ltr">Water <b>boils</b> at 100°C</td></tr>
+<tr><td>مضارع مستمر</td><td>now, Look!, Listen!, at the moment</td><td style="direction:ltr">am/is/are + V-ing</td><td style="direction:ltr">The children <b>are playing</b> now</td></tr>
+<tr><td>ماضي بسيط</td><td>yesterday, ago, last week, in 2010</td><td style="direction:ltr">V2</td><td style="direction:ltr">They <b>finished</b> two days ago</td></tr>
+<tr><td>ماضي مستمر</td><td>while + حدث مقطوع</td><td style="direction:ltr">was/were + V-ing</td><td style="direction:ltr">He <b>was watching</b> TV when I called</td></tr>
+<tr><td>مضارع تام</td><td>since, for, just, already, yet, ever</td><td style="direction:ltr">have/has + V3</td><td style="direction:ltr">She <b>has lived</b> here since 2018</td></tr>
+<tr><td>ماضي تام</td><td>after, before, by the time</td><td style="direction:ltr">had + V3</td><td style="direction:ltr">The lecture <b>had started</b> by the time we arrived</td></tr>
+<tr><td>مستقبل</td><td>tomorrow, next week, soon</td><td style="direction:ltr">will + مصدر / be going to</td><td style="direction:ltr">I <b>will visit</b> her tomorrow</td></tr>
+</table>
+<div class="star"><b>⭐ فرق مهم:</b> since + نقطة بداية (since 2019, since Monday) / for + مدة (for ten years, for two hours). سؤال since/for يتكرر كثيرا.</div>
+<div class="trap"><b>⚠️ فخ الاختبار:</b> ago = ماضي بسيط <u>دائما</u>. جملة "I have visited Paris last summer" خاطئة — مع زمن محدد بالماضي ممنوع المضارع التام. هذا بالضبط نوع أسئلة "حدد الخطأ".</div>
+<div class="trap"><b>⚠️ فخ ثان:</b> Look at those clouds! It <b>is going to</b> rain — التوقع المبني على دليل مرئي يأخذ be going to وليس will.</div>
+<div class="try"><div class="q">My family ______ in this house for twenty years. (live)</div><button onclick="rv(this)">أظهر الإجابة</button><div class="ans">✅ <b>has lived</b> — for + مدة مع استمرار الحدث = مضارع تام.</div></div>
+</div></div>
+
+<div class="card" id="g_c4">
+<div class="card-h" onclick="tg(this)"><div class="num">4</div><h3>الأفعال الناقصة Modals — وفخ "to" الشهير</h3><span class="arrow">▼</span></div>
+<div class="card-b">
+<table class="t">
+<tr><th>الفعل</th><th>المعنى</th><th>مثال</th></tr>
+<tr><td>must</td><td>إلزام/قانون</td><td style="direction:ltr">You <b>must</b> wear a seatbelt</td></tr>
+<tr><td>mustn't</td><td>ممنوع</td><td style="direction:ltr">You <b>mustn't</b> smoke in the hospital</td></tr>
+<tr><td>should</td><td>نصيحة</td><td style="direction:ltr">You <b>should</b> take a rest</td></tr>
+<tr><td>might</td><td>احتمال</td><td style="direction:ltr">It <b>might</b> rain this afternoon</td></tr>
+<tr><td>could</td><td>استطاعة بالماضي</td><td style="direction:ltr">He <b>could</b> swim when he was five</td></tr>
+<tr><td>Would you like...?</td><td>عرض مهذب</td><td style="direction:ltr"><b>Would</b> you like some tea?</td></tr>
+<tr><td>Shall I...?</td><td>اقتراح/عرض مساعدة</td><td style="direction:ltr"><b>Shall</b> I open the window?</td></tr>
+</table>
+<div class="trap"><b>⚠️ أهم فخ في الاختبار كله:</b> بعد الأفعال الناقصة يأتي المصدر <u>بدون to</u>. الطلاب أنفسهم كتبوا في الجروب: "must go وركزوا ما يصلح بعدها to". لو شفت خيار "must to go" أو "might to rain" فهو خاطئ فورا — والاختبار يحط هذي الخيارات عمدا.</div>
+<div class="try"><div class="q">Find the mistake: "He must to finish his homework before dinner."</div><button onclick="rv(this)">أظهر الإجابة</button><div class="ans">✅ الخطأ كلمة <b>to</b> — الصحيح: must finish.</div></div>
+</div></div>
+
+<div class="card" id="g_c5">
+<div class="card-h" onclick="tg(this)"><div class="num">5</div><h3>ضمائر الوصل who / whom / whose / which</h3><span class="arrow">▼</span></div>
+<div class="card-b">
+<table class="t">
+<tr><th>الضمير</th><th>متى؟</th><th>العلامة المميزة</th><th>مثال</th></tr>
+<tr><td>who</td><td>فاعل عاقل</td><td>بعده فعل مباشرة</td><td style="direction:ltr">the teacher <b>who</b> helped me</td></tr>
+<tr><td>whom</td><td>مفعول عاقل</td><td>بعد حرف جر أو قبل فاعل</td><td style="direction:ltr">To <b>whom</b> did you give it?</td></tr>
+<tr><td>whose</td><td>ملكية</td><td>بعده <u>اسم</u> مباشرة</td><td style="direction:ltr">the man <b>whose</b> car was stolen</td></tr>
+<tr><td>which</td><td>غير عاقل</td><td>أشياء وحيوانات وأماكن</td><td style="direction:ltr">the mosque <b>which</b> was built</td></tr>
+</table>
+<div class="tip"><b>💡 خدعة سريعة:</b> شف الكلمة اللي بعد الفراغ: فعل → who، اسم → whose، وقبل الفراغ حرف جر → whom، والموصوف شيء مو شخص → which. بهذي الطريقة تحل السؤال في 5 ثوان.</div>
+<div class="try"><div class="q">The students ______ books are on the desk should collect them.</div><button onclick="rv(this)">أظهر الإجابة</button><div class="ans">✅ <b>whose</b> — بعد الفراغ اسم (books) = ملكية.</div></div>
+</div></div>
+
+<div class="card" id="g_c6">
+<div class="card-h" onclick="tg(this)"><div class="num">6</div><h3>الكمّيات: much / many / few / little / neither / both</h3><span class="arrow">▼</span></div>
+<div class="card-b">
+<div class="rule">القاعدة الأم: <b>معدود</b> (تقدر تعدّه: books, seats, apples) ↔ <b>غير معدود</b> (ما ينعد: water, sugar, time, milk, traffic).</div>
+<table class="t">
+<tr><th>للمعدود</th><th>لغير المعدود</th></tr>
+<tr><td style="direction:ltr">many, few, a few</td><td style="direction:ltr">much, little, a little</td></tr>
+</table>
+<p><b>a few / a little</b> = قليل لكنه كاف (معنى إيجابي) — <b>few / little</b> بدون a = قليل جدا لا يكفي (معنى سلبي): "Few students passed — only three out of forty".</p>
+<div class="rule">الثنائيات: <b>Neither A nor B</b> = لا هذا ولا ذاك / <b>Either A or B</b> = أحدهما / <b>Both A and B</b> = كلاهما.<span class="en">Neither my brother nor my sister was at home.</span></div>
+<div class="trap"><b>⚠️ فخ الاختبار:</b> في النفي آخر الجملة نستخدم <b>either</b> وليس too: "I don't like coffee, and my brother doesn't like it <b>either</b>". أما neither فتبدأ الرد: "Neither do I". الطلاب ذكروا تكرار هذا السؤال بالذات.</div>
+<div class="trap"><b>⚠️ فخ ثان:</b> traffic وtime وmoney غير معدودة — "There <b>was</b> a lot of traffic" (مفرد) حتى لو قبلها a lot of.</div>
+<div class="try"><div class="q">There isn't ______ milk in the fridge. (much / many)</div><button onclick="rv(this)">أظهر الإجابة</button><div class="ans">✅ <b>much</b> — milk غير معدود.</div></div>
+</div></div>
+
+<div class="card" id="g_c7">
+<div class="card-h" onclick="tg(this)"><div class="num">7</div><h3>Capitalization — سؤال ثابت في كل اختبار</h3><span class="arrow">▼</span></div>
+<div class="card-b">
+<p>احفظ القائمة دي بالترتيب — والسؤال بيجي بصيغة "اختر الجملة الصحيحة":</p>
+<table class="t">
+<tr><th>تُكبَّر</th><th>مثال</th></tr>
+<tr><td>أول حرف في الجملة</td><td style="direction:ltr"><b>M</b>y friend...</td></tr>
+<tr><td>أسماء الأشخاص والألقاب معها</td><td style="direction:ltr"><b>D</b>r. <b>K</b>halid, <b>K</b>ing <b>S</b>alman</td></tr>
+<tr><td>المدن والدول والأماكن الجغرافية</td><td style="direction:ltr"><b>J</b>eddah, <b>S</b>audi <b>A</b>rabia, the <b>R</b>ed <b>S</b>ea</td></tr>
+<tr><td>أيام الأسبوع والشهور</td><td style="direction:ltr"><b>M</b>onday, <b>J</b>anuary, <b>R</b>amadan</td></tr>
+<tr><td>اللغات والجنسيات</td><td style="direction:ltr"><b>E</b>nglish, <b>S</b>audi</td></tr>
+<tr><td>الضمير I دائما</td><td style="direction:ltr">my friend and <b>I</b></td></tr>
+</table>
+<div class="tip"><b>💡 استراتيجية الحل:</b> الخيارات الأربعة فيها نفس الجملة بكتابات مختلفة. اشطب أولا أي خيار يبدأ بحرف صغير، ثم افحص أسماء الأعلام — غالبا يتبقى خيار واحد.</div>
+<div class="trap"><b>⚠️ انتبه:</b> الاتجاهات العادية لا تُكبَّر: "west of Saudi Arabia" — لكن لو كانت جزءا من اسم منطقة تُكبَّر.</div>
+</div></div>
+
+<div class="card" id="g_c8">
+<div class="card-h" onclick="tg(this)"><div class="num">8</div><h3>ترتيب الجمل + تحديد الخطأ — أسئلة المهارة</h3><span class="arrow">▼</span></div>
+<div class="card-b">
+<div class="rule">ترتيب الجملة الإنجليزية: <b>فاعل ← فعل ← مفعول ← (كيف) ← مكان ← زمان</b><span class="en">Sara walks to the library every morning. / My father bought a new phone last week.</span></div>
+<div class="tip"><b>💡 خدعة الترتيب:</b> دوّر أولا على الفاعل (الشخص/الشيء)، بعده الفعل مباشرة، وخل الزمان آخر شيء دائما. السؤال يجي بأرقام (1)(2)(3)(4) — رتبها على الورق قبل النظر للخيارات.</div>
+<p style="margin-top:10px"><b>أسئلة "حدد الكلمة الخطأ"</b> (تكررت كثيرا في الاختبارات الأخيرة) — قائمة الأخطاء اللي يحطونها دائما:</p>
+<table class="t">
+<tr><th>الخطأ المعتاد</th><th>الصحيح</th></tr>
+<tr><td style="direction:ltr">She <b>have</b> been...</td><td style="direction:ltr">She <b>has</b> been (فاعل مفرد)</td></tr>
+<tr><td style="direction:ltr">must <b>to</b> go</td><td style="direction:ltr">must go (بدون to)</td></tr>
+<tr><td style="direction:ltr">They <b>was</b> watching</td><td style="direction:ltr">They <b>were</b> (فاعل جمع)</td></tr>
+<tr><td style="direction:ltr">I <b>have visited</b> Paris last summer</td><td style="direction:ltr">I <b>visited</b> (زمن محدد بالماضي)</td></tr>
+<tr><td style="direction:ltr"><b>childrens</b></td><td style="direction:ltr">children (جمع شاذ، بلا s)</td></tr>
+<tr><td style="direction:ltr">more <b>taller</b></td><td style="direction:ltr">taller (ممنوع more + er)</td></tr>
+<tr><td style="direction:ltr"><b>goed</b></td><td style="direction:ltr">went (فعل شاذ)</td></tr>
+<tr><td style="direction:ltr">one of the smartest <b>student</b></td><td style="direction:ltr">students (جمع بعد one of the)</td></tr>
+<tr><td style="direction:ltr">There <b>is</b> many books</td><td style="direction:ltr">There <b>are</b> (الاسم جمع)</td></tr>
+</table>
+<div class="tip"><b>💡 منهجية الحل:</b> افحص بالترتيب: (1) تطابق الفاعل والفعل (2) الزمن مع الكلمة الدالة (3) to بعد modals (4) صيغ الجمع والمقارنة. 90% من أسئلة الخطأ من هذي الأربعة.</div>
+</div></div>
+
+<div class="card" id="g_c9">
+<div class="card-h" onclick="tg(this)"><div class="num">9</div><h3>المبني للمجهول Passive Voice</h3><span class="arrow">▼</span></div>
+<div class="card-b">
+<div class="rule">التركيبة: <b>be (بالزمن المناسب) + V3</b> — والفاعل الحقيقي بعد by أو محذوف.<span class="en">The letter was written by the manager. / Arabic coffee is served to guests. / The school will be opened next year.</span></div>
+<table class="t">
+<tr><th>الزمن</th><th>الصيغة</th></tr>
+<tr><td>مضارع</td><td style="direction:ltr">is/are + V3</td></tr>
+<tr><td>ماضي</td><td style="direction:ltr">was/were + V3</td></tr>
+<tr><td>مستقبل</td><td style="direction:ltr">will be + V3</td></tr>
+</table>
+<div class="tip"><b>💡 متى أعرف أنه مجهول؟</b> اسأل نفسك: هل الفاعل "يفعل" أم "يُفعَل به"؟ الرسالة لا تكتب نفسها — إذن was written. وجود by في الجملة قرينة قوية.</div>
+<div class="try"><div class="q">The letter ______ by the manager yesterday. (write)</div><button onclick="rv(this)">أظهر الإجابة</button><div class="ans">✅ <b>was written</b> — مجهول في الماضي + yesterday.</div></div>
+</div></div>
+
+<div class="card" id="g_c10">
+<div class="card-h" onclick="tg(this)"><div class="num">10</div><h3>علامات الترقيم + المقارنة — أسئلة سريعة الحسم</h3><span class="arrow">▼</span></div>
+<div class="card-b">
+<p><b>الترقيم</b> (الطلاب ذكروا ~3 أسئلة في الاختبار):</p>
+<table class="t">
+<tr><th>النوع</th><th>العلامة</th><th>مثال</th></tr>
+<tr><td>سؤال</td><td>?</td><td style="direction:ltr">Where are you going<b>?</b></td></tr>
+<tr><td>تعجب</td><td>!</td><td style="direction:ltr">What a beautiful view<b>!</b></td></tr>
+<tr><td>سرد عناصر</td><td>فواصل + and</td><td style="direction:ltr">apples<b>,</b> oranges<b>,</b> and bananas</td></tr>
+<tr><td>اقتباس</td><td>, + " "</td><td style="direction:ltr">Ahmed said<b>,</b> <b>"</b>I will arrive at noon.<b>"</b></td></tr>
+<tr><td>عبارة تابعة أولا</td><td>فاصلة بعدها</td><td style="direction:ltr">Before you leave<b>,</b> turn off the lights.</td></tr>
+</table>
+<p style="margin-top:10px"><b>المقارنة والتفضيل:</b></p>
+<div class="rule">قصير: <b>er / the ...est</b> (taller / the largest) — طويل: <b>more / the most</b> (more beautiful / the most expensive)<span class="en">easy → easier → the easiest (نحذف y)</span></div>
+<div class="trap"><b>⚠️ الفخ الثابت:</b> ممنوع الجمع بين الاثنين: "more taller" ✗ و"the most largest" ✗ — يحطونها في الخيارات دائما.</div>
+</div></div>
+
+</div><div class="unit" id="unit_r">
+<div class="unit-head"><h2>📘 استيعاب المقروء — 40% من الاختبار</h2><p>استراتيجيات حل أنواع الأسئلة الخمسة، القطع الأكثر تكرارا وملخصاتها، الرسوم البيانية، والمفردات اللي وردت حرفيا في الاختبارات.</p></div>
+<div class="toc"><h3>📑 محتويات القسم</h3><a href="#r_c1">شكل قسم الريدنق في الاختبار</a><a href="#r_c2">القطع الأكثر تكرارا — ذاكرها كلها قبل الاختبار ⭐</a><a href="#r_c3">الرسوم البيانية والجداول — درجات مضمونة</a><a href="#r_c4">المفردات المتكررة حرفيا في الاختبار ⭐</a><a href="#r_c5">خطة مذاكرة مقترحة للريدنق (3 جلسات)</a></div>
+<button class="openall" onclick="openAll('r')">📖 فتح كل الدروس</button>
+<div class="card open" id="r_c1">
+<div class="card-h" onclick="tg(this)"><div class="num">1</div><h3>شكل قسم الريدنق في الاختبار</h3><span class="arrow">▼</span></div>
+<div class="card-b">
+<p>قسم استيعاب المقروء = <b>40 سؤالا (40% من الدرجة)</b> — أكبر قسم في الاختبار. يتكون من قطع قراءة (150-200 كلمة غالبا) + رسوم بيانية وجداول + أسئلة مفردات داخل القطع.</p>
+<p>أنواع الأسئلة الخمسة اللي لازم تميزها من صيغة السؤال:</p>
+<table class="t">
+<tr><th>النوع</th><th>صيغته في الاختبار</th><th>استراتيجية الحل</th></tr>
+<tr><td>الفكرة الرئيسية</td><td style="direction:ltr">What is the main idea / mainly about?</td><td>الإجابة تغطي القطعة كلها — استبعد أي خيار يذكر تفصيلة واحدة</td></tr>
+<tr><td>التفاصيل</td><td style="direction:ltr">According to the passage...</td><td>خذ الكلمة المفتاحية من السؤال ودوّر عليها في النص</td></tr>
+<tr><td>النفي</td><td style="direction:ltr">Which is NOT mentioned?</td><td>اشطب من الخيارات كل ما ورد في النص — الباقي هو الجواب</td></tr>
+<tr><td>الاستنتاج</td><td style="direction:ltr">It can be inferred that...</td><td>الجواب غير مكتوب حرفيا لكن النص يدل عليه منطقيا</td></tr>
+<tr><td>المفردات</td><td style="direction:ltr">closest in meaning to...</td><td>عوّض بالخيار مكان الكلمة وشف هل الجملة تظل منطقية</td></tr>
+</table>
+<div class="tip"><b>💡 قاعدة ذهبية:</b> اقرأ الأسئلة قبل القطعة! توفر نص الوقت لأنك تعرف وش تدور عليه وأنت تقرأ.</div>
+</div></div>
+
+<div class="card" id="r_c2">
+<div class="card-h" onclick="tg(this)"><div class="num">2</div><h3>القطع الأكثر تكرارا — ذاكرها كلها قبل الاختبار ⭐</h3><span class="arrow">▼</span></div>
+<div class="card-b">
+<p>هذي القائمة مستخرجة من تحليل تجارب الطلاب الفعلية (يونيو 2026). القطع تتكرر بنفس الموضوع وأحيانا بنفس الأسئلة:</p>
+<table class="t">
+<tr><th>القطعة</th><th>أهم نقطة يجي عليها سؤال</th></tr>
+<tr><td><b>التضخم Inflation</b> (الأكثر تكرارا)</td><td>أشهر أداة للسيطرة عليه = رفع الفائدة، والمبالغة فيها تضر الوظائف</td></tr>
+<tr><td><b>التوتر والمشاعر Stress</b></td><td>التوتر القليل مفيد (يخلينا متيقظين)، والمزمن ضار — وكلمة irrational</td></tr>
+<tr><td><b>عدوانية الأطفال</b></td><td>طبيعية من 2-4 سنوات، ممنوع الضرب (الطفل يقلد)، بعد 6 سنوات → طبيب نفسي</td></tr>
+<tr><td><b>سوفت وير / قرصنة البرامج</b></td><td>القرصنة فيها فيروسات وبلا تحديث، والحل طويل المدى = التوعية</td></tr>
+<tr><td><b>السياحة في جامايكا</b></td><td>أهم مورد اقتصادي، مشاكلها التلوث والازدحام، والحل eco-tourism</td></tr>
+<tr><td><b>الإنفلونزا الإسبانية</b></td><td>ما بدأت في إسبانيا (الصحف الإسبانية أول من نشر)، قتلت شبابا أصحاء</td></tr>
+<tr><td><b>التايقر</b></td><td>يفضل يأكل الغزلان والخنازير البرية، يعيش وحيدا، نادرا يقابل الأسد (مناطق مختلفة)</td></tr>
+<tr><td><b>الكانسر</b></td><td>مو مرض واحد (100+ مرض)، يبدأ بانقسام خلايا بلا سيطرة، الاكتشاف المبكر هو المفتاح</td></tr>
+<tr><td><b>سنغافورة</b></td><td>نجحت رغم قلة الموارد: تعليم + محاربة فساد + موقع — تستورد معظم مياهها</td></tr>
+<tr><td><b>أمريكا واللغات</b></td><td>لا توجد لغة رسمية فيدرالية! 350+ لغة، الإسبانية الثانية (40 مليون)</td></tr>
+<tr><td><b>السوبر ماركت والسوبر سنتر</b></td><td>السوبر سنتر = سوبر ماركت + متجر أقسام، أرخص لأنه يشتري كميات ضخمة</td></tr>
+<tr><td><b>الباندا العملاقة</b></td><td>تأكل الخيزران 14 ساعة يوميا، ومنذ 2021 لم تعد مهددة بالانقراض</td></tr>
+<tr><td><b>مايك الإطفائي</b></td><td>أول مهمة يومية: فحص المعدات، وأصعب شيء بالوظيفة = الانتظار مو الخطر</td></tr>
+<tr><td><b>النحل</b></td><td>ثلث غذائنا يعتمد عليه، تراجع بسبب المبيدات وفقدان الزهور البرية</td></tr>
+<tr><td><b>تلوث البلاستيك</b></td><td>يتفتت لميكروبلاستيك، السلاحف تأكل الأكياس (تشبه القناديل)، الحل يبدأ بالعادات اليومية</td></tr>
+<tr><td><b>مدائن صالح</b></td><td>نحتها الأنباط (بناة البتراء)، 130+ مقبرة، أول موقع سعودي في اليونسكو (2008)</td></tr>
+<tr><td><b>الزواج والطلاق</b></td><td>سن الزواج ارتفع من 22 لفوق 30، والطلاق بدأ ينخفض لأن الزواج المتأخر أكثر تأنيا</td></tr>
+<tr><td><b>الفيتامينات والمعادن</b></td><td>فيتامين د من الشمس للعظام، الحديد ينقل الأكسجين، الحبوب فقط عند نقص حقيقي</td></tr>
+<tr><td><b>فراولة كاليفورنيا</b></td><td>90% من فراولة أمريكا، تُقطف يدويا لأنها طرية، مشكلتا العمال والمياه</td></tr>
+</table>
+<div class="star"><b>⭐ ملاحظة مهمة:</b> الطلاب أكدوا أن القطع تجي بنفس الفكرة لكن أحيانا بأسئلة مختلفة — فالهدف من الشرح فهم محتوى القطعة مو حفظ حروف الإجابات.</div>
+</div></div>
+
+<div class="card" id="r_c3">
+<div class="card-h" onclick="tg(this)"><div class="num">3</div><h3>الرسوم البيانية والجداول — درجات مضمونة</h3><span class="arrow">▼</span></div>
+<div class="card-b">
+<p>الطلاب وصفوها بأنها "سهلة جدا" — بشرط التدقيق. الرسوم المتكررة: <b>ماكدونالدز/كنتاكي، المياه العذبة (المغرب 1967/سوريا)، الحجاج (الجواب 2010)، كأس العالم وإسبانيا، طرق المواصلات ونسبة المشاة</b>.</p>
+<p>أنواع أسئلتها الأربعة:</p>
+<table class="t">
+<tr><th>السؤال</th><th>الاستراتيجية</th></tr>
+<tr><td style="direction:ltr">In which year was X highest?</td><td>دوّر على أكبر رقم في العمود/الصف المطلوب</td></tr>
+<tr><td style="direction:ltr">How much did X increase/decrease?</td><td>طرح بسيط: القيمة الثانية − الأولى</td></tr>
+<tr><td style="direction:ltr">Which statement is TRUE?</td><td>اختبر كل خيار ضد الجدول — واحد فقط يطابق</td></tr>
+<tr><td style="direction:ltr">What is the general trend?</td><td>الصورة الكلية: صاعد/هابط/ثابت — مو رقم واحد</td></tr>
+</table>
+<div class="trap"><b>⚠️ أشهر أخطاء الطلاب:</b> (1) قراءة الصف الصحيح من العمود الغلط (2) الخلط بين "الأعلى قيمة" و"الأكثر زيادة" (3) في رسمة إسبانيا: سنة الفوز بالكأس (2010) ليست سنة أكثر الأهداف (2006) — الاختبار يتعمد هذا الفخ.</div>
+</div></div>
+
+<div class="card" id="r_c4">
+<div class="card-h" onclick="tg(this)"><div class="num">4</div><h3>المفردات المتكررة حرفيا في الاختبار ⭐</h3><span class="arrow">▼</span></div>
+<div class="card-b">
+<p>هذي الكلمات وردت <b>حرفيا</b> في تجارب الطلاب — احفظها مع مرادفها قبل أي شيء ثان:</p>
+<table class="t">
+<tr><th>الكلمة</th><th>أقرب معنى (الإجابة)</th><th>بالعربي</th></tr>
+<tr><td style="direction:ltr">irrational</td><td style="direction:ltr">unreasonable</td><td>غير عقلاني</td></tr>
+<tr><td style="direction:ltr">negotiations</td><td style="direction:ltr">discussions</td><td>مفاوضات</td></tr>
+<tr><td style="direction:ltr">evolved</td><td style="direction:ltr">developed</td><td>تطوّر</td></tr>
+<tr><td style="direction:ltr">reform</td><td style="direction:ltr">change</td><td>إصلاح</td></tr>
+<tr><td style="direction:ltr">accumulate</td><td style="direction:ltr">collect</td><td>يتراكم</td></tr>
+<tr><td style="direction:ltr">obtaining</td><td style="direction:ltr">getting</td><td>الحصول على</td></tr>
+<tr><td style="direction:ltr">echo</td><td style="direction:ltr">copy</td><td>صدى/تكرار</td></tr>
+<tr><td style="direction:ltr">judge</td><td style="direction:ltr">evaluate</td><td>يحكم/يقيّم</td></tr>
+<tr><td style="direction:ltr">Quite, please!</td><td colspan="2">سؤال شهير يجي بخط كبير — المقصود طلب الهدوء (مثل Quiet) ويسأل عن معناها</td></tr>
+</table>
+<p>كلمات إضافية ذكرها الطلاب وتستاهل الشرح: <span style="direction:ltr;display:inline-block">alternative (بديل), constitute (يشكّل), intuition (حدس), traditional (تقليدي), liability (مسؤولية/عبء), overload (حمل زائد), forceful (قوي), misbehavior (سوء سلوك)</span>.</p>
+<div class="tip"><b>💡 استراتيجية أسئلة المفردات:</b> حتى لو ما تعرف الكلمة — اقرأ الجملة كاملة وعوّض كل خيار مكانها، والمنطقي هو الجواب. واحفظ البادئات: un/in/ir = نفي، mis = خطأ، re = إعادة.</div>
+</div></div>
+
+<div class="card" id="r_c5">
+<div class="card-h" onclick="tg(this)"><div class="num">5</div><h3>خطة مذاكرة مقترحة للريدنق (3 جلسات)</h3><span class="arrow">▼</span></div>
+<div class="card-b">
+<p><b>الجلسة 1:</b> ذاكر أنواع الأسئلة الخمسة واستراتيجية "اقرأ الأسئلة أولا"، ثم طبق على قطعتي التضخم والتوتر من النموذج 1.</p>
+<p><b>الجلسة 2:</b> ذاكر الرسوم البيانية والجداول وجدول المفردات المتكررة، ثم طبق على رسمتي ماك/كنتاكي والمياه.</p>
+<p><b>الجلسة 3:</b> راجع ملخصات القطع المتكررة كلها (الجدول في القسم 2)، ثم حل قسم الريدنق كاملا من نموذج بتوقيت حقيقي (45 دقيقة).</p>
+<div class="star"><b>⭐ نصيحة من طالب جاب +80:</b> "تدربوا كثير — التدريب يعلمكم كيف تستثنون الإجابات وتميزون الكلمات الدلالية. الأغلب يذاكر التجميعات بدون تدريب وهذا غلط". فحل دائما بتوقيت من البداية.</div>
+</div></div>
+
+</div><div class="unit" id="unit_l">
+<div class="unit-head"><h2>📘 الاستيعاب السماعي — 20% من الاختبار</h2><p>النصوص الأكثر تكرارا بأهم نقاطها، استراتيجيات الاستماع، وفخاخ but والتصحيح الذاتي.</p></div>
+<div class="toc"><h3>📑 محتويات القسم</h3><a href="#l_c1">شكل قسم الاستماع في الاختبار</a><a href="#l_c2">النصوص الأكثر تكرارا — ذاكر موضوعها قبل الاختبار ⭐</a><a href="#l_c3">استراتيجيات الاستماع — تدرب عليها</a><a href="#l_c4">خطة مذاكرة مقترحة للاستماع (جلستان)</a></div>
+<button class="openall" onclick="openAll('l')">📖 فتح كل الدروس</button>
+<div class="card open" id="l_c1">
+<div class="card-h" onclick="tg(this)"><div class="num">1</div><h3>شكل قسم الاستماع في الاختبار</h3><span class="arrow">▼</span></div>
+<div class="card-b">
+<p>قسم الاستيعاب السماعي = <b>20 سؤالا (20% من الدرجة)</b>. ستسمع محادثات قصيرة، محاضرات، وإعلانات — <b>مرة واحدة فقط</b> غالبا، فلازم تتعود تاخذ الفكرة من أول سماع.</p>
+<div class="star"><b>⭐ أهم ملاحظة من تجارب الطلاب (تكررت في كل التجارب):</b> "أغلب الأسئلة كانت على الفكرة الرئيسية Main Idea". يعني حتى لو فاتتك تفاصيل، لو فهمت "عن إيش يتكلمون" بتجيب أغلب الأسئلة.</div>
+<p>أنواع الأسئلة:</p>
+<table class="t">
+<tr><th>النوع</th><th>صيغته</th><th>نصيحة</th></tr>
+<tr><td>الفكرة الرئيسية</td><td style="direction:ltr">What is the talk mainly about?</td><td>تتحدد من أول جملتين غالبا — ركز في البداية</td></tr>
+<tr><td>تفاصيل وأرقام</td><td style="direction:ltr">How much / When / How many?</td><td>اكتب أي رقم تسمعه فورا (أسعار، ساعات، نسب، تواريخ)</td></tr>
+<tr><td>الاستنتاج</td><td style="direction:ltr">What will the man probably do?</td><td>اربط آخر جملة في المحادثة بالمنطق</td></tr>
+<tr><td>الموقف/المكان</td><td style="direction:ltr">Where does this take place?</td><td>من الكلمات الدالة: menu = مطعم، ticket = سفر، exam = جامعة</td></tr>
+</table>
+</div></div>
+
+<div class="card" id="l_c2">
+<div class="card-h" onclick="tg(this)"><div class="num">2</div><h3>النصوص الأكثر تكرارا — ذاكر موضوعها قبل الاختبار ⭐</h3><span class="arrow">▼</span></div>
+<div class="card-b">
+<p>من تحليل تجارب الطلاب، هذي المواضيع تتكرر في الاستماع (أحيانا بنفس النص وأسئلة مختلفة):</p>
+<table class="t">
+<tr><th>النص</th><th>أهم نقاطه اللي يجي عليها سؤال</th></tr>
+<tr><td><b>التلسكوب</b> (الأكثر تكرارا)</td><td>اختُرع في هولندا 1608، جاليليو طوّره (ما اخترعه!) واكتشف أقمار المشتري</td></tr>
+<tr><td><b>البرازيل</b></td><td>أكبر دولة بأمريكا الجنوبية، الأمازون تنتج ~20% من الأكسجين، كرة القدم "دين وطني"</td></tr>
+<tr><td><b>الرجل وزوجته يخططون لسفرة</b></td><td>وين بيسافرون، ليش اختاروا الوجهة، خصم الحجز المبكر، متى بيحجزون</td></tr>
+<tr><td><b>الدكتور يعلن عن الاختبار النهائي</b></td><td>الأربعاء الساعة 9، يغطي الوحدات 6-8 فقط، إحضار البطاقة الجامعية — وردت حرفيا في التجارب!</td></tr>
+<tr><td><b>عايد يتكلم عن تعلم الإنجليزية</b></td><td>الممارسة اليومية أهم شيء، التحدث مع الناطقين أفاده أكثر من الدورات، لا تخف من الخطأ</td></tr>
+<tr><td><b>بيوت نيوزلندا</b></td><td>مبنية من الخشب: الغابات متوفرة + الخشب يتحرك مع الزلازل بدل ما يتشقق</td></tr>
+<tr><td><b>النساء يعشن أطول من الرجال</b></td><td>بحوالي 5 سنوات — الرجال يدخنون أكثر ويراجعون الطبيب أقل</td></tr>
+<tr><td><b>الكولا والبيتزا (مطعم)</b></td><td>الطلب بالضبط، ليش دايت كولا (تقليل سكر)، مدة التجهيز</td></tr>
+<tr><td><b>الحليب</b></td><td>مهم لكل الأعمار مو بس الأطفال، كوبان يوميا، بدائل لمن عنده حساسية اللاكتوز</td></tr>
+<tr><td><b>أطفال ADHD</b></td><td>~5% من الأطفال، مو كسل ولا قلة أدب — أدمغتهم تعمل باختلاف، وينجحون مع الدعم</td></tr>
+<tr><td><b>حجز تذكرة طيران</b></td><td>الوجهة والموعد، فرق السعر بين الاقتصادية والبزنس، الوصول قبل الإقلاع بساعتين</td></tr>
+<tr><td><b>الأنيميشن والفريمات</b></td><td>24 فريم/ثانية تخدع العين، قديما 14,000 رسمة لـ10 دقائق، الفيلم ياخذ 3-4 سنوات</td></tr>
+<tr><td><b>استبيان الـ50 شخص</b></td><td>ليش 50 بالذات؟ لأن 10-15 ممكن تكون حظا — الخمسين تعطي نتائج موثوقة</td></tr>
+<tr><td><b>التنمر الإلكتروني</b></td><td>يلاحق الضحية لكل مكان، الخطوات: لا ترد + احفظ الرسائل دليلا + أخبر من تثق به</td></tr>
+</table>
+</div></div>
+
+<div class="card" id="l_c3">
+<div class="card-h" onclick="tg(this)"><div class="num">3</div><h3>استراتيجيات الاستماع — تدرب عليها</h3><span class="arrow">▼</span></div>
+<div class="card-b">
+<div class="tip"><b>💡 قبل التشغيل:</b> اقرأ الخيارات بسرعة — تعطيك توقعا عن الموضوع وتخليك تعرف وش تنتظر (أرقام؟ أماكن؟ أسماء؟).</div>
+<div class="tip"><b>💡 أثناء الاستماع:</b> اكتب الأرقام والأيام فور سماعها (9:00، الأربعاء، 900 ريال، ساعتين، 50 شخص). أسئلة الأرقام أسهل درجات القسم.</div>
+<div class="tip"><b>💡 انتبه للنهايات:</b> التحذيرات والتعليمات آخر النص يجي منها سؤال دائما ("من يغيب بلا عذر ياخذ صفرا"، "كلموني قبل الموعد لا بعده"، "اوصلوا قبل بساعتين").</div>
+<div class="trap"><b>⚠️ فخ شائع:</b> المتحدث يذكر شيئين ويفضّل أحدهما — السؤال يجي عن المفضل. مثال البرازيل: أعجبتها الشواطئ <u>لكن</u> الناس كانوا "the best part" — الجواب الناس. كلمة but/however تقلب الجواب!</div>
+<div class="trap"><b>⚠️ فخ التصحيح الذاتي:</b> المتحدث يقول معلومة ثم يصححها: "أبوه كان دكتورا عاما... والآن جرّاح" — والسؤال يحدد: الوظيفة السابقة أم الحالية؟ ركز على صيغة السؤال (قبل/الآن). هذا الفخ ذكره طالب حرفيا في الجروب.</div>
+<p style="margin-top:10px"><b>طريقة التدريب بالنماذج الثلاثة:</b> قسم الاستماع فيها مكتوب نصا — الأفضل <b>تطلب من معلمك أو أحد أهلك يقرأه عليك بصوت طبيعي مرة واحدة فقط</b> وأنت تجاوب، عشان تحاكي الاختبار الحقيقي. ولا تقرأ النص بنفسك إلا بعد الإجابة للمراجعة.</p>
+</div></div>
+
+<div class="card" id="l_c4">
+<div class="card-h" onclick="tg(this)"><div class="num">4</div><h3>خطة مذاكرة مقترحة للاستماع (جلستان)</h3><span class="arrow">▼</span></div>
+<div class="card-b">
+<p><b>الجلسة 1:</b> ذاكر أنواع الأسئلة واستراتيجية قراءة الخيارات قبل السماع، ثم طبق على نصي "التلسكوب" و"تخطيط السفرة" من النموذج 1.</p>
+<p><b>الجلسة 2:</b> ذاكر فخ but والتصحيح الذاتي وتدرب على التقاط الأرقام، ثم حل قسم الاستماع كاملا من النموذج 2 بقراءة واحدة وتوقيت حقيقي.</p>
+<div class="star"><b>⭐ للتدريب الإضافي:</b> أوصى طالب جايب +80 بمواقع مجانية للاستماع مثل British Council وStorynory — مفيدة لتعويد أذنك بين الجلسات.</div>
+</div></div>
+
+</div><div class="unit" id="unit_w">
+<div class="unit-head"><h2>📘 التحليل الكتابي — 10% من الاختبار</h2><p>أخطاء الجمل الأربعة الكبرى، التراكيب الجاهزة، جملة الموضوع والخاتمة، وخطة المذاكرة الكاملة.</p></div>
+<div class="toc"><h3>📑 محتويات القسم</h3><a href="#w_c1">شكل قسم التحليل الكتابي</a><a href="#w_c2">أخطاء الجمل الأربعة الكبرى — أساس القسم كله ⭐</a><a href="#w_c3">تراكيب احفظها جاهزة</a><a href="#w_c4">جملة الموضوع وجملة الخاتمة</a><a href="#w_c5">المفردات المتكررة + خطة المذاكرة</a></div>
+<button class="openall" onclick="openAll('w')">📖 فتح كل الدروس</button>
+<div class="card open" id="w_c1">
+<div class="card-h" onclick="tg(this)"><div class="num">1</div><h3>شكل قسم التحليل الكتابي</h3><span class="arrow">▼</span></div>
+<div class="card-b">
+<p>التحليل الكتابي = <b>10 أسئلة (10% من الدرجة)</b> — أصغر قسم لكنه سريع الدرجات إذا فهم الطالب أنماطه. لن يُطلب منك كتابة شيء، بل <b>اختيار الجملة الصحيحة/الأفضل صياغة</b>.</p>
+<p>الأنماط الخمسة المتكررة:</p>
+<table class="t">
+<tr><th>النمط</th><th>صيغة السؤال</th></tr>
+<tr><td>اختيار الجملة الصحيحة</td><td style="direction:ltr">Choose the best sentence / the sentence with NO errors</td></tr>
+<tr><td>دمج جملتين</td><td style="direction:ltr">Combine the two sentences</td></tr>
+<tr><td>جملة الموضوع/الخاتمة</td><td style="direction:ltr">Choose the best topic/concluding sentence</td></tr>
+<tr><td>الترقيم الصحيح</td><td style="direction:ltr">Which sentence is punctuated correctly?</td></tr>
+<tr><td>استبدال كلمة</td><td style="direction:ltr">Which word can replace...? (مثل judge → evaluate)</td></tr>
+</table>
+</div></div>
+
+<div class="card" id="w_c2">
+<div class="card-h" onclick="tg(this)"><div class="num">2</div><h3>أخطاء الجمل الأربعة الكبرى — أساس القسم كله ⭐</h3><span class="arrow">▼</span></div>
+<div class="card-b">
+<p>اتعلم تكشف هذي الأخطاء الأربعة، وبتحل أغلب القسم تلقائيا:</p>
+<div class="rule">1) <b>Comma Splice</b> — ربط جملتين كاملتين بفاصلة فقط = خطأ.<span class="en">✗ Riyadh is the capital, it is a big city. → ✓ Riyadh, the capital of Saudi Arabia, is a big city.</span></div>
+<div class="rule">2) <b>Fragment</b> — جملة ناقصة مقطوعة عن جوابها = خطأ.<span class="en">✗ Because it was raining. We stayed home. → ✓ Because it was raining, we stayed home.</span></div>
+<div class="rule">3) <b>ازدواج الروابط</b> — رابطان لنفس المعنى في جملة واحدة = خطأ.<span class="en">✗ Although he was tired, but he finished. → ✓ Although he was tired, he finished. (واحدة تكفي)</span></div>
+<div class="rule">4) <b>المعلَّق الخاطئ (Dangling)</b> — شبه الجملة الافتتاحية لازم فاعلها هو فاعل الجملة.<span class="en">✗ Walking in the park, the weather was beautiful. → ✓ Walking in the park, we enjoyed the weather. (الطقس لا يمشي!)</span></div>
+<div class="try"><div class="q">أي جملة صحيحة؟ (A) Despite he was sick, he came. (B) Despite being sick, he came.</div><button onclick="rv(this)">أظهر الإجابة</button><div class="ans">✅ <b>B</b> — Despite + اسم أو V-ing فقط. مع الجملة الكاملة نستخدم Although he was sick.</div></div>
+</div></div>
+
+<div class="card" id="w_c3">
+<div class="card-h" onclick="tg(this)"><div class="num">3</div><h3>تراكيب احفظها جاهزة</h3><span class="arrow">▼</span></div>
+<div class="card-b">
+<table class="t">
+<tr><th>التركيبة</th><th>القاعدة</th><th>مثال</th></tr>
+<tr><td style="direction:ltr">not only ... but also</td><td>قبل العنصرين المتوازيين مباشرة</td><td style="direction:ltr">She speaks <b>not only</b> English <b>but also</b> French</td></tr>
+<tr><td style="direction:ltr">neither ... nor</td><td>الفعل يطابق الأقرب</td><td style="direction:ltr">Neither the teacher nor the students <b>were</b> there</td></tr>
+<tr><td style="direction:ltr">enjoy / suggest / avoid + V-ing</td><td>بعدها ing وليس to</td><td style="direction:ltr">He suggested <b>going</b> to the beach</td></tr>
+<tr><td style="direction:ltr">look forward to + V-ing</td><td>الـto هنا حرف جر</td><td style="direction:ltr">I look forward to <b>hearing</b> from you</td></tr>
+<tr><td style="direction:ltr">; therefore,</td><td>فاصلة منقوطة قبلها وفاصلة بعدها</td><td style="direction:ltr">He studied hard<b>; therefore,</b> he passed</td></tr>
+<tr><td style="direction:ltr">Each ... has</td><td>Each مفرد دائما</td><td style="direction:ltr">Each of the students <b>has</b> a laptop</td></tr>
+<tr><td style="direction:ltr">to my brother and me</td><td>بعد حرف الجر ضمير مفعول</td><td style="direction:ltr">She gave it to my brother and <b>me</b> (وليس I)</td></tr>
+</table>
+<div class="tip"><b>💡 خدعة ضمير المفعول:</b> احذف "my brother and" واقرأ الجملة: "to me" منطقية، "to I" مستحيلة — هكذا تتأكد بنفسك.</div>
+</div></div>
+
+<div class="card" id="w_c4">
+<div class="card-h" onclick="tg(this)"><div class="num">4</div><h3>جملة الموضوع وجملة الخاتمة</h3><span class="arrow">▼</span></div>
+<div class="card-b">
+<div class="rule"><b>Topic Sentence:</b> تلخص فكرة الفقرة <u>كلها</u> وتكون عامة وشاملة — أي خيار يذكر تفصيلة شخصية أو معلومة جانبية فهو خاطئ.<span class="en">فقرة عن فوائد الرياضة → ✓ "Exercise has many important benefits for the body and mind." / ✗ "I went to the gym yesterday."</span></div>
+<div class="rule"><b>Concluding Sentence:</b> تلخص وتختم، وتبدأ غالبا بـ In short / In conclusion / To sum up.<span class="en">فقرة عن توفير الماء → ✓ "In short, small daily habits can save huge amounts of water."</span></div>
+<div class="tip"><b>💡 طريقة الاستبعاد:</b> اسأل نفسك عن كل خيار: "هل تصلح هذي الجملة عنوانا للفقرة كلها؟" — لو تغطي جزءا واحدا فقط أو خارج الموضوع، اشطبها.</div>
+</div></div>
+
+<div class="card" id="w_c5">
+<div class="card-h" onclick="tg(this)"><div class="num">5</div><h3>المفردات المتكررة + خطة المذاكرة</h3><span class="arrow">▼</span></div>
+<div class="card-b">
+<p>راجع جدول المفردات الأساسي (موجود كاملا في قسم الريدنق): <span style="direction:ltr;display:inline-block">irrational→unreasonable, negotiations→discussions, evolved→developed, reform→change, accumulate→collect, obtaining→getting, echo→copy, judge→evaluate</span> — وسؤال "Quite, please" الشهير.</p>
+<p><b>خطة المذاكرة المقترحة (جلسة واحدة):</b></p>
+<p>(1) الأخطاء الأربعة الكبرى مع أمثلتها — 20 دقيقة. (2) جدول التراكيب الجاهزة — 15 دقيقة. (3) جملة الموضوع والخاتمة — 10 دقائق. (4) حل قسم التحليل الكتابي من نموذج كامل مع مناقشة كل خيار خاطئ "ليش غلط" — 15 دقيقة.</p>
+<div class="star"><b>⭐ ترتيب المذاكرة الأمثل للأقسام كلها:</b> ابدأ بالقرامر (تأسيس) ← الريدنق (أكبر درجة) ← الاستماع ← التحليل الكتابي ← ثم النماذج الثلاثة بتوقيت حقيقي. الطلاب الحاصلون على +80 أجمعوا: "التأسيس + التدريب المكثف" هو السر.</div>
+</div></div>
+
+</div>
+</div>
+<div class="footer">للتدريب على اختبار STEP وتحقيق أعلى الدرجات تواصل مع <b>مستر محمود أبوهند</b><br>
+<a class="wa" href="https://wa.me/966542260935" target="_blank">واتساب: 0542260935</a> <a href="tel:0542260935">📞 0542260935</a></div>
+<script>
+function tg(h){ h.parentElement.classList.toggle('open'); }
+function rv(b){ b.nextElementSibling.classList.add('show'); b.style.display='none'; }
+function openAll(k){ document.querySelectorAll('#unit_'+k+' .card').forEach(c=>c.classList.add('open')); }
+function showUnit(k){
+  document.querySelectorAll('.unit').forEach(u=>u.classList.remove('active'));
+  document.querySelectorAll('.unitnav button').forEach(b=>b.classList.remove('active'));
+  document.getElementById('unit_'+k).classList.add('active');
+  document.getElementById('ub_'+k).classList.add('active');
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+showUnit('g');
+</script>
+</body>
+</html>
