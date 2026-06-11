@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Super Goal 3 — Term 2 Mock Exams</title>
+<!-- v2: all units mixed in every exam -->
+<style>
+:root{
+  --green:#0e6b48; --green-dark:#0a4f35; --green-light:#e6f4ee;
+  --gold:#c9a227; --ink:#1f2937; --muted:#6b7280; --bg:#f3f6f4;
+  --ok:#15803d; --ok-bg:#dcfce7; --bad:#b91c1c; --bad-bg:#fee2e2;
+  --card:#ffffff; --radius:14px;
+}
+*{box-sizing:border-box; margin:0; padding:0;}
+body{font-family:"Segoe UI",Tahoma,Arial,sans-serif; background:var(--bg); color:var(--ink); line-height:1.55;}
+.wrap{max-width:880px; margin:0 auto; padding:18px 14px 80px;}
+
+/* ===== Header ===== */
+.moe{background:linear-gradient(135deg,var(--green-dark),var(--green)); color:#fff; border-radius:var(--radius); padding:22px 24px; box-shadow:0 8px 24px rgba(14,107,72,.25); position:relative; overflow:hidden;}
+.moe::after{content:""; position:absolute; right:-40px; top:-40px; width:200px; height:200px; border-radius:50%; background:rgba(255,255,255,.06);}
+.moe-row{display:flex; justify-content:space-between; gap:10px; flex-wrap:wrap; font-size:.85rem; opacity:.95;}
+.moe-row div{line-height:1.7;}
+.moe h1{text-align:center; font-size:1.35rem; margin:14px 0 4px; letter-spacing:.3px;}
+.moe .sub{text-align:center; font-size:.9rem; opacity:.9;}
+.moe .badge{display:inline-block; background:var(--gold); color:#3a2e05; font-weight:700; border-radius:999px; padding:2px 14px; font-size:.8rem; margin-top:10px;}
+.student{display:flex; gap:10px; flex-wrap:wrap; margin-top:16px;}
+.student input{flex:1; min-width:160px; border:none; border-radius:8px; padding:9px 12px; font-size:.9rem;}
+
+/* ===== Tabs ===== */
+.tabs{display:flex; gap:8px; margin:18px 0 6px; flex-wrap:wrap;}
+.tab{flex:1; min-width:120px; background:var(--card); border:2px solid transparent; border-radius:12px; padding:10px 8px; text-align:center; cursor:pointer; box-shadow:0 2px 8px rgba(0,0,0,.06); transition:.15s;}
+.tab:hover{transform:translateY(-2px);}
+.tab.active{border-color:var(--green); background:var(--green-light);}
+.tab b{display:block; color:var(--green-dark); font-size:.95rem;}
+.tab span{font-size:.72rem; color:var(--muted);}
+.tab .done{display:inline-block; margin-top:3px; font-size:.72rem; font-weight:700; color:var(--ok);}
+
+/* ===== Sections ===== */
+.section{background:var(--card); border-radius:var(--radius); box-shadow:0 2px 10px rgba(0,0,0,.05); margin-top:16px; overflow:hidden;}
+.sec-head{display:flex; justify-content:space-between; align-items:center; padding:12px 18px; background:var(--green-light); border-bottom:1px solid #d4e9df;}
+.sec-head h2{font-size:1rem; color:var(--green-dark);}
+.sec-head h2 small{display:block; font-size:.74rem; color:var(--muted); font-weight:400;}
+.marks{background:var(--green); color:#fff; border-radius:999px; padding:3px 12px; font-size:.78rem; font-weight:700; white-space:nowrap;}
+.sec-body{padding:16px 18px;}
+.instr{font-size:.85rem; color:var(--muted); font-style:italic; margin-bottom:12px;}
+
+/* ===== Questions ===== */
+.q{margin-bottom:14px; padding:12px 14px; border:1px solid #e5e7eb; border-radius:10px; transition:.2s;}
+.q .qt{font-weight:600; margin-bottom:8px; font-size:.94rem;}
+.q .qt .num{color:var(--green); margin-right:6px;}
+.opts{display:flex; flex-wrap:wrap; gap:8px;}
+.opt{position:relative;}
+.opt input{position:absolute; opacity:0; pointer-events:none;}
+.opt label{display:inline-block; border:1.5px solid #d1d5db; border-radius:999px; padding:6px 16px; cursor:pointer; font-size:.88rem; background:#fff; transition:.12s; user-select:none;}
+.opt label:hover{border-color:var(--green);}
+.opt input:checked + label{background:var(--green); color:#fff; border-color:var(--green);}
+.q.correct{border-color:var(--ok); background:var(--ok-bg);}
+.q.wrong{border-color:var(--bad); background:var(--bad-bg);}
+.q .fb{display:none; margin-top:8px; font-size:.84rem; font-weight:600; border-radius:8px; padding:7px 12px;}
+.q.correct .fb{display:block; color:var(--ok); background:#fff;}
+.q.wrong .fb{display:block; color:var(--bad); background:#fff;}
+.q.unanswered{border-color:var(--gold);}
+.q.unanswered .fb{display:block; color:#92600a; background:#fff8e1;}
+
+/* reading passage */
+.passage{background:#fbfdf9; border:1px solid #dcebe2; border-left:5px solid var(--green); border-radius:10px; padding:16px 18px; margin-bottom:16px; font-size:.93rem;}
+.passage h3{color:var(--green-dark); margin-bottom:8px; font-size:1.05rem;}
+.passage p{margin-bottom:8px; text-align:justify;}
+
+/* composition */
+.comp-helpers{display:flex; flex-wrap:wrap; gap:6px; margin:10px 0 12px;}
+.comp-helpers span{background:var(--green-light); color:var(--green-dark); border:1px dashed var(--green); border-radius:999px; padding:3px 12px; font-size:.8rem;}
+textarea{width:100%; min-height:160px; border:1.5px solid #d1d5db; border-radius:10px; padding:12px; font-size:.95rem; font-family:inherit; resize:vertical;}
+textarea:focus{outline:none; border-color:var(--green);}
+.wordcount{font-size:.78rem; color:var(--muted); text-align:right; margin-top:4px;}
+.model{display:none; margin-top:12px; background:#fffbea; border:1px solid #f0dc9a; border-radius:10px; padding:14px;}
+.model h4{color:#8a6d0b; font-size:.9rem; margin-bottom:6px;}
+.model p{font-size:.9rem;}
+.rubric{display:none; margin-top:10px; font-size:.84rem;}
+.rubric table{width:100%; border-collapse:collapse;}
+.rubric td,.rubric th{border:1px solid #e5e7eb; padding:6px 10px; text-align:left;}
+.rubric th{background:var(--green-light); color:var(--green-dark);}
+
+/* buttons + score */
+.actions{display:flex; gap:10px; margin-top:18px; flex-wrap:wrap;}
+.btn{border:none; border-radius:10px; padding:12px 22px; font-size:.95rem; font-weight:700; cursor:pointer; transition:.15s;}
+.btn:hover{transform:translateY(-1px);}
+.btn-check{background:var(--green); color:#fff; flex:1; min-width:180px; box-shadow:0 4px 12px rgba(14,107,72,.3);}
+.btn-reset{background:#fff; color:var(--muted); border:1.5px solid #d1d5db;}
+.btn-print{background:#fff; color:var(--green-dark); border:1.5px solid var(--green);}
+.score{display:none; margin-top:16px; background:var(--card); border-radius:var(--radius); box-shadow:0 2px 10px rgba(0,0,0,.05); padding:18px;}
+.score h3{color:var(--green-dark); margin-bottom:10px;}
+.score-total{font-size:1.5rem; font-weight:800; color:var(--green);}
+.bar{height:12px; background:#e5e7eb; border-radius:999px; overflow:hidden; margin:10px 0 14px;}
+.bar i{display:block; height:100%; background:linear-gradient(90deg,var(--green),var(--gold)); border-radius:999px; transition:width .6s;}
+.score-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(140px,1fr)); gap:8px;}
+.score-grid div{background:var(--green-light); border-radius:10px; padding:8px 12px; font-size:.85rem;}
+.score-grid b{display:block; color:var(--green-dark); font-size:1.05rem;}
+.score .msg{margin-top:12px; font-size:.92rem; font-weight:600;}
+.note-comp{font-size:.8rem; color:var(--muted); margin-top:8px;}
+
+.fs-btn{position:fixed; top:14px; right:14px; z-index:99; background:var(--green-dark); color:#fff; border:none; border-radius:999px; padding:10px 18px; font-size:.85rem; font-weight:700; cursor:pointer; box-shadow:0 4px 14px rgba(0,0,0,.3); display:flex; align-items:center; gap:6px;}
+.fs-btn:hover{background:var(--green);}
+@media print{
+  body{background:#fff;}
+  .tabs,.actions,.moe .badge,.student,.fs-btn{display:none!important;}
+  .section{box-shadow:none; border:1px solid #ccc; break-inside:avoid;}
+  .q{break-inside:avoid;}
+}
+</style>
+</head>
+<body>
+<button class="fs-btn" id="fsBtn" onclick="toggleFS()" title="Full screen (F11)">⛶ <span>Full Screen</span></button>
+<div class="wrap">
+  <div class="moe">
+    <div class="moe-row">
+      <div>Kingdom of Saudi Arabia<br>Ministry of Education<br>Intermediate Stage</div>
+      <div style="text-align:right">المملكة العربية السعودية<br>وزارة التعليم<br>المرحلة المتوسطة</div>
+    </div>
+    <h1>English Language — End of Term 2 Mock Exams</h1>
+    <div class="sub">Super Goal 3 &nbsp;•&nbsp; Units 7 – 12 &nbsp;•&nbsp; 1447 H</div>
+    <div style="text-align:center"><span class="badge">Total: 40 Marks</span></div>
+    <div class="student">
+      <input placeholder="Student Name / اسم الطالب" id="stName">
+      <input placeholder="Class / الصف" id="stClass">
+    </div>
+  </div>
+
+  <div class="tabs" id="tabs"></div>
+  <div id="examArea"></div>
+</div>
+
+<script>
+const T="True", F="False";
+const EXAMS=[
+/* ================= EXAM 1 ================= */
+{
+ name:"Mock Exam 1", focus:"Units 7–12",
+ reading:{
+  title:"You Look Just Like Me!",
+  text:"<p>Bobby Shafran started a new semester at Sullivan Community College in New York. Another student confused him with Eddy Galland, who had studied there the previous semester. The two boys looked exactly alike. They found out that they were in fact twins, born at the same time. The boys were orphans and grew up in two different families. After the story appeared in the newspapers, another boy, David Kellman, realized that he was their brother, too. So the twins became triplets!</p><p>Another famous story is that of Daphne and Barbara, who met for the first time at the age of 39. When they met, each was wearing a beige dress and a brown jacket. They both liked their coffee cold and black, and they both fell down some stairs at the age of 15. Scientists like to study such twins to answer the classic question: which is more important — heredity or environment?</p>"
+ },
+ rq:[
+  {q:"Where did Bobby start a new semester?",o:["Sullivan Community College in New York","a school in Ireland","a university in Bangladesh","a college in Chicago"]},
+  {q:"How did Bobby and Eddy first find out about each other?",o:["Another student confused Bobby with Eddy","They met at a garage sale","Their parents introduced them","They read about each other in a book"]},
+  {q:"Who realized he was their third brother?",o:["David Kellman","Sean","Ted","Kalervo Oberg"]},
+  {q:"How old were Daphne and Barbara when they met?",o:["39","19","15","25"]},
+  {q:"Scientists study twins to learn more about ________.",o:["heredity and environment","cooking recipes","garage sales","driving habits"]},
+  {q:"Bobby and Eddy grew up in the same family.",o:[F,T],tf:1},
+  {q:"The twins became triplets after a newspaper story.",o:[T,F],tf:1},
+  {q:"Daphne and Barbara were wearing similar clothes when they met.",o:[T,F],tf:1},
+  {q:"In the passage, the word “confused” means thought wrongly that a person is someone else.",o:[T,F],tf:1}
+ ],
+ gr:[
+  {q:"These toys are in good condition, ________? (Unit 7)",o:["aren't they","isn't it","are they","don't they"]},
+  {q:"He hurt his hand, so he won't ________ play basketball today. (Unit 7)",o:["be able to","is able to","able to","be able"]},
+  {q:"You ________ stop at the traffic lights. It's the law. (Unit 8)",o:["must","should","could","might"]},
+  {q:"Adel is a careful driver. He drives ________. (Unit 8)",o:["carefully","careful","carefuly","more careful"]},
+  {q:"The man ________ was talking to the tourists was friendly. (Unit 9)",o:["who","which","it","where"]},
+  {q:"Have you done the dishes ________? (Unit 10)",o:["yet","already","just","since"]},
+  {q:"He can't stand ________ in line. (Unit 10)",o:["waiting","to wait","wait","waits"]},
+  {q:"If Saeed gets the job, he ________ very happy. (Unit 11)",o:["will be","would be","was","is being"]},
+  {q:"They managed ________ an earlier flight. (Unit 12)",o:["to get","getting","get","got"]}
+ ],
+ vo:[
+  {q:"You use a ________ to climb up to the roof.",o:["ladder","broom","hose","saw"]},
+  {q:"We cut the grass with a ________.",o:["lawn mower","vacuum cleaner","frying pan","screwdriver"]},
+  {q:"Always wear your seat ________ in the car.",o:["belt","wheel","mirror","shield"]},
+  {q:"A ________ person speaks a lot.",o:["talkative","quiet","lazy","serious"]},
+  {q:"People who keep talking on their phones in restaurants ________ me.",o:["annoy","borrow","feed","splash"]},
+  {q:"Can I ________ your hairbrush? I forgot mine.",o:["borrow","avoid","suggest","imagine"]},
+  {q:"Cars and factories cause air ________.",o:["pollution","environment","benefit","preference"]},
+  {q:"In Japan, people eat with ________.",o:["chopsticks","forks","spoons","knives"]},
+  {q:"A ________ person always arrives on time.",o:["punctual","relaxed","lazy","late"]}
+ ],
+ sp:[
+  ["vacuum","vaccum","vacume"],["luggage","lugage","lugagge"],["windshield","windsheild","windshild"],
+  ["pedestrian","pedestrain","pidestrian"],["talkative","talkitive","tolkative"],["toothpaste","toothpast","tothpaste"],
+  ["scholarship","scholership","scolarship"],["environment","enviroment","environmint"],
+  ["chopsticks","chopstiks","shopsticks"],["punctual","punctuel","panctual"]
+ ],
+ comp:{
+  prompt:"Write a paragraph of at least six sentences about a strange coincidence or a chance meeting.",
+  helpers:["one day","was walking","suddenly","heard","turned around","realized","to my surprise","since then"],
+  model:"One afternoon, I was walking around the mall when suddenly I heard someone call my name. I turned around and saw a familiar face. It took me a second to realize who it was. To my surprise, it was my cousin Mike. I hadn't seen him for five years because his family had moved to Jeddah. We had lunch together that afternoon and did a lot of catching up. Since then, we meet almost every week. What a small world!"
+ }
+},
+/* ================= EXAM 2 ================= */
+{
+ name:"Mock Exam 2", focus:"Units 7–12",
+ reading:{
+  title:"Is Right, Right?",
+  text:"<p>Why must you drive on the right side of the road in some countries and on the left in others? About a quarter of the world drives on the left, and most of those countries used to be British colonies. Some people believe it is natural to walk or drive on the right because most people are right-handed.</p><p>Hundreds of years ago in Europe, people rode their horses on the left, so their sword was between them and anyone coming toward them. In the 1700s, people in France and the United States started to use big wagons with several pairs of horses. It was easier for the drivers to sit on the left and control the horses, so they drove on the right side of the road. Napoleon, a ruler of France, ordered people to drive on the right in the early 1800s. France conquered many countries, so these countries drove on the right too. But France didn't conquer England, so England kept driving on the left. As recently as 1967, Sweden changed its laws. Now people in Sweden must drive on the right.</p>"
+ },
+ rq:[
+  {q:"About how much of the world drives on the left?",o:["a quarter","a half","a third","all of it"]},
+  {q:"Why do some people think driving on the right is natural?",o:["Most people are right-handed","Cars are faster on the right","Roads are wider on the right","It is the law everywhere"]},
+  {q:"Who ordered the French to drive on the right?",o:["Napoleon","Gutenberg","Oberg","Yunus"]},
+  {q:"Why did England keep driving on the left?",o:["France didn't conquer England","England had no cars","English roads were narrow","English people are left-handed"]},
+  {q:"When did Sweden change to driving on the right?",o:["1967","1800","1300","1700"]},
+  {q:"Most countries that drive on the left used to be British colonies.",o:[T,F],tf:1},
+  {q:"Hundreds of years ago, riders in Europe rode their horses on the right.",o:[F,T],tf:1},
+  {q:"Wagon drivers found it easier to control the horses sitting on the left.",o:[T,F],tf:1},
+  {q:"The passage says all countries will soon drive on the right.",o:[F,T],tf:1}
+ ],
+ gr:[
+  {q:"He didn't buy that fan, ________? (Unit 7)",o:["did he","didn't he","doesn't he","does he"]},
+  {q:"You ________ park on the sidewalk. It's forbidden. (Unit 8)",o:["must not","don't have to","should","may"]},
+  {q:"“Put on your seat belts,” the father said to his children. → The father told his children ________ their seat belts. (Unit 8)",o:["to put on","put on","putting on","to putting on"]},
+  {q:"I ________ in the store window when the thief grabbed my bag. (Unit 9)",o:["was looking","looked","am looking","look"]},
+  {q:"I've ________ washed the clothes. They're still wet. (Unit 10)",o:["just","yet","ever","never"]},
+  {q:"The TV is too loud. Please turn ________. (Unit 10)",o:["it down","down it","it under","down them"]},
+  {q:"If you heat water to 100 degrees Celsius, it ________. (Unit 11)",o:["boils","boiled","would boil","boil"]},
+  {q:"By the time we got to the airport, our flight ________. (Unit 12)",o:["had already left","already leaves","has already left","is leaving"]},
+  {q:"It's polite ________ in line for the bus. (Unit 12)",o:["to stand","standing","stand","stood"]}
+ ],
+ vo:[
+  {q:"Use a ________ to clean the carpet.",o:["vacuum cleaner","saucer","rocking chair","teddy bear"]},
+  {q:"The wipers clean the ________.",o:["windshield","trunk","hood","bumper"]},
+  {q:"A ________ is a person walking in the street.",o:["pedestrian","passenger","driver","mechanic"]},
+  {q:"An ________ person enjoys sports.",o:["athletic","efficient","honest","absentminded"]},
+  {q:"The bathroom is a ________! Clean it up.",o:["mess","mirror","complaint","shampoo"]},
+  {q:"Salman got a ________ to study at a university in America.",o:["scholarship","pollution","ticket","complaint"]},
+  {q:"We took the ________ route to enjoy the beautiful views.",o:["scenic","crowded","polluted","boring"]},
+  {q:"In some countries, you should leave a ________ for the waiter.",o:["tip","mess","dust","pocket"]},
+  {q:"It is ________ to shake hands when you meet someone in many countries.",o:["customary","impossible","rude","illegal"]}
+ ],
+ sp:[
+  ["knives","knifes","knivs"],["screwdriver","screwdriwer","scrudriver"],["dashboard","dashbord","deshboard"],
+  ["highway","highwai","hiway"],["athletic","athletec","atheletic"],["generous","generus","genereous"],
+  ["scissors","sissors","scisors"],["pollution","polution","pollusion"],
+  ["customary","customery","custumary"],["impression","impresion","impressoin"]
+ ],
+ comp:{
+  prompt:"Write an essay of at least six sentences giving drivers advice about safe driving. Use must, must not, should, and shouldn't.",
+  helpers:["seat belt","speed limit","road signs","cell phone","carefully","pedestrians"],
+  model:"Driving safely is very important. Drivers must always wear their seat belts. They must obey the road signs and stop at red traffic lights. They must not use their cell phones while they are driving. Drivers should drive carefully and stay under the speed limit. They should also watch out for pedestrians at crossings. If everyone follows these rules, our roads will be much safer."
+ }
+},
+/* ================= EXAM 3 ================= */
+{
+ name:"Mock Exam 3", focus:"Units 7–12",
+ reading:{
+  title:"Simple Ideas, Big Results",
+  text:"<p>Muhammad Yunus, often called “the world's banker to the poor,” received the Nobel Peace Prize in 2006 for his pioneering work against poverty. Yunus founded the Grameen Bank in 1976 with just $27 from his own pocket. The idea came to him while he was teaching economics at a university in Bangladesh, one of the poorest countries in the world. He and his students lent poor people small amounts of money. The people used the money for their own small businesses. Since then, the Grameen Bank model has been copied in more than 100 countries.</p><p>Mohammed Abdul Latif Jameel is a businessman who has received many awards for his humanitarian work. In 2012, he was named “Saudi Volunteer of the Year” for establishing job creation programs in Saudi Arabia and the Middle East. He realizes that unemployment is the main cause of poverty.</p>"
+ },
+ rq:[
+  {q:"Why did Yunus receive the Nobel Peace Prize?",o:["For his work against poverty","For his teaching","For a sports achievement","For his bank fees"]},
+  {q:"How much money did Yunus start the bank with?",o:["$27","$9","$1.35 million","$24 billion"]},
+  {q:"What did Yunus and his students do?",o:["They lent poor people small amounts of money","They built schools","They sold food","They opened restaurants"]},
+  {q:"What was Latif Jameel named in 2012?",o:["Saudi Volunteer of the Year","Banker to the poor","Nobel Prize winner","Businessman of the century"]},
+  {q:"According to the passage, the main cause of poverty is ________.",o:["unemployment","bad weather","travel","banks"]},
+  {q:"Yunus was teaching economics when he got the idea for the bank.",o:[T,F],tf:1},
+  {q:"The Grameen Bank model exists only in Bangladesh.",o:[F,T],tf:1},
+  {q:"Latif Jameel established job creation programs.",o:[T,F],tf:1},
+  {q:"Bangladesh is one of the richest countries in the world.",o:[F,T],tf:1}
+ ],
+ gr:[
+  {q:"You've had garage sales before, ________? (Unit 7)",o:["haven't you","hadn't you","have you","didn't you"]},
+  {q:"It's 8:30 and your brother is still in bed! “________ classes start at eight o'clock?” (Unit 7)",o:["Don't","Aren't","Isn't","Doesn't"]},
+  {q:"Saeed is a really good player. He plays ________. (Unit 8)",o:["well","good","goodly","best"]},
+  {q:"The horse ________ pulled the carriage was black. (Unit 9)",o:["that","who","she","what"]},
+  {q:"________ I speak to the manager, please? (Unit 9)",o:["May","Do","Am","Should rather"]},
+  {q:"A: Have you finished your homework? &nbsp;B: No, I haven't finished it ________. (Unit 10)",o:["yet","already","just","ever"]},
+  {q:"Faisal isn't rich. He wishes he ________ rich. (Unit 11)",o:["were","is","will be","be"]},
+  {q:"I'd rather ________ along the scenic route. (Unit 11)",o:["drive","driving","to drive","drove"]},
+  {q:"She tried ________ on the plane, but she couldn't. (Unit 12)",o:["to sleep","sleeping","sleep","slept"]}
+ ],
+ vo:[
+  {q:"Mom fried the eggs in a ________.",o:["frying pan","teapot","cup","plate"]},
+  {q:"A ________ keeps the room cool in summer.",o:["fan","hammer","teapot","garbage can"]},
+  {q:"Use the ________ mirror to see the cars behind you.",o:["rearview","glove","dash","head"]},
+  {q:"Don't drive over the speed ________.",o:["limit","light","lamp","line"]},
+  {q:"A ________ person isn't polite.",o:["rude","kind","generous","patient"]},
+  {q:"An ________ person does things well and quickly.",o:["efficient","unreliable","silly","pessimistic"]},
+  {q:"I need the ________ to cut this paper.",o:["scissors","shampoo","toothpaste","hairbrush"]},
+  {q:"A ________ works to protect nature and wild animals.",o:["conservationist","farmer","lawyer","editor"]},
+  {q:"The ________ welcomed the guests at the door.",o:["host","porter","thief","editor"]}
+ ],
+ sp:[
+  ["hammer","hamer","hammar"],["ignition","ignision","egnition"],["brake","braek","breake"],
+  ["efficient","effecient","eficient"],["patient","patiant","paitent"],["shampoo","shampo","champoo"],
+  ["complaint","complaynt","complient"],["graduation","graduasion","gradution"],
+  ["scenic","senic","scinic"],["surname","sirname","surnam"]
+ ],
+ comp:{
+  prompt:"Write a paragraph of at least six sentences about a person who has made a difference in the world or in your life. Describe his/her personality.",
+  helpers:["kind","generous","hardworking","helped","because","admire"],
+  model:"My grandfather is a person who has made a big difference in my life. He is kind, generous, and very hardworking. When he was young, he worked hard to help build a school in our village. He always helped poor families who needed food and money. He is also patient and never gets angry. I admire him because he taught me to help others. I hope I can be like him one day."
+ }
+},
+/* ================= EXAM 4 ================= */
+{
+ name:"Mock Exam 4", focus:"Units 7–12",
+ reading:{
+  title:"The Right Choice",
+  text:"<p>In the fifteenth century, in a tiny village near Nuremberg, Germany, lived a family with 18 children. The father worked almost 18 hours a day to keep food on the table. Two of the children, Albert and Albrecht, had a dream. They both wanted to study art, but they knew their father could never afford to send either of them to the academy.</p><p>Finally, the two boys made a pact. Albert said, “I'll work in the mines. With my earnings, I'll support you while you attend the academy. When you complete your studies, you'll support me.” Albrecht went off to study art, and his work was an immediate sensation. By the time he graduated, he was earning high fees for his works. When he returned, the family held a festive dinner. Albrecht thanked his beloved brother and said, “Now, Albert, it is your turn. You can go to the academy, and I will take care of you.”</p>"
+ },
+ rq:[
+  {q:"How many children were in the family?",o:["18","8","15","4"]},
+  {q:"What was the brothers' dream?",o:["To study art","To work in the mines","To become goldsmiths","To open a bank"]},
+  {q:"Why couldn't the father send them to the academy?",o:["He couldn't afford it","He didn't like art","The academy was closed","The boys were too young"]},
+  {q:"What did Albert do to support his brother?",o:["He worked in the mines","He sold paintings","He borrowed money","He became a teacher"]},
+  {q:"What happened when Albrecht returned home?",o:["The family held a festive dinner","He refused to see Albert","He went back to the academy","He moved to another country"]},
+  {q:"The story happened in Germany.",o:[T,F],tf:1},
+  {q:"Albrecht's work at the academy was unsuccessful.",o:[F,T],tf:1},
+  {q:"The two brothers made an agreement (a pact).",o:[T,F],tf:1},
+  {q:"The father worked only a few hours a day.",o:[F,T],tf:1}
+ ],
+ gr:[
+  {q:"They weren't able to sell the tools, ________? (Unit 7)",o:["were they","weren't they","did they","are they"]},
+  {q:"You look tired. You ________ take a rest. (Unit 8)",o:["should","must","mustn't","can't"]},
+  {q:"“Please don't drive so fast,” the woman said to her husband. → She asked him ________ so fast. (Unit 8)",o:["not to drive","to not driving","don't drive","not driving"]},
+  {q:"He was driving ________ he was talking on his cell phone. (Unit 9)",o:["while","who","which","until"]},
+  {q:"I enjoy ________ about other cultures. (Unit 10)",o:["learning","to learn","learn","learned"]},
+  {q:"Look how tall he is! He ________ be over two meters tall. (Unit 10)",o:["must","can't","shouldn't","would"]},
+  {q:"If Noura doesn't do the homework, she ________ fail the class. (Unit 11)",o:["may","would","did","does"]},
+  {q:"If I ________ rich, I wouldn't have to work. (Unit 11)",o:["were","am","will be","be"]},
+  {q:"________ you ever eaten sushi before you traveled to Japan? (Unit 12)",o:["Had","Have","Did","Were"]}
+ ],
+ vo:[
+  {q:"My little sister sleeps with her ________.",o:["teddy bear","screwdriver","garbage can","lawn mower"]},
+  {q:"Put the suitcases in the ________.",o:["trunk","dashboard","gas pedal","ignition"]},
+  {q:"He got a ________ for speeding.",o:["ticket","sign","signal","prize"]},
+  {q:"A ________ person likes giving things to other people.",o:["generous","selfish","serious","quiet"]},
+  {q:"An ________ person always tells the truth.",o:["honest","optimistic","clever","athletic"]},
+  {q:"I can't find my ________ to brush my teeth.",o:["toothpaste","nail polish","dishwashing liquid","hair dryer"]},
+  {q:"We must protect the ________ for future generations.",o:["environment","garage","luggage","dashboard"]},
+  {q:"After ________, he plans to go to college.",o:["graduation","pollution","preference","conservation"]},
+  {q:"The market was so ________ that we could hardly move.",o:["crowded","empty","quiet","clean"]}
+ ],
+ sp:[
+  ["mirror","miror","mirrer"],["signal","signel","sygnal"],["steering","stearing","steerring"],
+  ["carefully","carefuly","carfully"],["honest","honist","onnest"],["optimistic","optemistic","optimestic"],
+  ["benefit","benifit","benefet"],["choice","choise","chioce"],
+  ["similar","similer","simmilar"],["crowded","crowdid","croweded"]
+ ],
+ comp:{
+  prompt:"Write a paragraph of at least six sentences about an important choice you made and its consequences.",
+  helpers:["had to choose","decided","because","if","consequence","happy with"],
+  model:"Last year, I had to make an important choice. I had to choose between joining the school football team and joining the science club. It was such a difficult decision that I thought about it for a whole week. Finally, I decided to join the science club because I want to be an engineer in the future. I learned many new things and made new friends there. If I work hard, I will win a prize in the science fair this year. I am very happy with my choice, and I don't regret it."
+ }
+},
+/* ================= EXAM 5 ================= */
+{
+ name:"Mock Exam 5", focus:"Units 7–12",
+ reading:{
+  title:"A Fish Out of Water",
+  text:"<p>Almost everyone who studies, lives, or works abroad experiences some degree of culture shock. This period of cultural adjustment involves everything from getting used to the food to learning how to use the telephone. No matter how patient and flexible you are, adjusting to a new culture can sometimes be difficult and frustrating. Some people get depressed and very homesick.</p><p>The term culture shock was first used by the writer Kalervo Oberg in 1954. He identified five stages of culture shock. In the first stage, the newcomer is excited about being in a new place. In the second stage, the newcomer starts to complain about the new country because of problems with accommodation, transportation, and language. Later, the newcomer learns to understand the cultural differences. In the assimilation phase, the person accepts the food, habits, and customs of the new country and feels comfortable. The last stage, reverse culture shock, happens when the person returns home and needs time to get used to home again.</p>"
+ },
+ rq:[
+  {q:"Who used the term “culture shock” first?",o:["Kalervo Oberg","Napoleon","Muhammad Yunus","Albrecht Dürer"]},
+  {q:"How many stages of culture shock are there?",o:["Five","Two","Three","Ten"]},
+  {q:"In the first stage, the newcomer feels ________.",o:["excited","angry","homesick","bored"]},
+  {q:"In the second stage, the newcomer starts to ________.",o:["complain","celebrate","feel comfortable","return home"]},
+  {q:"When does reverse culture shock happen?",o:["When the person returns home","On the first day abroad","Before traveling","During the flight"]},
+  {q:"Only a few people experience culture shock.",o:[F,T],tf:1},
+  {q:"Adjusting to a new culture can be difficult and frustrating.",o:[T,F],tf:1},
+  {q:"In the assimilation phase, the person feels comfortable in the new country.",o:[T,F],tf:1},
+  {q:"The term culture shock was first used in 2004.",o:[F,T],tf:1}
+ ],
+ gr:[
+  {q:"This lawn mower runs on gas, ________? (Unit 7)",o:["doesn't it","isn't it","does it","didn't it"]},
+  {q:"A: ________ don't we go to the park this afternoon? &nbsp;B: That's a good idea! (Unit 7)",o:["Why","What","Where","How"]},
+  {q:"Majid is a fast runner. He runs ________. (Unit 8)",o:["fast","fastly","fastest","more fast"]},
+  {q:"“Could you check the brakes?” Ahmed asked the mechanic. → Ahmed asked the mechanic ________ the brakes. (Unit 8)",o:["to check","check","checking","checked"]},
+  {q:"They ________ in the café when it started to rain. (Unit 9)",o:["were sitting","sat","are sitting","sit"]},
+  {q:"These are your clothes. Please put ________ away. (Unit 10)",o:["them","they","their","its"]},
+  {q:"It was ________ a difficult test that none of the students did well. (Unit 10)",o:["such","so","too","very"]},
+  {q:"If we ________ this 4K television, we will see the game better. (Unit 11)",o:["get","got","would get","getting"]},
+  {q:"________ is a good way to learn about other cultures. (Unit 12)",o:["Traveling","Travel","To traveling","Traveled"]}
+ ],
+ vo:[
+  {q:"This old clock is over a hundred years old. It's a valuable ________.",o:["antique","bargain","teapot","saucer"]},
+  {q:"Sweep the floor with the ________.",o:["broom","hose","saw","pliers"]},
+  {q:"You must ________ the road signs.",o:["obey","pass","speed","grab"]},
+  {q:"An ________ person always expects the best to happen.",o:["optimistic","pessimistic","angry","absentminded"]},
+  {q:"The thief ________ the woman's bag and ran away.",o:["grabbed","complimented","recognized","spilled"]},
+  {q:"Would you ________ turning down the music, please?",o:["mind","avoid","suggest","stand"]},
+  {q:"Hard work has many ________ for your future.",o:["benefits","failures","complaints","shocks"]},
+  {q:"It took him a month to ________ to the new culture.",o:["adjust","block","remove","spread"]},
+  {q:"Your family name is also called your ________.",o:["surname","impression","topic","custom"]}
+ ],
+ sp:[
+  ["antique","anteque","antigue"],["broom","brom","broome"],["bumper","bumber","bamper"],
+  ["reliable","relyable","relaible"],["serious","sereous","serius"],["polite","polight","pollite"],
+  ["preference","prefrence","preferance"],["route","ruote","rowte"],
+  ["guest","gest","guast"],["adjust","ajust","adjest"]
+ ],
+ comp:{
+  prompt:"Write an email of at least six sentences to a friend who is going to visit your country. Give him/her advice about customs and what to do.",
+  helpers:["Dear","welcome","It's polite to","remember to","try to","don't forget to","Best wishes"],
+  model:"Dear Tom, I'm so happy that you're coming to visit Saudi Arabia next month. Here is some advice to help you enjoy your trip. It's polite to greet people when you enter a room. Remember to dress modestly and respect local customs. Try to taste our traditional food, like kabsa — it's delicious! Don't forget to bring light clothes because the weather is hot. People here are very generous, so don't be surprised if they invite you to dinner. Best wishes, Mahmoud"
+ }
+}
+];
+
+/* ---------- deterministic shuffle (stable across reloads) ---------- */
+function shuffled(arr, seed){
+  const a=arr.slice();
+  let s=seed;
+  for(let i=a.length-1;i>0;i--){
+    s=(s*9301+49297)%233280;
+    const j=Math.floor((s/233280)*(i+1));
+    [a[i],a[j]]=[a[j],a[i]];
+  }
+  return a;
+}
+
+let current=0;
+const answers=EXAMS.map(()=>({})); // saved selections per exam
+const checked=EXAMS.map(()=>false);
+const scores=EXAMS.map(()=>null);
+
+function renderTabs(){
+  const t=document.getElementById('tabs');
+  t.innerHTML=EXAMS.map((e,i)=>`
+    <div class="tab ${i===current?'active':''}" onclick="switchExam(${i})">
+      <b>${e.name}</b><span>${e.focus}</span>
+      ${scores[i]!==null?`<span class="done">✓ ${scores[i]} / 32</span>`:''}
+    </div>`).join('');
+}
+
+function qHTML(item, group, idx, seed){
+  const opts = item.tf ? ["True","False"] : shuffled(item.o, seed+idx*7+3);
+  const correct=item.o[0];
+  const name=`${group}_${idx}`;
+  const saved=answers[current][name];
+  return `<div class="q" id="q_${name}" data-correct="${escapeAttr(correct)}">
+    <div class="qt"><span class="num">${idx+1}.</span>${item.q}</div>
+    <div class="opts">${opts.map((o,k)=>`
+      <span class="opt">
+        <input type="radio" id="${name}_${k}" name="${name}" value="${escapeAttr(o)}" ${saved===o?'checked':''} onchange="answers[${current}]['${name}']=this.value">
+        <label for="${name}_${k}">${o}</label>
+      </span>`).join('')}
+    </div>
+    <div class="fb"></div>
+  </div>`;
+}
+
+function spHTML(opts, idx, seed){
+  const correct=opts[0];
+  const mixed=shuffled(opts, seed+idx*13+5);
+  const name=`sp_${idx}`;
+  const saved=answers[current][name];
+  return `<div class="q" id="q_${name}" data-correct="${escapeAttr(correct)}">
+    <div class="qt"><span class="num">${idx+1}.</span>Choose the correct spelling:</div>
+    <div class="opts">${mixed.map((o,k)=>`
+      <span class="opt">
+        <input type="radio" id="${name}_${k}" name="${name}" value="${escapeAttr(o)}" ${saved===o?'checked':''} onchange="answers[${current}]['${name}']=this.value">
+        <label for="${name}_${k}">${o}</label>
+      </span>`).join('')}
+    </div>
+    <div class="fb"></div>
+  </div>`;
+}
+
+function escapeAttr(s){return String(s).replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;');}
+
+function renderExam(){
+  const e=EXAMS[current];
+  const seed=(current+1)*101;
+  const area=document.getElementById('examArea');
+  area.innerHTML=`
+  <div class="section">
+    <div class="sec-head"><h2>I. Guided Composition <small>التعبير الموجه</small></h2><span class="marks">8 Marks</span></div>
+    <div class="sec-body">
+      <p style="font-weight:600">${e.comp.prompt}</p>
+      <div class="comp-helpers">${e.comp.helpers.map(h=>`<span>${h}</span>`).join('')}</div>
+      <textarea id="compText" placeholder="Write your paragraph here..." oninput="updateWC()">${answers[current].comp||''}</textarea>
+      <div class="wordcount" id="wc"></div>
+      <div class="model" id="modelBox">
+        <h4>📝 Model Answer (compare with your writing)</h4>
+        <p>${e.comp.model}</p>
+      </div>
+      <div class="rubric" id="rubricBox">
+        <table>
+          <tr><th>Marking criteria (teacher)</th><th>Marks</th></tr>
+          <tr><td>Content and ideas</td><td>2</td></tr>
+          <tr><td>Vocabulary and language accuracy</td><td>2</td></tr>
+          <tr><td>Punctuation and spelling</td><td>2</td></tr>
+          <tr><td>Organization, linking of ideas, and relevance to the topic</td><td>2</td></tr>
+        </table>
+      </div>
+      <p class="note-comp">✦ The composition is marked by your teacher (8 marks). After checking, a model answer and the marking criteria will appear.</p>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="sec-head"><h2>II. Reading Comprehension <small>فهم المقروء</small></h2><span class="marks">9 Marks</span></div>
+    <div class="sec-body">
+      <div class="passage"><h3>${e.reading.title}</h3>${e.reading.text}</div>
+      <p class="instr">Read the passage, then answer the questions. (1 mark each)</p>
+      ${e.rq.map((it,i)=>qHTML(it,'rq',i,seed)).join('')}
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="sec-head"><h2>III. Grammar <small>القواعد</small></h2><span class="marks">9 Marks</span></div>
+    <div class="sec-body">
+      <p class="instr">Choose the correct answer. (1 mark each)</p>
+      ${e.gr.map((it,i)=>qHTML(it,'gr',i,seed+50)).join('')}
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="sec-head"><h2>IV. Vocabulary <small>المفردات</small></h2><span class="marks">9 Marks</span></div>
+    <div class="sec-body">
+      <p class="instr">Choose the correct word. (1 mark each)</p>
+      ${e.vo.map((it,i)=>qHTML(it,'vo',i,seed+100)).join('')}
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="sec-head"><h2>V. Orthography (Spelling) <small>الإملاء</small></h2><span class="marks">5 Marks</span></div>
+    <div class="sec-body">
+      <p class="instr">Choose the correct spelling. (½ mark each)</p>
+      ${e.sp.map((opts,i)=>spHTML(opts,i,seed+150)).join('')}
+    </div>
+  </div>
+
+  <div class="actions">
+    <button class="btn btn-check" onclick="checkExam()">✔ Check My Answers</button>
+    <button class="btn btn-reset" onclick="resetExam()">↺ Try Again</button>
+    <button class="btn btn-print" onclick="window.print()">🖨 Print</button>
+  </div>
+  <div class="score" id="scoreBox"></div>`;
+  updateWC();
+  if(checked[current]) checkExam(true);
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function updateWC(){
+  const ta=document.getElementById('compText');
+  if(!ta) return;
+  answers[current].comp=ta.value;
+  const n=ta.value.trim()? ta.value.trim().split(/\s+/).length : 0;
+  document.getElementById('wc').textContent=n+" words";
+}
+
+function gradeGroup(prefix,count,per){
+  let pts=0, right=0;
+  for(let i=0;i<count;i++){
+    const name=`${prefix}_${i}`;
+    const div=document.getElementById('q_'+name);
+    const correct=div.dataset.correct;
+    const sel=document.querySelector(`input[name="${name}"]:checked`);
+    div.classList.remove('correct','wrong','unanswered');
+    const fb=div.querySelector('.fb');
+    if(!sel){
+      div.classList.add('unanswered');
+      fb.textContent='⚠ Not answered. Correct answer: '+correct;
+    }else if(sel.value===correct){
+      div.classList.add('correct'); fb.textContent='✓ Correct!';
+      pts+=per; right++;
+    }else{
+      div.classList.add('wrong');
+      fb.textContent='✗ Incorrect. Correct answer: '+correct;
+    }
+  }
+  return {pts, right};
+}
+
+function checkExam(silent){
+  const r=gradeGroup('rq',9,1);
+  const g=gradeGroup('gr',9,1);
+  const v=gradeGroup('vo',9,1);
+  const s=gradeGroup('sp',10,0.5);
+  const total=r.pts+g.pts+v.pts+s.pts;
+  checked[current]=true; scores[current]=total;
+  document.getElementById('modelBox').style.display='block';
+  document.getElementById('rubricBox').style.display='block';
+  const pct=Math.round(total/32*100);
+  let msg, color;
+  if(pct>=90){msg="🌟 Excellent! Outstanding work — you are ready for the final exam!"; color="var(--ok)";}
+  else if(pct>=75){msg="👍 Very good! Review the questions marked in red and try again."; color="var(--ok)";}
+  else if(pct>=50){msg="📖 Good effort. Go back to the units in your book and review the red questions."; color="#92600a";}
+  else{msg="💪 Don't give up! Review Units 7–12 carefully, then try this exam again."; color="var(--bad)";}
+  const box=document.getElementById('scoreBox');
+  box.style.display='block';
+  box.innerHTML=`
+    <h3>Your Result — ${EXAMS[current].name}</h3>
+    <div class="score-total">${total} / 32 <span style="font-size:.9rem;color:var(--muted);font-weight:400">(+ 8 marks composition, marked by teacher = /40)</span></div>
+    <div class="bar"><i style="width:${pct}%"></i></div>
+    <div class="score-grid">
+      <div>Reading<b>${r.pts} / 9</b></div>
+      <div>Grammar<b>${g.pts} / 9</b></div>
+      <div>Vocabulary<b>${v.pts} / 9</b></div>
+      <div>Spelling<b>${s.pts} / 5</b></div>
+    </div>
+    <div class="msg" style="color:${color}">${msg}</div>`;
+  renderTabs();
+  if(!silent) box.scrollIntoView({behavior:'smooth'});
+}
+
+function resetExam(){
+  answers[current]={comp:answers[current].comp||''};
+  checked[current]=false; scores[current]=null;
+  renderTabs(); renderExam();
+}
+
+function switchExam(i){ current=i; renderTabs(); renderExam(); }
+
+function toggleFS(){
+  if(!document.fullscreenElement){
+    document.documentElement.requestFullscreen().catch(()=>{});
+  }else{
+    document.exitFullscreen();
+  }
+}
+document.addEventListener('fullscreenchange',()=>{
+  const b=document.getElementById('fsBtn');
+  b.querySelector('span').textContent=document.fullscreenElement?'Exit Full Screen':'Full Screen';
+});
+
+renderTabs(); renderExam();
+</script>
+</body>
+</html>
