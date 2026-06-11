@@ -1,0 +1,857 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Super Goal 1">
+<meta name="theme-color" content="#0a1830">
+<title>Super Goal 1 — مراجعة الوحدات 12 · 13 · 14 | مستر محمود أبو هند</title>
+<style>
+:root {
+  --navy:#0a1830; --navy2:#11264a; --navy3:#1a3460;
+  --gold:#d8b35c; --gold2:#f0d28a; --cream:#faf6ec; --ink:#1c2333;
+  --ok:#2e9e5b; --bad:#d8484f; --radius:18px;
+}
+* { box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
+html { scroll-behavior:smooth; }
+body { margin:0; font-family:'Cairo',Tahoma,Arial,sans-serif; background:var(--navy); color:var(--ink); min-height:100vh; }
+.bgpat { position:fixed; inset:0; pointer-events:none; opacity:.5;
+  background:
+   radial-gradient(ellipse 70% 40% at 50% -10%, rgba(216,179,92,.16), transparent 60%),
+   radial-gradient(ellipse 40% 30% at 90% 110%, rgba(216,179,92,.08), transparent 60%); }
+.wrap { max-width:880px; margin:0 auto; padding:14px 14px 60px; position:relative; }
+
+/* header */
+header { text-align:center; padding:26px 10px 18px; color:var(--cream); }
+.crest { width:64px; height:64px; margin:0 auto 10px; border:2px solid var(--gold); border-radius:50%;
+  display:flex; align-items:center; justify-content:center; font-size:30px;
+  background:linear-gradient(160deg, var(--navy2), var(--navy3)); box-shadow:0 0 0 5px rgba(216,179,92,.12); }
+header h1 { font-family:'Playfair Display',Georgia,serif; font-size:clamp(24px,5.4vw,38px); margin:6px 0 2px; color:var(--gold2); letter-spacing:.5px; }
+.subtitle { font-size:15px; opacity:.92; }
+.teacherline { display:inline-block; margin-top:10px; padding:7px 18px; border:1px solid rgba(216,179,92,.5);
+  border-radius:999px; color:var(--gold2); font-size:14px; background:rgba(216,179,92,.07); }
+
+/* tabs */
+nav { position:sticky; top:0; z-index:50; background:rgba(10,24,48,.92); -webkit-backdrop-filter:blur(8px); backdrop-filter:blur(8px);
+  display:flex; gap:8px; overflow-x:auto; -webkit-overflow-scrolling:touch; padding:10px 4px; margin:8px -4px 18px; border-bottom:1px solid rgba(216,179,92,.25); }
+nav::-webkit-scrollbar { display:none; }
+.tab { flex:0 0 auto; min-height:46px; padding:10px 18px; border-radius:999px; border:1px solid rgba(216,179,92,.4);
+  background:transparent; color:var(--cream); font-family:inherit; font-size:15px; font-weight:700; cursor:pointer; }
+.tab.active { background:var(--gold); color:var(--navy); border-color:var(--gold); }
+
+/* panels */
+.unit-panel { display:none; animation:fadein .3s ease; }
+.unit-panel.show { display:block; }
+@keyframes fadein { from{opacity:0; transform:translateY(8px);} to{opacity:1; transform:none;} }
+
+.unit-hero { display:flex; gap:14px; align-items:center; background:linear-gradient(135deg,var(--navy2),var(--navy3));
+  border:1px solid rgba(216,179,92,.35); border-radius:var(--radius); padding:18px 16px; color:var(--cream); margin-bottom:14px; }
+.uh-icon { font-size:42px; }
+.uh-eyebrow { font-size:12px; letter-spacing:1.5px; text-transform:uppercase; color:var(--gold2); }
+.unit-hero h2 { margin:2px 0; font-family:'Playfair Display',Georgia,serif; font-size:clamp(19px,4.5vw,26px); }
+.uh-ar { font-size:14px; opacity:.9; }
+
+.stagebar { display:flex; gap:10px; margin-bottom:14px; }
+.stagebtn { flex:1; min-height:50px; border-radius:14px; border:1.5px solid rgba(216,179,92,.5); background:var(--navy2);
+  color:var(--cream); font-family:inherit; font-size:15.5px; font-weight:800; cursor:pointer; }
+.stagebtn.active { background:var(--gold); color:var(--navy); border-color:var(--gold); }
+.hide { display:none !important; }
+
+/* rules */
+.rulecard { background:var(--cream); border-radius:var(--radius); padding:16px 18px; margin-bottom:12px;
+  border-right:5px solid var(--gold); box-shadow:0 4px 14px rgba(0,0,0,.18); }
+.rulehead { font-weight:900; font-size:16.5px; color:var(--navy); margin-bottom:6px; }
+.rulebody { font-size:15px; line-height:1.9; }
+.ruleex { margin-top:8px; background:rgba(216,179,92,.16); border-radius:10px; padding:9px 12px;
+  font-size:14.5px; direction:ltr; text-align:left; color:#5a4a1c; font-weight:600; }
+.wordbank { display:flex; flex-wrap:wrap; gap:8px; }
+.wchip { background:var(--cream); border:1px solid rgba(216,179,92,.6); border-radius:999px; padding:7px 14px;
+  display:flex; gap:8px; align-items:center; font-size:14px; }
+.wchip span[dir=ltr] { font-weight:800; color:var(--navy); }
+.war { color:#7a6320; }
+.gonote { text-align:center; color:var(--gold2); margin-top:18px; font-weight:800; font-size:15.5px; }
+
+/* sections + questions */
+.sechead { display:flex; align-items:center; gap:10px; color:var(--gold2); font-weight:900; font-size:17px;
+  margin:22px 2px 10px; }
+.marks { margin-inline-start:auto; background:rgba(216,179,92,.18); border:1px solid rgba(216,179,92,.45);
+  color:var(--gold2); border-radius:999px; padding:3px 12px; font-size:12.5px; }
+.qcard { background:var(--cream); border-radius:var(--radius); padding:14px 14px 12px; margin-bottom:12px;
+  box-shadow:0 4px 14px rgba(0,0,0,.18); }
+.qhead { display:flex; gap:10px; align-items:flex-start; margin-bottom:10px; }
+.qnum { flex:0 0 auto; width:30px; height:30px; border-radius:50%; background:var(--navy); color:var(--gold2);
+  display:flex; align-items:center; justify-content:center; font-weight:900; font-size:14px; }
+.qtext { font-size:15.5px; font-weight:700; line-height:1.7; direction:ltr; text-align:left; flex:1; }
+.opts { display:grid; grid-template-columns:1fr 1fr; gap:8px; }
+@media (max-width:560px) { .opts { grid-template-columns:1fr; } }
+.opt { min-height:48px; border-radius:12px; border:1.5px solid #d8d2c2; background:#fff; font-family:inherit;
+  font-size:15px; font-weight:700; color:var(--ink); cursor:pointer; padding:10px 12px;
+  display:flex; align-items:center; gap:8px; direction:ltr; text-align:left; }
+.ol { width:22px; height:22px; flex:0 0 auto; border-radius:50%; background:rgba(216,179,92,.25); color:#7a6320;
+  display:flex; align-items:center; justify-content:center; font-size:12px; font-weight:900; }
+.opt.right { background:#e7f6ec; border-color:var(--ok); color:#185c33; }
+.opt.right .ol { background:var(--ok); color:#fff; }
+.opt.wrong { background:#fdeaea; border-color:var(--bad); color:#8c2227; }
+.opt.wrong .ol { background:var(--bad); color:#fff; }
+.opt:disabled { opacity:.85; }
+.fb { display:none; margin-top:10px; border-radius:12px; padding:10px 12px; font-size:14.5px; line-height:1.8; font-weight:700; }
+.fb.ok { display:block; background:#e7f6ec; color:#185c33; border-right:4px solid var(--ok); }
+.fb.no { display:block; background:#fdeaea; color:#8c2227; border-right:4px solid var(--bad); }
+
+/* picture questions */
+.picgrid { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:12px; }
+.piccard { text-align:center; }
+.picemoji { font-size:64px; line-height:1; margin:4px 0 10px; }
+.picrow { grid-template-columns:1fr; }
+.picopt { justify-content:center; }
+
+/* fill */
+.fillrow { display:flex; gap:8px; }
+.fillin { flex:1; min-height:48px; border-radius:12px; border:1.5px solid #d8d2c2; padding:10px 14px;
+  font-family:inherit; font-size:16px; direction:ltr; }
+.fillin:focus { outline:2px solid var(--gold); border-color:var(--gold); }
+.checkbtn { min-height:48px; padding:0 18px; border-radius:12px; border:none; background:var(--navy);
+  color:var(--gold2); font-family:inherit; font-size:15px; font-weight:800; cursor:pointer; }
+
+/* progress */
+.progresswrap { display:flex; align-items:center; gap:12px; margin-bottom:6px; }
+.progressbar { flex:1; height:12px; border-radius:999px; background:rgba(250,246,236,.18); overflow:hidden; }
+.progressfill { height:100%; width:0%; background:linear-gradient(90deg,var(--gold),var(--gold2)); border-radius:999px; transition:width .35s ease; }
+.progresstxt { color:var(--gold2); font-weight:900; font-size:14px; min-width:60px; text-align:center; }
+.unitdone { text-align:center; color:var(--gold2); font-weight:900; font-size:17px; margin:18px 0; }
+
+/* exam */
+.examhero { background:linear-gradient(135deg,#3a2c0a,var(--navy2)); }
+.bigbtn { display:block; width:100%; min-height:56px; margin:14px 0; border-radius:16px; border:none;
+  background:linear-gradient(135deg,var(--gold),var(--gold2)); color:var(--navy); font-family:inherit;
+  font-size:18px; font-weight:900; cursor:pointer; box-shadow:0 6px 18px rgba(216,179,92,.3); }
+.examtop { position:sticky; top:64px; z-index:40; display:flex; justify-content:space-between; align-items:center;
+  background:var(--navy2); border:1px solid rgba(216,179,92,.4); border-radius:14px; padding:10px 16px; margin-bottom:14px; }
+.timer { font-size:22px; font-weight:900; color:var(--gold2); font-variant-numeric:tabular-nums; direction:ltr; }
+.timer.low { color:#ff8a8a; }
+.scorecard { background:var(--cream); border-radius:var(--radius); padding:24px 18px; text-align:center; box-shadow:0 6px 20px rgba(0,0,0,.25); }
+.ring { width:150px; height:150px; margin:0 auto 12px; border-radius:50%; display:flex; align-items:center; justify-content:center;
+  background:conic-gradient(var(--gold) calc(var(--p)*1%), #e8e2d2 0); }
+.ring > div { width:118px; height:118px; border-radius:50%; background:var(--cream); display:flex; flex-direction:column;
+  align-items:center; justify-content:center; }
+.ringscore { font-size:30px; font-weight:900; color:var(--navy); direction:ltr; }
+.grade { font-size:20px; font-weight:900; margin:6px 0; }
+.gmsg { font-size:15.5px; line-height:1.9; }
+.review h3 { color:var(--gold2); margin:22px 4px 10px; }
+
+/* contact */
+.contact-hero { text-align:center; background:linear-gradient(160deg,var(--navy2),var(--navy3));
+  border:1px solid rgba(216,179,92,.4); border-radius:var(--radius); padding:26px 16px; color:var(--cream); margin-bottom:14px; }
+.c-avatar { width:78px; height:78px; margin:0 auto 10px; border-radius:50%; background:var(--gold); color:var(--navy);
+  display:flex; align-items:center; justify-content:center; font-size:28px; font-weight:900; font-family:'Playfair Display',serif; }
+.contact-hero h2 { margin:4px 0 2px; font-family:'Playfair Display',serif; color:var(--gold2); }
+.c-title { font-size:17px; font-weight:800; }
+.c-sub { font-size:13.5px; opacity:.85; }
+.contact-card { display:flex; gap:14px; align-items:center; background:var(--cream); border-radius:var(--radius);
+  padding:16px; margin-bottom:12px; box-shadow:0 4px 14px rgba(0,0,0,.18); }
+.cc-icon { font-size:34px; }
+.contact-card h3 { margin:0 0 2px; font-size:16px; color:var(--navy); }
+.cc-num { font-size:22px; font-weight:900; color:var(--navy); letter-spacing:1px; }
+.contact-card p { margin:4px 0 0; font-size:13.5px; color:#6b6353; }
+.contact-cta { display:flex; gap:14px; align-items:center; background:linear-gradient(135deg,#1f8a4c,#27ae60);
+  border-radius:var(--radius); padding:16px; margin-bottom:14px; color:#fff; text-decoration:none; box-shadow:0 6px 18px rgba(39,174,96,.35); }
+.cta-icon { font-size:34px; }
+.contact-cta h3 { margin:0 0 2px; font-size:16.5px; }
+.contact-cta p { margin:0; font-size:13.5px; opacity:.95; }
+.contact-divider { text-align:center; color:var(--gold2); font-weight:800; margin:16px 0 10px; }
+.session-types { display:grid; grid-template-columns:repeat(auto-fit,minmax(130px,1fr)); gap:10px; }
+.schip { background:var(--cream); border-radius:14px; text-align:center; padding:14px 8px; }
+.s-icon { font-size:26px; }
+.schip h4 { margin:6px 0 2px; color:var(--navy); }
+.schip p { margin:0; font-size:12.5px; color:#6b6353; }
+.bookline { margin-top:16px; background:rgba(216,179,92,.1); border:1px dashed rgba(216,179,92,.5);
+  color:var(--cream); border-radius:14px; padding:14px 16px; text-align:center; line-height:2; font-size:15px; }
+
+footer { text-align:center; color:rgba(250,246,236,.55); font-size:13px; margin-top:34px; line-height:2; }
+
+/* fullscreen button */
+#fsbtn { position:fixed; bottom:18px; inset-inline-start:18px; z-index:99; width:54px; height:54px; border-radius:50%;
+  border:1.5px solid rgba(216,179,92,.6); background:linear-gradient(160deg,var(--navy2),var(--navy3));
+  color:var(--gold2); font-size:22px; cursor:pointer; box-shadow:0 6px 18px rgba(0,0,0,.45);
+  display:flex; align-items:center; justify-content:center; }
+#fsbtn:active { transform:scale(.94); }
+@media (prefers-reduced-motion: reduce) { * { animation:none !important; transition:none !important; } }
+</style>
+</head>
+<body>
+<noscript>
+<div style="background:#fff;border:3px solid #d8484f;border-radius:18px;margin:14px;padding:20px 16px;text-align:center;color:#1c2333;font-weight:700;line-height:2.1;">
+<div style="font-size:40px;">🔒</div>
+<div style="font-size:19px;color:#d8484f;font-weight:900;margin-bottom:6px;">التطبيق مقفل في وضع المعاينة</div>
+<div style="font-size:16px;">حتى تعمل الأزرار والأسئلة، اتبع هاتين الخطوتين:</div>
+<div style="background:#faf6ec;border-radius:14px;padding:14px;margin:12px 0;font-size:16.5px;text-align:right;">
+<div>1️⃣ اضغط زر المشاركة <span style="display:inline-block;border:2px solid #0a1830;border-radius:8px;padding:1px 10px;font-size:20px;">⬆️</span> الموجود أعلى أو أسفل هذه الشاشة</div>
+<div style="margin-top:8px;">2️⃣ اختر <b style="color:#0a1830;">«فتح في Safari»</b> — <b dir="ltr">Open in Safari</b> 🧭 (أو Chrome)</div>
+</div>
+<div style="font-size:15px;color:#2e9e5b;font-weight:900;">✅ بعدها سيعمل كل شيء: الأسئلة والتصحيح والاختبار النهائي</div>
+<div style="font-size:13.5px;color:#6b6353;margin-top:6px;">هذه خطوة يطلبها الآيفون لتشغيل الملفات التفاعلية — مرة واحدة فقط عند كل فتح</div>
+</div>
+</noscript>
+<div class="bgpat"></div>
+<div class="wrap">
+<header>
+<div class="crest">⚜️</div>
+<h1>Super Goal 1</h1>
+<div class="subtitle">مراجعة تفاعلية شاملة · الوحدات 12 و 13 و 14 · هدفنا الدرجة الكاملة 🎯</div>
+<div class="teacherline">إعداد مستر محمود أبو هند · Mr. Mahmoud Abo-Hind · 📱 0542260935</div>
+</header>
+
+<nav>
+<button type="button" class="tab" onclick="showUnit(0,this)">🏖️ Unit 12</button><button type="button" class="tab" onclick="showUnit(1,this)">👔 Unit 13</button><button type="button" class="tab" onclick="showUnit(2,this)">🎉 Unit 14</button><button type="button" class="tab" onclick="showUnit(3,this)">🏆 الاختبار النهائي</button><button type="button" class="tab" onclick="showUnit(4,this)">📞 تواصل معي</button>
+</nav>
+
+<div class="unit-panel" id="panel0">
+<div class="unit-hero">
+<div class="uh-icon">🏖️</div>
+<div><div class="uh-eyebrow">Super Goal 1 · Worksheet Unit 12</div>
+<h2 dir="ltr">At the Beach</h2>
+<div class="uh-ar">على الشاطئ</div></div>
+</div>
+<div class="stagebar">
+<button type="button" class="stagebtn active" onclick="showStage(0,0,this)">📖 الشرح أولاً</button>
+<button type="button" class="stagebtn" onclick="showStage(0,1,this)">🎯 حل الأسئلة (20 سؤال)</button>
+</div>
+<div class="stage" id="stage0-0">
+<div class="rules"><div class="rulecard"><div class="rulehead">📌 can / can’t — القدرة</div><div class="rulebody">نستخدم <b>can</b> للقدرة و <b>can’t</b> لعدم القدرة، وبعدها مصدر بدون to، ولا نضع معها am / is / are أبداً.</div><div class="ruleex" dir="ltr">I can swim. ✦ I can’t surf, but I can water-ski.</div></div><div class="rulecard"><div class="rulehead">📌 like to + مصدر</div><div class="rulebody">نستخدم like to + الفعل في المصدر، والسؤال بـ Do / Does والإجابة المختصرة بنفس الفعل المساعد.</div><div class="ruleex" dir="ltr">Do they like to relax? — Yes, they do. ✦ Does she like to cook? — No, she doesn’t.</div></div><div class="rulecard"><div class="rulehead">📌 would like + to + مصدر</div><div class="rulebody">عبارة I’d like تعني أتمنى/أرغب، وبعدها دائماً to + مصدر.</div><div class="ruleex" dir="ltr">I’d like to buy a new laptop.</div></div><div class="rulecard"><div class="rulehead">📌 enjoy / spend time + ing</div><div class="rulebody">بعد enjoy وبعد spend time يأتي الفعل مضافاً له ing (gerund).</div><div class="ruleex" dir="ltr">Hameed enjoys playing volleyball. ✦ Amal spends her free time reading books.</div></div></div>
+<div class="sechead">🗂️ كلمات الوحدة — Word Bank</div>
+<div class="wordbank"><div class="wchip"><span dir="ltr">swim</span><span class="war">يسبح</span></div><div class="wchip"><span dir="ltr">surf</span><span class="war">يركب الأمواج</span></div><div class="wchip"><span dir="ltr">snorkel</span><span class="war">يغطس بأنبوب التنفس</span></div><div class="wchip"><span dir="ltr">sail</span><span class="war">يُبحر</span></div><div class="wchip"><span dir="ltr">water-ski</span><span class="war">يتزلج على الماء</span></div><div class="wchip"><span dir="ltr">rollerblade</span><span class="war">يتزلج بالعجلات</span></div><div class="wchip"><span dir="ltr">ice-skating</span><span class="war">التزلج على الجليد</span></div><div class="wchip"><span dir="ltr">play volleyball</span><span class="war">يلعب الكرة الطائرة</span></div><div class="wchip"><span dir="ltr">ride a bike</span><span class="war">يركب دراجة</span></div><div class="wchip"><span dir="ltr">hotel</span><span class="war">فندق</span></div><div class="wchip"><span dir="ltr">bookstore</span><span class="war">مكتبة</span></div><div class="wchip"><span dir="ltr">gym</span><span class="war">نادي رياضي</span></div></div>
+<div class="gonote">جاهز؟ اضغط على «حل الأسئلة» بالأعلى وابدأ التحدي! 💪</div>
+</div>
+<div class="stage hide" id="stage0-1">
+<div class="progresswrap"><div class="progressbar"><div class="progressfill" id="prog0"></div></div><div class="progresstxt" id="progtxt0">0 / 20</div></div>
+<div class="sechead">📝 Grammar — القواعد <span class="marks">6 Marks</span></div><div class="qcard" id="u12g0">
+<div class="qhead"><span class="qnum">1</span><span class="qtext" dir="ltr">He can’t surf, but he _____ water-ski.</span></div>
+<div class="opts"><button type="button" class="opt" onclick="pick(this,0,'u12g0')"><span class="ol">a</span>can’t</button><button type="button" class="opt" onclick="pick(this,1,'u12g0')"><span class="ol">b</span>can</button><button type="button" class="opt" onclick="pick(this,0,'u12g0')"><span class="ol">c</span>not can</button><button type="button" class="opt" onclick="pick(this,0,'u12g0')"><span class="ol">d</span>don’t can</button></div>
+<div class="fb" id="fb-u12g0"></div>
+</div><div class="qcard" id="u12g1">
+<div class="qhead"><span class="qnum">2</span><span class="qtext" dir="ltr">Aisha: Do they like to relax on the beach? — Lucy: Yes, _____.</span></div>
+<div class="opts"><button type="button" class="opt" onclick="pick(this,1,'u12g1')"><span class="ol">a</span>they do</button><button type="button" class="opt" onclick="pick(this,0,'u12g1')"><span class="ol">b</span>do they</button><button type="button" class="opt" onclick="pick(this,0,'u12g1')"><span class="ol">c</span>not they</button><button type="button" class="opt" onclick="pick(this,0,'u12g1')"><span class="ol">d</span>they don’t</button></div>
+<div class="fb" id="fb-u12g1"></div>
+</div><div class="qcard" id="u12g2">
+<div class="qhead"><span class="qnum">3</span><span class="qtext" dir="ltr">I _____ play volleyball, but I can play tennis.</span></div>
+<div class="opts"><button type="button" class="opt" onclick="pick(this,0,'u12g2')"><span class="ol">a</span>can</button><button type="button" class="opt" onclick="pick(this,0,'u12g2')"><span class="ol">b</span>am can</button><button type="button" class="opt" onclick="pick(this,1,'u12g2')"><span class="ol">c</span>can’t</button><button type="button" class="opt" onclick="pick(this,0,'u12g2')"><span class="ol">d</span>am can’t</button></div>
+<div class="fb" id="fb-u12g2"></div>
+</div><div class="qcard" id="u12g3">
+<div class="qhead"><span class="qnum">4</span><span class="qtext" dir="ltr">Jill: Does she like to cook? — Kate: No, _____.</span></div>
+<div class="opts"><button type="button" class="opt" onclick="pick(this,0,'u12g3')"><span class="ol">a</span>she does</button><button type="button" class="opt" onclick="pick(this,0,'u12g3')"><span class="ol">b</span>she don’t</button><button type="button" class="opt" onclick="pick(this,1,'u12g3')"><span class="ol">c</span>she doesn’t</button><button type="button" class="opt" onclick="pick(this,0,'u12g3')"><span class="ol">d</span>doesn’t she</button></div>
+<div class="fb" id="fb-u12g3"></div>
+</div><div class="qcard" id="u12g4">
+<div class="qhead"><span class="qnum">5</span><span class="qtext" dir="ltr">I’d like _____ a new laptop, but I can’t afford one. (buy)</span></div>
+<div class="opts"><button type="button" class="opt" onclick="pick(this,0,'u12g4')"><span class="ol">a</span>buy</button><button type="button" class="opt" onclick="pick(this,1,'u12g4')"><span class="ol">b</span>to buy</button><button type="button" class="opt" onclick="pick(this,0,'u12g4')"><span class="ol">c</span>buy to</button><button type="button" class="opt" onclick="pick(this,0,'u12g4')"><span class="ol">d</span>bought</button></div>
+<div class="fb" id="fb-u12g4"></div>
+</div><div class="qcard" id="u12g5">
+<div class="qhead"><span class="qnum">6</span><span class="qtext" dir="ltr">Hameed enjoys _____ volleyball at the beach. (play)</span></div>
+<div class="opts"><button type="button" class="opt" onclick="pick(this,0,'u12g5')"><span class="ol">a</span>plays</button><button type="button" class="opt" onclick="pick(this,0,'u12g5')"><span class="ol">b</span>played</button><button type="button" class="opt" onclick="pick(this,0,'u12g5')"><span class="ol">c</span>is play</button><button type="button" class="opt" onclick="pick(this,1,'u12g5')"><span class="ol">d</span>playing</button></div>
+<div class="fb" id="fb-u12g5"></div>
+</div><div class="sechead">✍️ Fill in the Blank — أكمل الفراغ <span class="marks">3 Marks</span></div><div class="qcard" id="u12f0">
+<div class="qhead"><span class="qnum">7</span><span class="qtext" dir="ltr">I’d like ________ a new laptop, but I can’t afford one. (buy)</span></div>
+<div class="fillrow">
+<input type="text" class="fillin" id="in-u12f0" dir="ltr" autocomplete="off" autocapitalize="off" placeholder="اكتب الإجابة هنا...">
+<button type="button" class="checkbtn" onclick="checkFill('u12f0')">تحقق ✓</button>
+</div>
+<div class="fb" id="fb-u12f0"></div>
+</div><div class="qcard" id="u12f1">
+<div class="qhead"><span class="qnum">8</span><span class="qtext" dir="ltr">Hameed enjoys ________ volleyball at the beach. (play)</span></div>
+<div class="fillrow">
+<input type="text" class="fillin" id="in-u12f1" dir="ltr" autocomplete="off" autocapitalize="off" placeholder="اكتب الإجابة هنا...">
+<button type="button" class="checkbtn" onclick="checkFill('u12f1')">تحقق ✓</button>
+</div>
+<div class="fb" id="fb-u12f1"></div>
+</div><div class="qcard" id="u12f2">
+<div class="qhead"><span class="qnum">9</span><span class="qtext" dir="ltr">Amal spends her free time ________ books. (read)</span></div>
+<div class="fillrow">
+<input type="text" class="fillin" id="in-u12f2" dir="ltr" autocomplete="off" autocapitalize="off" placeholder="اكتب الإجابة هنا...">
+<button type="button" class="checkbtn" onclick="checkFill('u12f2')">تحقق ✓</button>
+</div>
+<div class="fb" id="fb-u12f2"></div>
+</div><div class="sechead">📚 Vocabulary — المفردات <span class="marks">6 Marks</span></div><div class="qcard" id="u12v0">
+<div class="qhead"><span class="qnum">10</span><span class="qtext" dir="ltr">You can _____ at the pool.</span></div>
+<div class="opts"><button type="button" class="opt" onclick="pick(this,1,'u12v0')"><span class="ol">a</span>swim</button><button type="button" class="opt" onclick="pick(this,0,'u12v0')"><span class="ol">b</span>surf</button><button type="button" class="opt" onclick="pick(this,0,'u12v0')"><span class="ol">c</span>rollerblade</button><button type="button" class="opt" onclick="pick(this,0,'u12v0')"><span class="ol">d</span>sail</button></div>
+<div class="fb" id="fb-u12v0"></div>
+</div><div class="qcard" id="u12v1">
+<div class="qhead"><span class="qnum">11</span><span class="qtext" dir="ltr">My friends like to _____. They enjoy looking at underwater attractions.</span></div>
+<div class="opts"><button type="button" class="opt" onclick="pick(this,0,'u12v1')"><span class="ol">a</span>swim</button><button type="button" class="opt" onclick="pick(this,0,'u12v1')"><span class="ol">b</span>sail</button><button type="button" class="opt" onclick="pick(this,0,'u12v1')"><span class="ol">c</span>surf</button><button type="button" class="opt" onclick="pick(this,1,'u12v1')"><span class="ol">d</span>snorkel</button></div>
+<div class="fb" id="fb-u12v1"></div>
+</div><div class="qcard" id="u12v2">
+<div class="qhead"><span class="qnum">12</span><span class="qtext" dir="ltr">You can _____ on the beach. All you need is a ball and a net.</span></div>
+<div class="opts"><button type="button" class="opt" onclick="pick(this,0,'u12v2')"><span class="ol">a</span>rollerblade</button><button type="button" class="opt" onclick="pick(this,1,'u12v2')"><span class="ol">b</span>play volleyball</button><button type="button" class="opt" onclick="pick(this,0,'u12v2')"><span class="ol">c</span>skateboard</button><button type="button" class="opt" onclick="pick(this,0,'u12v2')"><span class="ol">d</span>play golf</button></div>
+<div class="fb" id="fb-u12v2"></div>
+</div><div class="qcard" id="u12v3">
+<div class="qhead"><span class="qnum">13</span><span class="qtext" dir="ltr">Jack can _____ a boat.</span></div>
+<div class="opts"><button type="button" class="opt" onclick="pick(this,0,'u12v3')"><span class="ol">a</span>swim</button><button type="button" class="opt" onclick="pick(this,0,'u12v3')"><span class="ol">b</span>kite surf</button><button type="button" class="opt" onclick="pick(this,0,'u12v3')"><span class="ol">c</span>water-ski</button><button type="button" class="opt" onclick="pick(this,1,'u12v3')"><span class="ol">d</span>sail</button></div>
+<div class="fb" id="fb-u12v3"></div>
+</div><div class="qcard" id="u12v4">
+<div class="qhead"><span class="qnum">14</span><span class="qtext" dir="ltr">They like to go _____ in the ice rink on Saturday afternoons.</span></div>
+<div class="opts"><button type="button" class="opt" onclick="pick(this,1,'u12v4')"><span class="ol">a</span>ice-skating</button><button type="button" class="opt" onclick="pick(this,0,'u12v4')"><span class="ol">b</span>swimming</button><button type="button" class="opt" onclick="pick(this,0,'u12v4')"><span class="ol">c</span>jogging</button><button type="button" class="opt" onclick="pick(this,0,'u12v4')"><span class="ol">d</span>fishing</button></div>
+<div class="fb" id="fb-u12v4"></div>
+</div><div class="qcard" id="u12v5">
+<div class="qhead"><span class="qnum">15</span><span class="qtext" dir="ltr">I sometimes _____ my bike to work.</span></div>
+<div class="opts"><button type="button" class="opt" onclick="pick(this,1,'u12v5')"><span class="ol">a</span>ride</button><button type="button" class="opt" onclick="pick(this,0,'u12v5')"><span class="ol">b</span>drive</button><button type="button" class="opt" onclick="pick(this,0,'u12v5')"><span class="ol">c</span>go</button><button type="button" class="opt" onclick="pick(this,0,'u12v5')"><span class="ol">d</span>get up</button></div>
+<div class="fb" id="fb-u12v5"></div>
+</div><div class="sechead">🖼️ Word under the Picture — الكلمة تحت الصورة <span class="marks">3 Marks</span></div><div class="picgrid"><div class="qcard piccard" id="u12p0">
+<div class="picemoji">🏨</div>
+<div class="qhead"><span class="qnum">16</span><span class="qtext">اختر الكلمة الصحيحة تحت الصورة</span></div>
+<div class="opts picrow"><button type="button" class="opt picopt" onclick="pick(this,0,'u12p0')">Bookstore</button><button type="button" class="opt picopt" onclick="pick(this,1,'u12p0')">Hotel</button><button type="button" class="opt picopt" onclick="pick(this,0,'u12p0')">Gym</button></div>
+<div class="fb" id="fb-u12p0"></div>
+</div><div class="qcard piccard" id="u12p1">
+<div class="picemoji">📚</div>
+<div class="qhead"><span class="qnum">17</span><span class="qtext">اختر الكلمة الصحيحة تحت الصورة</span></div>
+<div class="opts picrow"><button type="button" class="opt picopt" onclick="pick(this,1,'u12p1')">Bookstore</button><button type="button" class="opt picopt" onclick="pick(this,0,'u12p1')">Hotel</button><button type="button" class="opt picopt" onclick="pick(this,0,'u12p1')">Gym</button></div>
+<div class="fb" id="fb-u12p1"></div>
+</div><div class="qcard piccard" id="u12p2">
+<div class="picemoji">🏋️</div>
+<div class="qhead"><span class="qnum">18</span><span class="qtext">اختر الكلمة الصحيحة تحت الصورة</span></div>
+<div class="opts picrow"><button type="button" class="opt picopt" onclick="pick(this,0,'u12p2')">Bookstore</button><button type="button" class="opt picopt" onclick="pick(this,0,'u12p2')">Hotel</button><button type="button" class="opt picopt" onclick="pick(this,1,'u12p2')">Gym</button></div>
+<div class="fb" id="fb-u12p2"></div>
+</div></div><div class="sechead">🔤 Choose the Correct Letter — اختر الحرف الصحيح <span class="marks">2 Marks</span></div><div class="qcard" id="u12l0">
+<div class="qhead"><span class="qnum">19</span><span class="qtext" dir="ltr">You can go sho_ping and meet friends.</span></div>
+<div class="opts"><button type="button" class="opt" onclick="pick(this,0,'u12l0')"><span class="ol">a</span>v</button><button type="button" class="opt" onclick="pick(this,1,'u12l0')"><span class="ol">b</span>p</button><button type="button" class="opt" onclick="pick(this,0,'u12l0')"><span class="ol">c</span>r</button></div>
+<div class="fb" id="fb-u12l0"></div>
+</div><div class="qcard" id="u12l1">
+<div class="qhead"><span class="qnum">20</span><span class="qtext" dir="ltr">You can fly to pla_es.</span></div>
+<div class="opts"><button type="button" class="opt" onclick="pick(this,1,'u12l1')"><span class="ol">a</span>n</button><button type="button" class="opt" onclick="pick(this,0,'u12l1')"><span class="ol">b</span>o</button><button type="button" class="opt" onclick="pick(this,0,'u12l1')"><span class="ol">c</span>c</button></div>
+<div class="fb" id="fb-u12l1"></div>
+</div>
+<div class="unitdone" id="done0"></div>
+</div>
+</div><div class="unit-panel" id="panel1">
+<div class="unit-hero">
+<div class="uh-icon">👔</div>
+<div><div class="uh-eyebrow">Super Goal 1 · Worksheet Unit 13</div>
+<h2 dir="ltr">What Are You Going to Wear?</h2>
+<div class="uh-ar">ماذا سترتدي؟</div></div>
+</div>
+<div class="stagebar">
+<button type="button" class="stagebtn active" onclick="showStage(1,0,this)">📖 الشرح أولاً</button>
+<button type="button" class="stagebtn" onclick="showStage(1,1,this)">🎯 حل الأسئلة (20 سؤال)</button>
+</div>
+<div class="stage" id="stage1-0">
+<div class="rules"><div class="rulecard"><div class="rulehead">📌 be going to — المستقبل المخطط</div><div class="rulebody">للتحدث عن خطط المستقبل: فاعل + am / is / are + going to + مصدر.</div><div class="ruleex" dir="ltr">I’m going to buy pants. ✦ He is going to have a big wedding.</div></div><div class="rulecard"><div class="rulehead">📌 النفي والسؤال</div><div class="rulebody">النفي: isn’t / aren’t + going to + مصدر. السؤال: نبدأ بـ Am / Is / Are.</div><div class="ruleex" dir="ltr">She isn’t going to wear a dress. ✦ Are you going to buy a new dress? — No, I’m not.</div></div><div class="rulecard"><div class="rulehead">📌 الإجابات المختصرة</div><div class="rulebody">Yes, he is. / No, he isn’t. ✦ Yes, they are. / No, they aren’t.</div><div class="ruleex" dir="ltr">Is Dad going to buy a car? — No, he isn’t.</div></div><div class="rulecard"><div class="rulehead">📌 المضارع المستمر للمستقبل</div><div class="rulebody">الأحداث المرتب لها مسبقاً تأتي بصيغة is/are + فعل + ing.</div><div class="ruleex" dir="ltr">My brother is getting married in June.</div></div></div>
+<div class="sechead">🗂️ كلمات الوحدة — Word Bank</div>
+<div class="wordbank"><div class="wchip"><span dir="ltr">suit</span><span class="war">بدلة</span></div><div class="wchip"><span dir="ltr">tie</span><span class="war">ربطة عنق</span></div><div class="wchip"><span dir="ltr">shirt</span><span class="war">قميص</span></div><div class="wchip"><span dir="ltr">t-shirt</span><span class="war">تي شيرت</span></div><div class="wchip"><span dir="ltr">dress</span><span class="war">فستان</span></div><div class="wchip"><span dir="ltr">skirt</span><span class="war">تنورة</span></div><div class="wchip"><span dir="ltr">blouse</span><span class="war">بلوزة</span></div><div class="wchip"><span dir="ltr">shorts</span><span class="war">شورت</span></div><div class="wchip"><span dir="ltr">jeans</span><span class="war">جينز</span></div><div class="wchip"><span dir="ltr">coat</span><span class="war">معطف</span></div><div class="wchip"><span dir="ltr">shoes</span><span class="war">حذاء</span></div><div class="wchip"><span dir="ltr">boots</span><span class="war">حذاء طويل</span></div><div class="wchip"><span dir="ltr">sneakers</span><span class="war">حذاء رياضي</span></div><div class="wchip"><span dir="ltr">abaya</span><span class="war">عباية</span></div></div>
+<div class="gonote">جاهز؟ اضغط على «حل الأسئلة» بالأعلى وابدأ التحدي! 💪</div>
+</div>
+<div class="stage hide" id="stage1-1">
+<div class="progresswrap"><div class="progressbar"><div class="progressfill" id="prog1"></div></div><div class="progresstxt" id="progtxt1">0 / 20</div></div>
+<div class="sechead">📝 Grammar — القواعد <span class="marks">6 Marks</span></div><div class="qcard" id="u13g0">
+<div class="qhead"><span class="qnum">1</span><span class="qtext" dir="ltr">I’m not going to buy jeans. ______ pants.</span></div>
+<div class="opts"><button type="button" class="opt" onclick="pick(this,1,'u13g0')"><span class="ol">a</span>I’m going to buy</button><button type="button" class="opt" onclick="pick(this,0,'u13g0')"><span class="ol">b</span>I buying</button><button type="button" class="opt" onclick="pick(this,0,'u13g0')"><span class="ol">c</span>I’m going buying</button><button type="button" class="opt" onclick="pick(this,0,'u13g0')"><span class="ol">d</span>I going to buy</button></div>
+<div class="fb" id="fb-u13g0"></div>
+</div><div class="qcard" id="u13g1">
+<div class="qhead"><span class="qnum">2</span><span class="qtext" dir="ltr">Susan ______ a dress. She’s going to wear a skirt and blouse.</span></div>
+<div class="opts"><button type="button" class="opt" onclick="pick(this,0,'u13g1')"><span class="ol">a</span>isn’t wear</button><button type="button" class="opt" onclick="pick(this,0,'u13g1')"><span class="ol">b</span>not wearing</button><button type="button" class="opt" onclick="pick(this,1,'u13g1')"><span class="ol">c</span>isn’t going to wear</button><button type="button" class="opt" onclick="pick(this,0,'u13g1')"><span class="ol">d</span>isn’t going to wearing</button></div>
+<div class="fb" id="fb-u13g1"></div>
+</div><div class="qcard" id="u13g2">
+<div class="qhead"><span class="qnum">3</span><span class="qtext" dir="ltr">They ______ suits. They’re going to wear jeans.</span></div>
+<div class="opts"><button type="button" class="opt" onclick="pick(this,0,'u13g2')"><span class="ol">a</span>not wearing</button><button type="button" class="opt" onclick="pick(this,0,'u13g2')"><span class="ol">b</span>not going to wearing</button><button type="button" class="opt" onclick="pick(this,0,'u13g2')"><span class="ol">c</span>aren’t going wear</button><button type="button" class="opt" onclick="pick(this,1,'u13g2')"><span class="ol">d</span>aren’t going to wear</button></div>
+<div class="fb" id="fb-u13g2"></div>
+</div><div class="qcard" id="u13g3">
+<div class="qhead"><span class="qnum">4</span><span class="qtext" dir="ltr">Jane: Is Dad going to buy a new car? — Emma: No, ______.</span></div>
+<div class="opts"><button type="button" class="opt" onclick="pick(this,0,'u13g3')"><span class="ol">a</span>he no</button><button type="button" class="opt" onclick="pick(this,1,'u13g3')"><span class="ol">b</span>he isn’t</button><button type="button" class="opt" onclick="pick(this,0,'u13g3')"><span class="ol">c</span>he aren’t</button><button type="button" class="opt" onclick="pick(this,0,'u13g3')"><span class="ol">d</span>he is</button></div>
+<div class="fb" id="fb-u13g3"></div>
+</div><div class="qcard" id="u13g4">
+<div class="qhead"><span class="qnum">5</span><span class="qtext" dir="ltr">My brother ______ married in June.</span></div>
+<div class="opts"><button type="button" class="opt" onclick="pick(this,0,'u13g4')"><span class="ol">a</span>get</button><button type="button" class="opt" onclick="pick(this,1,'u13g4')"><span class="ol">b</span>is getting</button><button type="button" class="opt" onclick="pick(this,0,'u13g4')"><span class="ol">c</span>getting</button><button type="button" class="opt" onclick="pick(this,0,'u13g4')"><span class="ol">d</span>going to get</button></div>
+<div class="fb" id="fb-u13g4"></div>
+</div><div class="qcard" id="u13g5">
+<div class="qhead"><span class="qnum">6</span><span class="qtext" dir="ltr">He ______ a big wedding.</span></div>
+<div class="opts"><button type="button" class="opt" onclick="pick(this,0,'u13g5')"><span class="ol">a</span>is have</button><button type="button" class="opt" onclick="pick(this,0,'u13g5')"><span class="ol">b</span>having</button><button type="button" class="opt" onclick="pick(this,0,'u13g5')"><span class="ol">c</span>going to have</button><button type="button" class="opt" onclick="pick(this,1,'u13g5')"><span class="ol">d</span>is going to have</button></div>
+<div class="fb" id="fb-u13g5"></div>
+</div><div class="sechead">✍️ Fill in the Blank — أكمل الفراغ <span class="marks">3 Marks</span></div><div class="qcard" id="u13f0">
+<div class="qhead"><span class="qnum">7</span><span class="qtext" dir="ltr">Mei: ________ you going buy a new dress? — Lisa: No, I’m not.</span></div>
+<div class="fillrow">
+<input type="text" class="fillin" id="in-u13f0" dir="ltr" autocomplete="off" autocapitalize="off" placeholder="اكتب الإجابة هنا...">
+<button type="button" class="checkbtn" onclick="checkFill('u13f0')">تحقق ✓</button>
+</div>
+<div class="fb" id="fb-u13f0"></div>
+</div><div class="qcard" id="u13f1">
+<div class="qhead"><span class="qnum">8</span><span class="qtext" dir="ltr">Ella: ________ are you going to wear? — Laura: A black skirt.</span></div>
+<div class="fillrow">
+<input type="text" class="fillin" id="in-u13f1" dir="ltr" autocomplete="off" autocapitalize="off" placeholder="اكتب الإجابة هنا...">
+<button type="button" class="checkbtn" onclick="checkFill('u13f1')">تحقق ✓</button>
+</div>
+<div class="fb" id="fb-u13f1"></div>
+</div><div class="qcard" id="u13f2">
+<div class="qhead"><span class="qnum">9</span><span class="qtext" dir="ltr">Tim: Are they going to wear jackets? — Harry: Yes, ________.</span></div>
+<div class="fillrow">
+<input type="text" class="fillin" id="in-u13f2" dir="ltr" autocomplete="off" autocapitalize="off" placeholder="اكتب الإجابة هنا...">
+<button type="button" class="checkbtn" onclick="checkFill('u13f2')">تحقق ✓</button>
+</div>
+<div class="fb" id="fb-u13f2"></div>
+</div><div class="sechead">📚 Vocabulary — المفردات <span class="marks">6 Marks</span></div><div class="qcard" id="u13v0">
+<div class="qhead"><span class="qnum">10</span><span class="qtext" dir="ltr">He’s going to wear a shirt and a ______.</span></div>
+<div class="opts"><button type="button" class="opt" onclick="pick(this,0,'u13v0')"><span class="ol">a</span>shoes</button><button type="button" class="opt" onclick="pick(this,1,'u13v0')"><span class="ol">b</span>tie</button><button type="button" class="opt" onclick="pick(this,0,'u13v0')"><span class="ol">c</span>shorts</button><button type="button" class="opt" onclick="pick(this,0,'u13v0')"><span class="ol">d</span>white</button></div>
+<div class="fb" id="fb-u13v0"></div>
+</div><div class="qcard" id="u13v1">
+<div class="qhead"><span class="qnum">11</span><span class="qtext" dir="ltr">Do you need to buy new ______ to play basketball?</span></div>
+<div class="opts"><button type="button" class="opt" onclick="pick(this,0,'u13v1')"><span class="ol">a</span>suit</button><button type="button" class="opt" onclick="pick(this,0,'u13v1')"><span class="ol">b</span>shirt</button><button type="button" class="opt" onclick="pick(this,1,'u13v1')"><span class="ol">c</span>sneakers</button><button type="button" class="opt" onclick="pick(this,0,'u13v1')"><span class="ol">d</span>blouses</button></div>
+<div class="fb" id="fb-u13v1"></div>
+</div><div class="qcard" id="u13v2">
+<div class="qhead"><span class="qnum">12</span><span class="qtext" dir="ltr">I need to put on my ______. My feet are cold.</span></div>
+<div class="opts"><button type="button" class="opt" onclick="pick(this,0,'u13v2')"><span class="ol">a</span>shirt</button><button type="button" class="opt" onclick="pick(this,1,'u13v2')"><span class="ol">b</span>shoes</button><button type="button" class="opt" onclick="pick(this,0,'u13v2')"><span class="ol">c</span>coat</button><button type="button" class="opt" onclick="pick(this,0,'u13v2')"><span class="ol">d</span>shorts</button></div>
+<div class="fb" id="fb-u13v2"></div>
+</div><div class="qcard" id="u13v3">
+<div class="qhead"><span class="qnum">13</span><span class="qtext" dir="ltr">It’s hot. Are you going to wear ______?</span></div>
+<div class="opts"><button type="button" class="opt" onclick="pick(this,1,'u13v3')"><span class="ol">a</span>shorts</button><button type="button" class="opt" onclick="pick(this,0,'u13v3')"><span class="ol">b</span>jeans</button><button type="button" class="opt" onclick="pick(this,0,'u13v3')"><span class="ol">c</span>coat</button><button type="button" class="opt" onclick="pick(this,0,'u13v3')"><span class="ol">d</span>blouse</button></div>
+<div class="fb" id="fb-u13v3"></div>
+</div><div class="qcard" id="u13v4">
+<div class="qhead"><span class="qnum">14</span><span class="qtext" dir="ltr">I’m going to wear my white ______ with a black tie.</span></div>
+<div class="opts"><button type="button" class="opt" onclick="pick(this,0,'u13v4')"><span class="ol">a</span>t-shirt</button><button type="button" class="opt" onclick="pick(this,0,'u13v4')"><span class="ol">b</span>sock</button><button type="button" class="opt" onclick="pick(this,0,'u13v4')"><span class="ol">c</span>shorts</button><button type="button" class="opt" onclick="pick(this,1,'u13v4')"><span class="ol">d</span>shirt</button></div>
+<div class="fb" id="fb-u13v4"></div>
+</div><div class="qcard" id="u13v5">
+<div class="qhead"><span class="qnum">15</span><span class="qtext" dir="ltr">Women should wear a formal ______ to a wedding.</span></div>
+<div class="opts"><button type="button" class="opt" onclick="pick(this,1,'u13v5')"><span class="ol">a</span>dress</button><button type="button" class="opt" onclick="pick(this,0,'u13v5')"><span class="ol">b</span>tie</button><button type="button" class="opt" onclick="pick(this,0,'u13v5')"><span class="ol">c</span>suit</button><button type="button" class="opt" onclick="pick(this,0,'u13v5')"><span class="ol">d</span>thobe</button></div>
+<div class="fb" id="fb-u13v5"></div>
+</div><div class="sechead">🖼️ Word under the Picture — الكلمة تحت الصورة <span class="marks">3 Marks</span></div><div class="picgrid"><div class="qcard piccard" id="u13p0">
+<div class="picemoji">🤵</div>
+<div class="qhead"><span class="qnum">16</span><span class="qtext">اختر الكلمة الصحيحة تحت الصورة</span></div>
+<div class="opts picrow"><button type="button" class="opt picopt" onclick="pick(this,0,'u13p0')">Skirt</button><button type="button" class="opt picopt" onclick="pick(this,1,'u13p0')">Suit</button><button type="button" class="opt picopt" onclick="pick(this,0,'u13p0')">Boots</button></div>
+<div class="fb" id="fb-u13p0"></div>
+</div><div class="qcard piccard" id="u13p1">
+<div class="picemoji">🥾</div>
+<div class="qhead"><span class="qnum">17</span><span class="qtext">اختر الكلمة الصحيحة تحت الصورة</span></div>
+<div class="opts picrow"><button type="button" class="opt picopt" onclick="pick(this,0,'u13p1')">Skirt</button><button type="button" class="opt picopt" onclick="pick(this,0,'u13p1')">Suit</button><button type="button" class="opt picopt" onclick="pick(this,1,'u13p1')">Boots</button></div>
+<div class="fb" id="fb-u13p1"></div>
+</div><div class="qcard piccard" id="u13p2">
+<div class="picemoji">👗</div>
+<div class="qhead"><span class="qnum">18</span><span class="qtext">اختر الكلمة الصحيحة تحت الصورة</span></div>
+<div class="opts picrow"><button type="button" class="opt picopt" onclick="pick(this,1,'u13p2')">Skirt</button><button type="button" class="opt picopt" onclick="pick(this,0,'u13p2')">Suit</button><button type="button" class="opt picopt" onclick="pick(this,0,'u13p2')">Boots</button></div>
+<div class="fb" id="fb-u13p2"></div>
+</div></div><div class="sechead">🔤 Choose the Correct Letter — اختر الحرف الصحيح <span class="marks">2 Marks</span></div><div class="qcard" id="u13l0">
+<div class="qhead"><span class="qnum">19</span><span class="qtext" dir="ltr">Nawal is going to buy aba_a.</span></div>
+<div class="opts"><button type="button" class="opt" onclick="pick(this,1,'u13l0')"><span class="ol">a</span>y</button><button type="button" class="opt" onclick="pick(this,0,'u13l0')"><span class="ol">b</span>o</button><button type="button" class="opt" onclick="pick(this,0,'u13l0')"><span class="ol">c</span>r</button></div>
+<div class="fb" id="fb-u13l0"></div>
+</div><div class="qcard" id="u13l1">
+<div class="qhead"><span class="qnum">20</span><span class="qtext" dir="ltr">You need warm clothes, it’s _old in Abha.</span></div>
+<div class="opts"><button type="button" class="opt" onclick="pick(this,0,'u13l1')"><span class="ol">a</span>n</button><button type="button" class="opt" onclick="pick(this,0,'u13l1')"><span class="ol">b</span>o</button><button type="button" class="opt" onclick="pick(this,1,'u13l1')"><span class="ol">c</span>c</button></div>
+<div class="fb" id="fb-u13l1"></div>
+</div>
+<div class="unitdone" id="done1"></div>
+</div>
+</div><div class="unit-panel" id="panel2">
+<div class="unit-hero">
+<div class="uh-icon">🎉</div>
+<div><div class="uh-eyebrow">Super Goal 1 · Worksheet Unit 14</div>
+<h2 dir="ltr">Let’s Celebrate!</h2>
+<div class="uh-ar">هيا نحتفل!</div></div>
+</div>
+<div class="stagebar">
+<button type="button" class="stagebtn active" onclick="showStage(2,0,this)">📖 الشرح أولاً</button>
+<button type="button" class="stagebtn" onclick="showStage(2,1,this)">🎯 حل الأسئلة (20 سؤال)</button>
+</div>
+<div class="stage" id="stage2-0">
+<div class="rules"><div class="rulecard"><div class="rulehead">📌 Let’s + مصدر — الاقتراح</div><div class="rulebody">لاقتراح فعل شيء معاً نستخدم Let’s + الفعل في المصدر.</div><div class="ruleex" dir="ltr">Let’s invite Bob to our house!</div></div><div class="rulecard"><div class="rulehead">📌 want + to + مصدر</div><div class="rulebody">بعد want يأتي دائماً to + مصدر.</div><div class="ruleex" dir="ltr">Do you want to watch a film tonight?</div></div><div class="rulecard"><div class="rulehead">📌 must / mustn’t / should</div><div class="rulebody">must للإلزام، mustn’t للمنع التام، should للنصيحة. في السؤال يتقدم الفعل الناقص على الفاعل.</div><div class="ruleex" dir="ltr">You mustn’t cross when the light is red. ✦ What should I wear?</div></div><div class="rulecard"><div class="rulehead">📌 ضمائر المفعول</div><div class="rulebody">me أنا ✦ you أنت ✦ him هو ✦ her هي ✦ it ✦ us نحن ✦ them هم — تأتي بعد الفعل أو حرف الجر.</div><div class="ruleex" dir="ltr">Call her now. ✦ Let’s buy him a gift. ✦ Don’t forget me.</div></div></div>
+<div class="sechead">🗂️ كلمات الوحدة — Word Bank</div>
+<div class="wordbank"><div class="wchip"><span dir="ltr">celebrate</span><span class="war">يحتفل</span></div><div class="wchip"><span dir="ltr">flags</span><span class="war">أعلام</span></div><div class="wchip"><span dir="ltr">fireworks</span><span class="war">ألعاب نارية</span></div><div class="wchip"><span dir="ltr">decorations</span><span class="war">زينة</span></div><div class="wchip"><span dir="ltr">share meals</span><span class="war">يتشاركون الوجبات</span></div><div class="wchip"><span dir="ltr">graduation</span><span class="war">تخرج</span></div><div class="wchip"><span dir="ltr">invitation</span><span class="war">دعوة</span></div><div class="wchip"><span dir="ltr">cards</span><span class="war">بطاقات</span></div><div class="wchip"><span dir="ltr">National Day</span><span class="war">اليوم الوطني</span></div><div class="wchip"><span dir="ltr">Eid Al-Fitr</span><span class="war">عيد الفطر</span></div><div class="wchip"><span dir="ltr">Zakat Al-Fitr</span><span class="war">زكاة الفطر</span></div></div>
+<div class="gonote">جاهز؟ اضغط على «حل الأسئلة» بالأعلى وابدأ التحدي! 💪</div>
+</div>
+<div class="stage hide" id="stage2-1">
+<div class="progresswrap"><div class="progressbar"><div class="progressfill" id="prog2"></div></div><div class="progresstxt" id="progtxt2">0 / 20</div></div>
+<div class="sechead">📝 Grammar — القواعد <span class="marks">6 Marks</span></div><div class="qcard" id="u14g0">
+<div class="qhead"><span class="qnum">1</span><span class="qtext" dir="ltr">______ Bob to our house!</span></div>
+<div class="opts"><button type="button" class="opt" onclick="pick(this,0,'u14g0')"><span class="ol">a</span>We invite</button><button type="button" class="opt" onclick="pick(this,0,'u14g0')"><span class="ol">b</span>Let invite</button><button type="button" class="opt" onclick="pick(this,1,'u14g0')"><span class="ol">c</span>Let’s invite</button><button type="button" class="opt" onclick="pick(this,0,'u14g0')"><span class="ol">d</span>Let’s us invite</button></div>
+<div class="fb" id="fb-u14g0"></div>
+</div><div class="qcard" id="u14g1">
+<div class="qhead"><span class="qnum">2</span><span class="qtext" dir="ltr">Do you ______ a film on TV tonight?</span></div>
+<div class="opts"><button type="button" class="opt" onclick="pick(this,1,'u14g1')"><span class="ol">a</span>want to watch</button><button type="button" class="opt" onclick="pick(this,0,'u14g1')"><span class="ol">b</span>want watch</button><button type="button" class="opt" onclick="pick(this,0,'u14g1')"><span class="ol">c</span>want watching</button><button type="button" class="opt" onclick="pick(this,0,'u14g1')"><span class="ol">d</span>want to watching</button></div>
+<div class="fb" id="fb-u14g1"></div>
+</div><div class="qcard" id="u14g2">
+<div class="qhead"><span class="qnum">3</span><span class="qtext" dir="ltr">You ______ the street when the light is red.</span></div>
+<div class="opts"><button type="button" class="opt" onclick="pick(this,1,'u14g2')"><span class="ol">a</span>mustn’t cross</button><button type="button" class="opt" onclick="pick(this,0,'u14g2')"><span class="ol">b</span>should cross not</button><button type="button" class="opt" onclick="pick(this,0,'u14g2')"><span class="ol">c</span>must not to cross</button><button type="button" class="opt" onclick="pick(this,0,'u14g2')"><span class="ol">d</span>should cross</button></div>
+<div class="fb" id="fb-u14g2"></div>
+</div><div class="qcard" id="u14g3">
+<div class="qhead"><span class="qnum">4</span><span class="qtext" dir="ltr">What ______ to the graduation party?</span></div>
+<div class="opts"><button type="button" class="opt" onclick="pick(this,0,'u14g3')"><span class="ol">a</span>must I to wear</button><button type="button" class="opt" onclick="pick(this,0,'u14g3')"><span class="ol">b</span>I should wear</button><button type="button" class="opt" onclick="pick(this,1,'u14g3')"><span class="ol">c</span>should I wear</button><button type="button" class="opt" onclick="pick(this,0,'u14g3')"><span class="ol">d</span>I must wear</button></div>
+<div class="fb" id="fb-u14g3"></div>
+</div><div class="qcard" id="u14g4">
+<div class="qhead"><span class="qnum">5</span><span class="qtext" dir="ltr">We ______ kind and generous to others.</span></div>
+<div class="opts"><button type="button" class="opt" onclick="pick(this,1,'u14g4')"><span class="ol">a</span>should always be</button><button type="button" class="opt" onclick="pick(this,0,'u14g4')"><span class="ol">b</span>should always being</button><button type="button" class="opt" onclick="pick(this,0,'u14g4')"><span class="ol">c</span>must to always be</button><button type="button" class="opt" onclick="pick(this,0,'u14g4')"><span class="ol">d</span>must being always</button></div>
+<div class="fb" id="fb-u14g4"></div>
+</div><div class="qcard" id="u14g5">
+<div class="qhead"><span class="qnum">6</span><span class="qtext" dir="ltr">Can you hear me? I’m talking to ______!</span></div>
+<div class="opts"><button type="button" class="opt" onclick="pick(this,0,'u14g5')"><span class="ol">a</span>him</button><button type="button" class="opt" onclick="pick(this,1,'u14g5')"><span class="ol">b</span>you</button><button type="button" class="opt" onclick="pick(this,0,'u14g5')"><span class="ol">c</span>us</button><button type="button" class="opt" onclick="pick(this,0,'u14g5')"><span class="ol">d</span>I</button></div>
+<div class="fb" id="fb-u14g5"></div>
+</div><div class="sechead">✍️ Fill in the Blank — أكمل الفراغ <span class="marks">3 Marks</span></div><div class="qcard" id="u14f0">
+<div class="qhead"><span class="qnum">7</span><span class="qtext" dir="ltr">Amal: Mariam is a great friend. I’m going to call ________ now.</span></div>
+<div class="fillrow">
+<input type="text" class="fillin" id="in-u14f0" dir="ltr" autocomplete="off" autocapitalize="off" placeholder="اكتب الإجابة هنا...">
+<button type="button" class="checkbtn" onclick="checkFill('u14f0')">تحقق ✓</button>
+</div>
+<div class="fb" id="fb-u14f0"></div>
+</div><div class="qcard" id="u14f1">
+<div class="qhead"><span class="qnum">8</span><span class="qtext" dir="ltr">It’s Robert’s graduation next week. Let’s buy ________ a gift.</span></div>
+<div class="fillrow">
+<input type="text" class="fillin" id="in-u14f1" dir="ltr" autocomplete="off" autocapitalize="off" placeholder="اكتب الإجابة هنا...">
+<button type="button" class="checkbtn" onclick="checkFill('u14f1')">تحقق ✓</button>
+</div>
+<div class="fb" id="fb-u14f1"></div>
+</div><div class="qcard" id="u14f2">
+<div class="qhead"><span class="qnum">9</span><span class="qtext" dir="ltr">I want to go to the mall with you tomorrow. Don’t forget ________.</span></div>
+<div class="fillrow">
+<input type="text" class="fillin" id="in-u14f2" dir="ltr" autocomplete="off" autocapitalize="off" placeholder="اكتب الإجابة هنا...">
+<button type="button" class="checkbtn" onclick="checkFill('u14f2')">تحقق ✓</button>
+</div>
+<div class="fb" id="fb-u14f2"></div>
+</div><div class="sechead">📚 Vocabulary — المفردات <span class="marks">6 Marks</span></div><div class="qcard" id="u14v0">
+<div class="qhead"><span class="qnum">10</span><span class="qtext" dir="ltr">On December 2nd, they ______ Federation of the Emirates in the UAE.</span></div>
+<div class="opts"><button type="button" class="opt" onclick="pick(this,0,'u14v0')"><span class="ol">a</span>parades</button><button type="button" class="opt" onclick="pick(this,0,'u14v0')"><span class="ol">b</span>decorate</button><button type="button" class="opt" onclick="pick(this,1,'u14v0')"><span class="ol">c</span>celebrate</button><button type="button" class="opt" onclick="pick(this,0,'u14v0')"><span class="ol">d</span>share</button></div>
+<div class="fb" id="fb-u14v0"></div>
+</div><div class="qcard" id="u14v1">
+<div class="qhead"><span class="qnum">11</span><span class="qtext" dir="ltr">In Saudi Arabia, people fly ______ on September 23rd.</span></div>
+<div class="opts"><button type="button" class="opt" onclick="pick(this,1,'u14v1')"><span class="ol">a</span>flags</button><button type="button" class="opt" onclick="pick(this,0,'u14v1')"><span class="ol">b</span>streets</button><button type="button" class="opt" onclick="pick(this,0,'u14v1')"><span class="ol">c</span>fireworks</button><button type="button" class="opt" onclick="pick(this,0,'u14v1')"><span class="ol">d</span>celebrations</button></div>
+<div class="fb" id="fb-u14v1"></div>
+</div><div class="qcard" id="u14v2">
+<div class="qhead"><span class="qnum">12</span><span class="qtext" dir="ltr">On special days, families and friends usually get together and share ______.</span></div>
+<div class="opts"><button type="button" class="opt" onclick="pick(this,0,'u14v2')"><span class="ol">a</span>buildings</button><button type="button" class="opt" onclick="pick(this,1,'u14v2')"><span class="ol">b</span>meals</button><button type="button" class="opt" onclick="pick(this,0,'u14v2')"><span class="ol">c</span>decorations</button><button type="button" class="opt" onclick="pick(this,0,'u14v2')"><span class="ol">d</span>lights</button></div>
+<div class="fb" id="fb-u14v2"></div>
+</div><div class="qcard" id="u14v3">
+<div class="qhead"><span class="qnum">13</span><span class="qtext" dir="ltr">People in Saudi Arabia fly the flag and cover everything in ______ in their National Day.</span></div>
+<div class="opts"><button type="button" class="opt" onclick="pick(this,0,'u14v3')"><span class="ol">a</span>yellow</button><button type="button" class="opt" onclick="pick(this,0,'u14v3')"><span class="ol">b</span>purple</button><button type="button" class="opt" onclick="pick(this,0,'u14v3')"><span class="ol">c</span>blue</button><button type="button" class="opt" onclick="pick(this,1,'u14v3')"><span class="ol">d</span>green</button></div>
+<div class="fb" id="fb-u14v3"></div>
+</div><div class="qcard" id="u14v4">
+<div class="qhead"><span class="qnum">14</span><span class="qtext" dir="ltr">People in Eid Al-Fitr ______.</span></div>
+<div class="opts"><button type="button" class="opt" onclick="pick(this,1,'u14v4')"><span class="ol">a</span>give Zakat Al-Fitr</button><button type="button" class="opt" onclick="pick(this,0,'u14v4')"><span class="ol">b</span>sacrifice an animal</button><button type="button" class="opt" onclick="pick(this,0,'u14v4')"><span class="ol">c</span>do nothing</button><button type="button" class="opt" onclick="pick(this,0,'u14v4')"><span class="ol">d</span>offer money to others</button></div>
+<div class="fb" id="fb-u14v4"></div>
+</div><div class="qcard" id="u14v5">
+<div class="qhead"><span class="qnum">15</span><span class="qtext" dir="ltr">What is Zakat Al-Fitr?</span></div>
+<div class="opts"><button type="button" class="opt" onclick="pick(this,0,'u14v5')"><span class="ol">a</span>Muslim holiday</button><button type="button" class="opt" onclick="pick(this,0,'u14v5')"><span class="ol">b</span>Exchange gifts</button><button type="button" class="opt" onclick="pick(this,0,'u14v5')"><span class="ol">c</span>Sacrifice an animal</button><button type="button" class="opt" onclick="pick(this,1,'u14v5')"><span class="ol">d</span>Food donated to the poor</button></div>
+<div class="fb" id="fb-u14v5"></div>
+</div><div class="sechead">🖼️ Word under the Picture — الكلمة تحت الصورة <span class="marks">3 Marks</span></div><div class="picgrid"><div class="qcard piccard" id="u14p0">
+<div class="picemoji">🇸🇦</div>
+<div class="qhead"><span class="qnum">16</span><span class="qtext">اختر الكلمة الصحيحة تحت الصورة</span></div>
+<div class="opts picrow"><button type="button" class="opt picopt" onclick="pick(this,0,'u14p0')">Pizza</button><button type="button" class="opt picopt" onclick="pick(this,0,'u14p0')">Graduation day</button><button type="button" class="opt picopt" onclick="pick(this,1,'u14p0')">Saudi flag</button></div>
+<div class="fb" id="fb-u14p0"></div>
+</div><div class="qcard piccard" id="u14p1">
+<div class="picemoji">🍕</div>
+<div class="qhead"><span class="qnum">17</span><span class="qtext">اختر الكلمة الصحيحة تحت الصورة</span></div>
+<div class="opts picrow"><button type="button" class="opt picopt" onclick="pick(this,1,'u14p1')">Pizza</button><button type="button" class="opt picopt" onclick="pick(this,0,'u14p1')">Graduation day</button><button type="button" class="opt picopt" onclick="pick(this,0,'u14p1')">Saudi flag</button></div>
+<div class="fb" id="fb-u14p1"></div>
+</div><div class="qcard piccard" id="u14p2">
+<div class="picemoji">🎓</div>
+<div class="qhead"><span class="qnum">18</span><span class="qtext">اختر الكلمة الصحيحة تحت الصورة</span></div>
+<div class="opts picrow"><button type="button" class="opt picopt" onclick="pick(this,0,'u14p2')">Pizza</button><button type="button" class="opt picopt" onclick="pick(this,1,'u14p2')">Graduation day</button><button type="button" class="opt picopt" onclick="pick(this,0,'u14p2')">Saudi flag</button></div>
+<div class="fb" id="fb-u14p2"></div>
+</div></div><div class="sechead">🔤 Choose the Correct Letter — اختر الحرف الصحيح <span class="marks">2 Marks</span></div><div class="qcard" id="u14l0">
+<div class="qhead"><span class="qnum">19</span><span class="qtext" dir="ltr">I don’t have an in_itation to the party.</span></div>
+<div class="opts"><button type="button" class="opt" onclick="pick(this,0,'u14l0')"><span class="ol">a</span>y</button><button type="button" class="opt" onclick="pick(this,1,'u14l0')"><span class="ol">b</span>v</button><button type="button" class="opt" onclick="pick(this,0,'u14l0')"><span class="ol">c</span>r</button></div>
+<div class="fb" id="fb-u14l0"></div>
+</div><div class="qcard" id="u14l1">
+<div class="qhead"><span class="qnum">20</span><span class="qtext" dir="ltr">Let’s get some ca_ds for the National Day.</span></div>
+<div class="opts"><button type="button" class="opt" onclick="pick(this,1,'u14l1')"><span class="ol">a</span>r</button><button type="button" class="opt" onclick="pick(this,0,'u14l1')"><span class="ol">b</span>o</button><button type="button" class="opt" onclick="pick(this,0,'u14l1')"><span class="ol">c</span>c</button></div>
+<div class="fb" id="fb-u14l1"></div>
+</div>
+<div class="unitdone" id="done2"></div>
+</div>
+</div>
+<div class="unit-panel" id="panel3">
+<div class="unit-hero examhero">
+<div class="uh-icon">🏆</div>
+<div><div class="uh-eyebrow">Final Mock Exam · اختبار تجريبي شامل</div>
+<h2 dir="ltr">Units 12 + 13 + 14</h2>
+<div class="uh-ar">20 سؤالاً متنوعاً · 15 دقيقة · درجة كاملة بإذن الله</div></div>
+</div>
+<div id="examintro">
+<div class="rulecard">
+<div class="rulehead">📋 تعليمات الاختبار</div>
+<div class="rulebody">20 سؤال اختيار من متعدد من الوحدات الثلاث · لكل سؤال درجة واحدة · المؤقت 15 دقيقة · بعد التسليم ستظهر النتيجة مع مراجعة كاملة لكل سؤال بالشرح العربي.</div>
+</div>
+<button type="button" class="bigbtn" onclick="startExam()">🚀 ابدأ الاختبار الآن</button>
+</div>
+<div id="examarea" class="hide">
+<div class="examtop"><div class="timer" id="timer">15:00</div><div class="progresstxt" id="examcount">0 / 20</div></div>
+<div id="examqs"></div>
+<button type="button" class="bigbtn" onclick="submitExam()">📤 تسليم الاختبار</button>
+</div>
+<div id="examresult" class="hide"></div>
+</div>
+<div class="unit-panel" id="panel4">
+<div class="contact-hero">
+<div class="c-avatar">MA</div>
+<h2 dir="ltr">Mahmoud Abo-Hind</h2>
+<div class="c-title">مستر محمود أبو هند</div>
+<div class="c-sub">English Language Teacher · معلم اللغة الإنجليزية</div>
+</div>
+<div class="contact-card">
+<div class="cc-icon">📱</div>
+<div><h3>الجوال / Phone</h3><div class="cc-num" dir="ltr">0542260935</div><p>متاح للتواصل والاستفسار عن الحصص والمراجعة</p></div>
+</div>
+<a class="contact-cta" href="https://wa.me/966542260935" target="_blank" rel="noopener">
+<div class="cta-icon">💬</div>
+<div><h3>تواصل عبر واتساب — WhatsApp</h3><p>اضغط هنا للتواصل المباشر · 0542260935</p></div>
+</a>
+<div class="contact-divider">── أنواع الحصص المتاحة ──</div>
+<div class="session-types">
+<div class="schip"><div class="s-icon">🏠</div><h4>حضوري</h4><p>In-Person</p></div>
+<div class="schip"><div class="s-icon">💻</div><h4>أونلاين</h4><p>Online</p></div>
+<div class="schip"><div class="s-icon">👤</div><h4>فردي</h4><p>Individual</p></div>
+<div class="schip"><div class="s-icon">👥</div><h4>مجموعات</h4><p>Groups</p></div>
+</div>
+<div class="bookline">لحجز حصص مراجعة حضوري أو أونلاين، تواصل مع مستر محمود أبو هند على الجوال والواتساب: <b dir="ltr">0542260935</b></div>
+</div>
+
+<button type="button" id="fsbtn" onclick="toggleFS()" title="ملء الشاشة" aria-label="ملء الشاشة">⛶</button>
+
+<footer>Super Goal 1 · Units 12 – 14 Interactive Revision<br>إعداد مستر محمود أبو هند — للتواصل والحجز: 0542260935</footer>
+</div>
+
+<script>
+"use strict";
+var FILLS = {"u12f0": {"a": "to buy", "acc": ["to buy"]}, "u12f1": {"a": "playing", "acc": ["playing"]}, "u12f2": {"a": "reading", "acc": ["reading"]}, "u13f0": {"a": "Are", "acc": ["are"]}, "u13f1": {"a": "What", "acc": ["what"]}, "u13f2": {"a": "They are", "acc": ["they are", "theyare"]}, "u14f0": {"a": "her", "acc": ["her"]}, "u14f1": {"a": "him", "acc": ["him"]}, "u14f2": {"a": "me", "acc": ["me"]}};
+var EXPLS = {"u12g0": "بعد but نعكس المعنى: لا يستطيع ركوب الأمواج لكنه يستطيع التزلج على الماء ← can", "u12g1": "السؤال بدأ بـ Do they فالإجابة المختصرة المثبتة: Yes, they do (الفاعل ثم الفعل المساعد)", "u12g2": "بعد but نعكس المعنى ← can’t. وتذكر: لا نضع am/is/are مع can أبداً", "u12g3": "السؤال بدأ بـ Does she فالإجابة المنفية: No, she doesn’t", "u12g4": "القاعدة الذهبية: would like + to + مصدر ← to buy", "u12g5": "القاعدة الذهبية: enjoy + فعل + ing ← playing", "u12f0": "would like + to + مصدر", "u12f1": "enjoy + فعل + ing", "u12f2": "spend time + فعل + ing", "u12v0": "في المسبح (pool) نسبح ← swim", "u12v1": "مشاهدة ما تحت الماء = الغطس بأنبوب التنفس ← snorkel", "u12v2": "كرة + شبكة على الشاطئ = الكرة الطائرة ← play volleyball", "u12v3": "مع كلمة boat نستخدم sail (يُبحر بالقارب)", "u12v4": "ice rink = حلبة الجليد ← ice-skating التزلج على الجليد", "u12v5": "مع الدراجة bike نستخدم ride (نركب)، أما drive فللسيارة", "u12p0": "مبنى به مسبح وغرف للنزلاء = فندق Hotel", "u12p1": "محل لبيع الكتب = Bookstore", "u12p2": "مكان به أثقال وأجهزة رياضية = نادي رياضي Gym", "u12l0": "الكلمة الصحيحة shopping (التسوق) بحرف p مزدوج", "u12l1": "الكلمة الصحيحة planes (طائرات) بحرف n", "u13g0": "صيغة المستقبل المخطط: فاعل + am/is/are + going to + مصدر ← I’m going to buy", "u13g1": "النفي: isn’t + going to + مصدر (بدون ing بعد to) ← isn’t going to wear", "u13g2": "مع They ننفي بـ aren’t + going to + مصدر ← aren’t going to wear", "u13g3": "السؤال بدأ بـ Is والإجابة منفية: No, he isn’t", "u13g4": "المضارع المستمر للمستقبل المرتب له: is + getting ← is getting married", "u13g5": "لا بد من فعل be كاملاً: is + going to + have ← is going to have", "u13f0": "السؤال مع you في صيغة going to يبدأ بـ Are", "u13f1": "الإجابة شيء (تنورة سوداء) فنسأل بـ What", "u13f2": "الإجابة المختصرة المثبتة: Yes, they are", "u13v0": "بعد أداة النكرة a نختار مفرداً يناسب القميص ← tie (ربطة عنق)", "u13v1": "للعب كرة السلة نحتاج أحذية رياضية ← sneakers", "u13v2": "قدماي باردتان ← ألبس حذائي shoes", "u13v3": "الجو حار ← نلبس شورت shorts", "u13v4": "ربطة العنق تُلبس مع القميص الرسمي ← shirt", "u13v5": "النساء يلبسن فستاناً رسمياً في الزفاف ← dress", "u13p0": "بدلة رسمية = Suit", "u13p1": "حذاء طويل = Boots", "u13p2": "تنورة = Skirt", "u13l0": "الكلمة الصحيحة abaya (عباية) بحرف y", "u13l1": "الكلمة الصحيحة cold (بارد) بحرف c", "u14g0": "للاقتراح نستخدم Let’s + مصدر ← Let’s invite", "u14g1": "القاعدة: want + to + مصدر ← want to watch", "u14g2": "المنع التام (قانون): mustn’t + مصدر بدون to ← mustn’t cross", "u14g3": "في السؤال يأتي الفعل الناقص قبل الفاعل: should I wear", "u14g4": "should + (ظرف التكرار) + مصدر ← should always be", "u14g5": "أنا أتحدث إليك أنت ← ضمير المفعول you", "u14f0": "Mariam مؤنث، وضمير المفعول للمؤنث ← her", "u14f1": "Robert مذكر، وضمير المفعول للمذكر ← him", "u14f2": "المتحدث يقصد نفسه، وضمير المفعول للمتكلم ← me", "u14v0": "يحتفلون بالاتحاد ← celebrate", "u14v1": "مع الفعل fly نرفع الأعلام ← flags", "u14v2": "يجتمعون ويتشاركون الوجبات ← meals", "u14v3": "لون العلم السعودي ← green الأخضر", "u14v4": "في عيد الفطر يُخرج الناس زكاة الفطر ← give Zakat Al-Fitr", "u14v5": "زكاة الفطر = طعام يُتبرع به للفقراء ← Food donated to the poor", "u14p0": "العلم السعودي = Saudi flag", "u14p1": "بيتزا = Pizza", "u14p2": "قبعة التخرج = Graduation day", "u14l0": "الكلمة الصحيحة invitation (دعوة) بحرف v", "u14l1": "الكلمة الصحيحة cards (بطاقات) بحرف r"};
+var EXAM = [{"q": "He can’t surf, but he _____ water-ski.", "o": ["can’t", "can", "not can", "don’t can"], "a": 1, "x": "بعد but نعكس المعنى: لا يستطيع ركوب الأمواج لكنه يستطيع التزلج على الماء ← can", "u": 12}, {"q": "I’d like _____ a new laptop, but I can’t afford one. (buy)", "o": ["buy", "to buy", "buy to", "bought"], "a": 1, "x": "القاعدة الذهبية: would like + to + مصدر ← to buy", "u": 12}, {"q": "Hameed enjoys _____ volleyball at the beach. (play)", "o": ["plays", "played", "is play", "playing"], "a": 3, "x": "القاعدة الذهبية: enjoy + فعل + ing ← playing", "u": 12}, {"q": "My friends like to _____. They enjoy looking at underwater attractions.", "o": ["swim", "sail", "surf", "snorkel"], "a": 3, "x": "مشاهدة ما تحت الماء = الغطس بأنبوب التنفس ← snorkel", "u": 12}, {"q": "Jack can _____ a boat.", "o": ["swim", "kite surf", "water-ski", "sail"], "a": 3, "x": "مع كلمة boat نستخدم sail (يُبحر بالقارب)", "u": 12}, {"q": "They like to go _____ in the ice rink on Saturday afternoons.", "o": ["ice-skating", "swimming", "jogging", "fishing"], "a": 0, "x": "ice rink = حلبة الجليد ← ice-skating التزلج على الجليد", "u": 12}, {"q": "I’m not going to buy jeans. ______ pants.", "o": ["I’m going to buy", "I buying", "I’m going buying", "I going to buy"], "a": 0, "x": "صيغة المستقبل المخطط: فاعل + am/is/are + going to + مصدر ← I’m going to buy", "u": 13}, {"q": "They ______ suits. They’re going to wear jeans.", "o": ["not wearing", "not going to wearing", "aren’t going wear", "aren’t going to wear"], "a": 3, "x": "مع They ننفي بـ aren’t + going to + مصدر ← aren’t going to wear", "u": 13}, {"q": "Jane: Is Dad going to buy a new car? — Emma: No, ______.", "o": ["he no", "he isn’t", "he aren’t", "he is"], "a": 1, "x": "السؤال بدأ بـ Is والإجابة منفية: No, he isn’t", "u": 13}, {"q": "He ______ a big wedding.", "o": ["is have", "having", "going to have", "is going to have"], "a": 3, "x": "لا بد من فعل be كاملاً: is + going to + have ← is going to have", "u": 13}, {"q": "Do you need to buy new ______ to play basketball?", "o": ["suit", "shirt", "sneakers", "blouses"], "a": 2, "x": "للعب كرة السلة نحتاج أحذية رياضية ← sneakers", "u": 13}, {"q": "I’m going to wear my white ______ with a black tie.", "o": ["t-shirt", "sock", "shorts", "shirt"], "a": 3, "x": "ربطة العنق تُلبس مع القميص الرسمي ← shirt", "u": 13}, {"q": "Women should wear a formal ______ to a wedding.", "o": ["dress", "tie", "suit", "thobe"], "a": 0, "x": "النساء يلبسن فستاناً رسمياً في الزفاف ← dress", "u": 13}, {"q": "______ Bob to our house!", "o": ["We invite", "Let invite", "Let’s invite", "Let’s us invite"], "a": 2, "x": "للاقتراح نستخدم Let’s + مصدر ← Let’s invite", "u": 14}, {"q": "You ______ the street when the light is red.", "o": ["mustn’t cross", "should cross not", "must not to cross", "should cross"], "a": 0, "x": "المنع التام (قانون): mustn’t + مصدر بدون to ← mustn’t cross", "u": 14}, {"q": "What ______ to the graduation party?", "o": ["must I to wear", "I should wear", "should I wear", "I must wear"], "a": 2, "x": "في السؤال يأتي الفعل الناقص قبل الفاعل: should I wear", "u": 14}, {"q": "Can you hear me? I’m talking to ______!", "o": ["him", "you", "us", "I"], "a": 1, "x": "أنا أتحدث إليك أنت ← ضمير المفعول you", "u": 14}, {"q": "People in Saudi Arabia fly the flag and cover everything in ______ in their National Day.", "o": ["yellow", "purple", "blue", "green"], "a": 3, "x": "لون العلم السعودي ← green الأخضر", "u": 14}, {"q": "People in Eid Al-Fitr ______.", "o": ["give Zakat Al-Fitr", "sacrifice an animal", "do nothing", "offer money to others"], "a": 0, "x": "في عيد الفطر يُخرج الناس زكاة الفطر ← give Zakat Al-Fitr", "u": 14}, {"q": "What is Zakat Al-Fitr?", "o": ["Muslim holiday", "Exchange gifts", "Sacrifice an animal", "Food donated to the poor"], "a": 3, "x": "زكاة الفطر = طعام يُتبرع به للفقراء ← Food donated to the poor", "u": 14}];
+var UNIT_TOTALS = [20, 20, 20];
+var unitProgress = [{},{},{}];
+
+function showUnit(i, btn) {
+  var panels = document.querySelectorAll(".unit-panel");
+  for (var k=0;k<panels.length;k++) panels[k].classList.remove("show");
+  document.getElementById("panel"+i).classList.add("show");
+  var tabs = document.querySelectorAll("nav .tab");
+  for (var k2=0;k2<tabs.length;k2++) tabs[k2].classList.remove("active");
+  if (btn) btn.classList.add("active");
+  window.scrollTo({top:0, behavior:"smooth"});
+}
+
+function showStage(ui, s, btn) {
+  document.getElementById("stage"+ui+"-0").classList.toggle("hide", s!==0);
+  document.getElementById("stage"+ui+"-1").classList.toggle("hide", s!==1);
+  var bar = btn.parentElement.querySelectorAll(".stagebtn");
+  for (var k=0;k<bar.length;k++) bar[k].classList.remove("active");
+  btn.classList.add("active");
+}
+
+function unitIndexOf(qid) {
+  if (qid.indexOf("u12")===0) return 0;
+  if (qid.indexOf("u13")===0) return 1;
+  return 2;
+}
+
+function markProgress(qid, ok) {
+  var ui = unitIndexOf(qid);
+  if (unitProgress[ui][qid] !== undefined) return;
+  unitProgress[ui][qid] = ok ? 1 : 0;
+  var done = 0, correct = 0;
+  for (var k in unitProgress[ui]) { done++; correct += unitProgress[ui][k]; }
+  var total = UNIT_TOTALS[ui];
+  var fill = document.getElementById("prog"+ui);
+  var txt  = document.getElementById("progtxt"+ui);
+  if (fill) fill.style.width = Math.round(done/total*100) + "%";
+  if (txt) txt.textContent = done + " / " + total;
+  if (done === total) {
+    var d = document.getElementById("done"+ui);
+    var pct = Math.round(correct/total*100);
+    var msg = pct === 100 ? "🌟 ممتاز! درجة كاملة — أنت جاهز تماماً!" :
+              pct >= 80 ? "👏 رائع جداً! راجع الأخطاء البسيطة وأعد المحاولة" :
+              "💪 بداية جيدة — راجع الشرح ثم أعد حل الأسئلة";
+    if (d) d.textContent = "النتيجة: " + correct + " / " + total + " — " + msg;
+  }
+}
+
+function pick(btn, isRight, qid) {
+  var card = document.getElementById(qid);
+  var opts = card.querySelectorAll(".opt");
+  for (var k=0;k<opts.length;k++) opts[k].disabled = true;
+  var fb = document.getElementById("fb-"+qid);
+  if (isRight) {
+    btn.classList.add("right");
+    fb.className = "fb ok";
+    fb.textContent = "✅ إجابة صحيحة! " + (EXPLS[qid] || "");
+  } else {
+    btn.classList.add("wrong");
+    for (var k2=0;k2<opts.length;k2++) {
+      if (opts[k2].getAttribute("onclick").indexOf(",1,")>-1) opts[k2].classList.add("right");
+    }
+    fb.className = "fb no";
+    fb.textContent = "❌ غير صحيحة. " + (EXPLS[qid] || "");
+  }
+  markProgress(qid, isRight);
+}
+
+function norm(s) {
+  return (s||"").toLowerCase().replace(/[.\u2019']/g,"").replace(/\s+/g," ").trim();
+}
+
+function checkFill(qid) {
+  var input = document.getElementById("in-"+qid);
+  var fb = document.getElementById("fb-"+qid);
+  var data = FILLS[qid];
+  var val = norm(input.value);
+  if (!val) { fb.className="fb no"; fb.textContent = "✏️ اكتب إجابتك أولاً"; return; }
+  var ok = false;
+  for (var k=0;k<data.acc.length;k++) { if (val === norm(data.acc[k])) ok = true; }
+  input.disabled = ok;
+  if (ok) {
+    fb.className = "fb ok";
+    fb.textContent = "✅ إجابة صحيحة! " + (EXPLS[qid] || "");
+    markProgress(qid, true);
+  } else {
+    fb.className = "fb no";
+    fb.textContent = "❌ غير صحيحة — الإجابة الصحيحة: " + data.a + " · " + (EXPLS[qid] || "");
+    input.disabled = true;
+    markProgress(qid, false);
+  }
+}
+
+/* ---------- EXAM ---------- */
+var examAnswers = [];
+var examTimer = null;
+var examSeconds = 900;
+
+function startExam() {
+  document.getElementById("examintro").classList.add("hide");
+  document.getElementById("examresult").classList.add("hide");
+  document.getElementById("examarea").classList.remove("hide");
+  examAnswers = [];
+  for (var i=0;i<EXAM.length;i++) examAnswers.push(-1);
+  var box = document.getElementById("examqs");
+  var h = "";
+  for (var q=0;q<EXAM.length;q++) {
+    var item = EXAM[q];
+    h += '<div class="qcard" id="eq'+q+'"><div class="qhead"><span class="qnum">'+(q+1)+'</span><span class="qtext" dir="ltr">'+escapeHtml(item.q)+'</span><span class="marks">Unit '+item.u+'</span></div><div class="opts">';
+    for (var o=0;o<item.o.length;o++) {
+      h += '<button type="button" class="opt" onclick="examPick('+q+','+o+',this)"><span class="ol">'+String.fromCharCode(97+o)+'</span>'+escapeHtml(item.o[o])+'</button>';
+    }
+    h += '</div></div>';
+  }
+  box.innerHTML = h;
+  examSeconds = 900;
+  updateTimer();
+  updateExamCount();
+  if (examTimer) clearInterval(examTimer);
+  examTimer = setInterval(function() {
+    examSeconds--;
+    updateTimer();
+    if (examSeconds <= 0) { submitExam(); }
+  }, 1000);
+  window.scrollTo({top:0, behavior:"smooth"});
+}
+
+function escapeHtml(s) {
+  return s.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
+}
+
+function updateTimer() {
+  var m = Math.floor(examSeconds/60), s = examSeconds%60;
+  var t = document.getElementById("timer");
+  t.textContent = (m<10?"0":"")+m+":"+(s<10?"0":"")+s;
+  t.classList.toggle("low", examSeconds <= 120);
+}
+
+function updateExamCount() {
+  var done = 0;
+  for (var i=0;i<examAnswers.length;i++) if (examAnswers[i] > -1) done++;
+  document.getElementById("examcount").textContent = done + " / " + EXAM.length;
+}
+
+function examPick(q, o, btn) {
+  examAnswers[q] = o;
+  var card = document.getElementById("eq"+q);
+  var opts = card.querySelectorAll(".opt");
+  for (var k=0;k<opts.length;k++) { opts[k].classList.remove("right"); }
+  btn.classList.add("right");
+  updateExamCount();
+}
+
+function submitExam() {
+  if (examTimer) { clearInterval(examTimer); examTimer = null; }
+  var score = 0;
+  for (var i=0;i<EXAM.length;i++) if (examAnswers[i] === EXAM[i].a) score++;
+  var pct = Math.round(score/EXAM.length*100);
+  var grade, gcolor, gmsg;
+  if (pct === 100) { grade = "A+ ممتاز مرتفع 🌟"; gcolor = "#2e9e5b"; gmsg = "درجة كاملة! أنت جاهز تماماً للاختبار بإذن الله. أحسنت!"; }
+  else if (pct >= 90) { grade = "A ممتاز 🎉"; gcolor = "#2e9e5b"; gmsg = "مستوى رائع! راجع السؤال الذي أخطأت فيه وستحصل على الدرجة الكاملة."; }
+  else if (pct >= 80) { grade = "B جيد جداً 👏"; gcolor = "#7a9e2e"; gmsg = "أداء جيد جداً — ركز على مراجعة الأخطاء بالأسفل."; }
+  else if (pct >= 65) { grade = "C جيد 🙂"; gcolor = "#c98f2a"; gmsg = "بداية جيدة، أعد قراءة الشرح في كل وحدة ثم أعد الاختبار."; }
+  else { grade = "بحاجة لمراجعة 💪"; gcolor = "#d8484f"; gmsg = "لا تقلق! راجع شرح القواعد والمفردات ثم أعد المحاولة — ستتحسن كثيراً."; }
+
+  var h = '<div class="scorecard"><div class="ring" style="--p:'+pct+'"><div><div class="ringscore">'+score+' / '+EXAM.length+'</div><div style="font-size:13px;color:#6b6353">'+pct+'%</div></div></div>';
+  h += '<div class="grade" style="color:'+gcolor+'">'+grade+'</div><div class="gmsg">'+gmsg+'</div>';
+  h += '<button type="button" class="bigbtn" onclick="startExam()">🔄 إعادة الاختبار</button></div>';
+  h += '<div class="review"><h3>📖 المراجعة الكاملة</h3>';
+  for (var q=0;q<EXAM.length;q++) {
+    var item = EXAM[q];
+    var my = examAnswers[q];
+    var ok = my === item.a;
+    h += '<div class="qcard"><div class="qhead"><span class="qnum" style="background:'+(ok?"#2e9e5b":"#d8484f")+';color:#fff">'+(q+1)+'</span><span class="qtext" dir="ltr">'+escapeHtml(item.q)+'</span></div>';
+    h += '<div class="fb '+(ok?"ok":"no")+'" style="display:block">';
+    if (ok) { h += '✅ إجابتك صحيحة: <b dir="ltr">'+escapeHtml(item.o[item.a])+'</b><br>'; }
+    else {
+      h += '❌ إجابتك: <b dir="ltr">'+(my>-1?escapeHtml(item.o[my]):"لم تُجب")+'</b> · الصحيح: <b dir="ltr">'+escapeHtml(item.o[item.a])+'</b><br>';
+    }
+    h += escapeHtml(item.x) + '</div></div>';
+  }
+  h += '</div>';
+  document.getElementById("examarea").classList.add("hide");
+  var res = document.getElementById("examresult");
+  res.innerHTML = h;
+  res.classList.remove("hide");
+  window.scrollTo({top:0, behavior:"smooth"});
+}
+
+/* ---------- FULLSCREEN ---------- */
+function fsElement() {
+  return document.fullscreenElement || document.webkitFullscreenElement || null;
+}
+function enterFS() {
+  var el = document.documentElement;
+  var fn = el.requestFullscreen || el.webkitRequestFullscreen || el.webkitRequestFullScreen;
+  if (fn) { try { fn.call(el); } catch(e) {} }
+}
+function exitFS() {
+  var fn = document.exitFullscreen || document.webkitExitFullscreen;
+  if (fn) { try { fn.call(document); } catch(e) {} }
+}
+function toggleFS() {
+  if (fsElement()) { exitFS(); } else { enterFS(); }
+}
+function syncFSIcon() {
+  var b = document.getElementById("fsbtn");
+  if (b) b.textContent = fsElement() ? "🗗" : "⛶";
+}
+document.addEventListener("fullscreenchange", syncFSIcon);
+document.addEventListener("webkitfullscreenchange", syncFSIcon);
+/* iPhone Safari has no fullscreen API for pages — hide the button there */
+var fsSupported = !!(document.documentElement.requestFullscreen || document.documentElement.webkitRequestFullscreen || document.documentElement.webkitRequestFullScreen);
+if (!fsSupported) {
+  var fsb = document.getElementById("fsbtn");
+  if (fsb) fsb.style.display = "none";
+}
+/* auto fullscreen on the very first tap anywhere (browsers require a user gesture) */
+var fsAutoDone = false;
+function fsAuto() {
+  if (fsAutoDone) return;
+  fsAutoDone = true;
+  if (!fsElement()) enterFS();
+  document.removeEventListener("pointerdown", fsAuto);
+  document.removeEventListener("touchend", fsAuto);
+  document.removeEventListener("click", fsAuto);
+}
+if (fsSupported) {
+  document.addEventListener("pointerdown", fsAuto);
+  document.addEventListener("touchend", fsAuto);
+  document.addEventListener("click", fsAuto);
+}
+
+/* fonts: graceful offline */
+(function() {
+  try {
+    var l = document.createElement("link");
+    l.rel = "stylesheet";
+    l.href = "https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;800;900&family=Playfair+Display:wght@600;800&display=swap";
+    document.head.appendChild(l);
+  } catch(e) {}
+})();
+
+/* open first unit */
+showUnit(0, document.querySelector("nav .tab"));
+</script>
+</body>
+</html>
