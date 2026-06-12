@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>تدريب أسئلة إنجليزي - ثالث ثانوي - Mega Goal 3-2</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0;font-family:'Segoe UI',Tahoma,Arial,sans-serif}
+body{background:#f0f4f8;min-height:100vh;padding-bottom:40px}
+.header{background:linear-gradient(135deg,#0f766e,#0ea5e9);color:#fff;padding:16px;text-align:center;border-radius:0 0 22px 22px;box-shadow:0 4px 14px rgba(0,0,0,.15)}
+.header h1{font-size:1.35rem;margin-bottom:4px}
+.header p{font-size:.92rem;opacity:.92}
+.contact{margin-top:8px;display:inline-block;background:rgba(255,255,255,.18);border-radius:999px;padding:5px 16px;font-size:.9rem;font-weight:bold}
+.contact a{color:#fff;text-decoration:none}
+.container{max-width:880px;margin:0 auto;padding:16px}
+.hidden{display:none!important}
+.session-btn{border:none;width:100%;border-radius:16px;padding:18px;font-size:1.15rem;font-weight:bold;color:#fff;cursor:pointer;margin-bottom:12px;box-shadow:0 4px 12px rgba(0,0,0,.18);transition:.15s;text-align:right}
+.session-btn small{display:block;font-weight:normal;font-size:.88rem;opacity:.9;margin-top:4px}
+.session-btn:hover{transform:translateY(-2px)}
+.s1{background:linear-gradient(135deg,#0f766e,#059669)}
+.s2{background:linear-gradient(135deg,#7c3aed,#4f46e5)}
+.s3{background:linear-gradient(135deg,#f59e0b,#ef4444)}
+.s4{background:linear-gradient(135deg,#b45309,#f59e0b)}
+.session-label{font-size:1rem;font-weight:bold;color:#475569;margin:18px 4px 10px}
+.unit-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:10px}
+.unit-card{background:#fff;border-radius:14px;padding:12px;cursor:pointer;border:2px solid transparent;box-shadow:0 2px 8px rgba(0,0,0,.07);transition:.15s}
+.unit-card:hover{border-color:#0f766e;transform:translateY(-2px)}
+.unit-card .num{font-size:.78rem;color:#64748b}
+.unit-card .ti{font-weight:bold;font-size:.95rem;color:#1e293b;margin:2px 0}
+.unit-card .qn{font-size:.78rem;color:#0ea5e9;font-weight:bold}
+.topbar{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:14px;flex-wrap:wrap}
+.btn{border:none;border-radius:12px;padding:10px 18px;font-size:1rem;font-weight:bold;cursor:pointer;transition:.15s}
+.btn-back{background:#e2e8f0;color:#334155}
+.btn-back:hover{background:#cbd5e1}
+.btn-tricks{background:#fef3c7;color:#92400e}
+.btn-tricks:hover{background:#fde68a}
+.quiz-box{background:#fff;border-radius:18px;padding:20px;box-shadow:0 2px 10px rgba(0,0,0,.07)}
+.progress{height:10px;background:#e2e8f0;border-radius:6px;overflow:hidden;margin-bottom:14px}
+.progress div{height:100%;background:linear-gradient(90deg,#0f766e,#0ea5e9);width:0;transition:.3s}
+.qcount{font-size:.85rem;color:#64748b;margin-bottom:8px;display:flex;justify-content:space-between}
+.unit-tag{display:inline-block;background:#ccfbf1;color:#0f766e;border-radius:999px;padding:2px 12px;font-size:.8rem;font-weight:bold;margin-bottom:8px}
+.inst{color:#7c3aed;font-weight:bold;font-size:.95rem;margin-bottom:6px}
+.qtext{direction:ltr;text-align:left;font-size:1.2rem;font-weight:bold;color:#0f172a;background:#f8fafc;border-radius:12px;padding:14px;margin-bottom:14px;line-height:1.6}
+.qtext u{color:#dc2626}
+.opts{display:grid;gap:10px}
+.opt{padding:13px 16px;border:2px solid #e2e8f0;border-radius:12px;background:#fff;font-size:1.1rem;font-weight:bold;cursor:pointer;direction:ltr;text-align:left;transition:.12s;color:#1e293b}
+.opt.arabic{direction:rtl;text-align:right}
+.opt:hover{border-color:#5eead4;background:#f0fdfa}
+.opt.correct{background:#dcfce7;border-color:#22c55e;color:#166534}
+.opt.wrong{background:#fee2e2;border-color:#ef4444;color:#991b1b}
+.opt:disabled{cursor:default}
+.feedback{margin-top:14px;border-radius:12px;padding:12px 14px;font-size:1rem;line-height:1.7}
+.feedback.ok{background:#dcfce7;color:#166534}
+.feedback.no{background:#fef3c7;color:#92400e}
+.next-btn{margin-top:14px;width:100%;background:#0f766e;color:#fff;padding:13px;font-size:1.1rem}
+.next-btn:hover{background:#115e59}
+.result{text-align:center;padding:26px 10px}
+.result .emoji{font-size:3.2rem}
+.result h2{color:#1e293b;margin:10px 0}
+.result .scoretxt{font-size:1.25rem;color:#0f766e;font-weight:bold;margin-bottom:6px}
+.result p{color:#475569;margin-bottom:16px}
+.tricks-banner{background:linear-gradient(135deg,#1e293b,#334155);border:2px solid #f59e0b;color:#fff;border-radius:16px;padding:16px;margin-bottom:16px;text-align:center}
+.tricks-banner h2{color:#fbbf24;font-size:1.3rem;margin-bottom:6px}
+.tricks-banner p{font-size:.95rem;line-height:1.8;opacity:.95}
+.tricks-banner .sig{margin-top:8px;font-size:.88rem;color:#fbbf24;font-weight:bold}
+.trick{background:#fffbeb;border:2px solid #fbbf24;border-radius:16px;padding:0;margin-bottom:14px;box-shadow:0 3px 10px rgba(245,158,11,.18);overflow:hidden}
+.trick .thead{display:flex;align-items:center;gap:10px;background:#1e293b;padding:10px 14px}
+.trick .tnum{background:#fbbf24;color:#1e293b;min-width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:bold;font-size:1rem}
+.trick .see{color:#fbbf24;font-weight:bold;direction:ltr;text-align:left;font-size:1.08rem;flex:1}
+.trick .do{color:#1e293b;font-weight:bold;font-size:1.02rem;line-height:1.8;padding:10px 14px 4px}
+.trick .do b{color:#dc2626}
+.trick .exms{padding:4px 14px 12px}
+.trick .exm{direction:ltr;text-align:left;background:#fff;border:1px solid #fde68a;border-radius:8px;padding:7px 12px;font-size:.98rem;color:#334155;margin-top:6px}
+.trick .exm b{color:#16a34a;font-size:1.05rem}
+.trick .exm .nt{direction:rtl;color:#92400e;font-size:.82rem;float:right}
+.trick.key{border-color:#0f766e;background:#f0fdfa;box-shadow:0 3px 10px rgba(15,118,110,.18)}
+.trick.key .thead{background:#0f766e}
+.trick.key .tnum{background:#fff;color:#0f766e}
+.trick.key .see{color:#fff}
+.trick.key .exm{border-color:#99f6e4}
+.essay-banner{background:linear-gradient(135deg,#4f46e5,#7c3aed);color:#fff;border-radius:16px;padding:16px;margin-bottom:16px;text-align:center}
+.essay-banner h2{font-size:1.3rem;margin-bottom:6px}
+.essay-banner p{font-size:.95rem;line-height:1.8;opacity:.95}
+.essay-tips{background:#eef2ff;border:2px solid #c7d2fe;color:#3730a3;border-radius:14px;padding:14px;margin-bottom:16px;font-size:.97rem;line-height:2}
+.essay-card{background:#fff;border:2px solid #c7d2fe;border-radius:16px;margin-bottom:18px;overflow:hidden;box-shadow:0 3px 10px rgba(79,70,229,.12)}
+.essay-card .ehead{background:#4f46e5;color:#fff;padding:12px 14px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px}
+.essay-card .ehead h3{font-size:1.1rem;direction:ltr}
+.essay-card .wc{background:#fbbf24;color:#1e293b;border-radius:999px;padding:3px 12px;font-size:.82rem;font-weight:bold}
+.essay-card .ebody{padding:12px 14px}
+.esent{border-bottom:1px dashed #e2e8f0;padding:8px 4px;cursor:pointer}
+.esent:last-child{border-bottom:none}
+.esent .en{direction:ltr;text-align:left;font-size:1.05rem;font-weight:bold;color:#0f172a;transition:.2s}
+.esent .ar{font-size:.88rem;color:#64748b;margin-top:2px}
+.hideEn .esent .en{filter:blur(6px)}
+.hideEn .esent.reveal .en{filter:none}
+.btn-memo{background:#4f46e5;color:#fff;width:100%;margin-top:4px}
+.btn-memo:hover{background:#4338ca}
+@media(max-width:480px){.qtext{font-size:1.05rem}.header h1{font-size:1.15rem}}
+</style>
+</head>
+<body>
+<div class="header">
+<h1>✏️ تدريب على أسئلة الاختبار النهائي</h1>
+<p>إنجليزي – ثالث ثانوي – Mega Goal 3-2 – الترم الثاني (وحدات 7–12)</p>
+<div class="contact">إعداد وتنسيق وشرح: مستر/ محمود أبوهند &nbsp;|&nbsp; 📱 جوال وواتساب: <a href="https://wa.me/966542260935" dir="ltr">0542260935</a></div>
+<p style="margin-top:6px;font-size:.88rem">مع تمنياتي لكم بالتوفيق والنجاح</p>
+</div>
+<div class="container">
+
+<div id="home">
+  <button class="session-btn s4" onclick="showTricks()">🗝️ تجميعة الإنقاذ<small>قواعد سريعة بصيغة: لما تشوف كذا → جاوب كذا (افتحها قبل الحل)</small></button>
+  <button class="session-btn s1" onclick="startSession()">📚 تدريب الحصة الكاملة: وحدات 7 – 12<small>كل أسئلة المراجعات بالترتيب، سؤال يلي الآخر</small></button>
+  <button class="session-btn s2" onclick="showEssay()">📝 موضوع التعبير (سؤال مضمون في الاختبار)<small>موضوعان جاهزان للحفظ مع الترجمة: Why is English important? / Al-Ahsa</small></button>
+  <button class="session-btn s3" onclick="startExam()">🏆 اختبار تجريبي سريع<small>20 سؤالاً عشوائياً من كل الوحدات</small></button>
+  <div class="session-label">أو تدرّب على وحدة محددة:</div>
+  <div class="unit-grid" id="grid"></div>
+</div>
+
+<div id="quizView" class="hidden">
+  <div class="topbar">
+    <button class="btn btn-back" onclick="goHome()">⬅ الرئيسية</button>
+    <button class="btn btn-tricks" onclick="showTricks()">🗝️ التجميعة</button>
+    <div id="quizTitle" style="font-weight:bold;color:#1e293b;font-size:1.05rem"></div>
+  </div>
+  <div id="quizArea"></div>
+</div>
+
+<div id="tricksView" class="hidden">
+  <div class="topbar">
+    <button class="btn btn-back" onclick="hideTricks()">⬅ رجوع</button>
+    <div style="font-weight:bold;color:#92400e;font-size:1.1rem">🗝️ تجميعة الإنقاذ</div>
+  </div>
+  <div class="tricks-banner">
+    <h2>🗝️ تجميعة الإنقاذ – قواعد سريعة تحل بها أسئلة الاختبار</h2>
+    <p>ابحث عن <b>الكلمة المفتاحية</b> في السؤال، ثم طبّق القاعدة المقابلة لها مباشرة كما في الأمثلة.</p>
+    <div class="sig">إعداد وتنسيق وشرح: مستر/ محمود أبوهند – مع تمنياتي لكم بالتوفيق والنجاح</div>
+  </div>
+
+  <div class="trick key"><div class="thead"><span class="tnum">★</span><span class="see">ما معنى التصريف الأول والثاني والثالث؟</span></div>
+    <div class="do">كل فعل له 3 صور: <b>الأول</b> = المصدر | <b>الثاني</b> = الماضي | <b>الثالث</b> = يستخدم بعد have / has / had وبعد كلمات مثل should have.</div>
+    <div class="exms">
+      <div class="exm" style="direction:rtl;text-align:right">✅ <b style="color:#0f766e">أفعال منتظمة:</b> نضيف <b>ed</b> فقط: apologize → apologized → apologized</div>
+      <div class="exm" style="direction:rtl;text-align:right">⚠️ <b style="color:#0f766e">أفعال غير منتظمة:</b> تتغير وتُحفظ: leave → left → <b>left</b> | break → broke → <b>broken</b> | be → was → <b>been</b> | go → went → <b>gone</b></div>
+    </div></div>
+
+  <div class="trick"><div class="thead"><span class="tnum">1</span><span class="see">should have • may have • might have • could have • must have</span></div>
+    <div class="do">بعدها <b>التصريف الثالث</b> دائماً (للكلام عن الماضي)</div>
+    <div class="exms">
+      <div class="exm">He should have <b>apologized</b> for his mistakes.</div>
+      <div class="exm">I may have <b>left</b> it at home.</div>
+      <div class="exm">The package should have <b>been</b> sent a week ago.</div>
+      <div class="exm">You must <b>have</b> been so embarrassed. <span class="nt">بعد modal تأتي have وليس has/had</span></div>
+    </div></div>
+
+  <div class="trick"><div class="thead"><span class="tnum">2</span><span class="see">would rather / would prefer</span></div>
+    <div class="do">would rather + فعل <b>بدون إضافات</b> | would prefer + <b>to + فعل</b></div>
+    <div class="exms">
+      <div class="exm">I would rather <b>go</b> shopping.</div>
+      <div class="exm">I would prefer <b>to stay</b> home.</div>
+    </div></div>
+
+  <div class="trick"><div class="thead"><span class="tnum">3</span><span class="see">supposed to • going to • about to</span></div>
+    <div class="do">was / were + <b>supposed / going / about</b> + to + فعل <b>مصدر</b></div>
+    <div class="exms">
+      <div class="exm">You were <b>supposed</b> to help your friends.</div>
+      <div class="exm">They were supposed to <b>come</b> at 10:30.</div>
+      <div class="exm">He was going to <b>study</b> Engineering. — Ebrahim was about to <b>visit</b> Riyadh.</div>
+    </div></div>
+
+  <div class="trick"><div class="thead"><span class="tnum">4</span><span class="see">After • Before • While • On • Instead of</span></div>
+    <div class="do">الفعل بعدها مباشرة يأخذ <b>ing</b> | ومع After في جملتين ماضيتين: الأقدم تأخذ <b>had + تصريف ثالث</b></div>
+    <div class="exms">
+      <div class="exm">While <b>studying</b> English, Fahad phoned me.</div>
+      <div class="exm">Before <b>buying</b> the laptop, he had checked the prices.</div>
+      <div class="exm">On <b>arriving</b> at the airport... — Instead of <b>going</b> to the gym...</div>
+      <div class="exm">After he <b>had arrived</b> home, he prayed.</div>
+    </div></div>
+
+  <div class="trick"><div class="thead"><span class="tnum">5</span><span class="see">so much / so little / so many / so few</span></div>
+    <div class="do">اسم لا يُعد (homework / food) → <b>so much / so little</b> | اسم جمع معدود (people / books) → <b>so many / so few</b></div>
+    <div class="exms">
+      <div class="exm">I have <b>so much</b> homework that I am unable to go out.</div>
+      <div class="exm">There was <b>so little</b> food.</div>
+      <div class="exm"><b>So few</b> people were accepted into the school.</div>
+    </div></div>
+
+  <div class="trick"><div class="thead"><span class="tnum">6</span><span class="see">said that ... (الكلام المنقول)</span></div>
+    <div class="do">بعد said that الفعل يرجع <b>خطوة للماضي</b>: is → was | doesn't → didn't | will → would | المضارع → ماضٍ</div>
+    <div class="exms">
+      <div class="exm">Pedro said that he <b>was</b> watching T.V.</div>
+      <div class="exm">He said that his cell phone <b>wasn't</b> working.</div>
+      <div class="exm">Ali said that he <b>studied</b> math in the evening.</div>
+    </div></div>
+
+  <div class="trick"><div class="thead"><span class="tnum">7</span><span class="see">told + شخص / asked</span></div>
+    <div class="do">told + شخص + <b>to + فعل مصدر</b> | النهي: told + شخص + <b>not to</b> + فعل | الجملة فيها <b>if</b> (سؤال منقول) → <b>asked</b></div>
+    <div class="exms">
+      <div class="exm">My father told me <b>to go</b> straight home.</div>
+      <div class="exm">The manager told them <b>not to</b> come late.</div>
+      <div class="exm">They <b>asked</b> if he was hungry.</div>
+    </div></div>
+
+  <div class="trick"><div class="thead"><span class="tnum">8</span><span class="see">who • which • where • when • whose • who's</span></div>
+    <div class="do"><b>who</b> للعاقل | <b>which / that</b> لغير العاقل | <b>where</b> للمكان | <b>when</b> للزمان | <b>whose</b> للملكية (بعدها اسم) | <b>who's</b> = who is</div>
+    <div class="exms">
+      <div class="exm">Ali is a photographer <b>who</b> takes photographs.</div>
+      <div class="exm">A flag is something <b>which</b> is a symbol of a nation.</div>
+      <div class="exm">Do you know a place <b>where</b> I can buy an electronic reader?</div>
+      <div class="exm">Last Monday was the day <b>when</b> I saw my old friends.</div>
+      <div class="exm">We have a friend <b>whose</b> brother is in Australia.</div>
+      <div class="exm">Do you know the person <b>who's</b> standing at the back? <span class="nt">who's = who is</span></div>
+    </div></div>
+
+  <div class="trick"><div class="thead"><span class="tnum">9</span><span class="see">I wish / as if</span></div>
+    <div class="do">بعد <b>wish</b> فعل ماضٍ | بعد <b>as if</b> نستخدم <b>were</b> مع كل الضمائر</div>
+    <div class="exms">
+      <div class="exm">I wish I <b>knew</b> more foreign languages.</div>
+      <div class="exm">He talks as if he <b>were</b> an expert.</div>
+    </div></div>
+
+  <div class="trick"><div class="thead"><span class="tnum">10</span><span class="see">a / an / some / any</span></div>
+    <div class="do"><b>an</b> قبل صوت متحرك (a, e, i, o, u) | <b>a</b> قبل صوت ساكن (انتبه: a European لأنها تنطق "يو") | <b>some</b> في الإثبات | <b>any</b> في النفي والسؤال</div>
+    <div class="exms">
+      <div class="exm">I ate <b>an</b> orange yesterday.</div>
+      <div class="exm">London is <b>a</b> European capital. <span class="nt">تنطق يوروبيان = صوت ساكن</span></div>
+      <div class="exm">She ate <b>some</b> tasty food. — I did not buy <b>any</b> books.</div>
+    </div></div>
+
+  <div class="trick"><div class="thead"><span class="tnum">11</span><span class="see">believe • complain • notice • suspect • feel • discover + that</span></div>
+    <div class="do">أفعال الرأي والملاحظة، يأتي بعدها <b>that + جملة</b> — اختر الفعل المناسب للمعنى</div>
+    <div class="exms">
+      <div class="exm">Every mother <b>believes</b> that her children are beautiful.</div>
+      <div class="exm">Ali always <b>complains</b> that he is too short.</div>
+      <div class="exm">I <b>suspect</b> that their story was untrue.</div>
+    </div></div>
+
+  <div class="trick"><div class="thead"><span class="tnum">12</span><span class="see">If الشرطية (النوع الثالث)</span></div>
+    <div class="do">If + <b>had + تصريف ثالث</b> ، would have + <b>تصريف ثالث</b></div>
+    <div class="exms">
+      <div class="exm">If he had studied hard, he would have <b>succeeded</b> in the test.</div>
+    </div></div>
+</div>
+
+<div id="essayView" class="hidden">
+  <div class="topbar">
+    <button class="btn btn-back" onclick="goHome()">⬅ الرئيسية</button>
+    <div style="font-weight:bold;color:#4f46e5;font-size:1.1rem">📝 موضوع التعبير</div>
+  </div>
+  <div class="essay-banner">
+    <h2>📝 موضوع التعبير – لا يقل عن 80 كلمة</h2>
+    <p>في الاختبار ستكتب موضوعاً واحداً فقط: <b dir="ltr">Why is English important?</b> أو <b dir="ltr">Al-Ahsa</b><br>احفظ موضوعاً واحداً جيداً، والثاني اقرأه احتياطاً.</p>
+  </div>
+  <div class="essay-tips">
+    <b>خطة الحل في الاختبار:</b><br>
+    ١. اختر الموضوع الذي حفظته ولا تتردد.<br>
+    ٢. اكتب الجمل التي حفظتها بالترتيب، جملة تحت الأخرى في ذهنك ثم في فقرة واحدة.<br>
+    ٣. كل جملة تبدأ بحرف كبير وتنتهي بنقطة.<br>
+    ٤. لو نسيت جملة، لا تتوقف — انتقل للجملة التالية، المطلوب 80 كلمة وكل موضوع هنا أطول من المطلوب.<br>
+    ٥. اضغط زر <b>"وضع الحفظ"</b> لإخفاء الإنجليزية، واسترجع كل جملة من ترجمتها ثم اضغط عليها للتأكد.
+  </div>
+
+  <div class="essay-card" id="essay1">
+    <div class="ehead"><h3>Why is English important?</h3><span class="wc">٨٢ كلمة ✔ (جمل قصيرة وسهلة)</span></div>
+    <div class="ebody">
+      <div class="esent" onclick="this.classList.toggle('reveal')"><div class="en">English is very important in our life.</div><div class="ar">الإنجليزية مهمة جداً في حياتنا.</div></div>
+      <div class="esent" onclick="this.classList.toggle('reveal')"><div class="en">People all over the world speak English.</div><div class="ar">الناس في كل العالم يتكلمون الإنجليزية.</div></div>
+      <div class="esent" onclick="this.classList.toggle('reveal')"><div class="en">We use English when we travel to other countries.</div><div class="ar">نستخدم الإنجليزية عندما نسافر لدول أخرى.</div></div>
+      <div class="esent" onclick="this.classList.toggle('reveal')"><div class="en">We need English to study and to get a good job.</div><div class="ar">نحتاج الإنجليزية للدراسة وللحصول على وظيفة جيدة.</div></div>
+      <div class="esent" onclick="this.classList.toggle('reveal')"><div class="en">Many books and websites are in English.</div><div class="ar">كثير من الكتب والمواقع بالإنجليزية.</div></div>
+      <div class="esent" onclick="this.classList.toggle('reveal')"><div class="en">English helps us make friends from other countries.</div><div class="ar">الإنجليزية تساعدنا نكوّن أصدقاء من دول أخرى.</div></div>
+      <div class="esent" onclick="this.classList.toggle('reveal')"><div class="en">In Saudi Arabia, big companies want workers who speak English.</div><div class="ar">في السعودية، الشركات الكبيرة تريد موظفين يتكلمون الإنجليزية.</div></div>
+      <div class="esent" onclick="this.classList.toggle('reveal')"><div class="en">I like English and I try to learn new words every day.</div><div class="ar">أحب الإنجليزية وأحاول أتعلم كلمات جديدة كل يوم.</div></div>
+      <div class="esent" onclick="this.classList.toggle('reveal')"><div class="en">For all these reasons, English is very important for our future.</div><div class="ar">لكل هذه الأسباب، الإنجليزية مهمة جداً لمستقبلنا.</div></div>
+      <button class="btn btn-memo" onclick="toggleMemo('essay1',this)">🙈 وضع الحفظ: إخفاء الإنجليزية</button>
+    </div>
+  </div>
+
+  <div class="essay-card" id="essay2">
+    <div class="ehead"><h3>Al-Ahsa</h3><span class="wc">٨٢ كلمة ✔ (جمل قصيرة وسهلة)</span></div>
+    <div class="ebody">
+      <div class="esent" onclick="this.classList.toggle('reveal')"><div class="en">Al-Ahsa is a beautiful city in Saudi Arabia.</div><div class="ar">الأحساء مدينة جميلة في السعودية.</div></div>
+      <div class="esent" onclick="this.classList.toggle('reveal')"><div class="en">It is in the Eastern Province.</div><div class="ar">تقع في المنطقة الشرقية.</div></div>
+      <div class="esent" onclick="this.classList.toggle('reveal')"><div class="en">Al-Ahsa is the largest oasis in the world.</div><div class="ar">الأحساء أكبر واحة في العالم.</div></div>
+      <div class="esent" onclick="this.classList.toggle('reveal')"><div class="en">It has more than two million palm trees.</div><div class="ar">فيها أكثر من مليوني نخلة.</div></div>
+      <div class="esent" onclick="this.classList.toggle('reveal')"><div class="en">It is famous for its sweet dates and water springs.</div><div class="ar">مشهورة بالتمور الحلوة وعيون الماء.</div></div>
+      <div class="esent" onclick="this.classList.toggle('reveal')"><div class="en">There are many nice places to visit, like Al-Qara Mountain and the old souq.</div><div class="ar">فيها أماكن جميلة كثيرة للزيارة مثل جبل القارة والسوق القديم.</div></div>
+      <div class="esent" onclick="this.classList.toggle('reveal')"><div class="en">The weather is hot in summer and nice in winter.</div><div class="ar">الجو حار في الصيف وجميل في الشتاء.</div></div>
+      <div class="esent" onclick="this.classList.toggle('reveal')"><div class="en">Many people visit Al-Ahsa every year.</div><div class="ar">كثير من الناس يزورون الأحساء كل سنة.</div></div>
+      <div class="esent" onclick="this.classList.toggle('reveal')"><div class="en">I love Al-Ahsa because it is a quiet and very beautiful city.</div><div class="ar">أحب الأحساء لأنها مدينة هادئة وجميلة جداً.</div></div>
+      <button class="btn btn-memo" onclick="toggleMemo('essay2',this)">🙈 وضع الحفظ: إخفاء الإنجليزية</button>
+    </div>
+  </div>
+</div>
+
+</div>
+
+<script>
+const UNITS=[
+{n:7,quiz:[
+ {q:"He should have (apologized – apologize – apologizes – apologizing) for his mistakes.",o:["apologized","apologize","apologizing"],a:0,x:"بعد should have يأتي التصريف الثالث."},
+ {q:"I lost my cell phone. I may have (leave – leaving – left) it at home.",o:["leave","leaving","left"],a:2,x:"بعد may have يأتي التصريف الثالث left."},
+ {q:"You might (has – have – had) dropped it at the restaurant.",o:["has","have","had"],a:1,x:"بعد might وكل الـ modals تأتي have."},
+ {q:"You were (suppose – supposing – supposed) to help your friends.",o:["suppose","supposing","supposed"],a:2,x:"were supposed to = كان من المفترض."},
+ {q:"The package should have (be – are – been) sent a week ago.",o:["be","are","been"],a:2,x:"بعد should have التصريف الثالث: been."},
+ {q:"I would rather (go – going – went) shopping.",o:["go","going","went"],a:0,x:"بعد would rather فعل بدون إضافات."},
+ {q:"I would prefer (stay – to stay – stays) home.",o:["stay","to stay","stays"],a:1,x:"بعد would prefer يأتي to + فعل."},
+ {i:"صحح الخطأ:",q:"They were supposed to <u>coming</u> at 10:30.",o:["come","came","comes"],a:0,x:"بعد supposed to فعل مصدر."},
+ {i:"صحح الخطأ:",q:"Ali may <u>has</u> got lost.",o:["have","had","having"],a:0,x:"بعد may تأتي have دائماً."},
+ {i:"صحح الخطأ:",q:"You should not <u>had</u> been so angry.",o:["have","has","having"],a:0,x:"بعد should not تأتي have."},
+ {i:"صحح الخطأ:",q:"I ate <u>a</u> orange yesterday.",o:["an","some","any"],a:0,x:"orange تبدأ بصوت متحرك → an."},
+ {i:"صحح الخطأ:",q:"I did not buy <u>some</u> books last week.",o:["any","a","an"],a:0,x:"في النفي نستخدم any."},
+ {i:"صحح الخطأ:",q:"London is <u>an</u> European capital.",o:["a","some","any"],a:0,x:"European تنطق (يوروبيان) بصوت ساكن → a."},
+ {i:"صحح الخطأ:",q:"She ate <u>any</u> tasty food.",o:["some","an","a"],a:0,x:"في الإثبات نستخدم some."},
+ {q:"Titanic hit (an iceberg – a patent – a burden) and sank.",o:["an iceberg","a patent","a burden"],a:0,x:"iceberg = جبل جليدي."},
+ {q:"The most important communications technology was the (telegraph – gold – iceberg).",o:["telegraph","gold","iceberg"],a:0,x:"telegraph = التلغراف."},
+ {i:"اختر معنى الكلمة:",q:"outraged",o:["very angry","new thing","forgetful"],a:0,x:"outraged = غاضب جداً."},
+ {i:"اختر معنى الكلمة:",q:"endure",o:["put up with","raise","interfered with"],a:0,x:"endure = يتحمّل."}]},
+
+{n:8,quiz:[
+ {q:"I have (so much – such – so many) homework that I am unable to go out.",o:["so much","such","so many"],a:0,x:"homework لا تُعد → so much."},
+ {q:"After (meet – meeting – met) online, we discovered that we live in the same town.",o:["meet","meeting","met"],a:1,x:"بعد After الفعل يأخذ ing."},
+ {q:"(Such – So few – So much) people were accepted into the school.",o:["Such","So few","So much"],a:1,x:"people معدود جمع → so few."},
+ {q:"I ran into him on the street while (call – called – calling) him on my cell phone.",o:["call","called","calling"],a:2,x:"بعد while الفعل يأخذ ing."},
+ {q:"There was (so few – so many – so little) food that they could have died.",o:["so few","so many","so little"],a:2,x:"food لا تُعد → so little."},
+ {q:"What (were – was – is) you doing at 3 o'clock?",o:["were","was","is"],a:0,x:"مع you نستخدم were."},
+ {q:"He was going to (study – studies – studied) Engineering, but my dad advised him otherwise.",o:["study","studies","studied"],a:0,x:"بعد was going to فعل مصدر."},
+ {i:"صحح الخطأ:",q:"After he <u>has</u> arrived home, he prayed.",o:["had","have","having"],a:0,x:"الحدث الأقدم في الماضي → had + تصريف ثالث."},
+ {i:"صحح الخطأ:",q:"While <u>study</u> English, Fahad phoned me.",o:["studying","studied","studies"],a:0,x:"بعد While الفعل + ing."},
+ {i:"صحح الخطأ:",q:"Ebrahim was about to <u>visits</u> Riyadh.",o:["visit","visiting","visited"],a:0,x:"بعد about to فعل مصدر."},
+ {i:"صحح الخطأ:",q:"She was <u>go</u> to study, but she slept.",o:["going","goes","gone"],a:0,x:"was going to = كانت ستفعل."},
+ {i:"صحح الخطأ:",q:"Before <u>buys</u> the laptop, he had checked the prices.",o:["buying","bought","buy"],a:0,x:"بعد Before الفعل + ing."},
+ {i:"رتب الكلمات:",q:"mistakes / have / may / He / so many / made",o:["He may have made so many mistakes.","He may made have so many mistakes.","He have may made so many mistakes."],a:0,x:"He + may + have + تصريف ثالث."},
+ {i:"رتب الكلمات:",q:"so angry / been / You must / have.",o:["You must have been so angry.","You must been have so angry.","You have must been so angry."],a:0,x:"must + have + been."},
+ {q:"If you have qualifications, you will earn a higher (salary – summit – priority).",o:["salary","summit","priority"],a:0,x:"salary = راتب."},
+ {q:"The leaders of the 12 African countries attended the (summit – salary – reception).",o:["summit","salary","reception"],a:0,x:"summit = قمة."},
+ {i:"اختر معنى الكلمة:",q:"intact",o:["remaining whole and unharmed","confused","very thin and tired"],a:0,x:"intact = سليم لم يُمس."},
+ {i:"اختر معنى الكلمة:",q:"disoriented",o:["confused","able to be found","exciting"],a:0,x:"disoriented = مشوّش/تائه."}]},
+
+{n:9,quiz:[
+ {q:"Last night I (dreamt – dreaming – will dream) that I won a new expensive car.",o:["dreamt","dreaming","will dream"],a:0,x:"Last night → ماضٍ: dreamt."},
+ {q:"Every mother (fears – raining – believes) that her children are beautiful.",o:["fears","raining","believes"],a:2,x:"believes = تؤمن/تعتقد."},
+ {q:"Ali always (eats – complains – drinks) that he is too short.",o:["eats","complains","drinks"],a:1,x:"complains = يشتكي."},
+ {q:"Sara recently (is – complain – discovers) that she is good at math.",o:["is","complain","discovers"],a:2,x:"discovers = تكتشف."},
+ {q:"Did you (fail – flee – notice) that half of the class was absent?",o:["fail","flee","notice"],a:2,x:"notice = يلاحظ."},
+ {q:"Don't you (swim – feel – fly) that a lot of people worry about their appearance?",o:["swim","feel","fly"],a:1,x:"feel = تشعر."},
+ {q:"I (suspect – sells – sold) that their story was untrue.",o:["suspect","sells","sold"],a:0,x:"suspect = أشك."},
+ {i:"صحح الخطأ:",q:"<u>I am forgot</u> that I should use conditioner on my hair.",o:["I forgot","I am forget","I forgetting"],a:0,x:"الماضي البسيط: I forgot."},
+ {i:"صحح الخطأ:",q:"Fares <u>glad</u> that the weekend is over.",o:["is glad","glads","glading"],a:0,x:"glad صفة تحتاج فعل is قبلها."},
+ {i:"صحح الخطأ:",q:"People <u>arrives</u> early will be given priority seating.",o:["arriving","arrive","arrived"],a:0,x:"اسم الفاعل المختصر: People arriving early."},
+ {i:"صحح الخطأ:",q:"The jewelry <u>stealing</u> last week has been found.",o:["stolen","steal","stole"],a:0,x:"المجوهرات (مسروقة) → اسم مفعول stolen."},
+ {i:"صحح الخطأ:",q:"The tailor sewed the <u>tear</u> sleeves.",o:["torn","tearing","tears"],a:0,x:"الأكمام (الممزقة) → torn."},
+ {i:"صحح الخطأ:",q:"While <u>works</u> out at the gym, he saw an old school friend.",o:["working","worked","work"],a:0,x:"بعد While الفعل + ing."},
+ {i:"صحح الخطأ:",q:"On <u>arrive</u> at the airport, you should give your passport to the front desk.",o:["arriving","arrived","arrives"],a:0,x:"بعد On الفعل + ing."},
+ {i:"صحح الخطأ:",q:"Instead of <u>go</u> to the gym, he decided to play football.",o:["going","goes","went"],a:0,x:"بعد Instead of الفعل + ing."},
+ {q:"She seems to have an (obsession – element – standard) with handbags.",o:["obsession","element","standard"],a:0,x:"obsession = هوس."},
+ {q:"There are no natural materials in this. It is all (synthetic – appealing – privileged).",o:["synthetic","appealing","privileged"],a:0,x:"synthetic = صناعي."},
+ {i:"اختر معنى الكلمة:",q:"famine",o:["starvation / serious food shortage","idea of perfection","appear"],a:0,x:"famine = مجاعة."}]},
+
+{n:10,quiz:[
+ {q:"They said that they (might – might have – is) join us later.",o:["might","might have","is"],a:0,x:"might + فعل مصدر (join)."},
+ {q:"He said that his cell phone (isn't – were – wasn't) working.",o:["isn't","were","wasn't"],a:2,x:"بعد said الفعل يرجع للماضي: wasn't."},
+ {q:"He (say – said – asks) that he would buy a new laptop.",o:["say","said","asks"],a:1,x:"الكلام المنقول → said."},
+ {q:"They said that the fridge had (breaks – broke – broken) down.",o:["breaks","broke","broken"],a:2,x:"بعد had يأتي التصريف الثالث broken."},
+ {q:"The manager told them (being – to not – not to) come late the next meeting.",o:["being","to not","not to"],a:2,x:"النهي المنقول: told + شخص + not to + فعل."},
+ {q:"They (asked – said – told) if he was hungry.",o:["asked","said","told"],a:0,x:"السؤال المنقول (فيه if) → asked."},
+ {q:"The doctor told them not (go – to go – going) to school until they were healthy.",o:["go","to go","going"],a:1,x:"not to go."},
+ {q:"Is he able to (discover – discovers – discovering) the true story?",o:["discover","discovers","discovering"],a:0,x:"بعد able to فعل مصدر."},
+ {i:"صحح الخطأ:",q:"Pedro said that he <u>is</u> watching T.V.",o:["was","were","be"],a:0,x:"بعد said: is → was."},
+ {i:"صحح الخطأ:",q:"The teacher said that I <u>doesn't</u> have to do it.",o:["didn't","don't","isn't"],a:0,x:"بعد said: doesn't → didn't."},
+ {i:"صحح الخطأ:",q:"She said that her sister couldn't <u>studying</u> with her.",o:["study","studies","studied"],a:0,x:"بعد couldn't فعل مصدر."},
+ {i:"صحح الخطأ:",q:"My father told me to <u>going</u> straight home after school.",o:["go","goes","went"],a:0,x:"told me to + فعل مصدر."},
+ {i:"صحح الخطأ:",q:"He says that Riyadh <u>was</u> in Asia.",o:["is","were","be"],a:0,x:"حقيقة دائمة + الفعل says مضارع → is."},
+ {i:"صحح الخطأ:",q:"The doctor told the patient to <u>stopped</u> smoking.",o:["stop","stopping","stops"],a:0,x:"told + شخص + to + مصدر."},
+ {i:"صحح الخطأ:",q:"They <u>said</u> if they were going to travel any more.",o:["asked","told","says"],a:0,x:"فيها if → asked."},
+ {i:"صحح الخطأ:",q:"Ali said that he <u>study</u> math in the evening.",o:["studied","studies","studying"],a:0,x:"بعد said الفعل يرجع للماضي: studied."},
+ {q:"I read an interview with a famous (celebrity – virtue – rumor).",o:["celebrity","virtue","rumor"],a:0,x:"celebrity = شخص مشهور."},
+ {q:"Great minds (discuss – squash – gossip) ideas.",o:["discuss","squash","gossip"],a:0,x:"العقول العظيمة تناقش الأفكار."},
+ {i:"اختر معنى الكلمة:",q:"ridicule",o:["making fun of","exceptional","move around"],a:0,x:"ridicule = سخرية."}]},
+
+{n:11,quiz:[
+ {q:"Do you know a place (where – who – when) I can buy an electronic reader?",o:["where","who","when"],a:0,x:"place مكان → where."},
+ {q:"A flag is something (who – when – which) is a symbol of a nation.",o:["who","when","which"],a:2,x:"something غير عاقل → which."},
+ {q:"Ali is a photographer (which – who – when) takes photographs.",o:["which","who","when"],a:1,x:"عاقل → who."},
+ {q:"Spanish is a language (who – where – that) many people find easy to learn.",o:["who","where","that"],a:2,x:"غير عاقل → that."},
+ {q:"Are they going to be (take – takes – taking) the test?",o:["take","takes","taking"],a:2,x:"going to be + فعل ing (مستقبل مستمر)."},
+ {q:"Are you going to (learn – learns – learning) Chinese at school?",o:["learn","learns","learning"],a:0,x:"بعد going to فعل مصدر."},
+ {q:"Will you be (work – working – worked) on the weekend?",o:["work","working","worked"],a:1,x:"will be + فعل ing."},
+ {q:"I wish I (knew – knows – known) more foreign languages.",o:["knew","knows","known"],a:0,x:"بعد wish فعل ماضٍ."},
+ {i:"صحح الخطأ:",q:"Dubai is a city <u>when</u> many towers have been built.",o:["where","who","which"],a:0,x:"city مكان → where."},
+ {i:"صحح الخطأ:",q:"If he had studied hard, he would have <u>succeed</u> in the test.",o:["succeeded","succeeds","succeeding"],a:0,x:"would have + تصريف ثالث."},
+ {i:"صحح الخطأ:",q:"A vegetarian is someone <u>which</u> doesn't eat meat.",o:["who","where","when"],a:0,x:"someone عاقل → who."},
+ {i:"صحح الخطأ:",q:"The tutor <u>where</u> helps me with English is very kind.",o:["who","which","when"],a:0,x:"tutor عاقل → who."},
+ {i:"صحح الخطأ:",q:"Fahad is going to <u>has</u> his work professionally translated.",o:["have","had","having"],a:0,x:"بعد going to فعل مصدر have."},
+ {q:"The most widely spoken language in the world is (Mandarin – Esperanto – Arabic).",o:["Mandarin","Esperanto","Arabic"],a:0,x:"الماندرين الصينية الأوسع انتشاراً."},
+ {q:"(Arabic – Esperanto – Mandarin) has influenced many other languages.",o:["Arabic","Esperanto","Mandarin"],a:0,x:"العربية أثّرت في لغات كثيرة."},
+ {q:"China is such an (immense – solitary – neutral) country that there are 56 cultures living in it.",o:["immense","solitary","neutral"],a:0,x:"immense = ضخم/هائل."},
+ {i:"اختر معنى الكلمة:",q:"acquire",o:["learn","single","honorable"],a:0,x:"acquire = يكتسب/يتعلم."},
+ {i:"اختر معنى الكلمة:",q:"consecutive",o:["continuous","develop and change","lack of ability"],a:0,x:"consecutive = متتالٍ."}]},
+
+{n:12,quiz:[
+ {q:"Do you know the person (who's – whose – when) standing at the back of the bus?",o:["who's","whose","when"],a:0,x:"who's = who is (الذي يقف)."},
+ {q:"We have a friend (who's – when – whose) brother is in Australia.",o:["who's","when","whose"],a:2,x:"الملكية (أخوه) → whose."},
+ {q:"Ali is a photographer (which – who – when) takes photographs.",o:["which","who","when"],a:1,x:"عاقل → who."},
+ {q:"Spanish is a language (who – where – that) many people find easy to learn.",o:["who","where","that"],a:2,x:"غير عاقل → that."},
+ {q:"Last Monday was the day (whose – where – when) I saw my old friends.",o:["whose","where","when"],a:2,x:"day زمان → when."},
+ {q:"We went to Abha (where – whose – when) my family lived ten years ago.",o:["where","whose","when"],a:0,x:"Abha مكان → where."},
+ {q:"He talks as if he (are – were – is) an expert in the field.",o:["are","were","is"],a:1,x:"بعد as if نستخدم were."},
+ {q:"I wish I (knew – knows – known) more foreign languages.",o:["knew","knows","known"],a:0,x:"بعد wish فعل ماضٍ."},
+ {i:"رتب الكلمات:",q:"Are / on Saturday / match / the football / going to / you /?",o:["Are you going to the football match on Saturday?","Are you going on Saturday to football the match?","Are going you to the football match on Saturday?"],a:0,x:"Are you going to + المكان + الزمان."},
+ {i:"رتب الكلمات:",q:"live / They / in / coastal city / a beautiful",o:["They live in a beautiful coastal city.","They live in a coastal beautiful city.","They in live a beautiful coastal city."],a:0,x:"a + الصفات + الاسم."},
+ {i:"رتب الكلمات:",q:"I / a person / who / three languages / know / speaks",o:["I know a person who speaks three languages.","I know who a person speaks three languages.","I speaks a person who know three languages."],a:0,x:"اسم + who + فعل."},
+ {i:"رتب الكلمات:",q:"in the ocean / that lives / an animal / is / A fish",o:["A fish is an animal that lives in the ocean.","A fish is that an animal lives in the ocean.","An animal is a fish that lives in the ocean."],a:0,x:"اسم + that + فعل + مكان."},
+ {q:"The police were finally able to catch the (notorious – authentic – neutral) bank robbers.",o:["notorious","authentic","neutral"],a:0,x:"notorious = سيئ السمعة."},
+ {q:"We should do whatever we can to (preserve – invent – stumble) historic monuments.",o:["preserve","invent","stumble"],a:0,x:"preserve = يحافظ على."},
+ {q:"Modern nail polish was (invented – preserved – traced) in the 1920s.",o:["invented","preserved","traced"],a:0,x:"invented = اختُرع."},
+ {i:"اختر معنى الكلمة:",q:"authentic",o:["real","used to","stuck between two things"],a:0,x:"authentic = أصلي/حقيقي."},
+ {i:"اختر معنى الكلمة:",q:"stumble upon",o:["find something by chance","not favoring one side","a scientist"],a:0,x:"stumble upon = يجد بالصدفة."}]}
+];
+
+let view={qs:[],qi:0,score:0,mode:null};
+let prevView='home';
+function el(id){return document.getElementById(id)}
+function goHome(){['quizView','tricksView','essayView'].forEach(v=>el(v).classList.add('hidden'));el('home').classList.remove('hidden');window.scrollTo(0,0)}
+function showTricks(){
+  prevView=el('quizView').classList.contains('hidden')?'home':'quizView';
+  el('home').classList.add('hidden');el('quizView').classList.add('hidden');el('essayView').classList.add('hidden');
+  el('tricksView').classList.remove('hidden');window.scrollTo(0,0);
+}
+function hideTricks(){
+  el('tricksView').classList.add('hidden');
+  el(prevView).classList.remove('hidden');window.scrollTo(0,0);
+}
+function showEssay(){
+  el('home').classList.add('hidden');el('quizView').classList.add('hidden');el('tricksView').classList.add('hidden');
+  el('essayView').classList.remove('hidden');window.scrollTo(0,0);
+}
+function toggleMemo(id,btn){
+  const c=el(id);
+  c.classList.toggle('hideEn');
+  c.querySelectorAll('.esent').forEach(s=>s.classList.remove('reveal'));
+  btn.textContent=c.classList.contains('hideEn')?'👁️ إظهار الإنجليزية (اضغط على أي جملة لكشفها وحدها)':'🙈 وضع الحفظ: إخفاء الإنجليزية';
+}
+
+function buildHome(){
+  const g=el('grid');
+  UNITS.forEach((u,i)=>{
+    const c=document.createElement('div');c.className='unit-card';
+    c.innerHTML='<div class="num">Unit '+u.n+'</div><div class="ti">مراجعة الوحدة '+u.n+'</div><div class="qn">'+u.quiz.length+' سؤالاً</div>';
+    c.onclick=()=>startUnit(i);
+    g.appendChild(c);
+  });
+}
+
+function openQuiz(title,questions,mode){
+  view.mode=mode;
+  el('home').classList.add('hidden');el('essayView').classList.add('hidden');el('tricksView').classList.add('hidden');
+  el('quizView').classList.remove('hidden');
+  el('quizTitle').innerHTML=title;
+  view.qs=questions;view.qi=0;view.score=0;
+  renderQuestion();
+  window.scrollTo(0,0);
+}
+
+function startUnit(i){
+  const u=UNITS[i];
+  const qs=u.quiz.map(q=>({...q,tag:'Unit '+u.n}));
+  openQuiz('مراجعة الوحدة '+u.n,qs,{type:'unit',i:i});
+}
+
+function startSession(){
+  let qs=[];
+  UNITS.forEach(u=>{u.quiz.forEach(q=>qs.push({...q,tag:'Unit '+u.n}))});
+  openQuiz('📚 تدريب الحصة الكاملة (وحدات 7–12)',qs,{type:'session'});
+}
+
+function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
+
+function startExam(){
+  let pool=[];
+  UNITS.forEach(u=>{
+    pool=pool.concat(shuffle(u.quiz.slice()).slice(0,4).map(q=>({...q,tag:'Unit '+u.n})));
+  });
+  pool=shuffle(pool).slice(0,20);
+  openQuiz('🏆 الاختبار التجريبي السريع',pool,{type:'exam'});
+}
+
+function isArabic(s){return /[؀-ۿ]/.test(s)}
+
+function renderQuestion(){
+  const area=el('quizArea');
+  if(view.qi>=view.qs.length){return renderResult(area)}
+  const q=view.qs[view.qi];
+  const pct=Math.round(view.qi/view.qs.length*100);
+  let h='<div class="quiz-box"><div class="progress"><div style="width:'+pct+'%"></div></div>';
+  h+='<div class="qcount"><span>سؤال '+(view.qi+1)+' من '+view.qs.length+'</span><span>✅ '+view.score+'</span></div>';
+  if(q.tag)h+='<div class="unit-tag">'+q.tag+'</div>';
+  h+='<div class="inst">'+(q.i||'اختر الإجابة الصحيحة:')+'</div>';
+  h+='<div class="qtext">'+q.q+'</div><div class="opts">';
+  q.o.forEach((o,idx)=>{
+    h+='<button class="opt'+(isArabic(o)?' arabic':'')+'" onclick="answer(this,'+idx+')">'+o+'</button>';
+  });
+  h+='</div><div id="fb"></div></div>';
+  area.innerHTML=h;
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function answer(btn,idx){
+  const q=view.qs[view.qi];
+  const opts=btn.parentElement.querySelectorAll('.opt');
+  opts.forEach(o=>o.disabled=true);
+  opts[q.a].classList.add('correct');
+  const fb=el('fb');
+  if(idx===q.a){
+    view.score++;
+    fb.innerHTML='<div class="feedback ok">🎉 أحسنت! إجابة صحيحة.'+(q.x?'<br>💡 '+q.x:'')+'</div>';
+  }else{
+    btn.classList.add('wrong');
+    fb.innerHTML='<div class="feedback no">❌ ليست صحيحة. الإجابة الصحيحة: <b dir="ltr">'+q.o[q.a]+'</b><br>💡 '+(q.x||'')+'</div>';
+  }
+  fb.innerHTML+='<button class="btn next-btn" onclick="nextQ()">'+(view.qi+1>=view.qs.length?'عرض النتيجة 🏁':'السؤال التالي ⬅')+'</button>';
+}
+
+function nextQ(){view.qi++;renderQuestion()}
+
+function renderResult(area){
+  const total=view.qs.length,s=view.score,pct=Math.round(s/total*100);
+  let emoji,msg;
+  if(pct>=90){emoji='🏆';msg='ممتاز! أنت جاهز للاختبار بإذن الله!'}
+  else if(pct>=70){emoji='🌟';msg='جيد جداً! أعد المحاولة على الأسئلة التي أخطأت فيها.'}
+  else if(pct>=50){emoji='💪';msg='بداية طيبة! ركز على ملاحظة 💡 بعد كل سؤال وأعد التدريب.'}
+  else{emoji='📖';msg='لا بأس، راجع تجميعة الإنقاذ ثم أعد التدريب وستتحسن نتيجتك بإذن الله.'}
+  area.innerHTML='<div class="quiz-box result"><div class="emoji">'+emoji+'</div><h2>انتهى التدريب!</h2><div class="scoretxt">نتيجتك: '+s+' من '+total+' ('+pct+'%)</div><p>'+msg+'</p><button class="btn next-btn" style="max-width:280px" onclick="retry()">🔄 إعادة التدريب</button></div>';
+}
+
+function retry(){
+  const m=view.mode;
+  if(m.type==='exam')startExam();
+  else if(m.type==='session')startSession();
+  else startUnit(m.i);
+}
+
+buildHome();
+</script>
+</body>
+</html>
