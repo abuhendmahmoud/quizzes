@@ -102,9 +102,37 @@ textarea:focus{outline:none; border-color:var(--green);}
 
 .fs-btn{position:fixed; top:14px; right:14px; z-index:99; background:var(--green-dark); color:#fff; border:none; border-radius:999px; padding:10px 18px; font-size:.85rem; font-weight:700; cursor:pointer; box-shadow:0 4px 14px rgba(0,0,0,.3); display:flex; align-items:center; gap:6px;}
 .fs-btn:hover{background:var(--green);}
+/* ===== Rescue cheat sheet (تجميعة الإنقاذ) ===== */
+.rescue-btn{position:fixed; bottom:16px; right:16px; z-index:150; background:linear-gradient(135deg,#b45309,#f59e0b); color:#fff; border:none; border-radius:999px; padding:12px 20px; font-size:.95rem; font-weight:700; cursor:pointer; box-shadow:0 4px 16px rgba(180,83,9,.45); font-family:"Segoe UI",Tahoma,Arial,sans-serif;}
+.rescue-btn:hover{transform:translateY(-2px);}
+.rescue-overlay{display:none; position:fixed; inset:0; background:rgba(15,23,42,.65); z-index:200; overflow-y:auto;}
+.rescue-overlay.open{display:block;}
+.rescue-panel{max-width:880px; margin:18px auto; padding:0 14px 40px; direction:rtl; text-align:right;}
+.rescue-top{position:sticky; top:0; z-index:5; display:flex; justify-content:space-between; align-items:center; background:#1e293b; border:2px solid #f59e0b; border-radius:14px; padding:10px 14px; margin-bottom:12px;}
+.rescue-top h2{color:#fbbf24; font-size:1.15rem;}
+.rescue-close{background:#fbbf24; color:#1e293b; border:none; border-radius:10px; padding:8px 16px; font-weight:700; font-size:.95rem; cursor:pointer;}
+.rescue-banner{background:linear-gradient(135deg,#1e293b,#334155); border:2px solid #f59e0b; color:#fff; border-radius:14px; padding:14px; margin-bottom:14px; text-align:center;}
+.rescue-banner p{font-size:.95rem; line-height:1.9; opacity:.95;}
+.rescue-banner .sig{margin-top:6px; font-size:.86rem; color:#fbbf24; font-weight:700;}
+.trick{background:#fffbeb; border:2px solid #fbbf24; border-radius:14px; margin-bottom:13px; box-shadow:0 3px 10px rgba(245,158,11,.2); overflow:hidden;}
+.trick .thead{display:flex; align-items:center; gap:10px; background:#1e293b; padding:9px 13px;}
+.trick .tnum{background:#fbbf24; color:#1e293b; min-width:29px; height:29px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:700;}
+.trick .see{color:#fbbf24; font-weight:700; direction:ltr; text-align:left; font-size:1.05rem; flex:1;}
+.trick .do{color:#1e293b; font-weight:700; font-size:1rem; line-height:1.9; padding:10px 13px 4px;}
+.trick .do b{color:#dc2626;}
+.trick .exms{padding:4px 13px 12px;}
+.trick .exm{direction:ltr; text-align:left; background:#fff; border:1px solid #fde68a; border-radius:8px; padding:7px 11px; font-size:.95rem; color:#334155; margin-top:6px;}
+.trick .exm b{color:#16a34a; font-size:1.03rem;}
+.trick .exm .nt{direction:rtl; color:#92400e; font-size:.8rem; float:right;}
+.trick.key{border-color:#0e6b48; background:#e6f4ee;}
+.trick.key .thead{background:#0e6b48;}
+.trick.key .tnum{background:#fff; color:#0e6b48;}
+.trick.key .see{color:#fff;}
+.trick.key .exm{border-color:#bfe3d2;}
+
 @media print{
   body{background:#fff;}
-  .tabs,.actions,.moe .badge,.student,.fs-btn{display:none!important;}
+  .tabs,.actions,.moe .badge,.student,.fs-btn,.rescue-btn,.rescue-overlay{display:none!important;}
   .section{box-shadow:none; border:1px solid #ccc; break-inside:avoid;}
   .q{break-inside:avoid;}
 }
@@ -112,6 +140,162 @@ textarea:focus{outline:none; border-color:var(--green);}
 </head>
 <body>
 <button class="fs-btn" id="fsBtn" onclick="toggleFS()" title="Full screen (F11)">⛶ <span>Full Screen</span></button>
+<button class="rescue-btn" onclick="toggleRescue(true)">🗝️ تجميعة الإنقاذ</button>
+
+<div class="rescue-overlay" id="rescueOverlay">
+ <div class="rescue-panel">
+  <div class="rescue-top">
+    <h2>🗝️ تجميعة الإنقاذ</h2>
+    <button class="rescue-close" onclick="toggleRescue(false)">✕ إغلاق والعودة للاختبار</button>
+  </div>
+  <div class="rescue-banner">
+    <p>ابحث عن <b style="color:#fbbf24">الكلمة المفتاحية</b> في السؤال، ثم طبّق القاعدة المقابلة لها مباشرة كما في الأمثلة.</p>
+    <div class="sig">إعداد وتنسيق وشرح: مستر/ محمود أبوهند – جوال وواتساب: 0542260935 – مع تمنياتي لكم بالتوفيق والنجاح</div>
+  </div>
+
+  <div class="trick key"><div class="thead"><span class="tnum">★</span><span class="see">ما معنى التصريف الأول والثاني والثالث؟</span></div>
+    <div class="do">كل فعل له 3 صور: <b>الأول</b> = المصدر | <b>الثاني</b> = الماضي | <b>الثالث</b> = يستخدم بعد have / has / had.</div>
+    <div class="exms">
+      <div class="exm" style="direction:rtl;text-align:right">✅ <b style="color:#0e6b48">أفعال منتظمة:</b> نضيف <b>ed</b> فقط: wash → washed → washed</div>
+      <div class="exm" style="direction:rtl;text-align:right">⚠️ <b style="color:#0e6b48">أفعال غير منتظمة:</b> تتغير وتُحفظ: eat → ate → <b>eaten</b> | leave → left → <b>left</b> | do → did → <b>done</b> | go → went → <b>gone</b></div>
+    </div></div>
+
+  <div class="trick key"><div class="thead"><span class="tnum">📖</span><span class="see">طريقة حل سؤال القطعة (Reading)</span></div>
+    <div class="do">اقرأ <b>السؤال أولاً</b>، ثم ابحث عن كلماته (الأسماء والأرقام) داخل القطعة — الإجابة تكون في نفس الجملة غالباً. وفي سؤال True / False: قارن الجملة بما هو مكتوب حرفياً في القطعة، لا تجاوب من رأيك.</div>
+    <div class="exms">
+      <div class="exm">السؤال فيه "How old...?" → ابحث عن <b>رقم</b> في القطعة. <span class="nt">مثال: 39</span></div>
+      <div class="exm">السؤال فيه اسم شخص (Yunus / Napoleon) → ابحث عن <b>الاسم نفسه</b> في القطعة.</div>
+    </div></div>
+
+  <div class="trick"><div class="thead"><span class="tnum">1</span><span class="see">الأسئلة المذيلة ( ...? , aren't they)</span></div>
+    <div class="do">الجملة مثبتة → الذيل <b>منفي</b> | الجملة منفية → الذيل <b>مثبت</b>. نستخدم نفس الفعل المساعد + ضمير. فعل مضارع عادي → doesn't / don't | فعل ماضٍ عادي → didn't.</div>
+    <div class="exms">
+      <div class="exm">These toys are in good condition, <b>aren't they</b>?</div>
+      <div class="exm">He didn't buy that fan, <b>did he</b>? <span class="nt">منفية → مثبت</span></div>
+      <div class="exm">This lawn mower runs on gas, <b>doesn't it</b>?</div>
+      <div class="exm">You've had garage sales before, <b>haven't you</b>?</div>
+      <div class="exm">They weren't able to sell the tools, <b>were they</b>?</div>
+    </div></div>
+
+  <div class="trick"><div class="thead"><span class="tnum">2</span><span class="see">must / must not / should</span></div>
+    <div class="do">قانون وإلزام → <b>must</b> | ممنوع → <b>must not</b> | نصيحة → <b>should</b> | تخمين مؤكد → <b>must</b> (لازم يكون)</div>
+    <div class="exms">
+      <div class="exm">You <b>must</b> stop at the traffic lights. It's the law.</div>
+      <div class="exm">You <b>must not</b> park on the sidewalk. It's forbidden.</div>
+      <div class="exm">You look tired. You <b>should</b> take a rest. <span class="nt">نصيحة</span></div>
+      <div class="exm">Look how tall he is! He <b>must</b> be over two meters tall. <span class="nt">تخمين</span></div>
+    </div></div>
+
+  <div class="trick"><div class="thead"><span class="tnum">3</span><span class="see">الظرف (carefully • well • fast)</span></div>
+    <div class="do">لوصف الفعل نضيف <b>ly</b> للصفة | شواذ: good → <b>well</b> | fast → <b>fast</b> بدون تغيير</div>
+    <div class="exms">
+      <div class="exm">Adel is a careful driver. He drives <b>carefully</b>.</div>
+      <div class="exm">Saeed is a good player. He plays <b>well</b>.</div>
+      <div class="exm">Majid is a fast runner. He runs <b>fast</b>.</div>
+    </div></div>
+
+  <div class="trick"><div class="thead"><span class="tnum">4</span><span class="see">told / asked + شخص (نقل الأوامر)</span></div>
+    <div class="do">الأمر المنقول: told / asked + شخص + <b>to + فعل</b> | النهي: + <b>not to</b> + فعل</div>
+    <div class="exms">
+      <div class="exm">The father told his children <b>to put on</b> their seat belts.</div>
+      <div class="exm">She asked him <b>not to drive</b> so fast.</div>
+      <div class="exm">Ahmed asked the mechanic <b>to check</b> the brakes.</div>
+    </div></div>
+
+  <div class="trick"><div class="thead"><span class="tnum">5</span><span class="see">who / that / which</span></div>
+    <div class="do">عاقل (إنسان) → <b>who</b> | غير عاقل (حيوان / شيء) → <b>that / which</b></div>
+    <div class="exms">
+      <div class="exm">The man <b>who</b> was talking to the tourists was friendly.</div>
+      <div class="exm">The horse <b>that</b> pulled the carriage was black.</div>
+    </div></div>
+
+  <div class="trick"><div class="thead"><span class="tnum">6</span><span class="see">was / were + فعل ing (الماضي المستمر)</span></div>
+    <div class="do">حدث كان مستمراً وقطعه حدث آخر: <b>was/were + ing</b> مع when أو while</div>
+    <div class="exms">
+      <div class="exm">I <b>was looking</b> in the store window when the thief grabbed my bag.</div>
+      <div class="exm">They <b>were sitting</b> in the café when it started to rain.</div>
+      <div class="exm">He was driving <b>while</b> he was talking on his cell phone.</div>
+    </div></div>
+
+  <div class="trick"><div class="thead"><span class="tnum">7</span><span class="see">yet • already • just • ever</span></div>
+    <div class="do">كلها مع have / has + التصريف الثالث: <b>yet</b> في النفي والسؤال (آخر الجملة) | <b>already</b> في الإثبات | <b>just</b> = للتو | <b>ever</b> في السؤال (هل سبق؟)</div>
+    <div class="exms">
+      <div class="exm">Have you done the dishes <b>yet</b>?</div>
+      <div class="exm">No, I haven't finished it <b>yet</b>.</div>
+      <div class="exm">I've <b>just</b> washed the clothes. They're still wet.</div>
+    </div></div>
+
+  <div class="trick"><div class="thead"><span class="tnum">8</span><span class="see">فعل + ing أم to + فعل؟</span></div>
+    <div class="do">enjoy • can't stand • mind → فعل + <b>ing</b> | manage • try • It's polite → <b>to + فعل</b> | الفعل في أول الجملة (فاعل) → <b>ing</b></div>
+    <div class="exms">
+      <div class="exm">He can't stand <b>waiting</b> in line.</div>
+      <div class="exm">I enjoy <b>learning</b> about other cultures.</div>
+      <div class="exm">Would you mind <b>turning</b> down the music?</div>
+      <div class="exm">They managed <b>to get</b> an earlier flight. — She tried <b>to sleep</b>.</div>
+      <div class="exm">It's polite <b>to stand</b> in line. — <b>Traveling</b> is a good way to learn.</div>
+    </div></div>
+
+  <div class="trick"><div class="thead"><span class="tnum">9</span><span class="see">If الشرطية (3 أنواع)</span></div>
+    <div class="do">حقيقة علمية: if + مضارع ، <b>مضارع</b> | محتمل: if + مضارع ، <b>will / may + فعل</b> | خيالي: if + ماضٍ / were ، <b>would + فعل</b></div>
+    <div class="exms">
+      <div class="exm">If you heat water to 100°C, it <b>boils</b>. <span class="nt">حقيقة</span></div>
+      <div class="exm">If Saeed gets the job, he <b>will be</b> very happy. <span class="nt">محتمل</span></div>
+      <div class="exm">If Noura doesn't do the homework, she <b>may</b> fail.</div>
+      <div class="exm">If I <b>were</b> rich, I <b>wouldn't</b> have to work. <span class="nt">خيالي</span></div>
+    </div></div>
+
+  <div class="trick"><div class="thead"><span class="tnum">10</span><span class="see">wish / would rather</span></div>
+    <div class="do">بعد <b>wish</b> فعل ماضٍ أو were | بعد <b>would rather ('d rather)</b> فعل <b>بدون إضافات</b></div>
+    <div class="exms">
+      <div class="exm">Faisal isn't rich. He wishes he <b>were</b> rich.</div>
+      <div class="exm">I'd rather <b>drive</b> along the scenic route.</div>
+    </div></div>
+
+  <div class="trick"><div class="thead"><span class="tnum">11</span><span class="see">By the time / before (الماضي التام)</span></div>
+    <div class="do">الحدث الأقدم يأخذ <b>had + التصريف الثالث</b></div>
+    <div class="exms">
+      <div class="exm">By the time we got to the airport, our flight <b>had already left</b>.</div>
+      <div class="exm"><b>Had</b> you ever <b>eaten</b> sushi before you traveled to Japan?</div>
+    </div></div>
+
+  <div class="trick"><div class="thead"><span class="tnum">12</span><span class="see">such / so + that</span></div>
+    <div class="do">بعدها صفة + اسم → <b>such</b> | صفة فقط → <b>so</b></div>
+    <div class="exms">
+      <div class="exm">It was <b>such</b> a difficult test that none of the students did well.</div>
+      <div class="exm">The test was <b>so</b> difficult that nobody passed.</div>
+    </div></div>
+
+  <div class="trick"><div class="thead"><span class="tnum">13</span><span class="see">turn it down • put them away (الأفعال المركبة)</span></div>
+    <div class="do">الضمير (it / them) يأتي <b>في المنتصف</b> دائماً، ليس بعد الفعل المركب</div>
+    <div class="exms">
+      <div class="exm">The TV is too loud. Please turn <b>it</b> down. <span class="nt">وليس turn down it</span></div>
+      <div class="exm">These are your clothes. Please put <b>them</b> away.</div>
+    </div></div>
+
+  <div class="trick"><div class="thead"><span class="tnum">14</span><span class="see">May I ...? / be able to</span></div>
+    <div class="do">الاستئذان المهذب → <b>May I + فعل</b>؟ | القدرة مع will / won't → <b>be able to + فعل</b></div>
+    <div class="exms">
+      <div class="exm"><b>May I</b> speak to the manager, please?</div>
+      <div class="exm">He hurt his hand, so he won't <b>be able to</b> play basketball.</div>
+    </div></div>
+
+  <div class="trick"><div class="thead"><span class="tnum">15</span><span class="see">كلمات الإملاء المتكررة (احفظها كما هي)</span></div>
+    <div class="do">سؤال الإملاء نصف درجة لكل كلمة — احفظ شكل هذه الكلمات الصحيح:</div>
+    <div class="exms">
+      <div class="exm"><b>vacuum</b> • <b>luggage</b> • <b>windshield</b> • <b>pedestrian</b> • <b>environment</b></div>
+      <div class="exm"><b>scholarship</b> • <b>scissors</b> • <b>pollution</b> • <b>efficient</b> • <b>antique</b></div>
+      <div class="exm"><b>punctual</b> • <b>talkative</b> • <b>customary</b> • <b>complaint</b> • <b>brake</b></div>
+    </div></div>
+
+  <div class="trick"><div class="thead"><span class="tnum">16</span><span class="see">سؤال التعبير (8 درجات)</span></div>
+    <div class="do">اكتب <b>6 جمل قصيرة</b> على الأقل: جملة افتتاحية + 4 جمل عن الموضوع + جملة ختامية. استخدم الكلمات المساعدة المعطاة فوق مربع الكتابة، وكل جملة تبدأ بحرف كبير وتنتهي بنقطة. لا تترك المربع فارغاً أبداً.</div>
+    <div class="exms">
+      <div class="exm">جملة افتتاحية جاهزة: <b>... is very important.</b> / One day, ...</div>
+      <div class="exm">جملة ختامية جاهزة: <b>For all these reasons, ...</b> / I am very happy with ...</div>
+    </div></div>
+
+ </div>
+</div>
 <div class="wrap">
   <div class="moe">
     <div class="moe-row">
@@ -608,6 +792,13 @@ function toggleFS(){
   }else{
     document.exitFullscreen();
   }
+}
+
+function toggleRescue(open){
+  const o=document.getElementById('rescueOverlay');
+  o.classList.toggle('open', open);
+  document.body.style.overflow=open?'hidden':'';
+  if(open) o.scrollTop=0;
 }
 document.addEventListener('fullscreenchange',()=>{
   const b=document.getElementById('fsBtn');
