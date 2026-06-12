@@ -1,0 +1,984 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="SG1 U9-16">
+<meta name="theme-color" content="#0a1830">
+<title>Super Goal 1 — أوراق عمل الوحدات 9 إلى 16 | مستر محمود أبو هند</title>
+<style>
+:root {
+  --navy:#0a1830; --navy2:#11264a; --navy3:#1a3460;
+  --gold:#d8b35c; --gold2:#f0d28a; --cream:#faf6ec; --ink:#1c2333;
+  --ok:#2e9e5b; --bad:#d8484f; --radius:18px;
+}
+* { box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
+html { scroll-behavior:smooth; }
+body { margin:0; font-family:'Cairo',Tahoma,Arial,sans-serif; background:var(--navy); color:var(--ink); min-height:100vh; }
+.bgpat { position:fixed; inset:0; pointer-events:none; opacity:.5;
+  background:
+   radial-gradient(ellipse 70% 40% at 50% -10%, rgba(216,179,92,.16), transparent 60%),
+   radial-gradient(ellipse 40% 30% at 90% 110%, rgba(216,179,92,.08), transparent 60%); }
+.wrap { max-width:880px; margin:0 auto; padding:14px 14px 60px; position:relative; }
+header { text-align:center; padding:26px 10px 18px; color:var(--cream); }
+.crest { width:64px; height:64px; margin:0 auto 10px; border:2px solid var(--gold); border-radius:50%;
+  display:flex; align-items:center; justify-content:center; font-size:30px;
+  background:linear-gradient(160deg, var(--navy2), var(--navy3)); box-shadow:0 0 0 5px rgba(216,179,92,.12); }
+header h1 { font-family:'Playfair Display',Georgia,serif; font-size:clamp(22px,5vw,34px); margin:6px 0 2px; color:var(--gold2); letter-spacing:.5px; }
+.subtitle { font-size:15px; opacity:.92; }
+.teacherline { display:inline-block; margin-top:10px; padding:7px 18px; border:1px solid rgba(216,179,92,.5);
+  border-radius:999px; color:var(--gold2); font-size:14px; background:rgba(216,179,92,.07); }
+nav { position:sticky; top:0; z-index:50; background:rgba(10,24,48,.92); backdrop-filter:blur(8px);
+  display:flex; gap:8px; overflow-x:auto; padding:10px 4px; margin:8px -4px 18px; border-bottom:1px solid rgba(216,179,92,.25); }
+nav::-webkit-scrollbar { display:none; }
+.tab { flex:0 0 auto; min-height:46px; padding:10px 15px; border-radius:999px; border:1px solid rgba(216,179,92,.4);
+  background:transparent; color:var(--cream); font-family:inherit; font-size:14.5px; font-weight:700; cursor:pointer; }
+.tab.active { background:var(--gold); color:var(--navy); border-color:var(--gold); }
+.unit-panel { display:none; animation:fadein .3s ease; }
+.unit-panel.show { display:block; }
+@keyframes fadein { from{opacity:0; transform:translateY(8px);} to{opacity:1; transform:none;} }
+.unit-hero { display:flex; gap:14px; align-items:center; background:linear-gradient(135deg,var(--navy2),var(--navy3));
+  border:1px solid rgba(216,179,92,.35); border-radius:var(--radius); padding:18px 16px; color:var(--cream); margin-bottom:14px; }
+.uh-icon { font-size:42px; }
+.uh-eyebrow { font-size:12px; letter-spacing:1px; text-transform:uppercase; color:var(--gold2); }
+.unit-hero h2 { margin:2px 0; font-family:'Playfair Display',Georgia,serif; font-size:clamp(17px,4.2vw,24px); }
+.uh-ar { font-size:14px; opacity:.9; }
+.rules { margin-bottom:6px; }
+.rulecard { background:var(--cream); border-radius:14px; padding:10px 14px; margin-bottom:8px;
+  border-right:5px solid var(--gold); box-shadow:0 3px 10px rgba(0,0,0,.16); }
+.rulebody { font-size:14.5px; line-height:1.9; font-weight:700; }
+.sechead { display:flex; align-items:center; gap:10px; color:var(--gold2); font-weight:900; font-size:16.5px; margin:24px 2px 10px; }
+.qcard { background:var(--cream); border-radius:var(--radius); padding:14px 14px 12px; margin-bottom:12px;
+  box-shadow:0 4px 14px rgba(0,0,0,.18); }
+.qhead { display:flex; gap:10px; align-items:flex-start; margin-bottom:10px; }
+.qnum { flex:0 0 auto; min-width:30px; height:30px; border-radius:50%; background:var(--navy); color:var(--gold2);
+  display:flex; align-items:center; justify-content:center; font-weight:900; font-size:14px; padding:0 4px; }
+.qtext { font-size:15.5px; font-weight:700; line-height:1.7; direction:ltr; text-align:left; flex:1; }
+.opts { display:grid; grid-template-columns:1fr 1fr; gap:8px; }
+@media (max-width:560px) { .opts { grid-template-columns:1fr; } }
+.opt { min-height:48px; border-radius:12px; border:1.5px solid #d8d2c2; background:#fff; font-family:inherit;
+  font-size:15px; font-weight:700; color:var(--ink); cursor:pointer; padding:10px 12px;
+  display:flex; align-items:center; gap:8px; direction:ltr; text-align:left; }
+.ol { width:22px; height:22px; flex:0 0 auto; border-radius:50%; background:rgba(216,179,92,.25); color:#7a6320;
+  display:flex; align-items:center; justify-content:center; font-size:12px; font-weight:900; }
+.opt.right { background:#e7f6ec; border-color:var(--ok); color:#185c33; }
+.opt.right .ol { background:var(--ok); color:#fff; }
+.opt.wrong { background:#fdeaea; border-color:var(--bad); color:#8c2227; }
+.opt.wrong .ol { background:var(--bad); color:#fff; }
+.opt:disabled { opacity:.85; }
+.fb { display:none; margin-top:10px; border-radius:12px; padding:10px 12px; font-size:14.5px; line-height:1.8; font-weight:700; }
+.fb.ok { display:block; background:#e7f6ec; color:#185c33; border-right:4px solid var(--ok); }
+.fb.no { display:block; background:#fdeaea; color:#8c2227; border-right:4px solid var(--bad); }
+.picgrid { display:grid; grid-template-columns:repeat(auto-fit,minmax(230px,1fr)); gap:12px; }
+.piccard { text-align:center; }
+.picemoji { font-size:54px; line-height:1; margin:4px 0 10px; min-height:60px; display:flex; align-items:center; justify-content:center; gap:4px; }
+.picrow { grid-template-columns:1fr 1fr; }
+.letterrow { grid-template-columns:repeat(3,1fr); }
+.picopt { justify-content:center; }
+.fillrow { display:flex; gap:8px; }
+.fillin { flex:1; min-width:0; min-height:48px; border-radius:12px; border:1.5px solid #d8d2c2; padding:10px 14px;
+  font-family:inherit; font-size:16px; direction:ltr; }
+.fillin:focus { outline:2px solid var(--gold); border-color:var(--gold); }
+.checkbtn { min-height:48px; padding:0 18px; border-radius:12px; border:none; background:var(--navy);
+  color:var(--gold2); font-family:inherit; font-size:15px; font-weight:800; cursor:pointer; }
+.progresswrap { display:flex; align-items:center; gap:12px; margin-bottom:10px; }
+.progressbar { flex:1; height:12px; border-radius:999px; background:rgba(250,246,236,.18); overflow:hidden; }
+.progressfill { height:100%; width:0%; background:linear-gradient(90deg,var(--gold),var(--gold2)); border-radius:999px; transition:width .35s ease; }
+.progresstxt { color:var(--gold2); font-weight:900; font-size:14px; min-width:64px; text-align:center; }
+.unitdone { text-align:center; color:var(--gold2); font-weight:900; font-size:17px; margin:18px 0; }
+.contact-hero { text-align:center; background:linear-gradient(160deg,var(--navy2),var(--navy3));
+  border:1px solid rgba(216,179,92,.4); border-radius:var(--radius); padding:26px 16px; color:var(--cream); margin-bottom:14px; }
+.c-avatar { width:78px; height:78px; margin:0 auto 10px; border-radius:50%; background:var(--gold); color:var(--navy);
+  display:flex; align-items:center; justify-content:center; font-size:28px; font-weight:900; font-family:'Playfair Display',serif; }
+.contact-hero h2 { margin:4px 0 2px; font-family:'Playfair Display',serif; color:var(--gold2); }
+.c-title { font-size:17px; font-weight:800; }
+.c-sub { font-size:13.5px; opacity:.85; }
+.contact-card { display:flex; gap:14px; align-items:center; background:var(--cream); border-radius:var(--radius);
+  padding:16px; margin-bottom:12px; box-shadow:0 4px 14px rgba(0,0,0,.18); }
+.cc-icon { font-size:34px; }
+.contact-card h3 { margin:0 0 2px; font-size:16px; color:var(--navy); }
+.cc-num { font-size:22px; font-weight:900; color:var(--navy); letter-spacing:1px; }
+.contact-card p { margin:4px 0 0; font-size:13.5px; color:#6b6353; }
+.contact-cta { display:flex; gap:14px; align-items:center; background:linear-gradient(135deg,#1f8a4c,#27ae60);
+  border-radius:var(--radius); padding:16px; margin-bottom:14px; color:#fff; text-decoration:none; box-shadow:0 6px 18px rgba(39,174,96,.35); }
+.cta-icon { font-size:34px; }
+.contact-cta h3 { margin:0 0 2px; font-size:16.5px; }
+.contact-cta p { margin:0; font-size:13.5px; opacity:.95; }
+.contact-divider { text-align:center; color:var(--gold2); font-weight:800; margin:16px 0 10px; }
+.session-types { display:grid; grid-template-columns:repeat(auto-fit,minmax(130px,1fr)); gap:10px; }
+.schip { background:var(--cream); border-radius:14px; text-align:center; padding:14px 8px; }
+.s-icon { font-size:26px; }
+.schip h4 { margin:6px 0 2px; color:var(--navy); }
+.schip p { margin:0; font-size:12.5px; color:#6b6353; }
+.bookline { margin-top:16px; background:rgba(216,179,92,.1); border:1px dashed rgba(216,179,92,.5);
+  color:var(--cream); border-radius:14px; padding:14px 16px; text-align:center; line-height:2; font-size:15px; }
+footer { text-align:center; color:rgba(250,246,236,.55); font-size:13px; margin-top:34px; line-height:2; }
+#fsbtn { position:fixed; bottom:18px; inset-inline-start:18px; z-index:99; width:54px; height:54px; border-radius:50%;
+  border:1.5px solid rgba(216,179,92,.6); background:linear-gradient(160deg,var(--navy2),var(--navy3));
+  color:var(--gold2); font-size:22px; cursor:pointer; box-shadow:0 6px 18px rgba(0,0,0,.45);
+  display:flex; align-items:center; justify-content:center; }
+#fsbtn:active { transform:scale(.94); }
+.hide { display:none !important; }
+@media (prefers-reduced-motion: reduce) { * { animation:none !important; transition:none !important; } }
+</style>
+</head>
+<body>
+<div class="bgpat"></div>
+<div class="wrap">
+<header>
+<div class="crest">📚</div>
+<h1>Super Goal 1</h1>
+<div class="subtitle">أوراق عمل تفاعلية · الوحدات 9 ← 16 · قواعد + مفردات + تصحيح 🎯</div>
+<div class="teacherline">إعداد مستر محمود أبو هند · Mr. Mahmoud Abo-Hind · 📱 0542260935</div>
+</header>
+
+<nav>
+<button type="button" class="tab" onclick="showUnit(0,this)">💼 U9</button><button type="button" class="tab" onclick="showUnit(1,this)">🏫 U10</button><button type="button" class="tab" onclick="showUnit(2,this)">⏰ U11</button><button type="button" class="tab" onclick="showUnit(3,this)">🗺️ U12</button><button type="button" class="tab" onclick="showUnit(4,this)">👔 U13</button><button type="button" class="tab" onclick="showUnit(5,this)">🎉 U14</button><button type="button" class="tab" onclick="showUnit(6,this)">📺 U15</button><button type="button" class="tab" onclick="showUnit(7,this)">📅 U16</button><button type="button" class="tab" onclick="showUnit(8,this)">📞 تواصل</button>
+</nav>
+
+<div class="unit-panel" id="panel0">
+<div class="unit-hero"><div class="uh-icon">💼</div>
+<div><div class="uh-eyebrow">Super Goal 1 · Unit 9 Worksheet</div>
+<h2 dir="ltr">What Do You Do?</h2><div class="uh-ar">ماذا تعمل؟ — الوظائف · 24 سؤالاً تفاعلياً</div></div></div>
+<div class="progresswrap"><div class="progressbar"><div class="progressfill" id="prog0"></div></div><div class="progresstxt" id="progtxt0">0 / 24</div></div>
+<div class="rules"><div class="rulecard"><div class="rulebody">📌 المضارع البسيط: مع He / She نضيف s للفعل (drives – paints – takes)</div></div><div class="rulecard"><div class="rulebody">📌 السؤال: What does + فاعل مفرد + do? ✦ What do + جمع + do?</div></div><div class="rulecard"><div class="rulebody">📌 so للنتيجة ✦ because للسبب: He wants to be a carpenter because he likes to build houses</div></div></div><div class="sechead">📝 A. Choose the correct answer — Grammar</div><div class="qcard" id="u9q1">
+<div class="qhead"><span class="qnum">1</span><span class="qtext" dir="ltr">I ( works – work – working ) in a restaurant.</span></div>
+<div class="opts"><button type="button" class="opt" onclick="pick(this,0,'u9q1')"><span class="ol">a</span>works</button><button type="button" class="opt" onclick="pick(this,1,'u9q1')"><span class="ol">b</span>work</button><button type="button" class="opt" onclick="pick(this,0,'u9q1')"><span class="ol">c</span>working</button></div><div class="fb" id="fb-u9q1"></div></div><div class="qcard" id="u9q2">
+<div class="qhead"><span class="qnum">2</span><span class="qtext" dir="ltr">What ( does – do – doing ) Adel do?</span></div>
+<div class="opts"><button type="button" class="opt" onclick="pick(this,1,'u9q2')"><span class="ol">a</span>does</button><button type="button" class="opt" onclick="pick(this,0,'u9q2')"><span class="ol">b</span>do</button><button type="button" class="opt" onclick="pick(this,0,'u9q2')"><span class="ol">c</span>doing</button></div><div class="fb" id="fb-u9q2"></div></div><div class="qcard" id="u9q3">
+<div class="qhead"><span class="qnum">3</span><span class="qtext" dir="ltr">They ( play – playing – plays ) for a volleyball team.</span></div>
+<div class="opts"><button type="button" class="opt" onclick="pick(this,1,'u9q3')"><span class="ol">a</span>play</button><button type="button" class="opt" onclick="pick(this,0,'u9q3')"><span class="ol">b</span>playing</button><button type="button" class="opt" onclick="pick(this,0,'u9q3')"><span class="ol">c</span>plays</button></div><div class="fb" id="fb-u9q3"></div></div><div class="qcard" id="u9q4">
+<div class="qhead"><span class="qnum">4</span><span class="qtext" dir="ltr">He’s a bus driver. He ( drive – driving – drives ) a bus.</span></div>
+<div class="opts"><button type="button" class="opt" onclick="pick(this,0,'u9q4')"><span class="ol">a</span>drive</button><button type="button" class="opt" onclick="pick(this,0,'u9q4')"><span class="ol">b</span>driving</button><button type="button" class="opt" onclick="pick(this,1,'u9q4')"><span class="ol">c</span>drives</button></div><div class="fb" id="fb-u9q4"></div></div><div class="qcard" id="u9q5">
+<div class="qhead"><span class="qnum">5</span><span class="qtext" dir="ltr">She wants to be a lawyer, ( so – because – too ) she’s studying law at university.</span></div>
+<div class="opts"><button type="button" class="opt" onclick="pick(this,1,'u9q5')"><span class="ol">a</span>so</button><button type="button" class="opt" onclick="pick(this,0,'u9q5')"><span class="ol">b</span>because</button><button type="button" class="opt" onclick="pick(this,0,'u9q5')"><span class="ol">c</span>too</button></div><div class="fb" id="fb-u9q5"></div></div><div class="sechead">✏️ B1. Correct the underlined word — صحّح</div><div class="qcard" id="u9q6">
+<div class="qhead"><span class="qnum">6</span><span class="qtext" dir="ltr">He wants to be a carpenter so he likes to build houses. (Correct: so)</span></div>
+<div class="fillrow">
+<input type="text" class="fillin" id="in-u9q6" dir="ltr" autocomplete="off" autocapitalize="off" placeholder="اكتب الإجابة هنا...">
+<button type="button" class="checkbtn" onclick="checkFill('u9q6')">تحقق ✓</button>
+</div><div class="fb" id="fb-u9q6"></div></div><div class="qcard" id="u9q7">
+<div class="qhead"><span class="qnum">7</span><span class="qtext" dir="ltr">She paint pictures. (Correct: paint)</span></div>
+<div class="fillrow">
+<input type="text" class="fillin" id="in-u9q7" dir="ltr" autocomplete="off" autocapitalize="off" placeholder="اكتب الإجابة هنا...">
+<button type="button" class="checkbtn" onclick="checkFill('u9q7')">تحقق ✓</button>
+</div><div class="fb" id="fb-u9q7"></div></div><div class="qcard" id="u9q8">
+<div class="qhead"><span class="qnum">8</span><span class="qtext" dir="ltr">What does Yahya doing? (Correct: doing)</span></div>
+<div class="fillrow">
+<input type="text" class="fillin" id="in-u9q8" dir="ltr" autocomplete="off" autocapitalize="off" placeholder="اكتب الإجابة هنا...">
+<button type="button" class="checkbtn" onclick="checkFill('u9q8')">تحقق ✓</button>
+</div><div class="fb" id="fb-u9q8"></div></div><div class="qcard" id="u9q9">
+<div class="qhead"><span class="qnum">9</span><span class="qtext" dir="ltr">Amal take photos. (Correct: take)</span></div>
+<div class="fillrow">
+<input type="text" class="fillin" id="in-u9q9" dir="ltr" autocomplete="off" autocapitalize="off" placeholder="اكتب الإجابة هنا...">
+<button type="button" class="checkbtn" onclick="checkFill('u9q9')">تحقق ✓</button>
+</div><div class="fb" id="fb-u9q9"></div></div><div class="sechead">🔀 B2. Reorder — رتّب الكلمات</div><div class="qcard" id="u9q10">
+<div class="qhead"><span class="qnum">10</span><span class="qtext" dir="ltr">you / Why / learn English / do ?</span></div>
+<div class="fillrow">
+<input type="text" class="fillin" id="in-u9q10" dir="ltr" autocomplete="off" autocapitalize="off" placeholder="اكتب الإجابة هنا...">
+<button type="button" class="checkbtn" onclick="checkFill('u9q10')">تحقق ✓</button>
+</div><div class="fb" id="fb-u9q10"></div></div><div class="qcard" id="u9q11">
+<div class="qhead"><span class="qnum">11</span><span class="qtext" dir="ltr">does / she / What / do ?</span></div>
+<div class="fillrow">
+<input type="text" class="fillin" id="in-u9q11" dir="ltr" autocomplete="off" autocapitalize="off" placeholder="اكتب الإجابة هنا...">
+<button type="button" class="checkbtn" onclick="checkFill('u9q11')">تحقق ✓</button>
+</div><div class="fb" id="fb-u9q11"></div></div><div class="sechead">📚 A. Vocabulary — choose the correct answer</div><div class="qcard" id="u9q12">
+<div class="qhead"><span class="qnum">12</span><span class="qtext" dir="ltr">Fahd works at a school. He’s a ( driver – teacher – mechanic ).</span></div>
+<div class="opts"><button type="button" class="opt" onclick="pick(this,0,'u9q12')"><span class="ol">a</span>driver</button><button type="button" class="opt" onclick="pick(this,1,'u9q12')"><span class="ol">b</span>teacher</button><button type="button" class="opt" onclick="pick(this,0,'u9q12')"><span class="ol">c</span>mechanic</button></div><div class="fb" id="fb-u9q12"></div></div><div class="qcard" id="u9q13">
+<div class="qhead"><span class="qnum">13</span><span class="qtext" dir="ltr">My sister designs computer games. She’s a ( high-tech designer – nurse – player ).</span></div>
+<div class="opts"><button type="button" class="opt" onclick="pick(this,1,'u9q13')"><span class="ol">a</span>high-tech designer</button><button type="button" class="opt" onclick="pick(this,0,'u9q13')"><span class="ol">b</span>nurse</button><button type="button" class="opt" onclick="pick(this,0,'u9q13')"><span class="ol">c</span>player</button></div><div class="fb" id="fb-u9q13"></div></div><div class="qcard" id="u9q14">
+<div class="qhead"><span class="qnum">14</span><span class="qtext" dir="ltr">Ahmad’s brother works in a hospital. He’s a ( reporter – waiter – doctor ).</span></div>
+<div class="opts"><button type="button" class="opt" onclick="pick(this,0,'u9q14')"><span class="ol">a</span>reporter</button><button type="button" class="opt" onclick="pick(this,0,'u9q14')"><span class="ol">b</span>waiter</button><button type="button" class="opt" onclick="pick(this,1,'u9q14')"><span class="ol">c</span>doctor</button></div><div class="fb" id="fb-u9q14"></div></div><div class="sechead">🎯 B. Find the odd words — الكلمة الشاذة</div><div class="qcard" id="u9q15">
+<div class="qhead"><span class="qnum">15</span><span class="qtext" dir="ltr">Choose the odd word:</span></div>
+<div class="opts"><button type="button" class="opt" onclick="pick(this,0,'u9q15')"><span class="ol">a</span>restaurant</button><button type="button" class="opt" onclick="pick(this,0,'u9q15')"><span class="ol">b</span>store</button><button type="button" class="opt" onclick="pick(this,1,'u9q15')"><span class="ol">c</span>writer</button></div><div class="fb" id="fb-u9q15"></div></div><div class="qcard" id="u9q16">
+<div class="qhead"><span class="qnum">16</span><span class="qtext" dir="ltr">Choose the odd word:</span></div>
+<div class="opts"><button type="button" class="opt" onclick="pick(this,0,'u9q16')"><span class="ol">a</span>salesperson</button><button type="button" class="opt" onclick="pick(this,1,'u9q16')"><span class="ol">b</span>hospital</button><button type="button" class="opt" onclick="pick(this,0,'u9q16')"><span class="ol">c</span>chef</button></div><div class="fb" id="fb-u9q16"></div></div><div class="sechead">🔤 C. Choose the missing letter</div><div class="qcard" id="u9q17">
+<div class="qhead"><span class="qnum">17</span><span class="qtext" dir="ltr">Omar wants to be a professional football pla_er. ( y – p – l )</span></div>
+<div class="opts"><button type="button" class="opt" onclick="pick(this,1,'u9q17')"><span class="ol">a</span>y</button><button type="button" class="opt" onclick="pick(this,0,'u9q17')"><span class="ol">b</span>p</button><button type="button" class="opt" onclick="pick(this,0,'u9q17')"><span class="ol">c</span>l</button></div><div class="fb" id="fb-u9q17"></div></div><div class="qcard" id="u9q18">
+<div class="qhead"><span class="qnum">18</span><span class="qtext" dir="ltr">I want to be a pilo_ because I’m interested in planes. ( f – t – r )</span></div>
+<div class="opts"><button type="button" class="opt" onclick="pick(this,0,'u9q18')"><span class="ol">a</span>f</button><button type="button" class="opt" onclick="pick(this,1,'u9q18')"><span class="ol">b</span>t</button><button type="button" class="opt" onclick="pick(this,0,'u9q18')"><span class="ol">c</span>r</button></div><div class="fb" id="fb-u9q18"></div></div><div class="qcard" id="u9q19">
+<div class="qhead"><span class="qnum">19</span><span class="qtext" dir="ltr">He’s a ca_eraman. He films the news. ( s – m – b )</span></div>
+<div class="opts"><button type="button" class="opt" onclick="pick(this,0,'u9q19')"><span class="ol">a</span>s</button><button type="button" class="opt" onclick="pick(this,1,'u9q19')"><span class="ol">b</span>m</button><button type="button" class="opt" onclick="pick(this,0,'u9q19')"><span class="ol">c</span>b</button></div><div class="fb" id="fb-u9q19"></div></div><div class="sechead">🖼️ D. Write the correct word under each picture</div><div class="picgrid"><div class="qcard piccard" id="u9q20">
+<div class="picemoji">🧑‍⚕️</div>
+<div class="qhead"><span class="qnum">20</span><span class="qtext">اختر الكلمة الصحيحة للصورة</span></div>
+<div class="opts picrow"><button type="button" class="opt picopt" onclick="pick(this,0,'u9q20')">reporter</button><button type="button" class="opt picopt" onclick="pick(this,0,'u9q20')">striker</button><button type="button" class="opt picopt" onclick="pick(this,1,'u9q20')">doctor</button><button type="button" class="opt picopt" onclick="pick(this,0,'u9q20')">carpenter</button><button type="button" class="opt picopt" onclick="pick(this,0,'u9q20')">driver</button></div><div class="fb" id="fb-u9q20"></div></div><div class="qcard piccard" id="u9q21">
+<div class="picemoji">🎙️</div>
+<div class="qhead"><span class="qnum">21</span><span class="qtext">اختر الكلمة الصحيحة للصورة</span></div>
+<div class="opts picrow"><button type="button" class="opt picopt" onclick="pick(this,1,'u9q21')">reporter</button><button type="button" class="opt picopt" onclick="pick(this,0,'u9q21')">striker</button><button type="button" class="opt picopt" onclick="pick(this,0,'u9q21')">doctor</button><button type="button" class="opt picopt" onclick="pick(this,0,'u9q21')">carpenter</button><button type="button" class="opt picopt" onclick="pick(this,0,'u9q21')">driver</button></div><div class="fb" id="fb-u9q21"></div></div><div class="qcard piccard" id="u9q22">
+<div class="picemoji">🚗</div>
+<div class="qhead"><span class="qnum">22</span><span class="qtext">اختر الكلمة الصحيحة للصورة</span></div>
+<div class="opts picrow"><button type="button" class="opt picopt" onclick="pick(this,0,'u9q22')">reporter</button><button type="button" class="opt picopt" onclick="pick(this,0,'u9q22')">striker</button><button type="button" class="opt picopt" onclick="pick(this,0,'u9q22')">doctor</button><button type="button" class="opt picopt" onclick="pick(this,0,'u9q22')">carpenter</button><button type="button" class="opt picopt" onclick="pick(this,1,'u9q22')">driver</button></div><div class="fb" id="fb-u9q22"></div></div><div class="qcard piccard" id="u9q23">
+<div class="picemoji">⚽</div>
+<div class="qhead"><span class="qnum">23</span><span class="qtext">اختر الكلمة الصحيحة للصورة</span></div>
+<div class="opts picrow"><button type="button" class="opt picopt" onclick="pick(this,0,'u9q23')">reporter</button><button type="button" class="opt picopt" onclick="pick(this,1,'u9q23')">striker</button><button type="button" class="opt picopt" onclick="pick(this,0,'u9q23')">doctor</button><button type="button" class="opt picopt" onclick="pick(this,0,'u9q23')">carpenter</button><button type="button" class="opt picopt" onclick="pick(this,0,'u9q23')">driver</button></div><div class="fb" id="fb-u9q23"></div></div><div class="qcard piccard" id="u9q24">
+<div class="picemoji">🔨</div>
+<div class="qhead"><span class="qnum">24</span><span class="qtext">اختر الكلمة الصحيحة للصورة</span></div>
+<div class="opts picrow"><button type="button" class="opt picopt" onclick="pick(this,0,'u9q24')">reporter</button><button type="button" class="opt picopt" onclick="pick(this,0,'u9q24')">striker</button><button type="button" class="opt picopt" onclick="pick(this,0,'u9q24')">doctor</button><button type="button" class="opt picopt" onclick="pick(this,1,'u9q24')">carpenter</button><button type="button" class="opt picopt" onclick="pick(this,0,'u9q24')">driver</button></div><div class="fb" id="fb-u9q24"></div></div></div>
+<div class="unitdone" id="done0"></div>
+</div><div class="unit-panel" id="panel1">
+<div class="unit-hero"><div class="uh-icon">🏫</div>
+<div><div class="uh-eyebrow">Super Goal 1 · Unit 10 Worksheet</div>
+<h2 dir="ltr">What’s School Like?</h2><div class="uh-ar">كيف هي المدرسة؟ · 23 سؤالاً تفاعلياً</div></div></div>
+<div class="progresswrap"><div class="progressbar"><div class="progressfill" id="prog1"></div></div><div class="progresstxt" id="progtxt1">0 / 23</div></div>
+<div class="rules"><div class="rulecard"><div class="rulebody">📌 النفي: don’t مع I / you / we / they ✦ doesn’t مع he / she / it وبعدهما المصدر</div></div><div class="rulecard"><div class="rulebody">📌 have مع الجمع ✦ has مع المفرد الغائب: Faisal has a red backpack</div></div><div class="rulecard"><div class="rulebody">📌 صفات المشاعر: -ed للشخص (depressed) ✦ -ing للشيء (frightening)</div></div></div><div class="sechead">📝 A. Choose the correct answer — Grammar</div><div class="qcard" id="u10q1">
+<div class="qhead"><span class="qnum">1</span><span class="qtext" dir="ltr">I ( am not – doesn’t – don’t ) work in school.</span></div>
+<div class="opts"><button type="button" class="opt" onclick="pick(this,0,'u10q1')"><span class="ol">a</span>am not</button><button type="button" class="opt" onclick="pick(this,0,'u10q1')"><span class="ol">b</span>doesn’t</button><button type="button" class="opt" onclick="pick(this,1,'u10q1')"><span class="ol">c</span>don’t</button></div><div class="fb" id="fb-u10q1"></div></div><div class="qcard" id="u10q2">
+<div class="qhead"><span class="qnum">2</span><span class="qtext" dir="ltr">Hani and his cousin ( doesn’t – don’t – isn’t ) have passports.</span></div>
+<div class="opts"><button type="button" class="opt" onclick="pick(this,0,'u10q2')"><span class="ol">a</span>doesn’t</button><button type="button" class="opt" onclick="pick(this,1,'u10q2')"><span class="ol">b</span>don’t</button><button type="button" class="opt" onclick="pick(this,0,'u10q2')"><span class="ol">c</span>isn’t</button></div><div class="fb" id="fb-u10q2"></div></div><div class="qcard" id="u10q3">
+<div class="qhead"><span class="qnum">3</span><span class="qtext" dir="ltr">Faisal ( have – has – is ) a red backpack.</span></div>
+<div class="opts"><button type="button" class="opt" onclick="pick(this,0,'u10q3')"><span class="ol">a</span>have</button><button type="button" class="opt" onclick="pick(this,1,'u10q3')"><span class="ol">b</span>has</button><button type="button" class="opt" onclick="pick(this,0,'u10q3')"><span class="ol">c</span>is</button></div><div class="fb" id="fb-u10q3"></div></div><div class="qcard" id="u10q4">
+<div class="qhead"><span class="qnum">4</span><span class="qtext" dir="ltr">Sami ( drink – drinks – drinking ) coffee every day.</span></div>
+<div class="opts"><button type="button" class="opt" onclick="pick(this,0,'u10q4')"><span class="ol">a</span>drink</button><button type="button" class="opt" onclick="pick(this,1,'u10q4')"><span class="ol">b</span>drinks</button><button type="button" class="opt" onclick="pick(this,0,'u10q4')"><span class="ol">c</span>drinking</button></div><div class="fb" id="fb-u10q4"></div></div><div class="qcard" id="u10q5">
+<div class="qhead"><span class="qnum">5</span><span class="qtext" dir="ltr">I don’t like to watch ( frightened – frightening – frighten ) films on TV.</span></div>
+<div class="opts"><button type="button" class="opt" onclick="pick(this,0,'u10q5')"><span class="ol">a</span>frightened</button><button type="button" class="opt" onclick="pick(this,1,'u10q5')"><span class="ol">b</span>frightening</button><button type="button" class="opt" onclick="pick(this,0,'u10q5')"><span class="ol">c</span>frighten</button></div><div class="fb" id="fb-u10q5"></div></div><div class="qcard" id="u10q6">
+<div class="qhead"><span class="qnum">6</span><span class="qtext" dir="ltr">She is really ( depressed – depressing – depress ) about the news.</span></div>
+<div class="opts"><button type="button" class="opt" onclick="pick(this,1,'u10q6')"><span class="ol">a</span>depressed</button><button type="button" class="opt" onclick="pick(this,0,'u10q6')"><span class="ol">b</span>depressing</button><button type="button" class="opt" onclick="pick(this,0,'u10q6')"><span class="ol">c</span>depress</button></div><div class="fb" id="fb-u10q6"></div></div><div class="sechead">✏️ B1. Correct the underlined word — صحّح</div><div class="qcard" id="u10q7">
+<div class="qhead"><span class="qnum">7</span><span class="qtext" dir="ltr">Ahmad doesn’t speaks English. (Correct: speaks)</span></div>
+<div class="fillrow">
+<input type="text" class="fillin" id="in-u10q7" dir="ltr" autocomplete="off" autocapitalize="off" placeholder="اكتب الإجابة هنا...">
+<button type="button" class="checkbtn" onclick="checkFill('u10q7')">تحقق ✓</button>
+</div><div class="fb" id="fb-u10q7"></div></div><div class="qcard" id="u10q8">
+<div class="qhead"><span class="qnum">8</span><span class="qtext" dir="ltr">Reema have long hair. (Correct: have)</span></div>
+<div class="fillrow">
+<input type="text" class="fillin" id="in-u10q8" dir="ltr" autocomplete="off" autocapitalize="off" placeholder="اكتب الإجابة هنا...">
+<button type="button" class="checkbtn" onclick="checkFill('u10q8')">تحقق ✓</button>
+</div><div class="fb" id="fb-u10q8"></div></div><div class="qcard" id="u10q9">
+<div class="qhead"><span class="qnum">9</span><span class="qtext" dir="ltr">Ali brush his teeth twice a day. (Correct: brush)</span></div>
+<div class="fillrow">
+<input type="text" class="fillin" id="in-u10q9" dir="ltr" autocomplete="off" autocapitalize="off" placeholder="اكتب الإجابة هنا...">
+<button type="button" class="checkbtn" onclick="checkFill('u10q9')">تحقق ✓</button>
+</div><div class="fb" id="fb-u10q9"></div></div><div class="sechead">🔀 B2. Write the words in the correct order</div><div class="qcard" id="u10q10">
+<div class="qhead"><span class="qnum">10</span><span class="qtext" dir="ltr">Football / a very / exciting / sport / is</span></div>
+<div class="fillrow">
+<input type="text" class="fillin" id="in-u10q10" dir="ltr" autocomplete="off" autocapitalize="off" placeholder="اكتب الإجابة هنا...">
+<button type="button" class="checkbtn" onclick="checkFill('u10q10')">تحقق ✓</button>
+</div><div class="fb" id="fb-u10q10"></div></div><div class="qcard" id="u10q11">
+<div class="qhead"><span class="qnum">11</span><span class="qtext" dir="ltr">laptop / new / has / Omar / a</span></div>
+<div class="fillrow">
+<input type="text" class="fillin" id="in-u10q11" dir="ltr" autocomplete="off" autocapitalize="off" placeholder="اكتب الإجابة هنا...">
+<button type="button" class="checkbtn" onclick="checkFill('u10q11')">تحقق ✓</button>
+</div><div class="fb" id="fb-u10q11"></div></div><div class="qcard" id="u10q12">
+<div class="qhead"><span class="qnum">12</span><span class="qtext" dir="ltr">Math / quite / a / difficult / is / subject.</span></div>
+<div class="fillrow">
+<input type="text" class="fillin" id="in-u10q12" dir="ltr" autocomplete="off" autocapitalize="off" placeholder="اكتب الإجابة هنا...">
+<button type="button" class="checkbtn" onclick="checkFill('u10q12')">تحقق ✓</button>
+</div><div class="fb" id="fb-u10q12"></div></div><div class="sechead">🎯 A. Find the odd words — الكلمة الشاذة</div><div class="qcard" id="u10q13">
+<div class="qhead"><span class="qnum">13</span><span class="qtext" dir="ltr">Choose the odd word:</span></div>
+<div class="opts"><button type="button" class="opt" onclick="pick(this,0,'u10q13')"><span class="ol">a</span>smart</button><button type="button" class="opt" onclick="pick(this,0,'u10q13')"><span class="ol">b</span>intelligent</button><button type="button" class="opt" onclick="pick(this,1,'u10q13')"><span class="ol">c</span>funny</button></div><div class="fb" id="fb-u10q13"></div></div><div class="qcard" id="u10q14">
+<div class="qhead"><span class="qnum">14</span><span class="qtext" dir="ltr">Choose the odd word:</span></div>
+<div class="opts"><button type="button" class="opt" onclick="pick(this,0,'u10q14')"><span class="ol">a</span>difficult</button><button type="button" class="opt" onclick="pick(this,1,'u10q14')"><span class="ol">b</span>easy</button><button type="button" class="opt" onclick="pick(this,0,'u10q14')"><span class="ol">c</span>hard</button></div><div class="fb" id="fb-u10q14"></div></div><div class="qcard" id="u10q15">
+<div class="qhead"><span class="qnum">15</span><span class="qtext" dir="ltr">Choose the odd word:</span></div>
+<div class="opts"><button type="button" class="opt" onclick="pick(this,0,'u10q15')"><span class="ol">a</span>English</button><button type="button" class="opt" onclick="pick(this,0,'u10q15')"><span class="ol">b</span>history</button><button type="button" class="opt" onclick="pick(this,1,'u10q15')"><span class="ol">c</span>phone</button></div><div class="fb" id="fb-u10q15"></div></div><div class="sechead">🔤 B. Write the missing letter under each picture</div><div class="picgrid"><div class="qcard piccard" id="u10q16">
+<div class="picemoji">🤩</div>
+<div class="qhead"><span class="qnum">16</span><span class="qtext" dir="ltr">e_cited</span></div>
+<div class="opts letterrow"><button type="button" class="opt picopt" onclick="pick(this,1,'u10q16')">x</button><button type="button" class="opt picopt" onclick="pick(this,0,'u10q16')">s</button><button type="button" class="opt picopt" onclick="pick(this,0,'u10q16')">z</button></div><div class="fb" id="fb-u10q16"></div></div><div class="qcard piccard" id="u10q17">
+<div class="picemoji">😒</div>
+<div class="qhead"><span class="qnum">17</span><span class="qtext" dir="ltr">b_red</span></div>
+<div class="opts letterrow"><button type="button" class="opt picopt" onclick="pick(this,1,'u10q17')">o</button><button type="button" class="opt picopt" onclick="pick(this,0,'u10q17')">a</button><button type="button" class="opt picopt" onclick="pick(this,0,'u10q17')">u</button></div><div class="fb" id="fb-u10q17"></div></div><div class="qcard piccard" id="u10q18">
+<div class="picemoji">😠</div>
+<div class="qhead"><span class="qnum">18</span><span class="qtext" dir="ltr">ann_yed</span></div>
+<div class="opts letterrow"><button type="button" class="opt picopt" onclick="pick(this,1,'u10q18')">o</button><button type="button" class="opt picopt" onclick="pick(this,0,'u10q18')">i</button><button type="button" class="opt picopt" onclick="pick(this,0,'u10q18')">a</button></div><div class="fb" id="fb-u10q18"></div></div><div class="qcard piccard" id="u10q19">
+<div class="picemoji">😕</div>
+<div class="qhead"><span class="qnum">19</span><span class="qtext" dir="ltr">con_used</span></div>
+<div class="opts letterrow"><button type="button" class="opt picopt" onclick="pick(this,1,'u10q19')">f</button><button type="button" class="opt picopt" onclick="pick(this,0,'u10q19')">v</button><button type="button" class="opt picopt" onclick="pick(this,0,'u10q19')">t</button></div><div class="fb" id="fb-u10q19"></div></div></div><div class="sechead">📚 C. Choose the correct answer — Clubs</div><div class="qcard" id="u10q20">
+<div class="qhead"><span class="qnum">20</span><span class="qtext" dir="ltr">Members learn about and get a chance to use lots of computer programs in ( computer club – science club – archaeology club ).</span></div>
+<div class="opts"><button type="button" class="opt" onclick="pick(this,1,'u10q20')"><span class="ol">a</span>computer club</button><button type="button" class="opt" onclick="pick(this,0,'u10q20')"><span class="ol">b</span>science club</button><button type="button" class="opt" onclick="pick(this,0,'u10q20')"><span class="ol">c</span>archaeology club</button></div><div class="fb" id="fb-u10q20"></div></div><div class="qcard" id="u10q21">
+<div class="qhead"><span class="qnum">21</span><span class="qtext" dir="ltr">Members learn the basics of acting and get a chance to act in plays in ( football club – drama club – poetry club ).</span></div>
+<div class="opts"><button type="button" class="opt" onclick="pick(this,0,'u10q21')"><span class="ol">a</span>football club</button><button type="button" class="opt" onclick="pick(this,1,'u10q21')"><span class="ol">b</span>drama club</button><button type="button" class="opt" onclick="pick(this,0,'u10q21')"><span class="ol">c</span>poetry club</button></div><div class="fb" id="fb-u10q21"></div></div><div class="sechead">🔡 D. Choose the correct missing letter</div><div class="qcard" id="u10q22">
+<div class="qhead"><span class="qnum">22</span><span class="qtext" dir="ltr">My favorite _ubject is Math. ( s – h – l )</span></div>
+<div class="opts"><button type="button" class="opt" onclick="pick(this,1,'u10q22')"><span class="ol">a</span>s</button><button type="button" class="opt" onclick="pick(this,0,'u10q22')"><span class="ol">b</span>h</button><button type="button" class="opt" onclick="pick(this,0,'u10q22')"><span class="ol">c</span>l</button></div><div class="fb" id="fb-u10q22"></div></div><div class="qcard" id="u10q23">
+<div class="qhead"><span class="qnum">23</span><span class="qtext" dir="ltr">He has brown eyes and _urly black hair. ( u – c – w )</span></div>
+<div class="opts"><button type="button" class="opt" onclick="pick(this,0,'u10q23')"><span class="ol">a</span>u</button><button type="button" class="opt" onclick="pick(this,1,'u10q23')"><span class="ol">b</span>c</button><button type="button" class="opt" onclick="pick(this,0,'u10q23')"><span class="ol">c</span>w</button></div><div class="fb" id="fb-u10q23"></div></div>
+<div class="unitdone" id="done1"></div>
+</div><div class="unit-panel" id="panel2">
+<div class="unit-hero"><div class="uh-icon">⏰</div>
+<div><div class="uh-eyebrow">Super Goal 1 · Unit 11 Worksheet</div>
+<h2 dir="ltr">What Time Do You Get Up?</h2><div class="uh-ar">متى تستيقظ؟ — الروتين اليومي · 21 سؤالاً تفاعلياً</div></div></div>
+<div class="progresswrap"><div class="progressbar"><div class="progressfill" id="prog2"></div></div><div class="progresstxt" id="progtxt2">0 / 21</div></div>
+<div class="rules"><div class="rulecard"><div class="rulebody">📌 ظروف التكرار (always / usually / sometimes / never) = مضارع بسيط</div></div><div class="rulecard"><div class="rulebody">📌 now / at the moment = مضارع مستمر: am / is / are + فعل + ing</div></div><div class="rulecard"><div class="rulebody">📌 حروف الجر: in the morning ✦ at + الساعة ✦ on foot</div></div></div><div class="sechead">📝 A. Choose the correct answer — Grammar</div><div class="qcard" id="u11q1">
+<div class="qhead"><span class="qnum">1</span><span class="qtext" dir="ltr">We always ( go – goes – going ) to the gym.</span></div>
+<div class="opts"><button type="button" class="opt" onclick="pick(this,1,'u11q1')"><span class="ol">a</span>go</button><button type="button" class="opt" onclick="pick(this,0,'u11q1')"><span class="ol">b</span>goes</button><button type="button" class="opt" onclick="pick(this,0,'u11q1')"><span class="ol">c</span>going</button></div><div class="fb" id="fb-u11q1"></div></div><div class="qcard" id="u11q2">
+<div class="qhead"><span class="qnum">2</span><span class="qtext" dir="ltr">Omar usually ( do – doing – does ) his H.W before he plays with his friends.</span></div>
+<div class="opts"><button type="button" class="opt" onclick="pick(this,0,'u11q2')"><span class="ol">a</span>do</button><button type="button" class="opt" onclick="pick(this,0,'u11q2')"><span class="ol">b</span>doing</button><button type="button" class="opt" onclick="pick(this,1,'u11q2')"><span class="ol">c</span>does</button></div><div class="fb" id="fb-u11q2"></div></div><div class="qcard" id="u11q3">
+<div class="qhead"><span class="qnum">3</span><span class="qtext" dir="ltr">They sometimes come to school ( on – in – by ) foot.</span></div>
+<div class="opts"><button type="button" class="opt" onclick="pick(this,1,'u11q3')"><span class="ol">a</span>on</button><button type="button" class="opt" onclick="pick(this,0,'u11q3')"><span class="ol">b</span>in</button><button type="button" class="opt" onclick="pick(this,0,'u11q3')"><span class="ol">c</span>by</button></div><div class="fb" id="fb-u11q3"></div></div><div class="qcard" id="u11q4">
+<div class="qhead"><span class="qnum">4</span><span class="qtext" dir="ltr">Sara is busy now. She’s ( bake – bakes – baking ) cake.</span></div>
+<div class="opts"><button type="button" class="opt" onclick="pick(this,0,'u11q4')"><span class="ol">a</span>bake</button><button type="button" class="opt" onclick="pick(this,0,'u11q4')"><span class="ol">b</span>bakes</button><button type="button" class="opt" onclick="pick(this,1,'u11q4')"><span class="ol">c</span>baking</button></div><div class="fb" id="fb-u11q4"></div></div><div class="qcard" id="u11q5">
+<div class="qhead"><span class="qnum">5</span><span class="qtext" dir="ltr">Nawal is ( do – doing – does ) her homework at the moment.</span></div>
+<div class="opts"><button type="button" class="opt" onclick="pick(this,0,'u11q5')"><span class="ol">a</span>do</button><button type="button" class="opt" onclick="pick(this,1,'u11q5')"><span class="ol">b</span>doing</button><button type="button" class="opt" onclick="pick(this,0,'u11q5')"><span class="ol">c</span>does</button></div><div class="fb" id="fb-u11q5"></div></div><div class="qcard" id="u11q6">
+<div class="qhead"><span class="qnum">6</span><span class="qtext" dir="ltr">I usually have a shower ( in – on – at ) the morning.</span></div>
+<div class="opts"><button type="button" class="opt" onclick="pick(this,1,'u11q6')"><span class="ol">a</span>in</button><button type="button" class="opt" onclick="pick(this,0,'u11q6')"><span class="ol">b</span>on</button><button type="button" class="opt" onclick="pick(this,0,'u11q6')"><span class="ol">c</span>at</button></div><div class="fb" id="fb-u11q6"></div></div><div class="sechead">✏️ B1. Correct the underlined word — صحّح</div><div class="qcard" id="u11q7">
+<div class="qhead"><span class="qnum">7</span><span class="qtext" dir="ltr">I preferring drinking coffee. (Correct: preferring)</span></div>
+<div class="fillrow">
+<input type="text" class="fillin" id="in-u11q7" dir="ltr" autocomplete="off" autocapitalize="off" placeholder="اكتب الإجابة هنا...">
+<button type="button" class="checkbtn" onclick="checkFill('u11q7')">تحقق ✓</button>
+</div><div class="fb" id="fb-u11q7"></div></div><div class="qcard" id="u11q8">
+<div class="qhead"><span class="qnum">8</span><span class="qtext" dir="ltr">Noura never read on weekends. (Correct: read)</span></div>
+<div class="fillrow">
+<input type="text" class="fillin" id="in-u11q8" dir="ltr" autocomplete="off" autocapitalize="off" placeholder="اكتب الإجابة هنا...">
+<button type="button" class="checkbtn" onclick="checkFill('u11q8')">تحقق ✓</button>
+</div><div class="fb" id="fb-u11q8"></div></div><div class="qcard" id="u11q9">
+<div class="qhead"><span class="qnum">9</span><span class="qtext" dir="ltr">She wanting to get up early. (Correct: wanting)</span></div>
+<div class="fillrow">
+<input type="text" class="fillin" id="in-u11q9" dir="ltr" autocomplete="off" autocapitalize="off" placeholder="اكتب الإجابة هنا...">
+<button type="button" class="checkbtn" onclick="checkFill('u11q9')">تحقق ✓</button>
+</div><div class="fb" id="fb-u11q9"></div></div><div class="qcard" id="u11q10">
+<div class="qhead"><span class="qnum">10</span><span class="qtext" dir="ltr">Bob go to the park in seven thirty. (Correct: in)</span></div>
+<div class="fillrow">
+<input type="text" class="fillin" id="in-u11q10" dir="ltr" autocomplete="off" autocapitalize="off" placeholder="اكتب الإجابة هنا...">
+<button type="button" class="checkbtn" onclick="checkFill('u11q10')">تحقق ✓</button>
+</div><div class="fb" id="fb-u11q10"></div></div><div class="sechead">🕑 B2. What time is it? — الساعة تشير إلى 2:00</div><div class="qcard" id="u11q11">
+<div class="qhead"><span class="qnum">11</span><span class="qtext" dir="ltr">The clock shows 2:00. What time is it?</span></div>
+<div class="opts"><button type="button" class="opt" onclick="pick(this,1,'u11q11')"><span class="ol">a</span>It’s two o’clock</button><button type="button" class="opt" onclick="pick(this,0,'u11q11')"><span class="ol">b</span>It’s ten to two</button></div><div class="fb" id="fb-u11q11"></div></div><div class="sechead">🔀 B3. Reorder — رتّب</div><div class="qcard" id="u11q12">
+<div class="qhead"><span class="qnum">12</span><span class="qtext" dir="ltr">opens / at nine / usually / The bank</span></div>
+<div class="fillrow">
+<input type="text" class="fillin" id="in-u11q12" dir="ltr" autocomplete="off" autocapitalize="off" placeholder="اكتب الإجابة هنا...">
+<button type="button" class="checkbtn" onclick="checkFill('u11q12')">تحقق ✓</button>
+</div><div class="fb" id="fb-u11q12"></div></div><div class="qcard" id="u11q13">
+<div class="qhead"><span class="qnum">13</span><span class="qtext" dir="ltr">never / Sami / tennis / at night / plays</span></div>
+<div class="fillrow">
+<input type="text" class="fillin" id="in-u11q13" dir="ltr" autocomplete="off" autocapitalize="off" placeholder="اكتب الإجابة هنا...">
+<button type="button" class="checkbtn" onclick="checkFill('u11q13')">تحقق ✓</button>
+</div><div class="fb" id="fb-u11q13"></div></div><div class="sechead">📚 a. Choose the correct answer — Vocabulary</div><div class="qcard" id="u11q14">
+<div class="qhead"><span class="qnum">14</span><span class="qtext" dir="ltr">“It’s 12:00 P.M” means ( it’s afternoon – it’s midnight ).</span></div>
+<div class="opts"><button type="button" class="opt" onclick="pick(this,1,'u11q14')"><span class="ol">a</span>it’s afternoon</button><button type="button" class="opt" onclick="pick(this,0,'u11q14')"><span class="ol">b</span>it’s midnight</button></div><div class="fb" id="fb-u11q14"></div></div><div class="qcard" id="u11q15">
+<div class="qhead"><span class="qnum">15</span><span class="qtext" dir="ltr">“It’s 9:00 P.M” means ( it’s morning – it’s night ).</span></div>
+<div class="opts"><button type="button" class="opt" onclick="pick(this,0,'u11q15')"><span class="ol">a</span>it’s morning</button><button type="button" class="opt" onclick="pick(this,1,'u11q15')"><span class="ol">b</span>it’s night</button></div><div class="fb" id="fb-u11q15"></div></div><div class="sechead">🔤 B. Choose the correct missing letter</div><div class="qcard" id="u11q16">
+<div class="qhead"><span class="qnum">16</span><span class="qtext" dir="ltr">We always sing the Saudi national a_them. ( v – n – k )</span></div>
+<div class="opts"><button type="button" class="opt" onclick="pick(this,0,'u11q16')"><span class="ol">a</span>v</button><button type="button" class="opt" onclick="pick(this,1,'u11q16')"><span class="ol">b</span>n</button><button type="button" class="opt" onclick="pick(this,0,'u11q16')"><span class="ol">c</span>k</button></div><div class="fb" id="fb-u11q16"></div></div><div class="qcard" id="u11q17">
+<div class="qhead"><span class="qnum">17</span><span class="qtext" dir="ltr">A _en pal is someone you write letters to. ( p – s – r )</span></div>
+<div class="opts"><button type="button" class="opt" onclick="pick(this,1,'u11q17')"><span class="ol">a</span>p</button><button type="button" class="opt" onclick="pick(this,0,'u11q17')"><span class="ol">b</span>s</button><button type="button" class="opt" onclick="pick(this,0,'u11q17')"><span class="ol">c</span>r</button></div><div class="fb" id="fb-u11q17"></div></div><div class="sechead">🖼️ C. Write the correct word under each picture</div><div class="picgrid"><div class="qcard piccard" id="u11q18">
+<div class="picemoji">🥋</div>
+<div class="qhead"><span class="qnum">18</span><span class="qtext">اختر الكلمة الصحيحة للصورة</span></div>
+<div class="opts picrow"><button type="button" class="opt picopt" onclick="pick(this,0,'u11q18')">night</button><button type="button" class="opt picopt" onclick="pick(this,1,'u11q18')">Karate</button><button type="button" class="opt picopt" onclick="pick(this,0,'u11q18')">village</button><button type="button" class="opt picopt" onclick="pick(this,0,'u11q18')">work out</button></div><div class="fb" id="fb-u11q18"></div></div><div class="qcard piccard" id="u11q19">
+<div class="picemoji">🌃</div>
+<div class="qhead"><span class="qnum">19</span><span class="qtext">اختر الكلمة الصحيحة للصورة</span></div>
+<div class="opts picrow"><button type="button" class="opt picopt" onclick="pick(this,1,'u11q19')">night</button><button type="button" class="opt picopt" onclick="pick(this,0,'u11q19')">Karate</button><button type="button" class="opt picopt" onclick="pick(this,0,'u11q19')">village</button><button type="button" class="opt picopt" onclick="pick(this,0,'u11q19')">work out</button></div><div class="fb" id="fb-u11q19"></div></div><div class="qcard piccard" id="u11q20">
+<div class="picemoji">🏋️</div>
+<div class="qhead"><span class="qnum">20</span><span class="qtext">اختر الكلمة الصحيحة للصورة</span></div>
+<div class="opts picrow"><button type="button" class="opt picopt" onclick="pick(this,0,'u11q20')">night</button><button type="button" class="opt picopt" onclick="pick(this,0,'u11q20')">Karate</button><button type="button" class="opt picopt" onclick="pick(this,0,'u11q20')">village</button><button type="button" class="opt picopt" onclick="pick(this,1,'u11q20')">work out</button></div><div class="fb" id="fb-u11q20"></div></div><div class="qcard piccard" id="u11q21">
+<div class="picemoji">🏘️</div>
+<div class="qhead"><span class="qnum">21</span><span class="qtext">اختر الكلمة الصحيحة للصورة</span></div>
+<div class="opts picrow"><button type="button" class="opt picopt" onclick="pick(this,0,'u11q21')">night</button><button type="button" class="opt picopt" onclick="pick(this,0,'u11q21')">Karate</button><button type="button" class="opt picopt" onclick="pick(this,1,'u11q21')">village</button><button type="button" class="opt picopt" onclick="pick(this,0,'u11q21')">work out</button></div><div class="fb" id="fb-u11q21"></div></div></div>
+<div class="unitdone" id="done2"></div>
+</div><div class="unit-panel" id="panel3">
+<div class="unit-hero"><div class="uh-icon">🗺️</div>
+<div><div class="uh-eyebrow">Super Goal 1 · Unit 12 Worksheet</div>
+<h2 dir="ltr">What Can You Do There?</h2><div class="uh-ar">ماذا يمكنك أن تفعل هناك؟ · 27 سؤالاً تفاعلياً</div></div></div>
+<div class="progresswrap"><div class="progressbar"><div class="progressfill" id="prog3"></div></div><div class="progresstxt" id="progtxt3">0 / 27</div></div>
+<div class="rules"><div class="rulecard"><div class="rulebody">📌 can + مصدر بدون to: I can play chess ✦ السؤال: Can he…? والإجابة No, he can’t</div></div><div class="rulecard"><div class="rulebody">📌 like to + مصدر ✦ enjoy / dislike / can’t stand + فعل + ing</div></div><div class="rulecard"><div class="rulebody">📌 النفي: doesn’t like to ✦ السؤال: Does she like to…?</div></div></div><div class="sechead">📝 A. Choose the correct answer — Grammar</div><div class="qcard" id="u12q1">
+<div class="qhead"><span class="qnum">1</span><span class="qtext" dir="ltr">I can ( play – plays – playing ) chess.</span></div>
+<div class="opts"><button type="button" class="opt" onclick="pick(this,1,'u12q1')"><span class="ol">a</span>play</button><button type="button" class="opt" onclick="pick(this,0,'u12q1')"><span class="ol">b</span>plays</button><button type="button" class="opt" onclick="pick(this,0,'u12q1')"><span class="ol">c</span>playing</button></div><div class="fb" id="fb-u12q1"></div></div><div class="qcard" id="u12q2">
+<div class="qhead"><span class="qnum">2</span><span class="qtext" dir="ltr">We like to ( goes – going – go ) shopping.</span></div>
+<div class="opts"><button type="button" class="opt" onclick="pick(this,0,'u12q2')"><span class="ol">a</span>goes</button><button type="button" class="opt" onclick="pick(this,0,'u12q2')"><span class="ol">b</span>going</button><button type="button" class="opt" onclick="pick(this,1,'u12q2')"><span class="ol">c</span>go</button></div><div class="fb" id="fb-u12q2"></div></div><div class="qcard" id="u12q3">
+<div class="qhead"><span class="qnum">3</span><span class="qtext" dir="ltr">They enjoy ( swim – swims – swimming ) in the summer.</span></div>
+<div class="opts"><button type="button" class="opt" onclick="pick(this,0,'u12q3')"><span class="ol">a</span>swim</button><button type="button" class="opt" onclick="pick(this,0,'u12q3')"><span class="ol">b</span>swims</button><button type="button" class="opt" onclick="pick(this,1,'u12q3')"><span class="ol">c</span>swimming</button></div><div class="fb" id="fb-u12q3"></div></div><div class="qcard" id="u12q4">
+<div class="qhead"><span class="qnum">4</span><span class="qtext" dir="ltr">John ( isn’t – don’t – doesn’t ) like to ride horses.</span></div>
+<div class="opts"><button type="button" class="opt" onclick="pick(this,0,'u12q4')"><span class="ol">a</span>isn’t</button><button type="button" class="opt" onclick="pick(this,0,'u12q4')"><span class="ol">b</span>don’t</button><button type="button" class="opt" onclick="pick(this,1,'u12q4')"><span class="ol">c</span>doesn’t</button></div><div class="fb" id="fb-u12q4"></div></div><div class="qcard" id="u12q5">
+<div class="qhead"><span class="qnum">5</span><span class="qtext" dir="ltr">She can’t stand ( cook – cooking – cooks ).</span></div>
+<div class="opts"><button type="button" class="opt" onclick="pick(this,0,'u12q5')"><span class="ol">a</span>cook</button><button type="button" class="opt" onclick="pick(this,1,'u12q5')"><span class="ol">b</span>cooking</button><button type="button" class="opt" onclick="pick(this,0,'u12q5')"><span class="ol">c</span>cooks</button></div><div class="fb" id="fb-u12q5"></div></div><div class="sechead">✏️ B1. Correct the underlined word — صحّح</div><div class="qcard" id="u12q6">
+<div class="qhead"><span class="qnum">6</span><span class="qtext" dir="ltr">I would like to buying a new laptop. (Correct: buying)</span></div>
+<div class="fillrow">
+<input type="text" class="fillin" id="in-u12q6" dir="ltr" autocomplete="off" autocapitalize="off" placeholder="اكتب الإجابة هنا...">
+<button type="button" class="checkbtn" onclick="checkFill('u12q6')">تحقق ✓</button>
+</div><div class="fb" id="fb-u12q6"></div></div><div class="qcard" id="u12q7">
+<div class="qhead"><span class="qnum">7</span><span class="qtext" dir="ltr">Ahmad dislikes watch TV. (Correct: watch)</span></div>
+<div class="fillrow">
+<input type="text" class="fillin" id="in-u12q7" dir="ltr" autocomplete="off" autocapitalize="off" placeholder="اكتب الإجابة هنا...">
+<button type="button" class="checkbtn" onclick="checkFill('u12q7')">تحقق ✓</button>
+</div><div class="fb" id="fb-u12q7"></div></div><div class="qcard" id="u12q8">
+<div class="qhead"><span class="qnum">8</span><span class="qtext" dir="ltr">You can speaks English. (Correct: speaks)</span></div>
+<div class="fillrow">
+<input type="text" class="fillin" id="in-u12q8" dir="ltr" autocomplete="off" autocapitalize="off" placeholder="اكتب الإجابة هنا...">
+<button type="button" class="checkbtn" onclick="checkFill('u12q8')">تحقق ✓</button>
+</div><div class="fb" id="fb-u12q8"></div></div><div class="qcard" id="u12q9">
+<div class="qhead"><span class="qnum">9</span><span class="qtext" dir="ltr">Ahmad can’t writes stories. (Correct: writes)</span></div>
+<div class="fillrow">
+<input type="text" class="fillin" id="in-u12q9" dir="ltr" autocomplete="off" autocapitalize="off" placeholder="اكتب الإجابة هنا...">
+<button type="button" class="checkbtn" onclick="checkFill('u12q9')">تحقق ✓</button>
+</div><div class="fb" id="fb-u12q9"></div></div><div class="sechead">❓ B2. Answer — أجب</div><div class="qcard" id="u12q10">
+<div class="qhead"><span class="qnum">10</span><span class="qtext" dir="ltr">Can he write stories? (Answer with: No)</span></div>
+<div class="fillrow">
+<input type="text" class="fillin" id="in-u12q10" dir="ltr" autocomplete="off" autocapitalize="off" placeholder="اكتب الإجابة هنا...">
+<button type="button" class="checkbtn" onclick="checkFill('u12q10')">تحقق ✓</button>
+</div><div class="fb" id="fb-u12q10"></div></div><div class="sechead">🚫 B3. Give the negative — انفِ الجملة</div><div class="qcard" id="u12q11">
+<div class="qhead"><span class="qnum">11</span><span class="qtext" dir="ltr">Omar likes to fish.</span></div>
+<div class="fillrow">
+<input type="text" class="fillin" id="in-u12q11" dir="ltr" autocomplete="off" autocapitalize="off" placeholder="اكتب الإجابة هنا...">
+<button type="button" class="checkbtn" onclick="checkFill('u12q11')">تحقق ✓</button>
+</div><div class="fb" id="fb-u12q11"></div></div><div class="sechead">❔ B4. Make a Yes / No question — كوّن سؤالاً</div><div class="qcard" id="u12q12">
+<div class="qhead"><span class="qnum">12</span><span class="qtext" dir="ltr">He can drive a bus.</span></div>
+<div class="fillrow">
+<input type="text" class="fillin" id="in-u12q12" dir="ltr" autocomplete="off" autocapitalize="off" placeholder="اكتب الإجابة هنا...">
+<button type="button" class="checkbtn" onclick="checkFill('u12q12')">تحقق ✓</button>
+</div><div class="fb" id="fb-u12q12"></div></div><div class="qcard" id="u12q13">
+<div class="qhead"><span class="qnum">13</span><span class="qtext" dir="ltr">She likes to swim.</span></div>
+<div class="fillrow">
+<input type="text" class="fillin" id="in-u12q13" dir="ltr" autocomplete="off" autocapitalize="off" placeholder="اكتب الإجابة هنا...">
+<button type="button" class="checkbtn" onclick="checkFill('u12q13')">تحقق ✓</button>
+</div><div class="fb" id="fb-u12q13"></div></div><div class="sechead">📚 1. Choose the correct answer — Places</div><div class="qcard" id="u12q14">
+<div class="qhead"><span class="qnum">14</span><span class="qtext" dir="ltr">A place you can go shopping and meet friends. ( mall – hospital – school )</span></div>
+<div class="opts"><button type="button" class="opt" onclick="pick(this,1,'u12q14')"><span class="ol">a</span>mall</button><button type="button" class="opt" onclick="pick(this,0,'u12q14')"><span class="ol">b</span>hospital</button><button type="button" class="opt" onclick="pick(this,0,'u12q14')"><span class="ol">c</span>school</button></div><div class="fb" id="fb-u12q14"></div></div><div class="qcard" id="u12q15">
+<div class="qhead"><span class="qnum">15</span><span class="qtext" dir="ltr">A place visitors can sleep there. ( bank – bookstore – hotel )</span></div>
+<div class="opts"><button type="button" class="opt" onclick="pick(this,0,'u12q15')"><span class="ol">a</span>bank</button><button type="button" class="opt" onclick="pick(this,0,'u12q15')"><span class="ol">b</span>bookstore</button><button type="button" class="opt" onclick="pick(this,1,'u12q15')"><span class="ol">c</span>hotel</button></div><div class="fb" id="fb-u12q15"></div></div><div class="qcard" id="u12q16">
+<div class="qhead"><span class="qnum">16</span><span class="qtext" dir="ltr">A place you can fly to places. ( airport – bus station – park )</span></div>
+<div class="opts"><button type="button" class="opt" onclick="pick(this,1,'u12q16')"><span class="ol">a</span>airport</button><button type="button" class="opt" onclick="pick(this,0,'u12q16')"><span class="ol">b</span>bus station</button><button type="button" class="opt" onclick="pick(this,0,'u12q16')"><span class="ol">c</span>park</button></div><div class="fb" id="fb-u12q16"></div></div><div class="qcard" id="u12q17">
+<div class="qhead"><span class="qnum">17</span><span class="qtext" dir="ltr">A place you can open an account. ( supermarket – bank – restaurant )</span></div>
+<div class="opts"><button type="button" class="opt" onclick="pick(this,0,'u12q17')"><span class="ol">a</span>supermarket</button><button type="button" class="opt" onclick="pick(this,1,'u12q17')"><span class="ol">b</span>bank</button><button type="button" class="opt" onclick="pick(this,0,'u12q17')"><span class="ol">c</span>restaurant</button></div><div class="fb" id="fb-u12q17"></div></div><div class="sechead">🔤 2. Choose the missing letter</div><div class="qcard" id="u12q18">
+<div class="qhead"><span class="qnum">18</span><span class="qtext" dir="ltr">They ate in an Italian restauran_. ( t – o – l )</span></div>
+<div class="opts"><button type="button" class="opt" onclick="pick(this,1,'u12q18')"><span class="ol">a</span>t</button><button type="button" class="opt" onclick="pick(this,0,'u12q18')"><span class="ol">b</span>o</button><button type="button" class="opt" onclick="pick(this,0,'u12q18')"><span class="ol">c</span>l</button></div><div class="fb" id="fb-u12q18"></div></div><div class="qcard" id="u12q19">
+<div class="qhead"><span class="qnum">19</span><span class="qtext" dir="ltr">He goes to the gy_ every day. ( b – m – z )</span></div>
+<div class="opts"><button type="button" class="opt" onclick="pick(this,0,'u12q19')"><span class="ol">a</span>b</button><button type="button" class="opt" onclick="pick(this,1,'u12q19')"><span class="ol">b</span>m</button><button type="button" class="opt" onclick="pick(this,0,'u12q19')"><span class="ol">c</span>z</button></div><div class="fb" id="fb-u12q19"></div></div><div class="sechead">🎯 3. Find the odd words — الكلمة الشاذة</div><div class="qcard" id="u12q20">
+<div class="qhead"><span class="qnum">20</span><span class="qtext" dir="ltr">Choose the odd word:</span></div>
+<div class="opts"><button type="button" class="opt" onclick="pick(this,0,'u12q20')"><span class="ol">a</span>bank</button><button type="button" class="opt" onclick="pick(this,0,'u12q20')"><span class="ol">b</span>school</button><button type="button" class="opt" onclick="pick(this,1,'u12q20')"><span class="ol">c</span>writer</button></div><div class="fb" id="fb-u12q20"></div></div><div class="qcard" id="u12q21">
+<div class="qhead"><span class="qnum">21</span><span class="qtext" dir="ltr">Choose the odd word:</span></div>
+<div class="opts"><button type="button" class="opt" onclick="pick(this,0,'u12q21')"><span class="ol">a</span>hotel</button><button type="button" class="opt" onclick="pick(this,1,'u12q21')"><span class="ol">b</span>black</button><button type="button" class="opt" onclick="pick(this,0,'u12q21')"><span class="ol">c</span>mall</button></div><div class="fb" id="fb-u12q21"></div></div><div class="sechead">🔡 5. Write the missing letter</div><div class="picgrid"><div class="qcard piccard" id="u12q22">
+<div class="picemoji">🚶‍♂️🎒</div>
+<div class="qhead"><span class="qnum">22</span><span class="qtext" dir="ltr">Hi_ing</span></div>
+<div class="opts letterrow"><button type="button" class="opt picopt" onclick="pick(this,1,'u12q22')">k</button><button type="button" class="opt picopt" onclick="pick(this,0,'u12q22')">c</button><button type="button" class="opt picopt" onclick="pick(this,0,'u12q22')">t</button></div><div class="fb" id="fb-u12q22"></div></div><div class="qcard piccard" id="u12q23">
+<div class="picemoji">🚲</div>
+<div class="qhead"><span class="qnum">23</span><span class="qtext" dir="ltr">_ike</span></div>
+<div class="opts letterrow"><button type="button" class="opt picopt" onclick="pick(this,1,'u12q23')">b</button><button type="button" class="opt picopt" onclick="pick(this,0,'u12q23')">p</button><button type="button" class="opt picopt" onclick="pick(this,0,'u12q23')">l</button></div><div class="fb" id="fb-u12q23"></div></div></div><div class="sechead">🖼️ 4. Write the correct word under each picture</div><div class="picgrid"><div class="qcard piccard" id="u12q24">
+<div class="picemoji">⛸️</div>
+<div class="qhead"><span class="qnum">24</span><span class="qtext">اختر الكلمة الصحيحة للصورة</span></div>
+<div class="opts picrow"><button type="button" class="opt picopt" onclick="pick(this,1,'u12q24')">ice-skate</button><button type="button" class="opt picopt" onclick="pick(this,0,'u12q24')">forest</button><button type="button" class="opt picopt" onclick="pick(this,0,'u12q24')">rock-climbing</button><button type="button" class="opt picopt" onclick="pick(this,0,'u12q24')">mountain</button></div><div class="fb" id="fb-u12q24"></div></div><div class="qcard piccard" id="u12q25">
+<div class="picemoji">🧗</div>
+<div class="qhead"><span class="qnum">25</span><span class="qtext">اختر الكلمة الصحيحة للصورة</span></div>
+<div class="opts picrow"><button type="button" class="opt picopt" onclick="pick(this,0,'u12q25')">ice-skate</button><button type="button" class="opt picopt" onclick="pick(this,0,'u12q25')">forest</button><button type="button" class="opt picopt" onclick="pick(this,1,'u12q25')">rock-climbing</button><button type="button" class="opt picopt" onclick="pick(this,0,'u12q25')">mountain</button></div><div class="fb" id="fb-u12q25"></div></div><div class="qcard piccard" id="u12q26">
+<div class="picemoji">🌲</div>
+<div class="qhead"><span class="qnum">26</span><span class="qtext">اختر الكلمة الصحيحة للصورة</span></div>
+<div class="opts picrow"><button type="button" class="opt picopt" onclick="pick(this,0,'u12q26')">ice-skate</button><button type="button" class="opt picopt" onclick="pick(this,1,'u12q26')">forest</button><button type="button" class="opt picopt" onclick="pick(this,0,'u12q26')">rock-climbing</button><button type="button" class="opt picopt" onclick="pick(this,0,'u12q26')">mountain</button></div><div class="fb" id="fb-u12q26"></div></div><div class="qcard piccard" id="u12q27">
+<div class="picemoji">⛰️</div>
+<div class="qhead"><span class="qnum">27</span><span class="qtext">اختر الكلمة الصحيحة للصورة</span></div>
+<div class="opts picrow"><button type="button" class="opt picopt" onclick="pick(this,0,'u12q27')">ice-skate</button><button type="button" class="opt picopt" onclick="pick(this,0,'u12q27')">forest</button><button type="button" class="opt picopt" onclick="pick(this,0,'u12q27')">rock-climbing</button><button type="button" class="opt picopt" onclick="pick(this,1,'u12q27')">mountain</button></div><div class="fb" id="fb-u12q27"></div></div></div>
+<div class="unitdone" id="done3"></div>
+</div><div class="unit-panel" id="panel4">
+<div class="unit-hero"><div class="uh-icon">👔</div>
+<div><div class="uh-eyebrow">Super Goal 1 · Unit 13 Worksheet</div>
+<h2 dir="ltr">What Are You Going to Wear There?</h2><div class="uh-ar">ماذا سترتدي هناك؟ · 30 سؤالاً تفاعلياً</div></div></div>
+<div class="progresswrap"><div class="progressbar"><div class="progressfill" id="prog4"></div></div><div class="progresstxt" id="progtxt4">0 / 30</div></div>
+<div class="rules"><div class="rulecard"><div class="rulebody">📌 going to للمستقبل المخطط: am / is / are + going to + مصدر</div></div><div class="rulecard"><div class="rulebody">📌 النفي: isn’t / aren’t going to ✦ السؤال: نبدأ بـ Am / Is / Are</div></div><div class="rulecard"><div class="rulebody">📌 المضارع المستمر للمستقبل القريب المرتب له: We are watching a film this evening</div></div></div><div class="sechead">📝 A. Choose the correct answer — Grammar</div><div class="qcard" id="u13q1">
+<div class="qhead"><span class="qnum">1</span><span class="qtext" dir="ltr">I’m going to ( wear – wearing – wears ) jeans.</span></div>
+<div class="opts"><button type="button" class="opt" onclick="pick(this,1,'u13q1')"><span class="ol">a</span>wear</button><button type="button" class="opt" onclick="pick(this,0,'u13q1')"><span class="ol">b</span>wearing</button><button type="button" class="opt" onclick="pick(this,0,'u13q1')"><span class="ol">c</span>wears</button></div><div class="fb" id="fb-u13q1"></div></div><div class="qcard" id="u13q2">
+<div class="qhead"><span class="qnum">2</span><span class="qtext" dir="ltr">( Are – Am – Is ) you going to go to Dubai?</span></div>
+<div class="opts"><button type="button" class="opt" onclick="pick(this,1,'u13q2')"><span class="ol">a</span>Are</button><button type="button" class="opt" onclick="pick(this,0,'u13q2')"><span class="ol">b</span>Am</button><button type="button" class="opt" onclick="pick(this,0,'u13q2')"><span class="ol">c</span>Is</button></div><div class="fb" id="fb-u13q2"></div></div><div class="qcard" id="u13q3">
+<div class="qhead"><span class="qnum">3</span><span class="qtext" dir="ltr">We are ( watch – watching – watched ) a film on TV this evening.</span></div>
+<div class="opts"><button type="button" class="opt" onclick="pick(this,0,'u13q3')"><span class="ol">a</span>watch</button><button type="button" class="opt" onclick="pick(this,1,'u13q3')"><span class="ol">b</span>watching</button><button type="button" class="opt" onclick="pick(this,0,'u13q3')"><span class="ol">c</span>watched</button></div><div class="fb" id="fb-u13q3"></div></div><div class="qcard" id="u13q4">
+<div class="qhead"><span class="qnum">4</span><span class="qtext" dir="ltr">Amal is ( book – books – booking ) the restaurant tonight.</span></div>
+<div class="opts"><button type="button" class="opt" onclick="pick(this,0,'u13q4')"><span class="ol">a</span>book</button><button type="button" class="opt" onclick="pick(this,0,'u13q4')"><span class="ol">b</span>books</button><button type="button" class="opt" onclick="pick(this,1,'u13q4')"><span class="ol">c</span>booking</button></div><div class="fb" id="fb-u13q4"></div></div><div class="sechead">✏️ B1. Correct the underlined word — صحّح</div><div class="qcard" id="u13q5">
+<div class="qhead"><span class="qnum">5</span><span class="qtext" dir="ltr">I’m going to meeting my friends. (Correct: meeting)</span></div>
+<div class="fillrow">
+<input type="text" class="fillin" id="in-u13q5" dir="ltr" autocomplete="off" autocapitalize="off" placeholder="اكتب الإجابة هنا...">
+<button type="button" class="checkbtn" onclick="checkFill('u13q5')">تحقق ✓</button>
+</div><div class="fb" id="fb-u13q5"></div></div><div class="qcard" id="u13q6">
+<div class="qhead"><span class="qnum">6</span><span class="qtext" dir="ltr">He is wash his car on Wednesday. (Correct: wash)</span></div>
+<div class="fillrow">
+<input type="text" class="fillin" id="in-u13q6" dir="ltr" autocomplete="off" autocapitalize="off" placeholder="اكتب الإجابة هنا...">
+<button type="button" class="checkbtn" onclick="checkFill('u13q6')">تحقق ✓</button>
+</div><div class="fb" id="fb-u13q6"></div></div><div class="sechead">🚫 B2. Give the negative — انفِ</div><div class="qcard" id="u13q7">
+<div class="qhead"><span class="qnum">7</span><span class="qtext" dir="ltr">Ahmad is going to wear sandals to the beach.</span></div>
+<div class="fillrow">
+<input type="text" class="fillin" id="in-u13q7" dir="ltr" autocomplete="off" autocapitalize="off" placeholder="اكتب الإجابة هنا...">
+<button type="button" class="checkbtn" onclick="checkFill('u13q7')">تحقق ✓</button>
+</div><div class="fb" id="fb-u13q7"></div></div><div class="qcard" id="u13q8">
+<div class="qhead"><span class="qnum">8</span><span class="qtext" dir="ltr">Mark is going to wear jeans.</span></div>
+<div class="fillrow">
+<input type="text" class="fillin" id="in-u13q8" dir="ltr" autocomplete="off" autocapitalize="off" placeholder="اكتب الإجابة هنا...">
+<button type="button" class="checkbtn" onclick="checkFill('u13q8')">تحقق ✓</button>
+</div><div class="fb" id="fb-u13q8"></div></div><div class="sechead">🔀 B3. Reorder — رتّب</div><div class="qcard" id="u13q9">
+<div class="qhead"><span class="qnum">9</span><span class="qtext" dir="ltr">She / going / a new dress / is / to buy</span></div>
+<div class="fillrow">
+<input type="text" class="fillin" id="in-u13q9" dir="ltr" autocomplete="off" autocapitalize="off" placeholder="اكتب الإجابة هنا...">
+<button type="button" class="checkbtn" onclick="checkFill('u13q9')">تحقق ✓</button>
+</div><div class="fb" id="fb-u13q9"></div></div><div class="qcard" id="u13q10">
+<div class="qhead"><span class="qnum">10</span><span class="qtext" dir="ltr">Ali wears a ( lovely, leather, black ) shoes. — رتّب الصفات</span></div>
+<div class="fillrow">
+<input type="text" class="fillin" id="in-u13q10" dir="ltr" autocomplete="off" autocapitalize="off" placeholder="اكتب الإجابة هنا...">
+<button type="button" class="checkbtn" onclick="checkFill('u13q10')">تحقق ✓</button>
+</div><div class="fb" id="fb-u13q10"></div></div><div class="sechead">❔ B4. Make a Yes / No question</div><div class="qcard" id="u13q11">
+<div class="qhead"><span class="qnum">11</span><span class="qtext" dir="ltr">They are going to buy a tie for their dad.</span></div>
+<div class="fillrow">
+<input type="text" class="fillin" id="in-u13q11" dir="ltr" autocomplete="off" autocapitalize="off" placeholder="اكتب الإجابة هنا...">
+<button type="button" class="checkbtn" onclick="checkFill('u13q11')">تحقق ✓</button>
+</div><div class="fb" id="fb-u13q11"></div></div><div class="qcard" id="u13q12">
+<div class="qhead"><span class="qnum">12</span><span class="qtext" dir="ltr">She is going to fly to Dubai.</span></div>
+<div class="fillrow">
+<input type="text" class="fillin" id="in-u13q12" dir="ltr" autocomplete="off" autocapitalize="off" placeholder="اكتب الإجابة هنا...">
+<button type="button" class="checkbtn" onclick="checkFill('u13q12')">تحقق ✓</button>
+</div><div class="fb" id="fb-u13q12"></div></div><div class="sechead">🔤 A. Choose the correct letter — Vocabulary</div><div class="qcard" id="u13q13">
+<div class="qhead"><span class="qnum">13</span><span class="qtext" dir="ltr">Basketball players wear snea_ers. ( k – d – f )</span></div>
+<div class="opts"><button type="button" class="opt" onclick="pick(this,1,'u13q13')"><span class="ol">a</span>k</button><button type="button" class="opt" onclick="pick(this,0,'u13q13')"><span class="ol">b</span>d</button><button type="button" class="opt" onclick="pick(this,0,'u13q13')"><span class="ol">c</span>f</button></div><div class="fb" id="fb-u13q13"></div></div><div class="qcard" id="u13q14">
+<div class="qhead"><span class="qnum">14</span><span class="qtext" dir="ltr">Is it better to have a rain_oat or an umbrella? ( v – c – a )</span></div>
+<div class="opts"><button type="button" class="opt" onclick="pick(this,0,'u13q14')"><span class="ol">a</span>v</button><button type="button" class="opt" onclick="pick(this,1,'u13q14')"><span class="ol">b</span>c</button><button type="button" class="opt" onclick="pick(this,0,'u13q14')"><span class="ol">c</span>a</button></div><div class="fb" id="fb-u13q14"></div></div><div class="qcard" id="u13q15">
+<div class="qhead"><span class="qnum">15</span><span class="qtext" dir="ltr">A businessman usually wears a suit and a _ie. ( s – t – p )</span></div>
+<div class="opts"><button type="button" class="opt" onclick="pick(this,0,'u13q15')"><span class="ol">a</span>s</button><button type="button" class="opt" onclick="pick(this,1,'u13q15')"><span class="ol">b</span>t</button><button type="button" class="opt" onclick="pick(this,0,'u13q15')"><span class="ol">c</span>p</button></div><div class="fb" id="fb-u13q15"></div></div><div class="sechead">🎯 B. Find the odd words — الكلمة الشاذة</div><div class="qcard" id="u13q16">
+<div class="qhead"><span class="qnum">16</span><span class="qtext" dir="ltr">Choose the odd word:</span></div>
+<div class="opts"><button type="button" class="opt" onclick="pick(this,0,'u13q16')"><span class="ol">a</span>dress</button><button type="button" class="opt" onclick="pick(this,1,'u13q16')"><span class="ol">b</span>jeans</button><button type="button" class="opt" onclick="pick(this,0,'u13q16')"><span class="ol">c</span>abaya</button><button type="button" class="opt" onclick="pick(this,0,'u13q16')"><span class="ol">d</span>skirt</button></div><div class="fb" id="fb-u13q16"></div></div><div class="qcard" id="u13q17">
+<div class="qhead"><span class="qnum">17</span><span class="qtext" dir="ltr">Choose the odd word:</span></div>
+<div class="opts"><button type="button" class="opt" onclick="pick(this,1,'u13q17')"><span class="ol">a</span>shirt</button><button type="button" class="opt" onclick="pick(this,0,'u13q17')"><span class="ol">b</span>boots</button><button type="button" class="opt" onclick="pick(this,0,'u13q17')"><span class="ol">c</span>sandals</button><button type="button" class="opt" onclick="pick(this,0,'u13q17')"><span class="ol">d</span>shoes</button></div><div class="fb" id="fb-u13q17"></div></div><div class="qcard" id="u13q18">
+<div class="qhead"><span class="qnum">18</span><span class="qtext" dir="ltr">Choose the odd word:</span></div>
+<div class="opts"><button type="button" class="opt" onclick="pick(this,0,'u13q18')"><span class="ol">a</span>T-shirt</button><button type="button" class="opt" onclick="pick(this,0,'u13q18')"><span class="ol">b</span>shirt</button><button type="button" class="opt" onclick="pick(this,1,'u13q18')"><span class="ol">c</span>gloves</button><button type="button" class="opt" onclick="pick(this,0,'u13q18')"><span class="ol">d</span>blouse</button></div><div class="fb" id="fb-u13q18"></div></div><div class="sechead">🔡 E. Fill in the missing letters</div><div class="picgrid"><div class="qcard piccard" id="u13q19">
+<div class="picemoji">🧥</div>
+<div class="qhead"><span class="qnum">19</span><span class="qtext" dir="ltr">J_cket</span></div>
+<div class="opts letterrow"><button type="button" class="opt picopt" onclick="pick(this,1,'u13q19')">a</button><button type="button" class="opt picopt" onclick="pick(this,0,'u13q19')">e</button><button type="button" class="opt picopt" onclick="pick(this,0,'u13q19')">o</button></div><div class="fb" id="fb-u13q19"></div></div><div class="qcard piccard" id="u13q20">
+<div class="picemoji">🏞️</div>
+<div class="qhead"><span class="qnum">20</span><span class="qtext" dir="ltr">f_lls</span></div>
+<div class="opts letterrow"><button type="button" class="opt picopt" onclick="pick(this,1,'u13q20')">a</button><button type="button" class="opt picopt" onclick="pick(this,0,'u13q20')">u</button><button type="button" class="opt picopt" onclick="pick(this,0,'u13q20')">i</button></div><div class="fb" id="fb-u13q20"></div></div><div class="qcard piccard" id="u13q21">
+<div class="picemoji">👗</div>
+<div class="qhead"><span class="qnum">21</span><span class="qtext" dir="ltr">dr_ss</span></div>
+<div class="opts letterrow"><button type="button" class="opt picopt" onclick="pick(this,1,'u13q21')">e</button><button type="button" class="opt picopt" onclick="pick(this,0,'u13q21')">a</button><button type="button" class="opt picopt" onclick="pick(this,0,'u13q21')">i</button></div><div class="fb" id="fb-u13q21"></div></div></div><div class="sechead">📚 C. Choose the correct answer</div><div class="qcard" id="u13q22">
+<div class="qhead"><span class="qnum">22</span><span class="qtext" dir="ltr">Saudi men wear ( thobe – suit – tie ).</span></div>
+<div class="opts"><button type="button" class="opt" onclick="pick(this,1,'u13q22')"><span class="ol">a</span>thobe</button><button type="button" class="opt" onclick="pick(this,0,'u13q22')"><span class="ol">b</span>suit</button><button type="button" class="opt" onclick="pick(this,0,'u13q22')"><span class="ol">c</span>tie</button></div><div class="fb" id="fb-u13q22"></div></div><div class="qcard" id="u13q23">
+<div class="qhead"><span class="qnum">23</span><span class="qtext" dir="ltr">In the summer, Ali wears shorts and ( boots – jacket – sandals ).</span></div>
+<div class="opts"><button type="button" class="opt" onclick="pick(this,0,'u13q23')"><span class="ol">a</span>boots</button><button type="button" class="opt" onclick="pick(this,0,'u13q23')"><span class="ol">b</span>jacket</button><button type="button" class="opt" onclick="pick(this,1,'u13q23')"><span class="ol">c</span>sandals</button></div><div class="fb" id="fb-u13q23"></div></div><div class="qcard" id="u13q24">
+<div class="qhead"><span class="qnum">24</span><span class="qtext" dir="ltr">In cold weather, you need a ( sunglasses – coat – shirt ).</span></div>
+<div class="opts"><button type="button" class="opt" onclick="pick(this,0,'u13q24')"><span class="ol">a</span>sunglasses</button><button type="button" class="opt" onclick="pick(this,1,'u13q24')"><span class="ol">b</span>coat</button><button type="button" class="opt" onclick="pick(this,0,'u13q24')"><span class="ol">c</span>shirt</button></div><div class="fb" id="fb-u13q24"></div></div><div class="qcard" id="u13q25">
+<div class="qhead"><span class="qnum">25</span><span class="qtext" dir="ltr">In Saudi Arabia, all the women wear ( laptop – abaya – lamp ).</span></div>
+<div class="opts"><button type="button" class="opt" onclick="pick(this,0,'u13q25')"><span class="ol">a</span>laptop</button><button type="button" class="opt" onclick="pick(this,1,'u13q25')"><span class="ol">b</span>abaya</button><button type="button" class="opt" onclick="pick(this,0,'u13q25')"><span class="ol">c</span>lamp</button></div><div class="fb" id="fb-u13q25"></div></div><div class="sechead">🖼️ D. Choose the correct word for each picture</div><div class="picgrid"><div class="qcard piccard" id="u13q26">
+<div class="picemoji">🧦</div>
+<div class="qhead"><span class="qnum">26</span><span class="qtext">اختر الكلمة الصحيحة للصورة</span></div>
+<div class="opts picrow"><button type="button" class="opt picopt" onclick="pick(this,0,'u13q26')">pants</button><button type="button" class="opt picopt" onclick="pick(this,1,'u13q26')">socks</button><button type="button" class="opt picopt" onclick="pick(this,0,'u13q26')">coat</button><button type="button" class="opt picopt" onclick="pick(this,0,'u13q26')">skirt</button><button type="button" class="opt picopt" onclick="pick(this,0,'u13q26')">boots</button></div><div class="fb" id="fb-u13q26"></div></div><div class="qcard piccard" id="u13q27">
+<div class="picemoji">👖</div>
+<div class="qhead"><span class="qnum">27</span><span class="qtext">اختر الكلمة الصحيحة للصورة</span></div>
+<div class="opts picrow"><button type="button" class="opt picopt" onclick="pick(this,1,'u13q27')">pants</button><button type="button" class="opt picopt" onclick="pick(this,0,'u13q27')">socks</button><button type="button" class="opt picopt" onclick="pick(this,0,'u13q27')">coat</button><button type="button" class="opt picopt" onclick="pick(this,0,'u13q27')">skirt</button><button type="button" class="opt picopt" onclick="pick(this,0,'u13q27')">boots</button></div><div class="fb" id="fb-u13q27"></div></div><div class="qcard piccard" id="u13q28">
+<div class="picemoji">🧥</div>
+<div class="qhead"><span class="qnum">28</span><span class="qtext">اختر الكلمة الصحيحة للصورة</span></div>
+<div class="opts picrow"><button type="button" class="opt picopt" onclick="pick(this,0,'u13q28')">pants</button><button type="button" class="opt picopt" onclick="pick(this,0,'u13q28')">socks</button><button type="button" class="opt picopt" onclick="pick(this,1,'u13q28')">coat</button><button type="button" class="opt picopt" onclick="pick(this,0,'u13q28')">skirt</button><button type="button" class="opt picopt" onclick="pick(this,0,'u13q28')">boots</button></div><div class="fb" id="fb-u13q28"></div></div><div class="qcard piccard" id="u13q29">
+<div class="picemoji">👗</div>
+<div class="qhead"><span class="qnum">29</span><span class="qtext">اختر الكلمة الصحيحة للصورة</span></div>
+<div class="opts picrow"><button type="button" class="opt picopt" onclick="pick(this,0,'u13q29')">pants</button><button type="button" class="opt picopt" onclick="pick(this,0,'u13q29')">socks</button><button type="button" class="opt picopt" onclick="pick(this,0,'u13q29')">coat</button><button type="button" class="opt picopt" onclick="pick(this,1,'u13q29')">skirt</button><button type="button" class="opt picopt" onclick="pick(this,0,'u13q29')">boots</button></div><div class="fb" id="fb-u13q29"></div></div><div class="qcard piccard" id="u13q30">
+<div class="picemoji">🥾</div>
+<div class="qhead"><span class="qnum">30</span><span class="qtext">اختر الكلمة الصحيحة للصورة</span></div>
+<div class="opts picrow"><button type="button" class="opt picopt" onclick="pick(this,0,'u13q30')">pants</button><button type="button" class="opt picopt" onclick="pick(this,0,'u13q30')">socks</button><button type="button" class="opt picopt" onclick="pick(this,0,'u13q30')">coat</button><button type="button" class="opt picopt" onclick="pick(this,0,'u13q30')">skirt</button><button type="button" class="opt picopt" onclick="pick(this,1,'u13q30')">boots</button></div><div class="fb" id="fb-u13q30"></div></div></div>
+<div class="unitdone" id="done4"></div>
+</div><div class="unit-panel" id="panel5">
+<div class="unit-hero"><div class="uh-icon">🎉</div>
+<div><div class="uh-eyebrow">Super Goal 1 · Unit 14 Worksheet</div>
+<h2 dir="ltr">Let’s Celebrate</h2><div class="uh-ar">هيا نحتفل · 25 سؤالاً تفاعلياً</div></div></div>
+<div class="progresswrap"><div class="progressbar"><div class="progressfill" id="prog5"></div></div><div class="progresstxt" id="progtxt5">0 / 25</div></div>
+<div class="rules"><div class="rulecard"><div class="rulebody">📌 Let’s + مصدر للاقتراح ✦ need to / like to + مصدر</div></div><div class="rulecard"><div class="rulebody">📌 must / shouldn’t + مصدر بدون to: We must follow the rules</div></div><div class="rulecard"><div class="rulebody">📌 ضمائر المفعول: me – you – him – her – us – them</div></div></div><div class="sechead">📝 A. Choose the correct answer — Grammar</div><div class="qcard" id="u14q1">
+<div class="qhead"><span class="qnum">1</span><span class="qtext" dir="ltr">Sandra is her best friend. She’s going to visit ( her – she – my ).</span></div>
+<div class="opts"><button type="button" class="opt" onclick="pick(this,1,'u14q1')"><span class="ol">a</span>her</button><button type="button" class="opt" onclick="pick(this,0,'u14q1')"><span class="ol">b</span>she</button><button type="button" class="opt" onclick="pick(this,0,'u14q1')"><span class="ol">c</span>my</button></div><div class="fb" id="fb-u14q1"></div></div><div class="qcard" id="u14q2">
+<div class="qhead"><span class="qnum">2</span><span class="qtext" dir="ltr">I need to ( studied – study – studying ) hard.</span></div>
+<div class="opts"><button type="button" class="opt" onclick="pick(this,0,'u14q2')"><span class="ol">a</span>studied</button><button type="button" class="opt" onclick="pick(this,1,'u14q2')"><span class="ol">b</span>study</button><button type="button" class="opt" onclick="pick(this,0,'u14q2')"><span class="ol">c</span>studying</button></div><div class="fb" id="fb-u14q2"></div></div><div class="qcard" id="u14q3">
+<div class="qhead"><span class="qnum">3</span><span class="qtext" dir="ltr">Let’s ( play – playing – plays ) video games.</span></div>
+<div class="opts"><button type="button" class="opt" onclick="pick(this,1,'u14q3')"><span class="ol">a</span>play</button><button type="button" class="opt" onclick="pick(this,0,'u14q3')"><span class="ol">b</span>playing</button><button type="button" class="opt" onclick="pick(this,0,'u14q3')"><span class="ol">c</span>plays</button></div><div class="fb" id="fb-u14q3"></div></div><div class="qcard" id="u14q4">
+<div class="qhead"><span class="qnum">4</span><span class="qtext" dir="ltr">He doesn’t like to ( sharing – shared – share ) his laptop.</span></div>
+<div class="opts"><button type="button" class="opt" onclick="pick(this,0,'u14q4')"><span class="ol">a</span>sharing</button><button type="button" class="opt" onclick="pick(this,0,'u14q4')"><span class="ol">b</span>shared</button><button type="button" class="opt" onclick="pick(this,1,'u14q4')"><span class="ol">c</span>share</button></div><div class="fb" id="fb-u14q4"></div></div><div class="qcard" id="u14q5">
+<div class="qhead"><span class="qnum">5</span><span class="qtext" dir="ltr">We must ( followed – follow – following ) the rules.</span></div>
+<div class="opts"><button type="button" class="opt" onclick="pick(this,0,'u14q5')"><span class="ol">a</span>followed</button><button type="button" class="opt" onclick="pick(this,1,'u14q5')"><span class="ol">b</span>follow</button><button type="button" class="opt" onclick="pick(this,0,'u14q5')"><span class="ol">c</span>following</button></div><div class="fb" id="fb-u14q5"></div></div><div class="qcard" id="u14q6">
+<div class="qhead"><span class="qnum">6</span><span class="qtext" dir="ltr">They shouldn’t ( eats – eat – eating ) junk food.</span></div>
+<div class="opts"><button type="button" class="opt" onclick="pick(this,0,'u14q6')"><span class="ol">a</span>eats</button><button type="button" class="opt" onclick="pick(this,1,'u14q6')"><span class="ol">b</span>eat</button><button type="button" class="opt" onclick="pick(this,0,'u14q6')"><span class="ol">c</span>eating</button></div><div class="fb" id="fb-u14q6"></div></div><div class="sechead">✏️ B1. Correct the underlined word — صحّح</div><div class="qcard" id="u14q7">
+<div class="qhead"><span class="qnum">7</span><span class="qtext" dir="ltr">I’m going to be at home tonight. Please call him. (Correct: him)</span></div>
+<div class="fillrow">
+<input type="text" class="fillin" id="in-u14q7" dir="ltr" autocomplete="off" autocapitalize="off" placeholder="اكتب الإجابة هنا...">
+<button type="button" class="checkbtn" onclick="checkFill('u14q7')">تحقق ✓</button>
+</div><div class="fb" id="fb-u14q7"></div></div><div class="qcard" id="u14q8">
+<div class="qhead"><span class="qnum">8</span><span class="qtext" dir="ltr">Let’s sending greeting cards. (Correct: sending)</span></div>
+<div class="fillrow">
+<input type="text" class="fillin" id="in-u14q8" dir="ltr" autocomplete="off" autocapitalize="off" placeholder="اكتب الإجابة هنا...">
+<button type="button" class="checkbtn" onclick="checkFill('u14q8')">تحقق ✓</button>
+</div><div class="fb" id="fb-u14q8"></div></div><div class="qcard" id="u14q9">
+<div class="qhead"><span class="qnum">9</span><span class="qtext" dir="ltr">She shouldn’t spends all her money. (Correct: spends)</span></div>
+<div class="fillrow">
+<input type="text" class="fillin" id="in-u14q9" dir="ltr" autocomplete="off" autocapitalize="off" placeholder="اكتب الإجابة هنا...">
+<button type="button" class="checkbtn" onclick="checkFill('u14q9')">تحقق ✓</button>
+</div><div class="fb" id="fb-u14q9"></div></div><div class="qcard" id="u14q10">
+<div class="qhead"><span class="qnum">10</span><span class="qtext" dir="ltr">You must does your homework tonight. (Correct: does)</span></div>
+<div class="fillrow">
+<input type="text" class="fillin" id="in-u14q10" dir="ltr" autocomplete="off" autocapitalize="off" placeholder="اكتب الإجابة هنا...">
+<button type="button" class="checkbtn" onclick="checkFill('u14q10')">تحقق ✓</button>
+</div><div class="fb" id="fb-u14q10"></div></div><div class="sechead">🔀 B2. Unscramble the sentences — رتّب</div><div class="qcard" id="u14q11">
+<div class="qhead"><span class="qnum">11</span><span class="qtext" dir="ltr">play / Let’s / games / video</span></div>
+<div class="fillrow">
+<input type="text" class="fillin" id="in-u14q11" dir="ltr" autocomplete="off" autocapitalize="off" placeholder="اكتب الإجابة هنا...">
+<button type="button" class="checkbtn" onclick="checkFill('u14q11')">تحقق ✓</button>
+</div><div class="fb" id="fb-u14q11"></div></div><div class="qcard" id="u14q12">
+<div class="qhead"><span class="qnum">12</span><span class="qtext" dir="ltr">snacks / to buy / you / Do / need / ?</span></div>
+<div class="fillrow">
+<input type="text" class="fillin" id="in-u14q12" dir="ltr" autocomplete="off" autocapitalize="off" placeholder="اكتب الإجابة هنا...">
+<button type="button" class="checkbtn" onclick="checkFill('u14q12')">تحقق ✓</button>
+</div><div class="fb" id="fb-u14q12"></div></div><div class="qcard" id="u14q13">
+<div class="qhead"><span class="qnum">13</span><span class="qtext" dir="ltr">my / to call / need / I / friends</span></div>
+<div class="fillrow">
+<input type="text" class="fillin" id="in-u14q13" dir="ltr" autocomplete="off" autocapitalize="off" placeholder="اكتب الإجابة هنا...">
+<button type="button" class="checkbtn" onclick="checkFill('u14q13')">تحقق ✓</button>
+</div><div class="fb" id="fb-u14q13"></div></div><div class="sechead">📚 A. Choose the best answer — Vocabulary</div><div class="qcard" id="u14q14">
+<div class="qhead"><span class="qnum">14</span><span class="qtext" dir="ltr">On national days, people fly ( cards – flags – phones ) from their houses.</span></div>
+<div class="opts"><button type="button" class="opt" onclick="pick(this,0,'u14q14')"><span class="ol">a</span>cards</button><button type="button" class="opt" onclick="pick(this,1,'u14q14')"><span class="ol">b</span>flags</button><button type="button" class="opt" onclick="pick(this,0,'u14q14')"><span class="ol">c</span>phones</button></div><div class="fb" id="fb-u14q14"></div></div><div class="qcard" id="u14q15">
+<div class="qhead"><span class="qnum">15</span><span class="qtext" dir="ltr">People ( decorate – share – drink ) their homes with bright lights.</span></div>
+<div class="opts"><button type="button" class="opt" onclick="pick(this,1,'u14q15')"><span class="ol">a</span>decorate</button><button type="button" class="opt" onclick="pick(this,0,'u14q15')"><span class="ol">b</span>share</button><button type="button" class="opt" onclick="pick(this,0,'u14q15')"><span class="ol">c</span>drink</button></div><div class="fb" id="fb-u14q15"></div></div><div class="qcard" id="u14q16">
+<div class="qhead"><span class="qnum">16</span><span class="qtext" dir="ltr">You can watch the ( fireworks – buses – hotels ) in the sky at night.</span></div>
+<div class="opts"><button type="button" class="opt" onclick="pick(this,1,'u14q16')"><span class="ol">a</span>fireworks</button><button type="button" class="opt" onclick="pick(this,0,'u14q16')"><span class="ol">b</span>buses</button><button type="button" class="opt" onclick="pick(this,0,'u14q16')"><span class="ol">c</span>hotels</button></div><div class="fb" id="fb-u14q16"></div></div><div class="sechead">🔡 B. Fill in the missing letters</div><div class="picgrid"><div class="qcard piccard" id="u14q17">
+<div class="picemoji">🧀🍘</div>
+<div class="qhead"><span class="qnum">17</span><span class="qtext" dir="ltr">s_ack</span></div>
+<div class="opts letterrow"><button type="button" class="opt picopt" onclick="pick(this,1,'u14q17')">n</button><button type="button" class="opt picopt" onclick="pick(this,0,'u14q17')">t</button><button type="button" class="opt picopt" onclick="pick(this,0,'u14q17')">m</button></div><div class="fb" id="fb-u14q17"></div></div><div class="qcard piccard" id="u14q18">
+<div class="picemoji">🎓</div>
+<div class="qhead"><span class="qnum">18</span><span class="qtext" dir="ltr">_raduation</span></div>
+<div class="opts letterrow"><button type="button" class="opt picopt" onclick="pick(this,1,'u14q18')">G</button><button type="button" class="opt picopt" onclick="pick(this,0,'u14q18')">B</button><button type="button" class="opt picopt" onclick="pick(this,0,'u14q18')">T</button></div><div class="fb" id="fb-u14q18"></div></div></div><div class="sechead">🔤 C. Choose the correct letter</div><div class="qcard" id="u14q19">
+<div class="qhead"><span class="qnum">19</span><span class="qtext" dir="ltr">At the end of Ramadan, Muslims donate food to the poo_. ( w – a – r )</span></div>
+<div class="opts"><button type="button" class="opt" onclick="pick(this,0,'u14q19')"><span class="ol">a</span>w</button><button type="button" class="opt" onclick="pick(this,0,'u14q19')"><span class="ol">b</span>a</button><button type="button" class="opt" onclick="pick(this,1,'u14q19')"><span class="ol">c</span>r</button></div><div class="fb" id="fb-u14q19"></div></div><div class="qcard" id="u14q20">
+<div class="qhead"><span class="qnum">20</span><span class="qtext" dir="ltr">In celebration of Eid Al-Adha, families sacri_ice an animal. ( o – f – p )</span></div>
+<div class="opts"><button type="button" class="opt" onclick="pick(this,0,'u14q20')"><span class="ol">a</span>o</button><button type="button" class="opt" onclick="pick(this,1,'u14q20')"><span class="ol">b</span>f</button><button type="button" class="opt" onclick="pick(this,0,'u14q20')"><span class="ol">c</span>p</button></div><div class="fb" id="fb-u14q20"></div></div><div class="qcard" id="u14q21">
+<div class="qhead"><span class="qnum">21</span><span class="qtext" dir="ltr">Saudi Nationa_ Day is on September 23rd. ( l – k – j )</span></div>
+<div class="opts"><button type="button" class="opt" onclick="pick(this,1,'u14q21')"><span class="ol">a</span>l</button><button type="button" class="opt" onclick="pick(this,0,'u14q21')"><span class="ol">b</span>k</button><button type="button" class="opt" onclick="pick(this,0,'u14q21')"><span class="ol">c</span>j</button></div><div class="fb" id="fb-u14q21"></div></div><div class="sechead">🖼️ D. Choose the correct word for each picture</div><div class="picgrid"><div class="qcard piccard" id="u14q22">
+<div class="picemoji"><svg viewBox="0 0 64 64" width="60" height="60" aria-label="dates"><path d="M32 6 C26 12 24 18 26 24" fill="none" stroke="#7a5c2e" stroke-width="3" stroke-linecap="round"/><ellipse cx="22" cy="34" rx="8" ry="12" fill="#6b3f1d" stroke="#4a2a10" stroke-width="2"/><ellipse cx="34" cy="38" rx="8" ry="12" fill="#7a4a22" stroke="#4a2a10" stroke-width="2"/><ellipse cx="44" cy="30" rx="7" ry="11" fill="#6b3f1d" stroke="#4a2a10" stroke-width="2"/><ellipse cx="28" cy="48" rx="7" ry="10" fill="#8a5526" stroke="#4a2a10" stroke-width="2"/><ellipse cx="42" cy="46" rx="7" ry="10" fill="#6b3f1d" stroke="#4a2a10" stroke-width="2"/></svg></div>
+<div class="qhead"><span class="qnum">22</span><span class="qtext">اختر الكلمة الصحيحة للصورة</span></div>
+<div class="opts picrow"><button type="button" class="opt picopt" onclick="pick(this,1,'u14q22')">dates</button><button type="button" class="opt picopt" onclick="pick(this,0,'u14q22')">gift</button><button type="button" class="opt picopt" onclick="pick(this,0,'u14q22')">fireworks</button><button type="button" class="opt picopt" onclick="pick(this,0,'u14q22')">lamb</button></div><div class="fb" id="fb-u14q22"></div></div><div class="qcard piccard" id="u14q23">
+<div class="picemoji">🐑</div>
+<div class="qhead"><span class="qnum">23</span><span class="qtext">اختر الكلمة الصحيحة للصورة</span></div>
+<div class="opts picrow"><button type="button" class="opt picopt" onclick="pick(this,0,'u14q23')">dates</button><button type="button" class="opt picopt" onclick="pick(this,0,'u14q23')">gift</button><button type="button" class="opt picopt" onclick="pick(this,0,'u14q23')">fireworks</button><button type="button" class="opt picopt" onclick="pick(this,1,'u14q23')">lamb</button></div><div class="fb" id="fb-u14q23"></div></div><div class="qcard piccard" id="u14q24">
+<div class="picemoji">🎁</div>
+<div class="qhead"><span class="qnum">24</span><span class="qtext">اختر الكلمة الصحيحة للصورة</span></div>
+<div class="opts picrow"><button type="button" class="opt picopt" onclick="pick(this,0,'u14q24')">dates</button><button type="button" class="opt picopt" onclick="pick(this,1,'u14q24')">gift</button><button type="button" class="opt picopt" onclick="pick(this,0,'u14q24')">fireworks</button><button type="button" class="opt picopt" onclick="pick(this,0,'u14q24')">lamb</button></div><div class="fb" id="fb-u14q24"></div></div><div class="qcard piccard" id="u14q25">
+<div class="picemoji">🎆</div>
+<div class="qhead"><span class="qnum">25</span><span class="qtext">اختر الكلمة الصحيحة للصورة</span></div>
+<div class="opts picrow"><button type="button" class="opt picopt" onclick="pick(this,0,'u14q25')">dates</button><button type="button" class="opt picopt" onclick="pick(this,0,'u14q25')">gift</button><button type="button" class="opt picopt" onclick="pick(this,1,'u14q25')">fireworks</button><button type="button" class="opt picopt" onclick="pick(this,0,'u14q25')">lamb</button></div><div class="fb" id="fb-u14q25"></div></div></div>
+<div class="unitdone" id="done5"></div>
+</div><div class="unit-panel" id="panel6">
+<div class="unit-hero"><div class="uh-icon">📺</div>
+<div><div class="uh-eyebrow">Super Goal 1 · Unit 15 Worksheet</div>
+<h2 dir="ltr">Then and Now</h2><div class="uh-ar">الماضي والحاضر · 22 سؤالاً تفاعلياً</div></div></div>
+<div class="progresswrap"><div class="progressbar"><div class="progressfill" id="prog6"></div></div><div class="progresstxt" id="progtxt6">0 / 22</div></div>
+<div class="rules"><div class="rulecard"><div class="rulebody">📌 الماضي من فعل الكون: was مع المفرد ✦ were مع الجمع و you</div></div><div class="rulecard"><div class="rulebody">📌 There was + مفرد ✦ There were + جمع (في الماضي)</div></div><div class="rulecard"><div class="rulebody">📌 السؤال: نقدّم Was / Were على الفاعل: Was she tired?</div></div></div><div class="sechead">📝 A. Choose the correct answer — Grammar</div><div class="qcard" id="u15q1">
+<div class="qhead"><span class="qnum">1</span><span class="qtext" dir="ltr">Where ( was – were – is ) you born?</span></div>
+<div class="opts"><button type="button" class="opt" onclick="pick(this,0,'u15q1')"><span class="ol">a</span>was</button><button type="button" class="opt" onclick="pick(this,1,'u15q1')"><span class="ol">b</span>were</button><button type="button" class="opt" onclick="pick(this,0,'u15q1')"><span class="ol">c</span>is</button></div><div class="fb" id="fb-u15q1"></div></div><div class="qcard" id="u15q2">
+<div class="qhead"><span class="qnum">2</span><span class="qtext" dir="ltr">Adnan ( were – are – was ) always a smart student.</span></div>
+<div class="opts"><button type="button" class="opt" onclick="pick(this,0,'u15q2')"><span class="ol">a</span>were</button><button type="button" class="opt" onclick="pick(this,0,'u15q2')"><span class="ol">b</span>are</button><button type="button" class="opt" onclick="pick(this,1,'u15q2')"><span class="ol">c</span>was</button></div><div class="fb" id="fb-u15q2"></div></div><div class="qcard" id="u15q3">
+<div class="qhead"><span class="qnum">3</span><span class="qtext" dir="ltr">( Is – was – were ) you late?</span></div>
+<div class="opts"><button type="button" class="opt" onclick="pick(this,0,'u15q3')"><span class="ol">a</span>Is</button><button type="button" class="opt" onclick="pick(this,0,'u15q3')"><span class="ol">b</span>was</button><button type="button" class="opt" onclick="pick(this,1,'u15q3')"><span class="ol">c</span>were</button></div><div class="fb" id="fb-u15q3"></div></div><div class="qcard" id="u15q4">
+<div class="qhead"><span class="qnum">4</span><span class="qtext" dir="ltr">There ( are – were – was ) many fountains in this park 20 years ago.</span></div>
+<div class="opts"><button type="button" class="opt" onclick="pick(this,0,'u15q4')"><span class="ol">a</span>are</button><button type="button" class="opt" onclick="pick(this,1,'u15q4')"><span class="ol">b</span>were</button><button type="button" class="opt" onclick="pick(this,0,'u15q4')"><span class="ol">c</span>was</button></div><div class="fb" id="fb-u15q4"></div></div><div class="qcard" id="u15q5">
+<div class="qhead"><span class="qnum">5</span><span class="qtext" dir="ltr">There ( was – is – am ) one tailor in my village 10 years ago.</span></div>
+<div class="opts"><button type="button" class="opt" onclick="pick(this,1,'u15q5')"><span class="ol">a</span>was</button><button type="button" class="opt" onclick="pick(this,0,'u15q5')"><span class="ol">b</span>is</button><button type="button" class="opt" onclick="pick(this,0,'u15q5')"><span class="ol">c</span>am</button></div><div class="fb" id="fb-u15q5"></div></div><div class="qcard" id="u15q6">
+<div class="qhead"><span class="qnum">6</span><span class="qtext" dir="ltr">Sami answers ( he – his – him ) homework everyday.</span></div>
+<div class="opts"><button type="button" class="opt" onclick="pick(this,0,'u15q6')"><span class="ol">a</span>he</button><button type="button" class="opt" onclick="pick(this,1,'u15q6')"><span class="ol">b</span>his</button><button type="button" class="opt" onclick="pick(this,0,'u15q6')"><span class="ol">c</span>him</button></div><div class="fb" id="fb-u15q6"></div></div><div class="sechead">✏️ B1. Correct the underlined word — صحّح</div><div class="qcard" id="u15q7">
+<div class="qhead"><span class="qnum">7</span><span class="qtext" dir="ltr">Tom were born in Paris. (Correct: were)</span></div>
+<div class="fillrow">
+<input type="text" class="fillin" id="in-u15q7" dir="ltr" autocomplete="off" autocapitalize="off" placeholder="اكتب الإجابة هنا...">
+<button type="button" class="checkbtn" onclick="checkFill('u15q7')">تحقق ✓</button>
+</div><div class="fb" id="fb-u15q7"></div></div><div class="qcard" id="u15q8">
+<div class="qhead"><span class="qnum">8</span><span class="qtext" dir="ltr">They was in the class. (Correct: was)</span></div>
+<div class="fillrow">
+<input type="text" class="fillin" id="in-u15q8" dir="ltr" autocomplete="off" autocapitalize="off" placeholder="اكتب الإجابة هنا...">
+<button type="button" class="checkbtn" onclick="checkFill('u15q8')">تحقق ✓</button>
+</div><div class="fb" id="fb-u15q8"></div></div><div class="sechead">✅ B2. Change from negative to affirmative — حوّل للإثبات</div><div class="qcard" id="u15q9">
+<div class="qhead"><span class="qnum">9</span><span class="qtext" dir="ltr">Ali wasn’t good in math in high school.</span></div>
+<div class="fillrow">
+<input type="text" class="fillin" id="in-u15q9" dir="ltr" autocomplete="off" autocapitalize="off" placeholder="اكتب الإجابة هنا...">
+<button type="button" class="checkbtn" onclick="checkFill('u15q9')">تحقق ✓</button>
+</div><div class="fb" id="fb-u15q9"></div></div><div class="qcard" id="u15q10">
+<div class="qhead"><span class="qnum">10</span><span class="qtext" dir="ltr">They weren’t classmates at school.</span></div>
+<div class="fillrow">
+<input type="text" class="fillin" id="in-u15q10" dir="ltr" autocomplete="off" autocapitalize="off" placeholder="اكتب الإجابة هنا...">
+<button type="button" class="checkbtn" onclick="checkFill('u15q10')">تحقق ✓</button>
+</div><div class="fb" id="fb-u15q10"></div></div><div class="sechead">❔ B3. Make a Yes / No question</div><div class="qcard" id="u15q11">
+<div class="qhead"><span class="qnum">11</span><span class="qtext" dir="ltr">There were chairs on the room.</span></div>
+<div class="fillrow">
+<input type="text" class="fillin" id="in-u15q11" dir="ltr" autocomplete="off" autocapitalize="off" placeholder="اكتب الإجابة هنا...">
+<button type="button" class="checkbtn" onclick="checkFill('u15q11')">تحقق ✓</button>
+</div><div class="fb" id="fb-u15q11"></div></div><div class="qcard" id="u15q12">
+<div class="qhead"><span class="qnum">12</span><span class="qtext" dir="ltr">She was tired.</span></div>
+<div class="fillrow">
+<input type="text" class="fillin" id="in-u15q12" dir="ltr" autocomplete="off" autocapitalize="off" placeholder="اكتب الإجابة هنا...">
+<button type="button" class="checkbtn" onclick="checkFill('u15q12')">تحقق ✓</button>
+</div><div class="fb" id="fb-u15q12"></div></div><div class="sechead">🖼️ A. Write the correct words under each picture</div><div class="picgrid"><div class="qcard piccard" id="u15q13">
+<div class="picemoji">🏙️</div>
+<div class="qhead"><span class="qnum">13</span><span class="qtext">اختر الكلمة الصحيحة للصورة</span></div>
+<div class="opts picrow"><button type="button" class="opt picopt" onclick="pick(this,0,'u15q13')">basketball</button><button type="button" class="opt picopt" onclick="pick(this,0,'u15q13')">stable</button><button type="button" class="opt picopt" onclick="pick(this,0,'u15q13')">businessman</button><button type="button" class="opt picopt" onclick="pick(this,1,'u15q13')">skyscrapers</button></div><div class="fb" id="fb-u15q13"></div></div><div class="qcard piccard" id="u15q14">
+<div class="picemoji"><svg viewBox="0 0 72 64" width="64" height="58" aria-label="stable"><path d="M8 28 L36 8 L64 28 Z" fill="#b23a3a" stroke="#7a2424" stroke-width="2"/><rect x="12" y="28" width="48" height="28" fill="#d8584f" stroke="#7a2424" stroke-width="2"/><rect x="28" y="36" width="16" height="20" rx="2" fill="#f3efe3" stroke="#7a2424" stroke-width="2"/><line x1="28" y1="36" x2="44" y2="56" stroke="#7a2424" stroke-width="2"/><line x1="44" y1="36" x2="28" y2="56" stroke="#7a2424" stroke-width="2"/><rect x="16" y="32" width="8" height="8" fill="#f3efe3" stroke="#7a2424" stroke-width="2"/><rect x="48" y="32" width="8" height="8" fill="#f3efe3" stroke="#7a2424" stroke-width="2"/></svg></div>
+<div class="qhead"><span class="qnum">14</span><span class="qtext">اختر الكلمة الصحيحة للصورة</span></div>
+<div class="opts picrow"><button type="button" class="opt picopt" onclick="pick(this,0,'u15q14')">basketball</button><button type="button" class="opt picopt" onclick="pick(this,1,'u15q14')">stable</button><button type="button" class="opt picopt" onclick="pick(this,0,'u15q14')">businessman</button><button type="button" class="opt picopt" onclick="pick(this,0,'u15q14')">skyscrapers</button></div><div class="fb" id="fb-u15q14"></div></div><div class="qcard piccard" id="u15q15">
+<div class="picemoji">🏀</div>
+<div class="qhead"><span class="qnum">15</span><span class="qtext">اختر الكلمة الصحيحة للصورة</span></div>
+<div class="opts picrow"><button type="button" class="opt picopt" onclick="pick(this,1,'u15q15')">basketball</button><button type="button" class="opt picopt" onclick="pick(this,0,'u15q15')">stable</button><button type="button" class="opt picopt" onclick="pick(this,0,'u15q15')">businessman</button><button type="button" class="opt picopt" onclick="pick(this,0,'u15q15')">skyscrapers</button></div><div class="fb" id="fb-u15q15"></div></div><div class="qcard piccard" id="u15q16">
+<div class="picemoji">🧑‍💼</div>
+<div class="qhead"><span class="qnum">16</span><span class="qtext">اختر الكلمة الصحيحة للصورة</span></div>
+<div class="opts picrow"><button type="button" class="opt picopt" onclick="pick(this,0,'u15q16')">basketball</button><button type="button" class="opt picopt" onclick="pick(this,0,'u15q16')">stable</button><button type="button" class="opt picopt" onclick="pick(this,1,'u15q16')">businessman</button><button type="button" class="opt picopt" onclick="pick(this,0,'u15q16')">skyscrapers</button></div><div class="fb" id="fb-u15q16"></div></div></div><div class="sechead">📚 B. Choose the correct answer</div><div class="qcard" id="u15q17">
+<div class="qhead"><span class="qnum">17</span><span class="qtext" dir="ltr">Giant means: very ( tall – fat – sad ) person.</span></div>
+<div class="opts"><button type="button" class="opt" onclick="pick(this,1,'u15q17')"><span class="ol">a</span>tall</button><button type="button" class="opt" onclick="pick(this,0,'u15q17')"><span class="ol">b</span>fat</button><button type="button" class="opt" onclick="pick(this,0,'u15q17')"><span class="ol">c</span>sad</button></div><div class="fb" id="fb-u15q17"></div></div><div class="qcard" id="u15q18">
+<div class="qhead"><span class="qnum">18</span><span class="qtext" dir="ltr">“You’re kidding!” means: ( You’re joking! – You’re studying! – You’re cooking ).</span></div>
+<div class="opts"><button type="button" class="opt" onclick="pick(this,1,'u15q18')"><span class="ol">a</span>You’re joking!</button><button type="button" class="opt" onclick="pick(this,0,'u15q18')"><span class="ol">b</span>You’re studying!</button><button type="button" class="opt" onclick="pick(this,0,'u15q18')"><span class="ol">c</span>You’re cooking</button></div><div class="fb" id="fb-u15q18"></div></div><div class="sechead">↔️ C. Write the opposite of these words — اكتب العكس</div><div class="qcard" id="u15q19">
+<div class="qhead"><span class="qnum">19</span><span class="qtext" dir="ltr">New ≠ ________</span></div>
+<div class="fillrow">
+<input type="text" class="fillin" id="in-u15q19" dir="ltr" autocomplete="off" autocapitalize="off" placeholder="اكتب الإجابة هنا...">
+<button type="button" class="checkbtn" onclick="checkFill('u15q19')">تحقق ✓</button>
+</div><div class="fb" id="fb-u15q19"></div></div><div class="qcard" id="u15q20">
+<div class="qhead"><span class="qnum">20</span><span class="qtext" dir="ltr">short ≠ ________</span></div>
+<div class="fillrow">
+<input type="text" class="fillin" id="in-u15q20" dir="ltr" autocomplete="off" autocapitalize="off" placeholder="اكتب الإجابة هنا...">
+<button type="button" class="checkbtn" onclick="checkFill('u15q20')">تحقق ✓</button>
+</div><div class="fb" id="fb-u15q20"></div></div><div class="sechead">🔤 D. Choose the correct letter</div><div class="qcard" id="u15q21">
+<div class="qhead"><span class="qnum">21</span><span class="qtext" dir="ltr">Jeddah is an attractive, modern po_t city. ( r – y – f )</span></div>
+<div class="opts"><button type="button" class="opt" onclick="pick(this,1,'u15q21')"><span class="ol">a</span>r</button><button type="button" class="opt" onclick="pick(this,0,'u15q21')"><span class="ol">b</span>y</button><button type="button" class="opt" onclick="pick(this,0,'u15q21')"><span class="ol">c</span>f</button></div><div class="fb" id="fb-u15q21"></div></div><div class="qcard" id="u15q22">
+<div class="qhead"><span class="qnum">22</span><span class="qtext" dir="ltr">Majed Ahmed Abdullah is one of the best football _trikers. ( d – g – s )</span></div>
+<div class="opts"><button type="button" class="opt" onclick="pick(this,0,'u15q22')"><span class="ol">a</span>d</button><button type="button" class="opt" onclick="pick(this,0,'u15q22')"><span class="ol">b</span>g</button><button type="button" class="opt" onclick="pick(this,1,'u15q22')"><span class="ol">c</span>s</button></div><div class="fb" id="fb-u15q22"></div></div>
+<div class="unitdone" id="done6"></div>
+</div><div class="unit-panel" id="panel7">
+<div class="unit-hero"><div class="uh-icon">📅</div>
+<div><div class="uh-eyebrow">Super Goal 1 · Unit 16 Worksheet</div>
+<h2 dir="ltr">What Did You Do Last Week?</h2><div class="uh-ar">ماذا فعلت الأسبوع الماضي؟ · 28 سؤالاً تفاعلياً</div></div></div>
+<div class="progresswrap"><div class="progressbar"><div class="progressfill" id="prog7"></div></div><div class="progresstxt" id="progtxt7">0 / 28</div></div>
+<div class="rules"><div class="rulecard"><div class="rulebody">📌 الماضي البسيط: yesterday / last week ← فعل + ed أو فعل شاذ (take ← took, eat ← ate)</div></div><div class="rulecard"><div class="rulebody">📌 النفي: didn’t + مصدر: She didn’t eat a snack</div></div><div class="rulecard"><div class="rulebody">📌 السؤال: Did + فاعل + مصدر؟ والإجابة Yes, he did / No, they didn’t</div></div></div><div class="sechead">📝 A. Choose the correct answer — Grammar</div><div class="qcard" id="u16q1">
+<div class="qhead"><span class="qnum">1</span><span class="qtext" dir="ltr">Ali ( work – worked – working ) yesterday.</span></div>
+<div class="opts"><button type="button" class="opt" onclick="pick(this,0,'u16q1')"><span class="ol">a</span>work</button><button type="button" class="opt" onclick="pick(this,1,'u16q1')"><span class="ol">b</span>worked</button><button type="button" class="opt" onclick="pick(this,0,'u16q1')"><span class="ol">c</span>working</button></div><div class="fb" id="fb-u16q1"></div></div><div class="qcard" id="u16q2">
+<div class="qhead"><span class="qnum">2</span><span class="qtext" dir="ltr">Last week, we ( travel – travels – travelled ) to Jeddah.</span></div>
+<div class="opts"><button type="button" class="opt" onclick="pick(this,0,'u16q2')"><span class="ol">a</span>travel</button><button type="button" class="opt" onclick="pick(this,0,'u16q2')"><span class="ol">b</span>travels</button><button type="button" class="opt" onclick="pick(this,1,'u16q2')"><span class="ol">c</span>travelled</button></div><div class="fb" id="fb-u16q2"></div></div><div class="qcard" id="u16q3">
+<div class="qhead"><span class="qnum">3</span><span class="qtext" dir="ltr">Our team ( play – plays – played ) a football match once a week.</span></div>
+<div class="opts"><button type="button" class="opt" onclick="pick(this,0,'u16q3')"><span class="ol">a</span>play</button><button type="button" class="opt" onclick="pick(this,1,'u16q3')"><span class="ol">b</span>plays</button><button type="button" class="opt" onclick="pick(this,0,'u16q3')"><span class="ol">c</span>played</button></div><div class="fb" id="fb-u16q3"></div></div><div class="qcard" id="u16q4">
+<div class="qhead"><span class="qnum">4</span><span class="qtext" dir="ltr">She didn’t ( eat – ate – eating ) a snack.</span></div>
+<div class="opts"><button type="button" class="opt" onclick="pick(this,1,'u16q4')"><span class="ol">a</span>eat</button><button type="button" class="opt" onclick="pick(this,0,'u16q4')"><span class="ol">b</span>ate</button><button type="button" class="opt" onclick="pick(this,0,'u16q4')"><span class="ol">c</span>eating</button></div><div class="fb" id="fb-u16q4"></div></div><div class="qcard" id="u16q5">
+<div class="qhead"><span class="qnum">5</span><span class="qtext" dir="ltr">Noura always ( finish – finishes – finished ) her assignments on time.</span></div>
+<div class="opts"><button type="button" class="opt" onclick="pick(this,0,'u16q5')"><span class="ol">a</span>finish</button><button type="button" class="opt" onclick="pick(this,1,'u16q5')"><span class="ol">b</span>finishes</button><button type="button" class="opt" onclick="pick(this,0,'u16q5')"><span class="ol">c</span>finished</button></div><div class="fb" id="fb-u16q5"></div></div><div class="sechead">✏️ B1. Correct the underlined word — صحّح</div><div class="qcard" id="u16q6">
+<div class="qhead"><span class="qnum">6</span><span class="qtext" dir="ltr">They didn’t saw a Star Wars film. (Correct: saw)</span></div>
+<div class="fillrow">
+<input type="text" class="fillin" id="in-u16q6" dir="ltr" autocomplete="off" autocapitalize="off" placeholder="اكتب الإجابة هنا...">
+<button type="button" class="checkbtn" onclick="checkFill('u16q6')">تحقق ✓</button>
+</div><div class="fb" id="fb-u16q6"></div></div><div class="qcard" id="u16q7">
+<div class="qhead"><span class="qnum">7</span><span class="qtext" dir="ltr">We sometimes drinks coffee in the morning. (Correct: drinks)</span></div>
+<div class="fillrow">
+<input type="text" class="fillin" id="in-u16q7" dir="ltr" autocomplete="off" autocapitalize="off" placeholder="اكتب الإجابة هنا...">
+<button type="button" class="checkbtn" onclick="checkFill('u16q7')">تحقق ✓</button>
+</div><div class="fb" id="fb-u16q7"></div></div><div class="sechead">✅ B2. Change from negative to affirmative — حوّل للإثبات</div><div class="qcard" id="u16q8">
+<div class="qhead"><span class="qnum">8</span><span class="qtext" dir="ltr">Amina didn’t talk to her friend last night.</span></div>
+<div class="fillrow">
+<input type="text" class="fillin" id="in-u16q8" dir="ltr" autocomplete="off" autocapitalize="off" placeholder="اكتب الإجابة هنا...">
+<button type="button" class="checkbtn" onclick="checkFill('u16q8')">تحقق ✓</button>
+</div><div class="fb" id="fb-u16q8"></div></div><div class="qcard" id="u16q9">
+<div class="qhead"><span class="qnum">9</span><span class="qtext" dir="ltr">Qassim didn’t surf last week.</span></div>
+<div class="fillrow">
+<input type="text" class="fillin" id="in-u16q9" dir="ltr" autocomplete="off" autocapitalize="off" placeholder="اكتب الإجابة هنا...">
+<button type="button" class="checkbtn" onclick="checkFill('u16q9')">تحقق ✓</button>
+</div><div class="fb" id="fb-u16q9"></div></div><div class="sechead">❓ B3. Answer the questions — أجب</div><div class="qcard" id="u16q10">
+<div class="qhead"><span class="qnum">10</span><span class="qtext" dir="ltr">Did he take some pictures? (Answer with: Yes)</span></div>
+<div class="fillrow">
+<input type="text" class="fillin" id="in-u16q10" dir="ltr" autocomplete="off" autocapitalize="off" placeholder="اكتب الإجابة هنا...">
+<button type="button" class="checkbtn" onclick="checkFill('u16q10')">تحقق ✓</button>
+</div><div class="fb" id="fb-u16q10"></div></div><div class="qcard" id="u16q11">
+<div class="qhead"><span class="qnum">11</span><span class="qtext" dir="ltr">Did they eat sandwiches? (Answer with: No)</span></div>
+<div class="fillrow">
+<input type="text" class="fillin" id="in-u16q11" dir="ltr" autocomplete="off" autocapitalize="off" placeholder="اكتب الإجابة هنا...">
+<button type="button" class="checkbtn" onclick="checkFill('u16q11')">تحقق ✓</button>
+</div><div class="fb" id="fb-u16q11"></div></div><div class="sechead">⏪ B4. Write the simple past tense of the verbs</div><div class="qcard" id="u16q12">
+<div class="qhead"><span class="qnum">12</span><span class="qtext" dir="ltr">do ← ________</span></div>
+<div class="fillrow">
+<input type="text" class="fillin" id="in-u16q12" dir="ltr" autocomplete="off" autocapitalize="off" placeholder="اكتب الإجابة هنا...">
+<button type="button" class="checkbtn" onclick="checkFill('u16q12')">تحقق ✓</button>
+</div><div class="fb" id="fb-u16q12"></div></div><div class="qcard" id="u16q13">
+<div class="qhead"><span class="qnum">13</span><span class="qtext" dir="ltr">take ← ________</span></div>
+<div class="fillrow">
+<input type="text" class="fillin" id="in-u16q13" dir="ltr" autocomplete="off" autocapitalize="off" placeholder="اكتب الإجابة هنا...">
+<button type="button" class="checkbtn" onclick="checkFill('u16q13')">تحقق ✓</button>
+</div><div class="fb" id="fb-u16q13"></div></div><div class="qcard" id="u16q14">
+<div class="qhead"><span class="qnum">14</span><span class="qtext" dir="ltr">clean ← ________</span></div>
+<div class="fillrow">
+<input type="text" class="fillin" id="in-u16q14" dir="ltr" autocomplete="off" autocapitalize="off" placeholder="اكتب الإجابة هنا...">
+<button type="button" class="checkbtn" onclick="checkFill('u16q14')">تحقق ✓</button>
+</div><div class="fb" id="fb-u16q14"></div></div><div class="qcard" id="u16q15">
+<div class="qhead"><span class="qnum">15</span><span class="qtext" dir="ltr">eat ← ________</span></div>
+<div class="fillrow">
+<input type="text" class="fillin" id="in-u16q15" dir="ltr" autocomplete="off" autocapitalize="off" placeholder="اكتب الإجابة هنا...">
+<button type="button" class="checkbtn" onclick="checkFill('u16q15')">تحقق ✓</button>
+</div><div class="fb" id="fb-u16q15"></div></div><div class="sechead">🔤 D. Choose the missing letters</div><div class="qcard" id="u16q16">
+<div class="qhead"><span class="qnum">16</span><span class="qtext" dir="ltr">A favorite s_ack in the U.S. is chocolate chip cookies. ( n – b – q )</span></div>
+<div class="opts"><button type="button" class="opt" onclick="pick(this,1,'u16q16')"><span class="ol">a</span>n</button><button type="button" class="opt" onclick="pick(this,0,'u16q16')"><span class="ol">b</span>b</button><button type="button" class="opt" onclick="pick(this,0,'u16q16')"><span class="ol">c</span>q</button></div><div class="fb" id="fb-u16q16"></div></div><div class="qcard" id="u16q17">
+<div class="qhead"><span class="qnum">17</span><span class="qtext" dir="ltr">Today, piz_a is popular all around the world. ( w – m – z )</span></div>
+<div class="opts"><button type="button" class="opt" onclick="pick(this,0,'u16q17')"><span class="ol">a</span>w</button><button type="button" class="opt" onclick="pick(this,0,'u16q17')"><span class="ol">b</span>m</button><button type="button" class="opt" onclick="pick(this,1,'u16q17')"><span class="ol">c</span>z</button></div><div class="fb" id="fb-u16q17"></div></div><div class="qcard" id="u16q18">
+<div class="qhead"><span class="qnum">18</span><span class="qtext" dir="ltr">Imad needed to finish his a_signment for school. ( s – g – n )</span></div>
+<div class="opts"><button type="button" class="opt" onclick="pick(this,1,'u16q18')"><span class="ol">a</span>s</button><button type="button" class="opt" onclick="pick(this,0,'u16q18')"><span class="ol">b</span>g</button><button type="button" class="opt" onclick="pick(this,0,'u16q18')"><span class="ol">c</span>n</button></div><div class="fb" id="fb-u16q18"></div></div><div class="sechead">🎯 B. Find the odd words — الكلمة الشاذة</div><div class="qcard" id="u16q19">
+<div class="qhead"><span class="qnum">19</span><span class="qtext" dir="ltr">Choose the odd word:</span></div>
+<div class="opts"><button type="button" class="opt" onclick="pick(this,0,'u16q19')"><span class="ol">a</span>Football</button><button type="button" class="opt" onclick="pick(this,0,'u16q19')"><span class="ol">b</span>volleyball</button><button type="button" class="opt" onclick="pick(this,1,'u16q19')"><span class="ol">c</span>project</button></div><div class="fb" id="fb-u16q19"></div></div><div class="qcard" id="u16q20">
+<div class="qhead"><span class="qnum">20</span><span class="qtext" dir="ltr">Choose the odd word:</span></div>
+<div class="opts"><button type="button" class="opt" onclick="pick(this,0,'u16q20')"><span class="ol">a</span>kebabs</button><button type="button" class="opt" onclick="pick(this,0,'u16q20')"><span class="ol">b</span>rice</button><button type="button" class="opt" onclick="pick(this,1,'u16q20')"><span class="ol">c</span>Italy</button></div><div class="fb" id="fb-u16q20"></div></div><div class="sechead">🔡 B. Fill in the missing letters</div><div class="picgrid"><div class="qcard piccard" id="u16q21">
+<div class="picemoji">🍪</div>
+<div class="qhead"><span class="qnum">21</span><span class="qtext" dir="ltr">Coo_ies</span></div>
+<div class="opts letterrow"><button type="button" class="opt picopt" onclick="pick(this,1,'u16q21')">k</button><button type="button" class="opt picopt" onclick="pick(this,0,'u16q21')">c</button><button type="button" class="opt picopt" onclick="pick(this,0,'u16q21')">q</button></div><div class="fb" id="fb-u16q21"></div></div><div class="qcard piccard" id="u16q22">
+<div class="picemoji">🥞</div>
+<div class="qhead"><span class="qnum">22</span><span class="qtext" dir="ltr">Pan_akes</span></div>
+<div class="opts letterrow"><button type="button" class="opt picopt" onclick="pick(this,1,'u16q22')">c</button><button type="button" class="opt picopt" onclick="pick(this,0,'u16q22')">k</button><button type="button" class="opt picopt" onclick="pick(this,0,'u16q22')">s</button></div><div class="fb" id="fb-u16q22"></div></div></div><div class="sechead">📚 C. Choose the correct answer</div><div class="qcard" id="u16q23">
+<div class="qhead"><span class="qnum">23</span><span class="qtext" dir="ltr">A ( console – DVD – sofa ) is an equipment for video games.</span></div>
+<div class="opts"><button type="button" class="opt" onclick="pick(this,1,'u16q23')"><span class="ol">a</span>console</button><button type="button" class="opt" onclick="pick(this,0,'u16q23')"><span class="ol">b</span>DVD</button><button type="button" class="opt" onclick="pick(this,0,'u16q23')"><span class="ol">c</span>sofa</button></div><div class="fb" id="fb-u16q23"></div></div><div class="qcard" id="u16q24">
+<div class="qhead"><span class="qnum">24</span><span class="qtext" dir="ltr">A ( car race – camel race – horse race ) is a competition with cars.</span></div>
+<div class="opts"><button type="button" class="opt" onclick="pick(this,1,'u16q24')"><span class="ol">a</span>car race</button><button type="button" class="opt" onclick="pick(this,0,'u16q24')"><span class="ol">b</span>camel race</button><button type="button" class="opt" onclick="pick(this,0,'u16q24')"><span class="ol">c</span>horse race</button></div><div class="fb" id="fb-u16q24"></div></div><div class="sechead">🖼️ C. Write the correct words under each picture</div><div class="picgrid"><div class="qcard piccard" id="u16q25">
+<div class="picemoji">🌶️</div>
+<div class="qhead"><span class="qnum">25</span><span class="qtext">اختر الكلمة الصحيحة للصورة</span></div>
+<div class="opts picrow"><button type="button" class="opt picopt" onclick="pick(this,0,'u16q25')">sushi</button><button type="button" class="opt picopt" onclick="pick(this,0,'u16q25')">smartphone</button><button type="button" class="opt picopt" onclick="pick(this,1,'u16q25')">spicy</button><button type="button" class="opt picopt" onclick="pick(this,0,'u16q25')">calendar</button></div><div class="fb" id="fb-u16q25"></div></div><div class="qcard piccard" id="u16q26">
+<div class="picemoji">📅</div>
+<div class="qhead"><span class="qnum">26</span><span class="qtext">اختر الكلمة الصحيحة للصورة</span></div>
+<div class="opts picrow"><button type="button" class="opt picopt" onclick="pick(this,0,'u16q26')">sushi</button><button type="button" class="opt picopt" onclick="pick(this,0,'u16q26')">smartphone</button><button type="button" class="opt picopt" onclick="pick(this,0,'u16q26')">spicy</button><button type="button" class="opt picopt" onclick="pick(this,1,'u16q26')">calendar</button></div><div class="fb" id="fb-u16q26"></div></div><div class="qcard piccard" id="u16q27">
+<div class="picemoji">🍣</div>
+<div class="qhead"><span class="qnum">27</span><span class="qtext">اختر الكلمة الصحيحة للصورة</span></div>
+<div class="opts picrow"><button type="button" class="opt picopt" onclick="pick(this,1,'u16q27')">sushi</button><button type="button" class="opt picopt" onclick="pick(this,0,'u16q27')">smartphone</button><button type="button" class="opt picopt" onclick="pick(this,0,'u16q27')">spicy</button><button type="button" class="opt picopt" onclick="pick(this,0,'u16q27')">calendar</button></div><div class="fb" id="fb-u16q27"></div></div><div class="qcard piccard" id="u16q28">
+<div class="picemoji">📱</div>
+<div class="qhead"><span class="qnum">28</span><span class="qtext">اختر الكلمة الصحيحة للصورة</span></div>
+<div class="opts picrow"><button type="button" class="opt picopt" onclick="pick(this,0,'u16q28')">sushi</button><button type="button" class="opt picopt" onclick="pick(this,1,'u16q28')">smartphone</button><button type="button" class="opt picopt" onclick="pick(this,0,'u16q28')">spicy</button><button type="button" class="opt picopt" onclick="pick(this,0,'u16q28')">calendar</button></div><div class="fb" id="fb-u16q28"></div></div></div>
+<div class="unitdone" id="done7"></div>
+</div>
+<div class="unit-panel" id="panel8">
+<div class="contact-hero">
+<div class="c-avatar">MA</div>
+<h2 dir="ltr">Mahmoud Abo-Hind</h2>
+<div class="c-title">مستر محمود أبو هند</div>
+<div class="c-sub">English Language Teacher · معلم اللغة الإنجليزية</div>
+</div>
+<div class="contact-card">
+<div class="cc-icon">📱</div>
+<div><h3>الجوال / Phone</h3><div class="cc-num" dir="ltr">0542260935</div><p>متاح للتواصل والاستفسار عن الحصص والمراجعة</p></div>
+</div>
+<a class="contact-cta" href="https://wa.me/966542260935" target="_blank" rel="noopener">
+<div class="cta-icon">💬</div>
+<div><h3>تواصل عبر واتساب — WhatsApp</h3><p>اضغط هنا للتواصل المباشر · 0542260935</p></div>
+</a>
+<div class="contact-divider">── أنواع الحصص المتاحة ──</div>
+<div class="session-types">
+<div class="schip"><div class="s-icon">🏠</div><h4>حضوري</h4><p>In-Person</p></div>
+<div class="schip"><div class="s-icon">💻</div><h4>أونلاين</h4><p>Online</p></div>
+<div class="schip"><div class="s-icon">👤</div><h4>فردي</h4><p>Individual</p></div>
+<div class="schip"><div class="s-icon">👥</div><h4>مجموعات</h4><p>Groups</p></div>
+</div>
+<div class="bookline">لحجز حصص مراجعة حضوري أو أونلاين، تواصل مع مستر محمود أبو هند على الجوال والواتساب: <b dir="ltr">0542260935</b></div>
+</div>
+
+<button type="button" id="fsbtn" onclick="toggleFS()" title="ملء الشاشة" aria-label="ملء الشاشة">⛶</button>
+
+<footer>Super Goal 1 · Units 9 – 16 Interactive Worksheets<br>إعداد مستر محمود أبو هند — للتواصل والحجز: 0542260935</footer>
+</div>
+
+<script>
+"use strict";
+var FILLS = {"u9q6": {"a": "because", "acc": ["because"]}, "u9q7": {"a": "paints", "acc": ["paints"]}, "u9q8": {"a": "do", "acc": ["do"]}, "u9q9": {"a": "takes", "acc": ["takes"]}, "u9q10": {"a": "Why do you learn English?", "acc": ["why do you learn english"]}, "u9q11": {"a": "What does she do?", "acc": ["what does she do"]}, "u10q7": {"a": "speak", "acc": ["speak"]}, "u10q8": {"a": "has", "acc": ["has"]}, "u10q9": {"a": "brushes", "acc": ["brushes"]}, "u10q10": {"a": "Football is a very exciting sport.", "acc": ["football is a very exciting sport"]}, "u10q11": {"a": "Omar has a new laptop.", "acc": ["omar has a new laptop"]}, "u10q12": {"a": "Math is quite a difficult subject.", "acc": ["math is quite a difficult subject"]}, "u11q7": {"a": "prefer", "acc": ["prefer"]}, "u11q8": {"a": "reads", "acc": ["reads"]}, "u11q9": {"a": "wants", "acc": ["wants"]}, "u11q10": {"a": "at", "acc": ["at"]}, "u11q12": {"a": "The bank usually opens at nine.", "acc": ["the bank usually opens at nine", "the banks usually opens at nine"]}, "u11q13": {"a": "Sami never plays tennis at night.", "acc": ["sami never plays tennis at night"]}, "u12q6": {"a": "buy", "acc": ["buy"]}, "u12q7": {"a": "watching", "acc": ["watching"]}, "u12q8": {"a": "speak", "acc": ["speak"]}, "u12q9": {"a": "write", "acc": ["write"]}, "u12q10": {"a": "No, he can’t.", "acc": ["no he cant"]}, "u12q11": {"a": "Omar doesn’t like to fish.", "acc": ["omar doesnt like to fish", "omar does not like to fish"]}, "u12q12": {"a": "Can he drive a bus?", "acc": ["can he drive a bus"]}, "u12q13": {"a": "Does she like to swim?", "acc": ["does she like to swim"]}, "u13q5": {"a": "meet", "acc": ["meet"]}, "u13q6": {"a": "washing", "acc": ["washing"]}, "u13q7": {"a": "Ahmad isn’t going to wear sandals to the beach.", "acc": ["ahmad isnt going to wear sandals to the beach", "ahmad is not going to wear sandals to the beach"]}, "u13q8": {"a": "Mark isn’t going to wear jeans.", "acc": ["mark isnt going to wear jeans", "mark is not going to wear jeans", "mark isnt going to wear this jeans"]}, "u13q9": {"a": "She is going to buy a new dress.", "acc": ["she is going to buy a new dress"]}, "u13q10": {"a": "Ali wears lovely black leather shoes.", "acc": ["ali wears lovely black leather shoes", "ali wears a lovely black leather shoes"]}, "u13q11": {"a": "Are they going to buy a tie for their dad?", "acc": ["are they going to buy a tie for their dad"]}, "u13q12": {"a": "Is she going to fly to Dubai?", "acc": ["is she going to fly to dubai"]}, "u14q7": {"a": "me", "acc": ["me"]}, "u14q8": {"a": "send", "acc": ["send"]}, "u14q9": {"a": "spend", "acc": ["spend"]}, "u14q10": {"a": "do", "acc": ["do"]}, "u14q11": {"a": "Let’s play video games.", "acc": ["lets play video games"]}, "u14q12": {"a": "Do you need to buy snacks?", "acc": ["do you need to buy snacks"]}, "u14q13": {"a": "I need to call my friends.", "acc": ["i need to call my friends"]}, "u15q7": {"a": "was", "acc": ["was"]}, "u15q8": {"a": "were", "acc": ["were"]}, "u15q9": {"a": "Ali was good in math in high school.", "acc": ["ali was good in math in high school"]}, "u15q10": {"a": "They were classmates at school.", "acc": ["they were classmates at school"]}, "u15q11": {"a": "Were there chairs on the room?", "acc": ["were there chairs on the room", "were there chairs in the room"]}, "u15q12": {"a": "Was she tired?", "acc": ["was she tired"]}, "u15q19": {"a": "old", "acc": ["old"]}, "u15q20": {"a": "tall", "acc": ["tall"]}, "u16q6": {"a": "see", "acc": ["see"]}, "u16q7": {"a": "drink", "acc": ["drink"]}, "u16q8": {"a": "Amina talked to her friend last night.", "acc": ["amina talked to her friend last night"]}, "u16q9": {"a": "Qassim surfed last week.", "acc": ["qassim surfed last week"]}, "u16q10": {"a": "Yes, he did.", "acc": ["yes he did"]}, "u16q11": {"a": "No, they didn’t.", "acc": ["no they didnt"]}, "u16q12": {"a": "did", "acc": ["did"]}, "u16q13": {"a": "took", "acc": ["took"]}, "u16q14": {"a": "cleaned", "acc": ["cleaned"]}, "u16q15": {"a": "ate", "acc": ["ate"]}};
+var EXPLS = {"u9q1": "مع I في المضارع البسيط الفعل بدون s ← work", "u9q2": "Adel مفرد غائب ← نسأل بـ does", "u9q3": "They جمع ← الفعل بدون s: play", "u9q4": "He مفرد غائب ← drives بحرف s", "u9q5": "النتيجة: تريد أن تصبح محامية لذلك تدرس القانون ← so", "u9q6": "هنا سبب وليس نتيجة ← because", "u9q7": "She مفرد غائب ← paints", "u9q8": "بعد does يأتي الفعل في المصدر ← do", "u9q9": "Amal مفرد غائب ← takes", "u9q10": "أداة الاستفهام + do + الفاعل + الفعل", "u9q11": "What + does + she + do?", "u9q12": "يعمل في مدرسة ← معلم teacher", "u9q13": "تصمم ألعاب الحاسوب ← مصممة تقنية high-tech designer", "u9q14": "يعمل في مستشفى ← طبيب doctor", "u9q15": "restaurant و store أماكن، بينما writer (كاتب) وظيفة ← الشاذة", "u9q16": "salesperson و chef وظائف، بينما hospital مكان ← الشاذة", "u9q17": "player (لاعب) بحرف y", "u9q18": "pilot (طيّار) بحرف t", "u9q19": "cameraman (مصوّر) بحرف m", "u9q20": "يفحص المرضى = doctor طبيب", "u9q21": "ينقل الأخبار = reporter مراسل", "u9q22": "يقود السيارة = driver سائق", "u9q23": "مهاجم كرة القدم = striker", "u9q24": "يبني بالخشب = carpenter نجّار", "u10q1": "ننفي الفعل العادي مع I بـ don’t", "u10q2": "فاعل جمع (هاني وابن عمه) ← don’t", "u10q3": "Faisal مفرد غائب ← has", "u10q4": "every day = مضارع بسيط، وSami مفرد ← drinks", "u10q5": "نصف الأفلام (شيء) بـ -ing ← frightening مخيفة", "u10q6": "نصف شعور الشخص بـ -ed ← depressed", "u10q7": "بعد doesn’t يأتي المصدر ← speak", "u10q8": "Reema مفرد غائب ← has", "u10q9": "Ali مفرد غائب والفعل ينتهي بـ sh ← نضيف es: brushes", "u10q10": "فاعل + is + a very + صفة + اسم", "u10q11": "فاعل + has + a + صفة + اسم", "u10q12": "quite تأتي قبل a + الصفة", "u10q13": "smart و intelligent بمعنى ذكي، بينما funny مضحك ← الشاذة", "u10q14": "difficult و hard بمعنى صعب، بينما easy سهل ← الشاذة", "u10q15": "English و history مواد دراسية، بينما phone هاتف ← الشاذة", "u10q16": "excited (متحمس) بحرف x", "u10q17": "bored (يشعر بالملل) بحرف o", "u10q18": "annoyed (منزعج) بحرف o", "u10q19": "confused (محتار) بحرف f", "u10q20": "برامج الحاسوب ← نادي الحاسوب computer club", "u10q21": "التمثيل والمسرحيات ← نادي الدراما drama club", "u10q22": "subject (مادة دراسية) بحرف s", "u10q23": "curly (مجعّد) بحرف c", "u11q1": "We جمع ← go بدون s", "u11q2": "Omar مفرد غائب ← does", "u11q3": "القاعدة الثابتة: on foot", "u11q4": "now + She’s = مضارع مستمر ← baking", "u11q5": "at the moment = مضارع مستمر ← doing", "u11q6": "in the morning في الصباح", "u11q7": "مع I في المضارع البسيط ← prefer", "u11q8": "Noura مفرد غائب ← reads", "u11q9": "She مفرد غائب في المضارع البسيط ← wants", "u11q10": "مع الساعة نستخدم at ← at seven thirty", "u11q11": "الساعة الثانية تماماً ← It’s two o’clock", "u11q12": "الفاعل + ظرف التكرار + الفعل + الوقت", "u11q13": "الفاعل + never + الفعل + المفعول + الوقت", "u11q14": "12:00 P.M = الظهر ← afternoon", "u11q15": "9:00 P.M = مساءً ← night", "u11q16": "anthem (النشيد الوطني) بحرف n", "u11q17": "pen pal (صديق مراسلة) بحرف p", "u11q18": "رياضة الكاراتيه = Karate", "u11q19": "الليل = night", "u11q20": "تمارين رياضية = work out", "u11q21": "قرية = village", "u12q1": "بعد can يأتي المصدر ← play", "u12q2": "like to + مصدر ← go", "u12q3": "enjoy + ing ← swimming", "u12q4": "John مفرد غائب ← doesn’t", "u12q5": "can’t stand + ing ← cooking", "u12q6": "would like to + مصدر ← buy", "u12q7": "dislike + ing ← watching", "u12q8": "بعد can يأتي المصدر ← speak", "u12q9": "بعد can’t يأتي المصدر ← write", "u12q10": "الإجابة المنفية مع Can هي No, he can’t", "u12q11": "ننفي بـ doesn’t والفعل يعود للمصدر like", "u12q12": "نقدّم can على الفاعل", "u12q13": "نسأل بـ Does والفعل يعود للمصدر like", "u12q14": "التسوق ولقاء الأصدقاء ← mall", "u12q15": "ينام فيه الزوار ← hotel", "u12q16": "السفر بالطائرة ← airport مطار", "u12q17": "فتح حساب ← bank بنك", "u12q18": "restaurant (مطعم) بحرف t", "u12q19": "gym (نادي رياضي) بحرف m", "u12q20": "bank و school أماكن، بينما writer وظيفة ← الشاذة", "u12q21": "hotel و mall أماكن، بينما black لون ← الشاذة", "u12q22": "hiking (المشي لمسافات طويلة) بحرف k", "u12q23": "bike (دراجة) بحرف b", "u12q24": "التزلج على الجليد = ice-skate", "u12q25": "تسلق الصخور = rock-climbing", "u12q26": "غابة = forest", "u12q27": "جبل = mountain", "u13q1": "بعد going to يأتي المصدر ← wear", "u13q2": "مع you نستخدم Are", "u13q3": "are + this evening = مضارع مستمر للمستقبل ← watching", "u13q4": "is + tonight ← booking", "u13q5": "بعد going to يأتي المصدر ← meet", "u13q6": "He is + فعل + ing ← washing", "u13q7": "نضيف not بعد is ← isn’t going to wear", "u13q8": "isn’t going to wear", "u13q9": "فاعل + is going to + مصدر + مفعول", "u13q10": "ترتيب الصفات: الرأي (lovely) ثم اللون (black) ثم الخامة (leather)", "u13q11": "نقدّم Are على الفاعل", "u13q12": "نقدّم Is على الفاعل", "u13q13": "sneakers (أحذية رياضية) بحرف k", "u13q14": "raincoat (معطف مطر) بحرف c", "u13q15": "tie (ربطة عنق) بحرف t", "u13q16": "dress و abaya و skirt ملابس نسائية، بينما jeans للجميع ← الشاذة", "u13q17": "boots و sandals و shoes أحذية، بينما shirt قميص ← الشاذة", "u13q18": "T-shirt و shirt و blouse ملابس علوية، بينما gloves قفازات ← الشاذة", "u13q19": "jacket (سترة) بحرف a", "u13q20": "falls (شلالات) بحرف a", "u13q21": "dress (فستان) بحرف e", "u13q22": "الرجال السعوديون يلبسون الثوب thobe", "u13q23": "في الصيف ← صنادل sandals", "u13q24": "في البرد ← معطف coat", "u13q25": "النساء يلبسن العباية abaya", "u13q26": "جوارب = socks", "u13q27": "بنطال = pants", "u13q28": "معطف = coat", "u13q29": "تنورة = skirt", "u13q30": "حذاء طويل = boots", "u14q1": "بعد الفعل نستخدم ضمير المفعول ← her", "u14q2": "need to + مصدر ← study", "u14q3": "Let’s + مصدر ← play", "u14q4": "like to + مصدر ← share", "u14q5": "بعد must يأتي المصدر ← follow", "u14q6": "بعد shouldn’t يأتي المصدر ← eat", "u14q7": "المتحدث يقصد نفسه ← me", "u14q8": "Let’s + مصدر ← send", "u14q9": "بعد shouldn’t يأتي المصدر ← spend", "u14q10": "بعد must يأتي المصدر ← do", "u14q11": "Let’s + الفعل + المفعول", "u14q12": "Do + الفاعل + need to + المصدر", "u14q13": "I + need to + الفعل + المفعول", "u14q14": "يرفعون الأعلام ← flags", "u14q15": "يزينون منازلهم ← decorate", "u14q16": "في السماء ليلاً ← الألعاب النارية fireworks", "u14q17": "snack (وجبة خفيفة) بحرف n", "u14q18": "Graduation (التخرج) بحرف G", "u14q19": "poor (الفقراء) بحرف r", "u14q20": "sacrifice (يضحّي) بحرف f", "u14q21": "National (الوطني) بحرف l", "u14q22": "تمر = dates", "u14q23": "خروف = lamb", "u14q24": "هدية = gift", "u14q25": "ألعاب نارية = fireworks", "u15q1": "مع you نستخدم were", "u15q2": "Adnan مفرد + ماضٍ ← was", "u15q3": "مع you ← were", "u15q4": "جمع + ماضٍ (20 سنة مضت) ← were", "u15q5": "مفرد + ماضٍ ← was", "u15q6": "قبل الاسم نستخدم ضمير الملكية ← his", "u15q7": "Tom مفرد ← was", "u15q8": "They جمع ← were", "u15q9": "نحذف النفي: wasn’t ← was", "u15q10": "نحذف النفي: weren’t ← were", "u15q11": "نقدّم Were على there", "u15q12": "نقدّم Was على الفاعل", "u15q13": "ناطحات سحاب = skyscrapers", "u15q14": "إسطبل الخيول = stable", "u15q15": "كرة السلة = basketball", "u15q16": "رجل أعمال = businessman", "u15q17": "giant = عملاق أي طويل جداً ← tall", "u15q18": "kidding = joking تمزح", "u15q19": "جديد عكسها قديم old", "u15q20": "قصير عكسها طويل tall", "u15q21": "port (ميناء) بحرف r", "u15q22": "strikers (مهاجمون) بحرف s", "u16q1": "yesterday = ماضٍ ← worked", "u16q2": "Last week = ماضٍ ← travelled", "u16q3": "once a week = مضارع بسيط مع فاعل مفرد ← plays", "u16q4": "بعد didn’t يأتي المصدر ← eat", "u16q5": "always = مضارع بسيط وNoura مفرد ← finishes", "u16q6": "بعد didn’t يأتي المصدر ← see", "u16q7": "We جمع ← drink بدون s", "u16q8": "نحذف didn’t ونحوّل الفعل للماضي ← talked", "u16q9": "نحذف didn’t ← surfed", "u16q10": "الإجابة المثبتة مع Did هي Yes, he did", "u16q11": "الإجابة المنفية: No, they didn’t", "u16q12": "do فعل شاذ ماضيه did", "u16q13": "take فعل شاذ ماضيه took", "u16q14": "فعل منتظم نضيف ed ← cleaned", "u16q15": "eat فعل شاذ ماضيه ate", "u16q16": "snack (وجبة خفيفة) بحرف n", "u16q17": "pizza بحرف z مزدوج", "u16q18": "assignment (واجب) بحرف s", "u16q19": "Football و volleyball رياضات، بينما project مشروع ← الشاذة", "u16q20": "kebabs و rice أطعمة، بينما Italy دولة ← الشاذة", "u16q21": "cookies بحرف k", "u16q22": "pancakes بحرف c", "u16q23": "جهاز ألعاب الفيديو ← console", "u16q24": "منافسة بالسيارات ← car race", "u16q25": "حار = spicy", "u16q26": "تقويم = calendar", "u16q27": "سوشي = sushi", "u16q28": "هاتف ذكي = smartphone"};
+var TOTALS = [24, 23, 21, 27, 30, 25, 22, 28];
+var NUNITS = 8;
+var progress = [];
+for (var pi=0; pi<NUNITS; pi++) progress.push({});
+
+function showUnit(i, btn) {
+  var panels = document.querySelectorAll(".unit-panel");
+  for (var k=0;k<panels.length;k++) panels[k].classList.remove("show");
+  document.getElementById("panel"+i).classList.add("show");
+  var tabs = document.querySelectorAll("nav .tab");
+  for (var k2=0;k2<tabs.length;k2++) tabs[k2].classList.remove("active");
+  if (btn) btn.classList.add("active");
+  window.scrollTo({top:0, behavior:"smooth"});
+}
+
+function tabIndexOf(qid) {
+  var m = qid.match(/^u(\d+)q/);
+  return m ? (parseInt(m[1],10) - 9) : 0;
+}
+
+function markProgress(qid, ok) {
+  var ti = tabIndexOf(qid);
+  if (progress[ti][qid] !== undefined) return;
+  progress[ti][qid] = ok ? 1 : 0;
+  var done = 0, correct = 0;
+  for (var k in progress[ti]) { done++; correct += progress[ti][k]; }
+  var total = TOTALS[ti];
+  var fill = document.getElementById("prog"+ti);
+  var txt  = document.getElementById("progtxt"+ti);
+  if (fill) fill.style.width = Math.round(done/total*100) + "%";
+  if (txt) txt.textContent = done + " / " + total;
+  if (done === total) {
+    var d = document.getElementById("done"+ti);
+    var pct = Math.round(correct/total*100);
+    var msg = pct === 100 ? "🌟 ممتاز! درجة كاملة — أنت جاهز تماماً!" :
+              pct >= 80 ? "👏 رائع جداً! راجع الأخطاء البسيطة وأعد المحاولة" :
+              "💪 بداية جيدة — راجع الملاحظات الحمراء ثم أعد الحل";
+    if (d) d.textContent = "نتيجتك في هذه الوحدة: " + correct + " / " + total + " — " + msg;
+  }
+}
+
+function pick(btn, isRight, qid) {
+  var card = document.getElementById(qid);
+  var opts = card.querySelectorAll(".opt");
+  for (var k=0;k<opts.length;k++) opts[k].disabled = true;
+  var fb = document.getElementById("fb-"+qid);
+  if (isRight) {
+    btn.classList.add("right");
+    fb.className = "fb ok";
+    fb.textContent = "✅ إجابة صحيحة! " + (EXPLS[qid] || "");
+  } else {
+    btn.classList.add("wrong");
+    for (var k2=0;k2<opts.length;k2++) {
+      if (opts[k2].getAttribute("onclick").indexOf(",1,")>-1) opts[k2].classList.add("right");
+    }
+    fb.className = "fb no";
+    fb.textContent = "❌ غير صحيحة. " + (EXPLS[qid] || "");
+  }
+  markProgress(qid, isRight);
+}
+
+function norm(s) {
+  return (s||"").toLowerCase().replace(/[.,!?\u2019\u2018']/g,"").replace(/\s+/g," ").trim();
+}
+
+function checkFill(qid) {
+  var input = document.getElementById("in-"+qid);
+  var fb = document.getElementById("fb-"+qid);
+  var data = FILLS[qid];
+  var val = norm(input.value);
+  if (!val) { fb.className="fb no"; fb.textContent = "✏️ اكتب إجابتك أولاً"; return; }
+  var ok = false;
+  for (var k=0;k<data.acc.length;k++) { if (val === norm(data.acc[k])) ok = true; }
+  input.disabled = true;
+  if (ok) {
+    fb.className = "fb ok";
+    fb.textContent = "✅ إجابة صحيحة! " + (EXPLS[qid] || "");
+  } else {
+    fb.className = "fb no";
+    fb.textContent = "❌ غير صحيحة — الإجابة: " + data.a + " · " + (EXPLS[qid] || "");
+  }
+  markProgress(qid, ok);
+}
+
+/* ---------- FULLSCREEN ---------- */
+function fsElement() {
+  return document.fullscreenElement || document.webkitFullscreenElement || null;
+}
+function enterFS() {
+  var el = document.documentElement;
+  var fn = el.requestFullscreen || el.webkitRequestFullscreen || el.webkitRequestFullScreen;
+  if (fn) { try { fn.call(el); } catch(e) {} }
+}
+function exitFS() {
+  var fn = document.exitFullscreen || document.webkitExitFullscreen;
+  if (fn) { try { fn.call(document); } catch(e) {} }
+}
+function toggleFS() {
+  if (fsElement()) { exitFS(); } else { enterFS(); }
+}
+function syncFSIcon() {
+  var b = document.getElementById("fsbtn");
+  if (b) b.textContent = fsElement() ? "🗗" : "⛶";
+}
+document.addEventListener("fullscreenchange", syncFSIcon);
+document.addEventListener("webkitfullscreenchange", syncFSIcon);
+var fsAutoDone = false;
+function fsAuto() {
+  if (fsAutoDone) return;
+  fsAutoDone = true;
+  if (!fsElement()) enterFS();
+  document.removeEventListener("pointerdown", fsAuto);
+  document.removeEventListener("touchend", fsAuto);
+  document.removeEventListener("click", fsAuto);
+}
+document.addEventListener("pointerdown", fsAuto);
+document.addEventListener("touchend", fsAuto);
+document.addEventListener("click", fsAuto);
+
+(function() {
+  try {
+    var l = document.createElement("link");
+    l.rel = "stylesheet";
+    l.href = "https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;800;900&family=Playfair+Display:wght@600;800&display=swap";
+    document.head.appendChild(l);
+  } catch(e) {}
+})();
+
+showUnit(0, document.querySelector("nav .tab"));
+</script>
+</body>
+</html>
