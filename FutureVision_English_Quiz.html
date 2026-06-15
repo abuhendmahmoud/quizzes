@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>English Final Review Quiz – Future Vision Private School</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--green:#1a6b3a;--gl:#2d9c58;--gold:#c9983a;--cream:#fdf8f0;--dark:#1a1a1a;--red:#c0392b;--bg:#f4f0e8;--card:#fff;--border:#e0d8c8;--r:14px}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--dark);min-height:100vh}
+#cover{min-height:100vh;background:linear-gradient(160deg,#0f3d22,#1a6b3a 60%,#2d9c58);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:40px 24px;text-align:center;position:relative;overflow:hidden}
+#cover::before{content:'';position:absolute;width:400px;height:400px;border-radius:50%;border:60px solid rgba(255,255,255,.05);top:-100px;right:-100px}
+#cover::after{content:'';position:absolute;width:300px;height:300px;border-radius:50%;border:40px solid rgba(255,255,255,.05);bottom:-80px;left:-80px}
+.badge{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.25);border-radius:50px;padding:8px 20px;color:rgba(255,255,255,.9);font-size:12px;letter-spacing:1px;text-transform:uppercase;margin-bottom:28px;font-weight:600}
+.cicon{font-size:56px;margin-bottom:20px}
+#cover h1{font-family:'Playfair Display',serif;color:#fff;font-size:32px;line-height:1.2;margin-bottom:12px}
+#cover p{color:rgba(255,255,255,.75);font-size:15px;margin-bottom:8px;max-width:320px}
+.gline{width:60px;height:3px;background:var(--gold);border-radius:2px;margin:20px auto}
+.cmeta{color:rgba(255,255,255,.6);font-size:13px;margin-bottom:36px}
+.nsec{width:100%;max-width:340px;margin-bottom:24px}
+.nsec label{display:block;color:rgba(255,255,255,.8);font-size:13px;margin-bottom:8px;text-align:left;font-weight:500}
+.nsec input{width:100%;padding:14px 18px;border-radius:var(--r);border:1px solid rgba(255,255,255,.25);background:rgba(255,255,255,.1);color:#fff;font-size:16px;font-family:'DM Sans',sans-serif;outline:none;transition:border .2s}
+.nsec input::placeholder{color:rgba(255,255,255,.4)}
+.nsec input:focus{border-color:var(--gold)}
+.bstart{background:var(--gold);color:#1a1a1a;border:none;padding:16px 40px;border-radius:50px;font-size:16px;font-weight:700;cursor:pointer;font-family:'DM Sans',sans-serif;transition:transform .15s,opacity .15s}
+.bstart:hover{transform:scale(1.03);opacity:.92}
+#quiz{display:none}
+.qhdr{background:var(--green);padding:16px 20px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;box-shadow:0 2px 12px rgba(0,0,0,.15)}
+.qhdr .logo{font-family:'Playfair Display',serif;color:#fff;font-size:15px}
+.pinfo{color:rgba(255,255,255,.85);font-size:13px;font-weight:500}
+.pbwrap{background:rgba(0,0,0,.15);height:4px}
+.pbfill{background:var(--gold);height:4px;transition:width .4s;width:0}
+.sblock{margin:24px 16px 0}
+.stitle{font-family:'Playfair Display',serif;font-size:18px;color:var(--green);padding:12px 18px;background:#fff;border-left:4px solid var(--gold);border-radius:0 var(--r) var(--r) 0;margin-bottom:16px;box-shadow:0 2px 8px rgba(0,0,0,.06)}
+.pbox{background:#fffdf6;border:1px solid var(--border);border-radius:var(--r);padding:18px;font-size:14px;line-height:1.8;color:#333;margin-bottom:20px;border-left:3px solid var(--gl)}
+.pbox strong{color:var(--green);display:block;margin-bottom:10px}
+.qcard{background:var(--card);border-radius:var(--r);padding:18px;margin-bottom:14px;border:1px solid var(--border);box-shadow:0 1px 4px rgba(0,0,0,.05)}
+.qnum{font-size:11px;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px}
+.qtext{font-size:15px;color:var(--dark);line-height:1.6;margin-bottom:14px;font-weight:500;white-space:pre-line}
+.opts{display:flex;flex-direction:column;gap:8px}
+.obtn{display:flex;align-items:center;gap:12px;padding:11px 14px;border-radius:10px;border:1.5px solid var(--border);background:#fafaf8;cursor:pointer;text-align:left;font-family:'DM Sans',sans-serif;font-size:14px;color:var(--dark);transition:all .15s;width:100%}
+.obtn:hover{border-color:var(--green);background:#f0faf4}
+.obtn.sel{border-color:var(--green);background:#e8f5ee;color:var(--green);font-weight:600}
+.obtn.ok{border-color:#27ae60;background:#eafaf1;color:#1e8449;font-weight:600}
+.obtn.bad{border-color:var(--red);background:#fdedec;color:var(--red)}
+.oltr{width:26px;height:26px;border-radius:50%;background:var(--border);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;flex-shrink:0}
+.sel .oltr{background:var(--green);color:#fff}
+.ok  .oltr{background:#27ae60;color:#fff}
+.bad .oltr{background:var(--red);color:#fff}
+.tfgrid{display:grid;grid-template-columns:1fr;gap:8px}
+.tfrow{display:flex;align-items:center;justify-content:space-between;padding:10px 14px;border:1.5px solid var(--border);border-radius:10px;background:#fafaf8;gap:12px}
+.tfstmt{font-size:13px;flex:1;color:#333}
+.tfbtns{display:flex;gap:6px;flex-shrink:0}
+.tfbtn{padding:6px 14px;border-radius:6px;border:1.5px solid var(--border);background:#fff;font-size:12px;font-weight:700;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .15s}
+.tfbtn.selt{background:var(--green);border-color:var(--green);color:#fff}
+.tfbtn.self{background:var(--red);border-color:var(--red);color:#fff}
+.otarea{width:100%;padding:12px 14px;border-radius:10px;border:1.5px solid var(--border);font-family:'DM Sans',sans-serif;font-size:14px;color:var(--dark);resize:vertical;min-height:80px;background:#fafaf8;outline:none;transition:border .2s}
+.otarea:focus{border-color:var(--green)}
+.wc{font-size:11px;color:#aaa;text-align:right;margin-top:4px}
+.wc.ok{color:var(--green);font-weight:600}
+.subbtn-wrap{padding:24px 16px 40px;display:flex;flex-direction:column;align-items:center;gap:12px}
+.subbtn{background:var(--green);color:#fff;border:none;padding:16px 40px;border-radius:50px;font-size:16px;font-weight:700;cursor:pointer;font-family:'DM Sans',sans-serif;width:100%;max-width:340px}
+.subnote{font-size:12px;color:#888;text-align:center}
+#results{display:none}
+.rhdr{background:linear-gradient(160deg,#0f3d22,#1a6b3a);padding:40px 20px 30px;text-align:center}
+.scirc{width:120px;height:120px;border-radius:50%;background:rgba(255,255,255,.1);border:3px solid var(--gold);display:flex;flex-direction:column;align-items:center;justify-content:center;margin:0 auto 16px}
+.sbig{font-family:'Playfair Display',serif;font-size:38px;color:#fff;line-height:1}
+.ssub{font-size:11px;color:rgba(255,255,255,.6);letter-spacing:1px;text-transform:uppercase}
+.rhdr h2{font-family:'Playfair Display',serif;color:#fff;font-size:22px;margin-bottom:6px}
+.rhdr p{color:rgba(255,255,255,.7);font-size:14px}
+.eresult{font-size:40px;margin-bottom:10px}
+.rbd{padding:20px 16px}
+.bdcard{background:var(--card);border-radius:var(--r);padding:16px;margin-bottom:12px;border:1px solid var(--border)}
+.bdcard h3{font-size:14px;font-weight:700;color:var(--green);margin-bottom:12px}
+.rrow{display:flex;align-items:flex-start;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--border);font-size:13px;gap:10px}
+.rrow:last-child{border-bottom:none}
+.rq{flex:1;color:#444;line-height:1.4}
+.rbadge{padding:3px 10px;border-radius:20px;font-size:11px;font-weight:700;flex-shrink:0}
+.rc{background:#eafaf1;color:#1e8449}
+.rw{background:#fdedec;color:var(--red)}
+.ro{background:#fef9e7;color:#d4ac0d}
+.fbcard{background:var(--card);border-radius:var(--r);padding:16px;margin:0 16px 12px;border:1px solid var(--border)}
+.fbcard h3{font-size:15px;font-weight:700;color:var(--green);margin-bottom:14px}
+.fbslabel{font-size:11px;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:1px;margin:14px 0 6px}
+.fbitem{background:#f8fff8;border-radius:8px;padding:12px 14px;margin-bottom:8px;border-left:3px solid var(--gl);font-size:13px;line-height:1.7;color:#2a2a2a}
+.fbiql{font-weight:700;color:var(--green);font-size:12px;margin-bottom:4px}
+.csec{padding:0 16px 40px;display:flex;flex-direction:column;gap:10px;align-items:center}
+.cnote{font-size:12px;color:#888;text-align:center;max-width:300px}
+#ov{display:none;position:fixed;inset:0;z-index:9999;background:rgba(10,40,20,.92);align-items:center;justify-content:center;flex-direction:column;text-align:center;padding:30px}
+#ov.on{display:flex}
+.spin{width:56px;height:56px;border:5px solid rgba(255,255,255,.2);border-top-color:var(--gold);border-radius:50%;animation:sp .9s linear infinite;margin-bottom:20px}
+@keyframes sp{to{transform:rotate(360deg)}}
+#ov h3{color:#fff;font-family:'Playfair Display',serif;font-size:22px;margin-bottom:8px}
+#ov p{color:rgba(255,255,255,.7);font-size:14px}
+.oicon{font-size:56px;margin-bottom:16px;display:none}
+.fbrow{margin-bottom:8px;padding:8px 10px;border-radius:6px;font-size:13px;line-height:1.7}
+.fbrow b{display:block;margin-bottom:2px}
+.fbgood{background:#eafaf1;border-left:3px solid #27ae60}
+.fbgood b{color:#1e8449}
+.fbwarn{background:#fef9e7;border-left:3px solid var(--gold)}
+.fbwarn b{color:#d4ac0d}
+.fbbad{background:#fdedec;border-left:3px solid var(--red)}
+.fbbad b{color:var(--red)}
+.nsec select{width:100%;padding:14px 18px;border-radius:var(--r);border:1px solid rgba(255,255,255,.25);background:rgba(255,255,255,.15);color:#fff;font-size:16px;font-family:'DM Sans',sans-serif;outline:none;transition:border .2s;-webkit-appearance:none;appearance:none;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.nsec select:focus{border-color:var(--gold)}
+.nsec select option{color:#1a1a1a;background:#fff;font-size:16px}
+.errmsg{color:#ff6b6b;font-size:13px;margin-top:6px;font-weight:600;display:none}
+.bstart{-webkit-tap-highlight-color:transparent;touch-action:manipulation}
+</style>
+</head>
+<body>
+
+<div id="cover">
+  <div class="badge">🇸🇦 Future Vision Private School</div>
+  <div class="cicon">📝</div>
+  <h1>English Final Review Quiz</h1>
+  <div class="gline"></div>
+  <p>Secondary Stage &nbsp;|&nbsp; Mr. Mahmoud Abo-Hind</p>
+  <p class="cmeta">Reading · Grammar · Vocabulary · Composition</p>
+
+  <div class="nsec">
+    <label>1️⃣ Select your class:</label>
+    <select id="selClass" onchange="loadNames()">
+      <option value="">-- Select Class --</option>
+      <option value="201">Class 201</option>
+      <option value="203">Class 203</option>
+      <option value="205">Class 205</option>
+    </select>
+  </div>
+
+  <div class="nsec" id="nameWrap" style="display:none">
+    <label>2️⃣ Select your name:</label>
+    <select id="selName">
+      <option value="">-- Select Your Name --</option>
+    </select>
+  </div>
+
+  <div class="nsec" id="idWrap" style="display:none">
+    <label>3️⃣ Enter your Civil ID (رقم السجل المدني):</label>
+    <input type="text" id="inpID" placeholder="Enter your Civil ID number">
+    <div class="errmsg" id="errMsg">❌ Civil ID does not match. Please try again.</div>
+  </div>
+
+  <button class="bstart" onclick="startQuiz()" ontouchstart="">Start Quiz →</button>
+</div>
+
+<div id="quiz">
+  <div class="qhdr">
+    <span class="logo">📘 English Quiz</span>
+    <span class="pinfo" id="pinfo">0 / 0</span>
+  </div>
+  <div class="pbwrap"><div class="pbfill" id="pbfill"></div></div>
+  <div id="qcontent"></div>
+  <div class="subbtn-wrap">
+    <button class="subbtn" onclick="submitQuiz()">✅ Submit My Answers</button>
+    <p class="subnote">Make sure you have answered all questions before submitting</p>
+  </div>
+</div>
+
+<div id="results">
+  <div class="rhdr">
+    <div class="eresult" id="eresult">🎉</div>
+    <div class="scirc"><div class="sbig" id="sbig">0%</div><div class="ssub">Score</div></div>
+    <h2 id="rname"></h2><p id="rmsg"></p>
+  </div>
+  <div class="rbd" id="rbd"></div>
+  <div class="fbcard">
+    <h3>✍️ Writing Feedback</h3>
+    <div id="fbcontent"></div>
+  </div>
+  <div class="csec">
+    <p class="cnote" style="font-size:14px;color:var(--green);font-weight:600">📧 Your results have been automatically sent to Mr. Mahmoud.</p>
+    <p class="cnote">You do not need to do anything else. Good luck in your exam! 🎓</p>
+  </div>
+</div>
+
+<div id="ov">
+  <div class="spin" id="ospin"></div>
+  <div class="oicon" id="oicon">✅</div>
+  <h3 id="otitle">Sending your results...</h3>
+  <p id="omsg">Please wait while we send your results to Mr. Mahmoud</p>
+</div>
+
+<script>
+const SVC="service_maf9z1y", TMPL="template_54reras", PKEY="bGp0Dg0mWcLMWygjf";
+emailjs.init(PKEY);
+
+const QD={sections:[
+  {title:"I. Reading Comprehension — Text 1: Animal Heroes",
+   passage:"Animal heroes are incredible creatures that show bravery and kindness in many different ways. Take Rusty the dog, for example, who always protects his family and alerts them to any danger nearby. Or think about Polly the parrot, who squawks loudly when someone needs help, just like a feathery alarm clock! But being a hero isn't just about big actions; it's also about the little things animals do every day to help each other. From ants working together to carry heavy food to <u>their</u> nest to dolphins guiding lost swimmers back to shore, animals are always looking out for each other. Even when we can't understand their language, animals show us the importance of teamwork and caring for others. So, let's celebrate these amazing animal heroes and remember that we can all be heroes too, by being kind and helpful to everyone around us.",
+   questions:[
+    {id:"r1q1",type:"open",text:"1) What are the Animal heroes?"},
+    {id:"r1q2",type:"open",text:"2) What does Rusty the dog do to be considered a hero?"},
+    {id:"r1q3",type:"mcq",text:'3) The underlined pronoun "their" refers to _________.', options:["the dog","the parrot","ants","dolphins"],answer:2},
+    {id:"r1tf",type:"tf",items:[
+      {stmt:"A. Being a hero is just about big actions.",answer:false},
+      {stmt:"B. Animals show us the importance of teamwork and caring for others.",answer:true},
+      {stmt:"C. We can't be heroes like animals.",answer:false},
+      {stmt:"D. Dolphins guide lost swimmers back to shore.",answer:true}
+    ]}
+  ]},
+  {title:"Reading Comprehension — Text 2: Technology in Education",
+   passage:"Technology has revolutionized the way students learn in modern classrooms. Interactive whiteboards, tablets, and online platforms have transformed traditional teaching methods into engaging and interactive experiences. Students can now access educational resources from anywhere in the world, making learning more flexible and personalized. Teachers use digital tools to create dynamic lessons that capture students' attention and make complex concepts easier to understand. Moreover, technology enables students to collaborate with peers from different countries, fostering global awareness and cultural exchange. However, excessive screen time can be harmful to students' health and concentration. Therefore, educators must find a balance between utilizing technology's benefits and maintaining traditional learning methods. When used wisely, technology becomes a powerful ally in education, helping students develop critical thinking skills and preparing them for the digital age.",
+   questions:[
+    {id:"r2q1",type:"open",text:"1) How has technology changed education?"},
+    {id:"r2q2",type:"open",text:"2) What are the benefits of using technology in classrooms?"},
+    {id:"r2tf",type:"tf",items:[
+      {stmt:"A. Technology has made learning less flexible.",answer:false},
+      {stmt:"B. Excessive screen time can be harmful to students' health.",answer:true},
+      {stmt:"C. Technology helps students develop critical thinking skills.",answer:true},
+      {stmt:"D. Teachers should use only technology and no traditional methods.",answer:false}
+    ]}
+  ]},
+  {title:"II. Grammar",questions:[
+    {id:"g1",type:"mcq",text:"1) Math homework is ____________ it makes me feel confused.",options:["puzzle","puzzles","puzzled","puzzling"],answer:3},
+    {id:"g2",type:"mcq",text:"2) If only my father ____________ any money.",options:["will lending","would lend","lending","is lend"],answer:1},
+    {id:"g3",type:"mcq",text:"3) I was ____________ that I cried with laughter.",options:["such amused","so amused","such an amused","so amuse"],answer:1},
+    {id:"g4",type:"mcq",text:"4) There are ____________ pineapples in the fridge.",options:["some","any","a","an"],answer:0},
+    {id:"g5",type:"mcq",text:"5) I think it's time to ____________.",options:["throw it out","throw out it","it throw out","out it throw"],answer:0},
+    {id:"g6",type:"mcq",text:"6) The lost cat will ____________ soon or later.",options:["be found","found","be find","to be find"],answer:0},
+    {id:"g7",type:"mcq",text:"7) Both cheetah ____________ lion are fast animals.",options:["nor","or","and","none"],answer:2},
+    {id:"g8",type:"mcq",text:"8) Jinan was expected ____________ cats.",options:["to have liked","have liked","to be like","to have like"],answer:0},
+    {id:"g9",type:"mcq",text:"9) If he studied more, he ____________ better grades.",options:["get","have gotten","would got","would get"],answer:3},
+    {id:"g10",type:"mcq",text:"10) Ali ____________ sleep early, but now he goes to sleep late.",options:["use","used to","used","uses to"],answer:1},
+    {id:"g11",type:"mcq",text:"11) Amal can ____________.",options:["the food whip up","the whip up food","whip the food up","the up food whip"],answer:2},
+    {id:"g12",type:"mcq",text:"12) My family are looking forward ____________ you soon.",options:["to see","on seeing","to seeing","of seeing"],answer:2},
+    {id:"g13",type:"mcq",text:"13) You don't need your coat. Why don't you ____________?",options:["take off it","it take off","take it off","off it take"],answer:2},
+    {id:"g14",type:"mcq",text:"14) I don't have ____________ money. Can I borrow ____________ money?",options:["any / some","some / any","a / an","any / any"],answer:0},
+    {id:"g15",type:"mcq",text:"15) I'm making ____________ cup of tea.",options:["many","much","a","an"],answer:2},
+    {id:"g16",type:"mcq",text:"16) The birds should ____________ daily.",options:["be feed","be fed","to be fed","fed"],answer:1},
+    {id:"g17",type:"mcq",text:"17) It ____________ that animals must never be given cola.",options:["is say","say","is said","said is"],answer:2},
+    {id:"g18",type:"mcq",text:"18) ____________ Al Hilal nor Al Nassr will win the Saudi Pro League this year.",options:["Either","Neither","All","None"],answer:1},
+    {id:"g19",type:"mcq",text:"19) My mother will cook ____________ Kabsa or Mandi for lunch.",options:["both","all","neither","either"],answer:3},
+    {id:"g20",type:"mcq",text:"20) The test was ____________ to finish on time.",options:["too difficult","difficult too","too difficulty","difficulty too"],answer:0}
+  ]},
+  {title:"III. Vocabulary",questions:[
+    {id:"v1",type:"mcq",text:"1) Ali is getting to me, I feel ____________ when I'm around him.",options:["remarkable","irritated","fake","equivalent"],answer:1},
+    {id:"v2",type:"mcq",text:"2) The business Ali runs is so ____________ that he makes a lot of money.",options:["famished","booming","appetizing","peak"],answer:1},
+    {id:"v3",type:"mcq",text:"3) I was ____________ to lie, but I told the truth instead.",options:["tempted","dread","reasoned","vanished"],answer:0},
+    {id:"v4",type:"mcq",text:"4) I ____________ traveling by plane. Flying makes me nervous.",options:["peeked","dread","tempted","reasoned"],answer:1},
+    {id:"v5",type:"mcq",text:"5) Mothers give ____________ with loving words to their children.",options:["comfort","loyalty","shelter","atmosphere"],answer:0},
+    {id:"v6",type:"mcq",text:"6) Saudis have strong ____________ to the king.",options:["shelter","atmosphere","loyalty","comfort"],answer:2},
+    {id:"v7",type:"mcq",text:"7) Luckily, our home has a quiet and peaceful ____________.",options:["worn","loyalty","atmosphere","shelter"],answer:2},
+    {id:"v8",type:"mcq",text:"8) These are the running shoes favored by ____________ runners.",options:["spectator","marathon","rink","penalty"],answer:1},
+    {id:"v9",type:"mcq",text:"9) The Olympic Games ____________ in Greece in 776 B.C.E.",options:["penalty","spectator","equipment","originated"],answer:3},
+    {id:"v10",type:"mcq",text:"10) Alzheimer's disease is said to be a ____________ condition.",options:["vanished","dread","genetic","tempted"],answer:2},
+    {id:"v11",type:"mcq",text:"11) Is there anything to eat? I'm absolutely ____________.",options:["famished","booming","delicacy","appetizing"],answer:0},
+    {id:"v12",type:"mcq",text:"12) For iftar, we prepare a ____________ that can feed twenty fasting people.",options:["peak","delicacy","feast","famished"],answer:2},
+    {id:"v13",type:"mcq",text:"13) In the food world, fish eggs are considered a ____________ because of their high price.",options:["feast","peak","delicacy","appetizing"],answer:2},
+    {id:"v14",type:"mcq",text:"14) Dolphins are the most intelligent ____________ mammals.",options:["marine","recovery","adapt","speculative"],answer:0},
+    {id:"v15",type:"mcq",text:"15) His ____________ was complete after four days in the hospital.",options:["bond","duration","recovery","pamper"],answer:2},
+    {id:"v16",type:"mcq",text:"16) The mother has a strong ____________ with her baby.",options:["pamper","bond","duration","recovery"],answer:1},
+    {id:"v17",type:"mcq",text:"17) In order to ____________ his pet, Ali takes him everywhere.",options:["adapt","pamper","speculate","bond"],answer:1},
+    {id:"v18",type:"mcq",text:"18) I was ____________ this morning when I couldn't find my English book.",options:["puzzled","remarkable","equivalent","bilingual"],answer:0},
+    {id:"v19",type:"mcq",text:"19) Your project was ____________. It was so good and incredible.",options:["irritated","puzzled","remarkable","fake"],answer:2},
+    {id:"v20",type:"mcq",text:"20) To play tennis, you'll need some ____________ such as a racket, a net and a ball.",options:["penalty","marathon","equipment","rink"],answer:2}
+  ]},
+  {title:"IV. Composition",questions:[
+    {id:"c1",type:"essay",text:"A) Write a paragraph about Sport (no less than 70 words)\nWrite about your favourite sport, why you enjoy it, and its benefits:",minWords:70},
+    {id:"c2",type:"essay",text:"B) Write a paragraph about Eating Habits (no less than 70 words)\nWrite about healthy eating habits, their importance, and how you maintain a balanced diet:",minWords:70}
+  ]}
+]};
+
+let sName="", sClass="", ANS={};
+
+// ── Student Database ──────────────────────────────────────────────────────────
+var STUDENTS={
+  "201":[
+    {name:"أحمد بن عبدالعزيز بن أحمد العامر",      id:"1146714702"},
+    {name:"أحمد بن سامي بن ابراهيم النعيم",         id:"1145582274"},
+    {name:"البراء عبدالرحمن بن عبداللطيف النعيم",   id:"1148298209"},
+    {name:"الوليد بن طه بن عبدالعزيز الملحم",       id:"1147726390"},
+    {name:"اياد بن فهد بن عبدالرحمن الملحم",        id:"1148287939"},
+    {name:"بندر بن علي بن علي عبد السهيمي",         id:"1146584709"},
+    {name:"حساب بن صالح بن عطية المالكي",           id:"1159080785"},
+    {name:"خالد بن عبدالرحمن بن جابر البوجابر",    id:"1146767064"},
+    {name:"سلمان بن ثامر بن سلمان الملحم",          id:"1146562044"},
+    {name:"صالح ابراهيم عبدالرحمن النعيم",          id:"1148093204"},
+    {name:"صالح بن احمد بن صالح النصي العامدي",    id:"1144288287"},
+    {name:"عبدالرحمن بن محمد بن عبدالرحمن النعيم", id:"1150037123"},
+    {name:"عبدالله بن احمد بن عبدالله النعيم",      id:"1148098575"},
+    {name:"عبدالله بن تركي بن عبدالله الملحم",      id:"1146668833"},
+    {name:"عبدالله بن محمد بن علي العتيبي",         id:"1146046071"},
+    {name:"عثمان ماهر بن ابراهيم الملحم",           id:"1148746108"},
+    {name:"عمر عادل عبد العزيز المندوه",            id:"2372616744"},
+    {name:"محمد بن سعد بن مسمار السبيعي",          id:"1147050965"},
+    {name:"محمد بن فيصل بن محمد السقوفي",          id:"1150815494"},
+    {name:"مرضي بن خالد بن عبدالعزيز العلوي الحربي",id:"1147127607"},
+    {name:"ناصر بن فهد بن ناصر الملحم",            id:"1146966955"},
+    {name:"ناصر بن يعقوب بن ناصر المرزوق",         id:"1149546309"},
+    {name:"ياس بن علاء بن زاهد ابوالخيور",          id:"1146440423"}
+  ],
+  "203":[
+    {name:"احمد بن انور بن عيسى المليلي",           id:"1147626087"},
+    {name:"براك بن ناصر بن براك الدوسري",           id:"1152172498"},
+    {name:"تركي خالد بن فهد الحارثي",               id:"1150974986"},
+    {name:"رائد مشعان بن فراج الدوسري",             id:"1149289751"},
+    {name:"راشد بن جابر بن ناصر المري",             id:"1147901225"},
+    {name:"ريان بن عبدالله بن حسن آل داحشه العامدي",id:"1146543655"},
+    {name:"سعد بن صالح بن سعد الشهراني",           id:"1146456411"},
+    {name:"سعد بن صالح بن عبدالله العبدالكريم",    id:"1148218918"},
+    {name:"عبدالله ناصر بن نايف العتيبي",           id:"1145768386"},
+    {name:"عبدالحميد بن عبدالعزيز النعيم",          id:"1147501215"},
+    {name:"عبدالعزيز بن عبدالله بن عبدالعزيز النعيم",id:"1147985293"},
+    {name:"عبدالله بداح عبدالله الدوسري",           id:"1147048266"},
+    {name:"عجب سعد عجب الدوسري",                    id:"1148168220"},
+    {name:"فهد سعد بن فهد الدوسري",                id:"1145164669"},
+    {name:"محمد بن فهد بن محمد الدوسري",           id:"1145486815"},
+    {name:"محمد خالد مسفر الدوسري",                id:"1149728881"},
+    {name:"محمد عامر ناصر الشكرة",                 id:"1147539868"},
+    {name:"محمد ناصر سالم القحطاني",               id:"1148575713"},
+    {name:"محمد نور محمود - ولي",                   id:"2288603737"},
+    {name:"سنيف بن ناصر بن منيف العتيبي",          id:"1146766454"},
+    {name:"ناصر بن سعد بن مبارك الحفناني الدوسري", id:"1160895627"},
+    {name:"هادي جابر بن محمد المري",               id:"1146492127"}
+  ],
+  "205":[
+    {name:"حمد سالم ابن فهد الدوسري",              id:"1146819071"},
+    {name:"خالد عبدالعزيز ابن علوش الدوسري",       id:"1148174467"},
+    {name:"راكان بن محمد بن صالح بالطور",          id:"1149655639"},
+    {name:"ريان عبدالله بن ابراهيم الصالح",         id:"1149668178"},
+    {name:"سعد بن مثقال بن محمد الدوسري",          id:"1146002546"},
+    {name:"سلطان سعد بن سعد عجب الدوسري",         id:"1147626202"},
+    {name:"ضويحي بن عبدالله بن طويحي العتيبي",    id:"1145752927"},
+    {name:"صبدان عبدالله بن ضيدان الحراحين",       id:"1148134917"},
+    {name:"فارس بن نايف بن عبدالرحمن الخوفي",     id:"1150187423"},
+    {name:"فراج زهير ابن فراج الدوسري",            id:"1147910093"},
+    {name:"فيصل فلاح فرحان الفرحان",               id:"1147445199"},
+    {name:"محمد مشعان بن برجس الدوسري",           id:"1159904059"},
+    {name:"مناحي بن عايض بن مناحي الدوسري",       id:"1146178981"},
+    {name:"منذر رائد عبدالله العتيبي",              id:"1148920992"},
+    {name:"مهدي عبدالرحمن بن حسن العرجاني",       id:"1141456507"},
+    {name:"نادر بن مرسيل بن نادر الصخاره الدوسري", id:"1148674367"},
+    {name:"ناصر بن شافي بن سعد الدوسري",          id:"1147328361"}
+  ]
+};
+
+var TEACHER_CODE = "mariam261985";
+
+function loadNames(){
+  var cls=document.getElementById("selClass").value;
+  var nameWrap=document.getElementById("nameWrap");
+  var idWrap=document.getElementById("idWrap");
+  var selName=document.getElementById("selName");
+  document.getElementById("errMsg").style.display="none";
+  if(!cls){nameWrap.style.display="none";idWrap.style.display="none";return;}
+  selName.innerHTML='<option value="">-- Select Your Name --</option>';
+  STUDENTS[cls].forEach(function(s){
+    var opt=document.createElement("option");
+    opt.value=s.name; opt.textContent=s.name;
+    selName.appendChild(opt);
+  });
+  nameWrap.style.display="block";
+  idWrap.style.display="block";
+}
+
+function startQuiz(){
+  var cls=document.getElementById("selClass").value;
+  var name=document.getElementById("selName").value;
+  var enteredID=document.getElementById("inpID").value.trim();
+  var errMsg=document.getElementById("errMsg");
+  errMsg.style.display="none";
+
+  if(!cls){alert("Please select your class.");return;}
+  if(!name||name===""){alert("Please select your name.");return;}
+  if(!enteredID||enteredID===""){alert("Please enter your Civil ID.");return;}
+
+  // Teacher bypass
+  if(enteredID===TEACHER_CODE){
+    sName="Mr. Mahmoud (Teacher)";
+    sClass=cls;
+    proceedToQuiz();return;
+  }
+
+  // Verify Civil ID - loop instead of find() for better Android compatibility
+  var students=STUDENTS[cls];
+  var match=null;
+  for(var i=0;i<students.length;i++){
+    if(students[i].name===name){match=students[i];break;}
+  }
+
+  // Also try trimmed ID comparison
+  var cleanID=enteredID.replace(/\s/g,"");
+  if(!match||cleanID!==match.id.replace(/\s/g,"")){
+    errMsg.style.display="block";
+    document.getElementById("inpID").value="";
+    return;
+  }
+
+  sName=name; sClass=cls;
+  proceedToQuiz();
+}
+
+function proceedToQuiz(){
+  document.getElementById("cover").style.display="none";
+  document.getElementById("quiz").style.display="block";
+  renderQuiz();
+}
+
+function renderQuiz(){
+  var c=document.getElementById("qcontent"); c.innerHTML="";
+  QD.sections.forEach(function(sec){
+    var sb=document.createElement("div"); sb.className="sblock";
+    sb.innerHTML='<div class="stitle">'+sec.title+'</div>';
+    if(sec.passage){var pb=document.createElement("div");pb.className="pbox";pb.innerHTML='<strong>📖 Read the following text carefully:</strong>'+sec.passage;sb.appendChild(pb);}
+    sec.questions.forEach(function(q){
+      if(q.type==="mcq")sb.appendChild(rMCQ(q));
+      else if(q.type==="open")sb.appendChild(rOpen(q));
+      else if(q.type==="tf")sb.appendChild(rTF(q));
+      else if(q.type==="essay")sb.appendChild(rEssay(q));
+    });
+    c.appendChild(sb);
+  });
+  updateProg();
+}
+
+function rMCQ(q){
+  var d=document.createElement("div");d.className="qcard";
+  var L=["A","B","C","D"];
+  d.innerHTML='<div class="qnum">Multiple Choice</div><div class="qtext">'+q.text+'</div><div class="opts" id="o_'+q.id+'">'+
+    q.options.map(function(o,i){return'<button class="obtn" onclick="selMCQ(\''+q.id+'\','+i+',this)" id="ob_'+q.id+'_'+i+'"><span class="oltr">'+L[i]+'</span>'+o+'</button>';}).join("")+'</div>';
+  return d;
+}
+function rOpen(q){
+  var d=document.createElement("div");d.className="qcard";
+  d.innerHTML='<div class="qnum">Open Question</div><div class="qtext">'+q.text+'</div><textarea class="otarea" id="a_'+q.id+'" placeholder="Write your answer here..." oninput="updOpen(\''+q.id+'\',this)"></textarea><div class="wc" id="w_'+q.id+'">0 words</div>';
+  return d;
+}
+function rTF(q){
+  var d=document.createElement("div");d.className="qcard";
+  d.innerHTML='<div class="qnum">True / False</div><div class="tfgrid">'+
+    q.items.map(function(item,i){return'<div class="tfrow"><span class="tfstmt">'+item.stmt+'</span><div class="tfbtns"><button class="tfbtn" id="tT_'+q.id+'_'+i+'" onclick="selTF(\''+q.id+'\','+i+',true,this)">T</button><button class="tfbtn" id="tF_'+q.id+'_'+i+'" onclick="selTF(\''+q.id+'\','+i+',false,this)">F</button></div></div>';}).join("")+'</div>';
+  return d;
+}
+function rEssay(q){
+  var d=document.createElement("div");d.className="qcard";
+  d.innerHTML='<div class="qnum">Composition (min '+q.minWords+' words)</div><div class="qtext">'+q.text+'</div><textarea class="otarea" id="a_'+q.id+'" placeholder="Write your paragraph here..." rows="7" oninput="updEssay(\''+q.id+'\','+q.minWords+',this)"></textarea><div class="wc" id="w_'+q.id+'">0 / '+q.minWords+' words</div>';
+  return d;
+}
+
+function selMCQ(qid,idx,el){
+  document.querySelectorAll("#o_"+qid+" .obtn").forEach(function(b){b.classList.remove("sel");});
+  el.classList.add("sel");ANS[qid]=idx;updateProg();
+}
+function updOpen(qid,el){
+  ANS[qid]=el.value.trim();
+  var w=el.value.trim()?el.value.trim().split(/\s+/).length:0;
+  document.getElementById("w_"+qid).textContent=w+" words";updateProg();
+}
+function updEssay(qid,min,el){
+  ANS[qid]=el.value.trim();
+  var w=el.value.trim()?el.value.trim().split(/\s+/).length:0;
+  var wc=document.getElementById("w_"+qid);
+  wc.textContent=w+" / "+min+" words";
+  wc.className="wc"+(w>=min?" ok":"");updateProg();
+}
+function selTF(qid,idx,val,el){
+  document.getElementById("tT_"+qid+"_"+idx).classList.remove("selt");
+  document.getElementById("tF_"+qid+"_"+idx).classList.remove("self");
+  el.classList.add(val?"selt":"self");
+  if(!ANS[qid])ANS[qid]={};ANS[qid][idx]=val;updateProg();
+}
+
+function countAns(){
+  var t=0,a=0;
+  QD.sections.forEach(function(s){s.questions.forEach(function(q){
+    if(q.type==="tf"){q.items.forEach(function(_,i){t++;if(ANS[q.id]&&ANS[q.id][i]!==undefined)a++;});}
+    else{t++;if(ANS[q.id]!==undefined&&ANS[q.id]!=="")a++;}
+  });});
+  return{t:t,a:a};
+}
+function updateProg(){
+  var r=countAns();
+  document.getElementById("pinfo").textContent=r.a+" / "+r.t;
+  document.getElementById("pbfill").style.width=(r.a/r.t*100)+"%";
+}
+async function submitQuiz(){
+  var r=countAns();
+  if(r.a<r.t&&!confirm("You have "+(r.t-r.a)+" unanswered question(s). Submit anyway?"))return;
+  showResults();
+  sendResults();
+  await runFeedback();
+}
+
+function showResults(){
+  document.getElementById("quiz").style.display="none";
+  document.getElementById("results").style.display="block";
+  var ok=0,tot=0,html="";
+  QD.sections.forEach(function(sec){
+    html+='<div class="bdcard"><h3>'+sec.title+'</h3>';
+    sec.questions.forEach(function(q){
+      var L=["A","B","C","D"];
+      if(q.type==="mcq"){
+        tot++;var c=ANS[q.id]===q.answer;if(c)ok++;
+        html+='<div class="rrow"><span class="rq">'+q.text.substring(0,55)+'...</span><span class="rbadge '+(c?"rc":"rw")+'">'+(c?"✓ Correct":"✗ "+L[q.answer])+'</span></div>';
+      }else if(q.type==="tf"){
+        q.items.forEach(function(item,i){
+          tot++;var uv=ANS[q.id]?ANS[q.id][i]:undefined;var c=uv===item.answer;if(c)ok++;
+          html+='<div class="rrow"><span class="rq">'+item.stmt+'</span><span class="rbadge '+(c?"rc":"rw")+'">'+(c?"✓ "+(item.answer?"True":"False"):"✗ "+(item.answer?"True":"False"))+'</span></div>';
+        });
+      }else if(q.type==="open"){
+        html+='<div class="rrow"><span class="rq">'+q.text.substring(0,55)+'</span><span class="rbadge ro">📝 Written</span></div>';
+      }else if(q.type==="essay"){
+        var w=(ANS[q.id]||"").split(/\s+/).filter(Boolean).length;
+        html+='<div class="rrow"><span class="rq">'+q.text.substring(0,55)+'</span><span class="rbadge ro">📝 '+w+' words</span></div>';
+      }
+    });
+    html+='</div>';
+  });
+  var pct=Math.round(ok/tot*100);
+  document.getElementById("sbig").textContent=pct+"%";
+  document.getElementById("rname").textContent=sName;
+  document.getElementById("eresult").textContent=pct>=80?"🏆":pct>=60?"👍":"💪";
+  document.getElementById("rmsg").textContent=pct>=80?"Excellent! You are very well prepared for the exam!":pct>=60?"Good work! Review the topics you missed.":"Keep studying hard — you can do better!";
+  document.getElementById("rbd").innerHTML=html;
+  window.scrollTo(0,0);
+}
+
+// ═══════════════════════════════════════════════════
+// GROQ AI FEEDBACK ENGINE (via Cloudflare Worker)
+// ═══════════════════════════════════════════════════
+
+var GROQ_URL = "https://raspy-field-95a9.abuhendmahmoud.workers.dev";
+
+var GEMINI_KEY = "AIzaSyAT2NKsY7IGRSwILTIVr2VJPSbz_MLyeQk";
+var GEMINI_URL = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=" + GEMINI_KEY;
+
+var HINTS={
+  r1q1:{keys:["bravery","kindness","incredible","creatures","protect","help","hero","animals"],
+        hint:'Suggested: <b>"Animal heroes are incredible creatures that show bravery and kindness in many different ways."</b>'},
+  r1q2:{keys:["protect","family","alert","danger","guard","warn","nearby"],
+        hint:'Suggested: <b>"Rusty always protects his family and alerts them to any danger nearby."</b>'},
+  r2q1:{keys:["revolutionized","interactive","flexible","personalized","digital","online","tablets","transformed"],
+        hint:'Suggested: <b>"Technology revolutionized learning by introducing interactive tools, making it flexible and personalized."</b>'},
+  r2q2:{keys:["collaborate","critical","flexible","anywhere","dynamic","global","awareness","thinking"],
+        hint:'Suggested: <b>"Students can learn flexibly, collaborate globally, and develop critical thinking skills."</b>'}
+};
+
+function wcount(text){return text.trim()?text.trim().split(/\s+/).length:0;}
+
+function fbRow(type,label,content){
+  return '<div class="fbrow fb'+type+'"><b>'+label+'</b>'+content+'</div>';
+}
+
+function analyseOpen(qid,text){
+  var hint=HINTS[qid];
+  if(!text||text.trim().length<3)return fbRow("bad","❌ No Answer","You did not write an answer."+(hint?"<br>"+hint.hint:""));
+  var w=wcount(text),tl=text.toLowerCase();
+  var found=hint?hint.keys.filter(function(k){return tl.includes(k);}).length:0;
+  var html="";
+  if(w<4)html+=fbRow("bad","❌ Too Short","Write a full sentence."+(hint?"<br>Hint: "+hint.hint:""));
+  else if(found>=2)html+=fbRow("good","✅ Good Answer","Your answer covers the main idea. Well done!");
+  else if(found===1)html+=fbRow("warn","⚠️ Partly Correct","You have the right idea but need more detail.<br>"+(hint?hint.hint:""));
+  else html+=fbRow("bad","❌ Needs Work","Your answer misses the main point.<br>"+(hint?hint.hint:""));
+  return html;
+}
+
+function topicCheck(text,topic){
+  var tl=text.toLowerCase();
+  var tw=topic==="sport"
+    ?["sport","play","game","team","win","fitness","health","exercise","ball","match","player","run","swim","football","basketball","tennis","volleyball","cricket","race","compete","athlete","coach","training","physical"]
+    :["eat","food","healthy","diet","meal","fruit","vegetable","nutrition","breakfast","lunch","dinner","vitamin","cook","balanced","protein","calories","water","drink","nutrients","junk","sugar","weight","body"];
+  var tf=tw.filter(function(w){return tl.includes(w);});
+  if(tf.length>=3)return fbRow("good","✅ Topic","Your paragraph is well focused on the topic. Good work!");
+  else if(tf.length>=1)return fbRow("warn","⚠️ Topic","Your paragraph is partly on topic. Include more ideas about "+(topic==="sport"?"your favourite sport and its benefits.":"healthy eating habits and their importance."));
+  else return fbRow("bad","❌ Off Topic","Your paragraph does not seem to be about "+(topic==="sport"?"sport. Write about your favourite sport, why you enjoy it, and its benefits.":"eating habits. Write about healthy food, balanced meals, and why they are important."));
+}
+
+function wordCountCheck(text,minW){
+  var words=wcount(text);
+  if(words>=minW)return fbRow("good","✅ Word Count","You wrote <b>"+words+" words</b>. You met the "+minW+"-word minimum! Great job!");
+  else return fbRow("bad","❌ Word Count","You wrote <b>"+words+" words</b> but need at least <b>"+minW+"</b>. Please add <b>"+(minW-words)+" more words</b>.");
+}
+
+async function getGeminiFeedback(label, text){
+  if(!text||text.trim().length<5) return fbRow("bad","❌ No Answer","You did not write a paragraph.");
+
+  var prompt = "You are an English teacher for secondary school students in Saudi Arabia.\n\n" +
+    "Check this student paragraph carefully and find ALL mistakes:\n\n" +
+    "\"" + text + "\"\n\n" +
+    "Reply in this EXACT format. Each mistake on its own line. Use | to separate wrong from correct.\n\n" +
+    "SPELLING:\n" +
+    "[wrong word] | [correct word]\n" +
+    "(list every spelling mistake, or write: none)\n\n" +
+    "GRAMMAR:\n" +
+    "[wrong phrase] | [correct phrase] | [short reason]\n" +
+    "(list every grammar mistake, or write: none)\n\n" +
+    "PUNCTUATION:\n" +
+    "[what is wrong] | [how to fix it]\n" +
+    "(list every punctuation mistake, or write: none)\n\n" +
+    "Be thorough. Find every single mistake no matter how small.";
+
+  try {
+    var res = await fetch(GROQ_URL, {
+      method:"POST",
+      headers:{
+        "Content-Type":"application/json"
+      },
+      body:JSON.stringify({
+        model:"llama-3.3-70b-versatile",
+        messages:[
+          {role:"system", content:"You are a strict English teacher. Find ALL spelling, grammar and punctuation mistakes in student writing. Be thorough and find every single mistake."},
+          {role:"user", content:prompt}
+        ],
+        temperature:0.1,
+        max_tokens:800
+      })
+    });
+    var data = await res.json();
+    if(!data.choices||!data.choices[0]) return fbRow("warn","⚠️","Could not get feedback. Check internet connection.");
+    var raw = data.choices[0].message.content;
+    return parseGeminiFeedback(raw);
+  } catch(e) {
+    console.error(e);
+    return fbRow("warn","⚠️ AI Feedback Unavailable","Check your internet connection and try again.");
+  }
+}
+function parseGeminiFeedback(raw){
+  var html = "";
+
+  // Extract each section
+  function getSection(name){
+    var re = new RegExp(name+":\\s*\\n([\\s\\S]*?)(?=\\n[A-Z]+:|$)","i");
+    var m = raw.match(re);
+    return m ? m[1].trim() : "";
+  }
+
+  function renderSection(title, icon, rawText){
+    var lines = rawText.split("\n")
+      .map(function(l){ return l.trim(); })
+      .filter(function(l){ return l.length > 2 && l.toLowerCase() !== "none"; });
+
+    if(lines.length === 0){
+      return fbRow("good","✅ "+title,"No "+title.toLowerCase()+" mistakes found! Well done! ✨");
+    }
+    var severity = lines.length > 2 ? "bad" : "warn";
+    var ico = lines.length > 2 ? "❌" : "⚠️";
+    var items = lines.map(function(line){
+      var parts = line.split("|").map(function(p){ return p.trim(); });
+      if(parts.length >= 2){
+        return '• <span style="color:#c0392b;text-decoration:line-through">' + parts[0] + '</span> → <b style="color:#1a6b3a">' + parts[1] + '</b>' +
+          (parts[2] ? ' <span style="color:#888;font-size:12px">(' + parts[2] + ')</span>' : '');
+      }
+      return "• " + line;
+    });
+    return fbRow(severity, ico+" "+title+" ("+lines.length+" mistake"+(lines.length>1?"s":"")+" found)",
+      items.join("<br>"));
+  }
+
+  var spRaw = getSection("SPELLING");
+  var grRaw = getSection("GRAMMAR");
+  var puRaw = getSection("PUNCTUATION");
+
+  html += renderSection("Spelling", "✅", spRaw);
+  html += renderSection("Grammar", "✅", grRaw);
+  html += renderSection("Punctuation", "✅", puRaw);
+
+  return html;
+}
+
+async function runFeedback(){
+  var fc = document.getElementById("fbcontent");
+  var html = "";
+
+  // Comprehension open questions
+  var openQs = [];
+  QD.sections.forEach(function(s){ s.questions.forEach(function(q){ if(q.type==="open") openQs.push(q); }); });
+  if(openQs.length){
+    html += '<div class="fbslabel">📖 Reading Comprehension Open Questions</div>';
+    openQs.forEach(function(q,i){
+      html += '<div class="fbitem"><div class="fbiql">Q'+(i+1)+': '+q.text+'</div>'+analyseOpen(q.id, ANS[q.id]||"")+'</div>';
+    });
+  }
+
+  // Word count + topic (instant)
+  html += '<div class="fbslabel">✍️ Composition A — Sport</div>';
+  html += '<div class="fbitem" id="fbA">'+wordCountCheck(ANS["c1"]||"",70)+topicCheck(ANS["c1"]||"","sport")+
+    '<div id="fbA_ai" class="fbrow fbwarn"><b>⏳ AI is checking spelling, grammar and punctuation...</b> Please wait a few seconds.</div></div>';
+
+  html += '<div class="fbslabel">✍️ Composition B — Eating Habits</div>';
+  html += '<div class="fbitem" id="fbB">'+wordCountCheck(ANS["c2"]||"",70)+topicCheck(ANS["c2"]||"","eating")+
+    '<div id="fbB_ai" class="fbrow fbwarn"><b>⏳ AI is checking spelling, grammar and punctuation...</b> Please wait a few seconds.</div></div>';
+
+  fc.innerHTML = html;
+
+  // Call Gemini for each essay separately for more accurate results
+  var resA = await getGeminiFeedback("Sport", ANS["c1"]||"");
+  var elA = document.getElementById("fbA_ai");
+  if(elA) elA.outerHTML = resA;
+
+  var resB = await getGeminiFeedback("Eating Habits", ANS["c2"]||"");
+  var elB = document.getElementById("fbB_ai");
+  if(elB) elB.outerHTML = resB;
+
+  window.fbText = fc.innerText;
+}
+
+
+function sendResults(){
+  var ok=0,tot=0,wrong=[],openA=[],comps=[];
+  QD.sections.forEach(function(s){s.questions.forEach(function(q){
+    if(q.type==="mcq"){tot++;if(ANS[q.id]===q.answer)ok++;else wrong.push("✗ "+q.text.substring(0,60)+" → "+["A","B","C","D"][q.answer]);}
+    else if(q.type==="tf"){q.items.forEach(function(item,i){tot++;var uv=ANS[q.id]?ANS[q.id][i]:undefined;if(uv===item.answer)ok++;else wrong.push("✗ "+item.stmt+" → "+(item.answer?"True":"False"));});}
+    else if(q.type==="open"){openA.push(q.text+"\n→ "+(ANS[q.id]||"(no answer)"));}
+    else if(q.type==="essay"){var w=(ANS[q.id]||"").split(/\s+/).filter(Boolean).length;comps.push(q.text.substring(0,50)+" ("+w+" words)\n→ "+(ANS[q.id]||"(no answer)"));}
+  });});
+  var pct=Math.round(ok/tot*100);
+  var ov=document.getElementById("ov"); ov.classList.add("on");
+  emailjs.send(SVC,TMPL,{
+    student_name:sName+" (Class "+sClass+")",
+    score:ok+" / "+tot+" ("+pct+"%)",
+    date:new Date().toLocaleDateString("en-GB"),
+    open_answers:openA.join("\n\n")||"None",
+    composition:comps.join("\n\n")||"None",
+    wrong_answers:wrong.length?wrong.join("\n"):"All correct! ✓",
+    ai_feedback:window.fbText||"See student results page."
+  }).then(function(){
+    document.getElementById("ospin").style.display="none";
+    document.getElementById("oicon").style.display="block";
+    document.getElementById("otitle").textContent="Results Sent! 🎉";
+    document.getElementById("omsg").textContent="Your results have been sent to Mr. Mahmoud.";
+    setTimeout(function(){ov.classList.remove("on");},3500);
+  }).catch(function(err){
+    document.getElementById("ospin").style.display="none";
+    document.getElementById("oicon").textContent="⚠️";
+    document.getElementById("oicon").style.display="block";
+    document.getElementById("otitle").textContent="Sending Failed";
+    document.getElementById("omsg").textContent="Check your internet connection.";
+    setTimeout(function(){ov.classList.remove("on");},3500);
+    console.error(err);
+  });
+}
+</script>
+</body>
+</html>
