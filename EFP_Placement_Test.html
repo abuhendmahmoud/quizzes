@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="theme-color" content="#0a1628">
+<title>English Foundation Program — Placement Test</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&family=Playfair+Display:wght@600;700;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#0a1628; --navy-2:#0f2038; --card:#12233d; --card-2:#182e4d;
+  --gold:#d4af37; --gold-soft:#e8c96a; --gold-dim:rgba(212,175,55,.16);
+  --ink:#e9eef7; --ink-dim:#9db0c9; --line:rgba(212,175,55,.22);
+  --ok:#3fbf7f; --no:#e2604f; --shadow:0 10px 34px rgba(0,0,0,.42);
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;padding:0}
+body{
+  background:var(--navy);
+  background-image:radial-gradient(900px 480px at 50% -8%, #16294a 0%, var(--navy) 62%);
+  color:var(--ink);
+  font-family:'Cairo',-apple-system,BlinkMacSystemFont,'Segoe UI',Tahoma,sans-serif;
+  min-height:100vh; font-size:16px; line-height:1.75;
+  -webkit-text-size-adjust:100%;
+}
+.en{font-family:'Playfair Display',Georgia,serif;direction:ltr}
+.ltr{direction:ltr;text-align:left}
+.wrap{max-width:760px;margin:0 auto;padding:0 16px 64px}
+
+/* ---------- top bar ---------- */
+#bar{position:sticky;top:0;z-index:50;background:rgba(10,22,40,.94);
+  backdrop-filter:blur(10px);border-bottom:1px solid var(--line);display:none}
+#bar .inner{max-width:760px;margin:0 auto;padding:10px 16px;display:flex;
+  align-items:center;gap:12px;justify-content:space-between}
+#barLabel{font-size:12.5px;color:var(--ink-dim);font-weight:600}
+#clock{font-family:'Playfair Display',serif;font-size:17px;color:var(--gold);
+  font-weight:700;letter-spacing:.5px;direction:ltr;min-width:56px;text-align:center}
+#clock.warn{color:#ff9a76;animation:pulse 1.1s infinite}
+@keyframes pulse{50%{opacity:.45}}
+#track{height:5px;background:rgba(255,255,255,.07)}
+#fill{height:100%;width:0;background:linear-gradient(90deg,var(--gold),var(--gold-soft));
+  transition:width .35s cubic-bezier(.4,0,.2,1)}
+
+/* ---------- shared ---------- */
+.card{background:var(--card);border:1px solid var(--line);border-radius:18px;
+  padding:22px;box-shadow:var(--shadow);margin-top:18px}
+h1{font-family:'Playfair Display',serif;font-size:27px;line-height:1.3;margin:0 0 6px;
+  color:var(--gold);direction:ltr;text-align:center;font-weight:900}
+h2{font-size:19px;margin:0 0 12px;color:var(--gold-soft);font-weight:700}
+.sub{text-align:center;color:var(--ink-dim);font-size:14px;margin:0 0 22px}
+.rule{height:1px;background:var(--line);margin:20px 0}
+.muted{color:var(--ink-dim);font-size:14px}
+
+.btn{display:block;width:100%;padding:16px;border:none;border-radius:14px;
+  background:linear-gradient(135deg,var(--gold),#c39a2b);color:#0a1628;
+  font-family:'Cairo',sans-serif;font-weight:900;font-size:17px;cursor:pointer;
+  margin-top:16px;box-shadow:0 6px 20px rgba(212,175,55,.24);transition:transform .12s,opacity .2s}
+.btn:active{transform:scale(.985)}
+.btn:disabled{opacity:.32;cursor:not-allowed;box-shadow:none}
+.btn.ghost{background:transparent;border:1.5px solid var(--gold);color:var(--gold);
+  box-shadow:none;font-size:15.5px;padding:13px}
+.btn.wa{background:linear-gradient(135deg,#25d366,#1da851);color:#05230f}
+
+.field{width:100%;padding:14px;border-radius:12px;border:1.5px solid var(--line);
+  background:var(--navy-2);color:var(--ink);font-family:'Cairo',sans-serif;font-size:16px}
+.field:focus{outline:none;border-color:var(--gold)}
+
+/* ---------- welcome ---------- */
+.crest{text-align:center;margin:34px 0 4px}
+.crest .mark{display:inline-block;padding:9px 20px;border:1.5px solid var(--gold);
+  border-radius:999px;color:var(--gold);font-size:11.5px;letter-spacing:3.4px;
+  font-weight:700;direction:ltr}
+.rules li{margin-bottom:11px;font-size:15px}
+.rules li b{color:var(--gold-soft)}
+.pick{display:flex;gap:10px;margin-top:10px}
+.pick button{flex:1;padding:15px;border-radius:12px;border:1.5px solid var(--line);
+  background:var(--navy-2);color:var(--ink);font-family:'Cairo',sans-serif;
+  font-size:16.5px;font-weight:700;cursor:pointer}
+.pick button.on{border-color:var(--gold);background:var(--gold-dim);color:var(--gold)}
+
+/* ---------- question ---------- */
+.eyebrow{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}
+.chip{font-size:11px;letter-spacing:2px;color:var(--gold);border:1px solid var(--line);
+  padding:4px 11px;border-radius:999px;font-weight:700;direction:ltr}
+.count{font-size:12.5px;color:var(--ink-dim);direction:ltr;font-weight:600}
+.prompt{font-size:19px;font-weight:700;line-height:1.65;margin-bottom:6px}
+.prompt.enq{font-family:'Playfair Display',serif;direction:ltr;text-align:left;font-size:20px}
+.hint{font-size:13.5px;color:var(--ink-dim);margin-bottom:16px}
+.passage{background:var(--navy-2);border-inline-start:3px solid var(--gold);
+  border-radius:12px;padding:16px;margin-bottom:18px;direction:ltr;text-align:left;
+  font-family:'Playfair Display',serif;font-size:16.5px;line-height:1.95;color:#dce6f4}
+
+.opts{display:flex;flex-direction:column;gap:11px}
+.opt{padding:15px 17px;border-radius:13px;border:1.5px solid var(--line);
+  background:var(--navy-2);cursor:pointer;font-size:17px;min-height:52px;
+  display:flex;align-items:center;gap:12px;transition:border-color .15s,background .15s}
+.opt.ltr{direction:ltr;text-align:left;font-family:'Playfair Display',serif}
+.opt:active{background:var(--card-2)}
+.opt.on{border-color:var(--gold);background:var(--gold-dim)}
+.opt .k{width:26px;height:26px;flex:none;border-radius:50%;border:1.5px solid var(--line);
+  display:grid;place-items:center;font-size:12px;color:var(--ink-dim);font-weight:700}
+.opt.on .k{background:var(--gold);color:#0a1628;border-color:var(--gold)}
+
+.play{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;
+  padding:20px;border-radius:14px;border:1.5px dashed var(--gold);background:var(--gold-dim);
+  color:var(--gold);font-family:'Cairo',sans-serif;font-size:17px;font-weight:700;
+  cursor:pointer;margin-bottom:18px}
+.play:disabled{opacity:.34;cursor:not-allowed}
+.plays{text-align:center;font-size:12.5px;color:var(--ink-dim);margin:-10px 0 16px;direction:ltr}
+
+.tiles{display:flex;flex-wrap:wrap;gap:9px;margin-bottom:14px}
+.tile{padding:11px 16px;border-radius:10px;border:1.5px solid var(--line);
+  background:var(--navy-2);cursor:pointer;font-family:'Playfair Display',serif;
+  font-size:17px;direction:ltr}
+.tile.used{opacity:.25;pointer-events:none}
+.slot{min-height:58px;border:1.5px solid var(--gold);border-radius:12px;padding:13px;
+  background:var(--navy-2);direction:ltr;text-align:left;font-family:'Playfair Display',serif;
+  font-size:18px;margin-bottom:12px;color:var(--gold-soft)}
+.slot:empty::before{content:"…";color:var(--ink-dim)}
+
+textarea.field{min-height:132px;resize:vertical;direction:ltr;text-align:left;
+  font-family:'Playfair Display',serif;font-size:17px;line-height:1.9}
+input.eng{direction:ltr;text-align:left;font-family:'Playfair Display',serif;font-size:18px}
+
+/* ---------- report ---------- */
+.big{text-align:center;padding:8px 0 4px}
+.big .n{font-family:'Playfair Display',serif;font-size:62px;font-weight:900;color:var(--gold);line-height:1}
+.big .l{font-size:13px;color:var(--ink-dim);letter-spacing:2px;direction:ltr}
+.skill{margin-bottom:15px}
+.skill .top{display:flex;justify-content:space-between;font-size:14.5px;margin-bottom:6px}
+.skill .top b{color:var(--gold-soft);font-weight:700}
+.meter{height:9px;border-radius:99px;background:rgba(255,255,255,.08);overflow:hidden}
+.meter i{display:block;height:100%;border-radius:99px;background:linear-gradient(90deg,var(--gold),var(--gold-soft));width:0;transition:width 1s cubic-bezier(.3,0,.2,1)}
+.verdict{background:var(--gold-dim);border:1px solid var(--gold);border-radius:14px;padding:18px;margin-top:6px}
+.verdict .row{display:flex;justify-content:space-between;gap:12px;padding:7px 0;
+  border-bottom:1px dashed var(--line);font-size:15px}
+.verdict .row:last-child{border:none}
+.verdict .row b{color:var(--gold);text-align:end}
+pre.raw{white-space:pre-wrap;word-break:break-word;background:var(--navy-2);
+  border:1px solid var(--line);border-radius:12px;padding:15px;font-size:12.5px;
+  color:var(--ink-dim);max-height:280px;overflow:auto;direction:ltr;text-align:left;
+  font-family:ui-monospace,Menlo,Consolas,monospace}
+.note{background:rgba(226,96,79,.09);border:1px solid rgba(226,96,79,.4);
+  border-radius:12px;padding:14px;font-size:14px;margin-top:14px}
+@media(max-width:400px){h1{font-size:23px}.prompt{font-size:17.5px}.big .n{font-size:52px}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+</head>
+<body>
+
+<div id="bar">
+  <div class="inner"><span id="barLabel"></span><span id="clock">35:00</span></div>
+  <div id="track"><div id="fill"></div></div>
+</div>
+
+<div class="wrap">
+
+<!-- ============ WELCOME ============ -->
+<section id="sWelcome">
+  <div class="crest"><span class="mark">ENGLISH FOUNDATION PROGRAM</span></div>
+  <h1>Placement Test</h1>
+  <p class="sub">اختبار تحديد نقطة البداية</p>
+
+  <div class="card">
+    <h2>قبل أن تبدأ</h2>
+    <ul class="rules">
+      <li>هذه <b>ليست اختبارًا بدرجات</b>. الهدف أن يعرف الأستاذ من أين يبدأ معك.</li>
+      <li>الأسئلة تبدأ سهلة جدًا ثم تصعب. <b>من الطبيعي أن تتوقف في المنتصف</b>.</li>
+      <li>إذا لم تعرف الإجابة، اختر <b>«لا أعرف»</b> ولا تخمّن عشوائيًا. التخمين يعطي نتيجة خاطئة وقد يبدأ الأستاذ معك من مستوى أصعب مما تحتمل.</li>
+      <li><b>لا تستخدم مترجمًا ولا تسأل أحدًا.</b> النتيجة تُستخدم لتصميم دروسك أنت.</li>
+      <li>الوقت <b>35 دقيقة</b>، وتحتاج إلى صوت (سماعة أو مكبر الهاتف).</li>
+    </ul>
+    <div class="rule"></div>
+    <label class="muted" for="nm">اسمك</label>
+    <div class="pick" style="margin-bottom:12px">
+      <button type="button" data-nm="محمد">محمد</button>
+      <button type="button" data-nm="حاتم">حاتم</button>
+    </div>
+    <input id="nm" class="field" placeholder="أو اكتب اسمك هنا" autocomplete="off">
+    <button class="btn" id="go">ابدأ الاختبار</button>
+    <p class="muted" style="text-align:center;margin:14px 0 0;font-size:13px">
+      تأكد من رفع صوت الجهاز قبل البدء.</p>
+  </div>
+</section>
+
+<!-- ============ QUIZ ============ -->
+<section id="sQuiz" style="display:none">
+  <div class="card" id="qCard"></div>
+  <button class="btn" id="next" disabled>التالي</button>
+  <button class="btn ghost" id="skip">لا أعرف — تخطَّ السؤال</button>
+</section>
+
+<!-- ============ REPORT ============ -->
+<section id="sReport" style="display:none"></section>
+
+</div>
+
+<script>
+"use strict";
+
+/* ==================================================================
+   QUESTION BANK
+   sec: sound | vocab | grammar | reading | writing | listening | pron
+   type: mcq | audio | order | text | free | notice
+   ================================================================== */
+var BANK = [
+
+/* ---------- SOUND CHECK (decoding proxy) — 8 ---------- */
+{sec:"sound",type:"audio",word:"man",hint:"استمع إلى الكلمة ثم اختر كتابتها الصحيحة.",
+ opts:["nam","man","men","mun"],ans:1},
+{sec:"sound",type:"audio",word:"pen",opts:["pin","ben","pen","pan"],ans:2},
+{sec:"sound",type:"audio",word:"box",opts:["box","pox","bax","bux"],ans:0},
+{sec:"sound",type:"audio",word:"bus",opts:["bas","buz","pus","bus"],ans:3},
+{sec:"sound",type:"audio",word:"school",opts:["shool","school","scool","skool"],ans:1},
+{sec:"sound",type:"audio",word:"friend",opts:["freind","frend","friend","friand"],ans:2},
+{sec:"sound",type:"audio",word:"teacher",opts:["teacher","ticher","teecher","tacher"],ans:0},
+{sec:"sound",type:"audio",word:"family",opts:["famly","femily","familly","family"],ans:3},
+
+/* ---------- VOCABULARY — 10 ---------- */
+{sec:"vocab",type:"mcq",q:"ما معنى كلمة <span class='en'>book</span>؟",opts:["مدرسة","كتاب","سيارة","ماء"],ans:1},
+{sec:"vocab",type:"mcq",q:"ما معنى كلمة <span class='en'>teacher</span>؟",opts:["طبيب","طالب","معلّم","مهندس"],ans:2},
+{sec:"vocab",type:"mcq",q:"ما معنى كلمة <span class='en'>water</span>؟",opts:["ماء","خبز","نار","هواء"],ans:0},
+{sec:"vocab",type:"mcq",q:"كيف نكتب «أخت» بالإنجليزية؟",opts:["brother","mother","sister","daughter"],ans:2,ltr:true},
+{sec:"vocab",type:"mcq",q:"كيف نكتب «سعيد» بالإنجليزية؟",opts:["hungry","happy","angry","tired"],ans:1,ltr:true},
+{sec:"vocab",type:"mcq",eq:"My father works in a hospital. He is a ______.",opts:["teacher","driver","doctor","farmer"],ans:2,ltr:true},
+{sec:"vocab",type:"mcq",eq:"I eat ______ in the morning.",opts:["window","breakfast","football","summer"],ans:1,ltr:true},
+{sec:"vocab",type:"mcq",eq:"It is very hot in ______.",opts:["winter","school","summer","night"],ans:2,ltr:true},
+{sec:"vocab",type:"mcq",eq:"She is very ______. She always helps other people.",opts:["lazy","kind","short","angry"],ans:1,ltr:true},
+{sec:"vocab",type:"mcq",eq:"We must protect the ______ from pollution.",opts:["environment","furniture","adventure","temperature"],ans:0,ltr:true},
+
+/* ---------- GRAMMAR — 12 (graded A0 -> A2) ---------- */
+{sec:"grammar",band:0,type:"mcq",eq:"I ______ a student.",opts:["is","am","are","be"],ans:1,ltr:true},
+{sec:"grammar",band:0,type:"mcq",eq:"She ______ my sister.",opts:["am","are","is","be"],ans:2,ltr:true},
+{sec:"grammar",band:0,type:"mcq",eq:"They ______ my friends.",opts:["are","is","am","be"],ans:0,ltr:true},
+{sec:"grammar",band:1,type:"mcq",eq:"This is my book. ______ name is Ali.",opts:["Me","I","My","Mine"],ans:2,ltr:true},
+{sec:"grammar",band:1,type:"mcq",eq:"He ______ two brothers.",opts:["have","has","is","are"],ans:1,ltr:true},
+{sec:"grammar",band:1,type:"mcq",eq:"There ______ four students in the class.",opts:["is","are","am","be"],ans:1,ltr:true},
+{sec:"grammar",band:2,type:"mcq",eq:"He ______ to school every day.",opts:["go","going","goes","gone"],ans:2,ltr:true},
+{sec:"grammar",band:2,type:"mcq",eq:"I ______ like cold weather.",opts:["am not","doesn't","not","don't"],ans:3,ltr:true},
+{sec:"grammar",band:2,type:"mcq",eq:"Where ______ you live?",opts:["is","do","does","are"],ans:1,ltr:true},
+{sec:"grammar",band:3,type:"mcq",eq:"Yesterday I ______ to the market.",opts:["go","went","going","goes"],ans:1,ltr:true},
+{sec:"grammar",band:3,type:"mcq",eq:"My brother is ______ than me.",opts:["tall","tallest","taller","more tall"],ans:2,ltr:true},
+{sec:"grammar",band:3,type:"mcq",eq:"I have ______ finished my homework.",opts:["yet","already","ago","since"],ans:1,ltr:true},
+
+/* ---------- READING — 8 ---------- */
+{sec:"reading",type:"mcq",p:"My name is Sami. I am a student. I am from Riyadh.",
+ eq:"What is his name?",opts:["Sami","Ali","Riyadh","Khalid"],ans:0,ltr:true},
+{sec:"reading",type:"mcq",p:"My name is Sami. I am a student. I am from Riyadh.",
+ eq:"Where is he from?",opts:["Dammam","Riyadh","Jeddah","Al-Ahsa"],ans:1,ltr:true},
+
+{sec:"reading",type:"mcq",p:"Nora is fifteen years old. She lives in Al-Ahsa with her family. She has one brother and two sisters. Her father is a doctor and her mother is a teacher. Nora likes reading books and playing volleyball.",
+ eq:"How old is Nora?",opts:["twelve","fifteen","sixteen","fifty"],ans:1,ltr:true},
+{sec:"reading",type:"mcq",p:"Nora is fifteen years old. She lives in Al-Ahsa with her family. She has one brother and two sisters. Her father is a doctor and her mother is a teacher. Nora likes reading books and playing volleyball.",
+ eq:"What is her mother's job?",opts:["a doctor","a nurse","a teacher","a student"],ans:2,ltr:true},
+{sec:"reading",type:"mcq",p:"Nora is fifteen years old. She lives in Al-Ahsa with her family. She has one brother and two sisters. Her father is a doctor and her mother is a teacher. Nora likes reading books and playing volleyball.",
+ eq:"How many sisters has Nora got?",opts:["one","two","three","none"],ans:1,ltr:true},
+
+{sec:"reading",type:"mcq",p:"Last summer, Khalid travelled to Turkey with his family. They stayed in a small hotel near the sea for ten days. Every morning they went swimming, and in the afternoon they visited old markets in the city. Khalid took hundreds of photos with his new camera. The weather was warm but not too hot. It was the best holiday of his life, and he wants to go back next year.",
+ eq:"Where did Khalid go last summer?",opts:["Egypt","Turkey","Riyadh","the sea"],ans:1,ltr:true},
+{sec:"reading",type:"mcq",p:"Last summer, Khalid travelled to Turkey with his family. They stayed in a small hotel near the sea for ten days. Every morning they went swimming, and in the afternoon they visited old markets in the city. Khalid took hundreds of photos with his new camera. The weather was warm but not too hot. It was the best holiday of his life, and he wants to go back next year.",
+ eq:"How long did they stay?",opts:["one day","one week","ten days","one month"],ans:2,ltr:true},
+{sec:"reading",type:"mcq",p:"Last summer, Khalid travelled to Turkey with his family. They stayed in a small hotel near the sea for ten days. Every morning they went swimming, and in the afternoon they visited old markets in the city. Khalid took hundreds of photos with his new camera. The weather was warm but not too hot. It was the best holiday of his life, and he wants to go back next year.",
+ eq:"Why does Khalid want to go back next year?",
+ opts:["Because the hotel was big.","Because he did not take photos.","Because he enjoyed the holiday very much.","Because the weather was very hot."],ans:2,ltr:true},
+
+/* ---------- WRITING — 5 (3 auto + 2 manual) ---------- */
+{sec:"writing",type:"text",q:"انسخ هذه الجملة تمامًا كما هي:",
+ model:"My school is big.",check:"copy",scored:true},
+{sec:"writing",type:"order",q:"رتّب الكلمات لتكوّن جملة صحيحة:",
+ words:["is","a","My","teacher","mother"],ans:"My mother is a teacher",scored:true},
+{sec:"writing",type:"text",q:"أكمل الجملة عن نفسك:",hintAr:"اكتب الجملة كاملة، مثل: My name is ______",
+ model:"My name is",check:"hasIs",scored:true},
+{sec:"writing",type:"free",q:"اكتب جملة واحدة عن نفسك بالإنجليزية.",
+ hintAr:"جملة واحدة تكفي. لا بأس إن كان بها خطأ."},
+{sec:"writing",type:"free",q:"اكتب ثلاث جمل عن عائلتك بالإنجليزية.",
+ hintAr:"إن استطعت جملة واحدة فقط فاكتبها ولا تترك الفراغ."},
+
+/* ---------- LISTENING — notice + 5 ---------- */
+{sec:"listening",type:"notice",
+ title:"القسم التالي: الاستماع",
+ body:"ستسمع نصًا قصيرًا بالإنجليزية. تستطيع تشغيله <b>مرتين فقط</b> — لذلك استمع بتركيز. بعد الاستماع ستجيب عن 5 أسئلة، ويبقى زر التشغيل معك حتى تنتهي المرتان.",
+ script:"Hello. My name is Yousef. I am sixteen years old. I am from Dammam. My father is an engineer. After school, I play football with my friends."},
+{sec:"listening",type:"mcq",listen:true,eq:"What is his name?",opts:["Khalid","Yousef","Sami","Bandar"],ans:1,ltr:true},
+{sec:"listening",type:"mcq",listen:true,eq:"How old is he?",opts:["fourteen","fifteen","sixteen","seventeen"],ans:2,ltr:true},
+{sec:"listening",type:"mcq",listen:true,eq:"Where is he from?",opts:["Riyadh","Dammam","Al-Ahsa","Jeddah"],ans:1,ltr:true},
+{sec:"listening",type:"mcq",listen:true,eq:"What is his father's job?",opts:["a teacher","a doctor","a driver","an engineer"],ans:3,ltr:true},
+{sec:"listening",type:"mcq",listen:true,eq:"What does he do after school?",opts:["He sleeps.","He plays football.","He watches TV.","He reads books."],ans:1,ltr:true},
+
+/* ---------- PRONUNCIATION (discrimination) — 6 ---------- */
+{sec:"pron",type:"audio",word:"pen",hint:"استمع جيدًا واختر الكلمة التي سمعتها.",opts:["pen","Ben"],ans:0},
+{sec:"pron",type:"audio",word:"three",opts:["tree","three"],ans:1},
+{sec:"pron",type:"audio",word:"van",opts:["fan","van"],ans:1},
+{sec:"pron",type:"audio",word:"sheep",opts:["ship","sheep"],ans:1},
+{sec:"pron",type:"audio",word:"cut",opts:["cat","cut"],ans:1},
+{sec:"pron",type:"audio",word:"thin",opts:["thin","tin"],ans:0},
+
+/* ---------- SPEAKING notice (not scored) ---------- */
+{sec:"speak",type:"notice",
+ title:"خطوة أخيرة — التسجيل الصوتي",
+ body:"لا يستطيع هذا الاختبار قياس نطقك. بعد إرسال النتيجة، افتح واتساب وسجّل رسالة صوتية <b>30 ثانية</b> للأستاذ تجيب فيها عن هذه الأسئلة الثلاثة بالإنجليزية:<br><br><span class='en' style='font-size:17px;line-height:2.1'>1. What's your name?<br>2. Tell me about your family.<br>3. What do you do every day after school?</span><br><br>لا بأس إن أخطأت أو توقفت. المطلوب أن يسمع صوتك، لا أن تكون مثاليًا."}
+];
+
+var SEC_MAX={sound:8,vocab:10,grammar:12,reading:8,writing:3,listening:5,pron:6};
+var SEC_AR={sound:"ربط الصوت بالكتابة",vocab:"المفردات",grammar:"القواعد",
+  reading:"القراءة",writing:"الكتابة",listening:"الاستماع",pron:"تمييز الأصوات"};
+var SEC_EN={sound:"Decoding",vocab:"Vocabulary",grammar:"Grammar",reading:"Reading",
+  writing:"Writing",listening:"Listening",pron:"Pronunciation"};
+
+/* ================= state ================= */
+var S={name:"",i:0,ans:[],score:{},bands:[0,0,0,0],free:[],order:[],
+       plays:{listen:0},started:0,left:35*60,timer:null,sel:null};
+Object.keys(SEC_MAX).forEach(function(k){S.score[k]=0});
+
+var $=function(id){return document.getElementById(id)};
+
+var KEY="efp_placement_v1";
+function save(){
+  try{ localStorage.setItem(KEY,JSON.stringify({
+    name:S.name,i:S.i,ans:S.ans,score:S.score,bands:S.bands,
+    free:S.free,plays:S.plays,left:S.left,started:S.started
+  })); }catch(e){}
+}
+function wipe(){ try{ localStorage.removeItem(KEY); }catch(e){} }
+function stored(){
+  try{ var r=localStorage.getItem(KEY); return r?JSON.parse(r):null; }catch(e){ return null; }
+}
+var esc=function(s){return String(s).replace(/[&<>"]/g,function(c){
+  return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})};
+
+/* ================= speech ================= */
+var voice=null;
+function pickVoice(){
+  var v=window.speechSynthesis?speechSynthesis.getVoices():[];
+  for(var i=0;i<v.length;i++){ if(/^en[-_]GB/i.test(v[i].lang)){voice=v[i];return} }
+  for(var j=0;j<v.length;j++){ if(/^en/i.test(v[j].lang)){voice=v[j];return} }
+}
+if(window.speechSynthesis){ pickVoice(); speechSynthesis.onvoiceschanged=pickVoice; }
+function say(text,rate){
+  if(!window.speechSynthesis){alert("متصفحك لا يدعم تشغيل الصوت. جرّب Chrome أو Safari.");return}
+  speechSynthesis.cancel();
+  var u=new SpeechSynthesisUtterance(text);
+  u.lang="en-GB"; u.rate=rate||.8; u.pitch=1;
+  if(voice) u.voice=voice;
+  speechSynthesis.speak(u);
+}
+
+/* ================= welcome ================= */
+document.querySelectorAll(".pick button").forEach(function(b){
+  b.onclick=function(){
+    document.querySelectorAll(".pick button").forEach(function(x){x.classList.remove("on")});
+    b.classList.add("on"); $("nm").value=b.dataset.nm;
+  };
+});
+(function(){
+  var r=stored();
+  if(!r || !r.name || r.i<1) return;
+  var d=document.createElement("button");
+  d.className="btn ghost";
+  d.textContent="متابعة اختبار "+r.name+" من السؤال "+(r.i+1);
+  d.onclick=function(){
+    S.name=r.name; S.i=r.i; S.ans=r.ans; S.score=r.score; S.bands=r.bands;
+    S.free=r.free; S.plays=r.plays; S.left=r.left; S.started=r.started;
+    $("sWelcome").style.display="none"; $("sQuiz").style.display="block";
+    $("bar").style.display="block"; say("Welcome back.",1);
+    startClock(); render();
+  };
+  $("go").parentNode.insertBefore(d,$("go").nextSibling);
+})();
+
+$("go").onclick=function(){
+  var n=$("nm").value.trim();
+  if(!n){ $("nm").focus(); $("nm").style.borderColor="#e2604f"; return; }
+  S.name=n; S.started=Date.now();
+  $("sWelcome").style.display="none";
+  $("sQuiz").style.display="block";
+  $("bar").style.display="block";
+  say("Let us start.",1);
+  startClock(); render();
+};
+
+/* ================= clock ================= */
+function startClock(){
+  S.timer=setInterval(function(){
+    S.left--;
+    var m=Math.floor(S.left/60), s=S.left%60;
+    $("clock").textContent=m+":"+(s<10?"0":"")+s;
+    if(S.left<=300) $("clock").classList.add("warn");
+    if(S.left%15===0) save();
+    if(S.left<=0){ clearInterval(S.timer); finish(); }
+  },1000);
+}
+
+/* ================= render ================= */
+function render(){
+  var q=BANK[S.i]; S.sel=null;
+  $("fill").style.width=((S.i/BANK.length)*100)+"%";
+  $("barLabel").textContent=SEC_AR[q.sec]||"";
+  $("next").disabled=true;
+  $("next").textContent = (S.i===BANK.length-1) ? "إنهاء وعرض النتيجة" : "التالي";
+  $("skip").style.display = (q.type==="notice") ? "none" : "block";
+  window.scrollTo(0,0);
+
+  var h='<div class="eyebrow"><span class="chip">'+(SEC_EN[q.sec]||"FINAL")+
+        '</span><span class="count">'+(S.i+1)+' / '+BANK.length+'</span></div>';
+
+  if(q.type==="notice"){
+    h+='<div class="prompt">'+q.title+'</div><p class="hint" style="font-size:15px;line-height:1.9">'+q.body+'</p>';
+    if(q.script) h+='<button class="play" id="pl">▶︎ &nbsp;استمع الآن</button><p class="plays" id="pc"></p>';
+    $("qCard").innerHTML=h;
+    if(q.script){
+      $("pl").onclick=function(){
+        if(S.plays.listen>=2) return;
+        S.plays.listen++; say(q.script,.72); paintPlays();
+      };
+      paintPlays();
+    }
+    $("next").disabled=false; return;
+  }
+
+  if(q.type==="audio"){
+    h+='<div class="prompt">'+(q.hint||"استمع ثم اختر الإجابة الصحيحة.")+'</div>';
+    h+='<button class="play" id="pl">🔊 &nbsp;اضغط للاستماع</button>';
+    h+='<div class="opts">'+q.opts.map(function(o,k){
+      return '<div class="opt ltr" data-k="'+k+'"><span class="k">'+"ABCD"[k]+'</span><span>'+esc(o)+'</span></div>';
+    }).join("")+'</div>';
+    $("qCard").innerHTML=h;
+    $("pl").onclick=function(){ say(q.word,.75) };
+    say(q.word,.75);
+    bindOpts(); return;
+  }
+
+  if(q.type==="mcq"){
+    if(q.p) h+='<div class="passage">'+esc(q.p)+'</div>';
+    if(q.listen){
+      h+='<button class="play" id="pl">▶︎ &nbsp;إعادة الاستماع</button><p class="plays" id="pc"></p>';
+    }
+    h+= q.eq ? '<div class="prompt enq">'+esc(q.eq)+'</div>' : '<div class="prompt">'+q.q+'</div>';
+    h+='<div class="opts">'+q.opts.map(function(o,k){
+      return '<div class="opt'+(q.ltr?" ltr":"")+'" data-k="'+k+'"><span class="k">'+"ABCD"[k]+'</span><span>'+esc(o)+'</span></div>';
+    }).join("")+'</div>';
+    $("qCard").innerHTML=h;
+    if(q.listen){
+      var sc=BANK.filter(function(b){return b.script})[0].script;
+      $("pl").onclick=function(){ if(S.plays.listen>=2) return; S.plays.listen++; say(sc,.72); paintPlays(); };
+      paintPlays();
+    }
+    bindOpts(); return;
+  }
+
+  if(q.type==="text"||q.type==="free"){
+    h+='<div class="prompt">'+q.q+'</div>';
+    if(q.check==="copy") h+='<div class="passage" style="text-align:center;font-size:20px">'+esc(q.model)+'</div>';
+    if(q.hintAr) h+='<p class="hint">'+q.hintAr+'</p>';
+    h+= (q.type==="free")
+      ? '<textarea class="field" id="tx" placeholder="Write here…" spellcheck="false"></textarea>'
+      : '<input class="field eng" id="tx" placeholder="Write here…" autocomplete="off" spellcheck="false">';
+    $("qCard").innerHTML=h;
+    var t=$("tx");
+    t.addEventListener("paste",function(e){e.preventDefault()});
+    t.oninput=function(){ S.sel=t.value; $("next").disabled = t.value.trim().length===0; };
+    return;
+  }
+
+  if(q.type==="order"){
+    var mix=q.words.slice();
+    for(var a=mix.length-1;a>0;a--){var b=Math.floor(Math.random()*(a+1));var tmp=mix[a];mix[a]=mix[b];mix[b]=tmp}
+    h+='<div class="prompt">'+q.q+'</div>';
+    h+='<div class="slot" id="slot"></div>';
+    h+='<div class="tiles" id="tiles">'+mix.map(function(w,k){
+      return '<span class="tile" data-w="'+esc(w)+'" data-k="'+k+'">'+esc(w)+'</span>';
+    }).join("")+'</div>';
+    h+='<button class="btn ghost" id="clr" style="margin-top:0">مسح والبدء من جديد</button>';
+    $("qCard").innerHTML=h;
+    var built=[];
+    function paint(){
+      $("slot").textContent=built.join(" ");
+      S.sel=built.join(" ");
+      $("next").disabled = built.length!==q.words.length;
+    }
+    document.querySelectorAll("#tiles .tile").forEach(function(t){
+      t.onclick=function(){ t.classList.add("used"); built.push(t.dataset.w); paint(); };
+    });
+    $("clr").onclick=function(){
+      built=[]; document.querySelectorAll("#tiles .tile").forEach(function(t){t.classList.remove("used")}); paint();
+    };
+    return;
+  }
+}
+
+function paintPlays(){
+  var el=$("pc"); if(!el) return;
+  var left=2-S.plays.listen;
+  el.textContent = left>0 ? ("مرات الاستماع المتبقية: "+left) : "انتهت مرات الاستماع";
+  var b=$("pl"); if(b) b.disabled = left<=0;
+}
+
+function bindOpts(){
+  document.querySelectorAll(".opt").forEach(function(o){
+    o.onclick=function(){
+      document.querySelectorAll(".opt").forEach(function(x){x.classList.remove("on")});
+      o.classList.add("on"); S.sel=parseInt(o.dataset.k,10); $("next").disabled=false;
+    };
+  });
+}
+
+/* ================= grading ================= */
+function grade(){
+  var q=BANK[S.i];
+  if(q.type==="notice"){ S.ans.push({sec:q.sec,ok:null,raw:"—"}); return; }
+  var ok=false, raw=S.sel;
+
+  if(q.type==="mcq"||q.type==="audio"){
+    ok = (S.sel===q.ans);
+    raw = (S.sel===null||S.sel===undefined) ? "—" : q.opts[S.sel];
+  } else if(q.type==="order"){
+    ok = (String(S.sel||"").replace(/\s+/g," ").trim().toLowerCase() === q.ans.toLowerCase());
+  } else if(q.type==="text"){
+    var v=String(S.sel||"").replace(/\s+/g," ").trim();
+    if(q.check==="copy") ok = (v.replace(/[.]$/,"").toLowerCase() === q.model.replace(/[.]$/,"").toLowerCase());
+    if(q.check==="hasIs") ok = /(^|\s)(is|'s)(\s|$)/i.test(v) && v.split(/\s+/).length>=3;
+  } else if(q.type==="free"){
+    S.free.push({q:q.q,a:String(S.sel||"—")});
+    S.ans.push({sec:q.sec,ok:null,raw:S.sel});
+    return;
+  }
+
+  if(ok){ S.score[q.sec]++; if(q.sec==="grammar") S.bands[q.band]++; }
+  S.ans.push({sec:q.sec,ok:ok,raw:raw});
+}
+
+function advance(){
+  if(S.i>=BANK.length-1){ wipe(); finish(); return; }
+  S.i++; save(); render();
+}
+$("next").onclick=function(){ grade(); advance(); };
+$("skip").onclick=function(){ S.sel=null; grade(); advance(); };
+
+/* ================= decision engine ================= */
+function decide(pct,sound,ceiling){
+  var track, level, start, why;
+  if(sound<=3){ track="Track A — عيادة فك ترميز"; }
+  else if(sound<=5){ track="Track A-Light — عيادة أسبوعان"; }
+  else { track="Track B — Standard Foundation"; }
+
+  var reads = (sound>=6);   // الترميز يسبق كل شيء
+
+  if(pct<=30){ level="Foundation 1 (A1.1)"; start="Month 1 · Lesson 1 — بإيقاع أبطأ (5 كلمات جديدة بدل 10)"; }
+  else if(pct<=50){ level="Foundation 1 (A1.1)"; start="Month 1 · Lesson 1 — الإيقاع الطبيعي"; }
+  else if(pct<=65){ level="Foundation 1 (A1.1)";
+                    if(reads){ track="Track C — Accelerated Entry";
+                               start="Month 1 مضغوط في أسبوع واحد ← ثم Month 2 · Lesson 21"; }
+                    else { start="Month 1 · Lesson 1 — الإيقاع الطبيعي"; } }
+  else if(pct<=80){ if(reads){ level="Foundation 2 (A1.2)"; track="Track C — Accelerated Entry";
+                               start="Month 3 · Lesson 41"; }
+                    else { level="Foundation 1 (A1.1)"; start="Month 1 · Lesson 1"; } }
+  else { if(reads){ level="فوق مستوى البرنامج"; track="—";
+                    start="البرنامج التأسيسي قد لا يناسبه — راجع الحالة قبل البدء"; }
+         else { level="Foundation 1 (A1.1)"; start="Month 1 · Lesson 1"; } }
+
+  if(!reads) start = "Month 1 · Lesson 1 + عيادة فك الترميز 10 دقائق يوميًا";
+
+  why = "سقف القواعد: " + ["A0 — لم يتجاوز To Be","A1 — يعرف To Be والملكية",
+        "A1+ — يعرف Present Simple","A2 — يعرف الماضي والمقارنة"][ceiling];
+  return {track:track,level:level,start:start,why:why};
+}
+
+/* ================= report ================= */
+function finish(){
+  clearInterval(S.timer);
+  $("bar").style.display="none";
+  $("sQuiz").style.display="none";
+  if(window.speechSynthesis) speechSynthesis.cancel();
+
+  var pcts={}, got=0, max=0;
+  Object.keys(SEC_MAX).forEach(function(k){
+    pcts[k]=Math.round((S.score[k]/SEC_MAX[k])*100);
+    if(k!=="sound"){ got+=S.score[k]; max+=SEC_MAX[k]; }
+  });
+  var pct=Math.round((got/max)*100);
+
+  var ceiling=0;
+  for(var b=0;b<4;b++){ if(S.bands[b]>=2) ceiling=b; }
+  var D=decide(pct,S.score.sound,ceiling);
+  var mins=Math.max(1,Math.round((Date.now()-S.started)/60000));
+
+  /* --- plain-text report for WhatsApp --- */
+  var T="";
+  T+="ENGLISH FOUNDATION PROGRAM\n";
+  T+="نتيجة اختبار تحديد المستوى\n";
+  T+="————————————————\n";
+  T+="الطالب: "+S.name+"\n";
+  T+="التاريخ: "+new Date().toLocaleDateString("en-GB")+"\n";
+  T+="زمن الحل: "+mins+" دقيقة\n\n";
+  T+="فحص الصوت/الكتابة: "+S.score.sound+"/8\n\n";
+  ["vocab","grammar","reading","writing","listening","pron"].forEach(function(k){
+    T+=SEC_EN[k]+": "+S.score[k]+"/"+SEC_MAX[k]+"  ("+pcts[k]+"%)\n";
+  });
+  T+="\nالمجموع: "+got+"/"+max+"  = "+pct+"%\n";
+  T+="————————————————\n";
+  T+="Level: "+D.level+"\n";
+  T+="Track: "+D.track+"\n";
+  T+="البداية: "+D.start+"\n";
+  T+=D.why+"\n";
+  T+="————————————————\n";
+  T+="القواعد حسب المستوى:\n";
+  T+="A0 "+S.bands[0]+"/3 | A1 "+S.bands[1]+"/3 | A1+ "+S.bands[2]+"/3 | A2 "+S.bands[3]+"/3\n";
+  T+="————————————————\n";
+  T+="الكتابة الحرة (صحّحها بنفسك):\n";
+  S.free.forEach(function(f,i){ T+=(i+1)+") "+f.q+"\n   « "+f.a+" »\n"; });
+  T+="————————————————\n";
+  T+="أخطأ في: ";
+  var wrong=[];
+  S.ans.forEach(function(a,i){ if(a.ok===false) wrong.push(i+1); });
+  T+=(wrong.length?wrong.join(", "):"لا شيء")+"\n";
+
+  /* --- screen --- */
+  var h='<div class="crest"><span class="mark">RESULT · '+esc(S.name)+'</span></div>';
+  h+='<div class="card"><div class="big"><div class="n">'+pct+'%</div><div class="l">OVERALL</div></div>';
+  h+='<div class="rule"></div>';
+  ["sound","vocab","grammar","reading","writing","listening","pron"].forEach(function(k){
+    h+='<div class="skill"><div class="top"><b>'+SEC_AR[k]+'</b><span class="en">'+
+       S.score[k]+'/'+SEC_MAX[k]+' · '+pcts[k]+'%</span></div>'+
+       '<div class="meter"><i data-w="'+pcts[k]+'"></i></div></div>';
+  });
+  h+='</div>';
+
+  h+='<div class="card"><h2>القرار المقترح</h2><div class="verdict">'+
+     '<div class="row"><span>المستوى</span><b>'+D.level+'</b></div>'+
+     '<div class="row"><span>المسار</span><b>'+D.track+'</b></div>'+
+     '<div class="row"><span>نقطة البداية</span><b>'+D.start+'</b></div>'+
+     '<div class="row"><span>سقف القواعد</span><b>'+D.why.replace("سقف القواعد: ","")+'</b></div>'+
+     '</div>';
+  h+='<div class="note"><b>ملاحظة للأستاذ:</b> الكتابة الحرة والنطق لم تُصحّح آليًا. '+
+     'نص الطالب كامل في التقرير أدناه، والتسجيل الصوتي يصلك على واتساب.</div></div>';
+
+  h+='<div class="card"><h2>أرسل النتيجة للأستاذ</h2>'+
+     '<label class="muted" for="wa">رقم الأستاذ على واتساب</label>'+
+     '<input id="wa" class="field" value="966542260935" inputmode="numeric">'+
+     '<button class="btn wa" id="send">إرسال عبر واتساب</button>'+
+     '<button class="btn ghost" id="copy">نسخ التقرير</button>'+
+     '<button class="btn ghost" id="dl">حفظ التقرير كملف</button>'+
+     '<div class="rule"></div><pre class="raw" id="raw">'+esc(T)+'</pre></div>';
+
+  $("sReport").innerHTML=h;
+  $("sReport").style.display="block";
+  setTimeout(function(){
+    document.querySelectorAll(".meter i").forEach(function(m){ m.style.width=m.dataset.w+"%" });
+  },120);
+
+  $("send").onclick=function(){
+    var num=$("wa").value.replace(/\D/g,"");
+    window.open("https://wa.me/"+num+"?text="+encodeURIComponent(T),"_blank");
+  };
+  $("copy").onclick=function(){
+    if(navigator.clipboard){ navigator.clipboard.writeText(T).then(function(){
+      $("copy").textContent="تم النسخ ✓"; }); }
+    else { var r=document.createRange(); r.selectNode($("raw"));
+      getSelection().removeAllRanges(); getSelection().addRange(r); document.execCommand("copy");
+      $("copy").textContent="تم النسخ ✓"; }
+  };
+  $("dl").onclick=function(){
+    var blob=new Blob([T],{type:"text/plain;charset=utf-8"});
+    var a=document.createElement("a");
+    a.href=URL.createObjectURL(blob);
+    a.download="Placement_"+S.name.replace(/\s+/g,"_")+".txt";
+    a.click();
+  };
+}
+</script>
+</body>
+</html>
